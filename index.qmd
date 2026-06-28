@@ -1,11 +1,11 @@
 # Introduction {.unnumbered}
 
-These are the lecture notes for STA 5300 - Statistical Methods.
+These are the lecture notes for QBA 5330 - Business Analytics for Decision Making.
 
 **Prerequisites:** None 
     
 #### Course Description:
 
-Introduction to descriptive and inferential statistics. Topics may be selected from the following: descriptive statistics and graphs, probability, regression, correlation, tests of hypotheses, interval estimation, measurement, reliability, experimental design, analysis of variance, nonparametric methods, and multivariate methods.
+An introduction to analytical techniques in the three areas of business analytics – descriptive, prescriptive, and predictive – and their application to business decision making.
 
 

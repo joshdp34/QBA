@@ -1,0 +1,1871 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.42">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>1&nbsp; Introduction to Statistics – STA 5330 Bus Analytics for Dec Making</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-2ea2d3e7f2364fcda3d434693d3458e0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style type="text/css">
+.sidebar .chapter-number {
+color: #FFB81c;
+}
+.center-panel.quarto-layout-panel {
+justify-content: center;
+column-gap: 1rem;
+}
+</style>
+<style>
+div.callout-example.callout {
+  border-left-color: #008000;
+}
+div.callout-example.callout-style-default .callout-header {
+  background-color: rgba(0, 128, 0, 0.13);
+}
+div.callout-example .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-example.callout-style-default .callout-icon::before, div.callout-example.callout-titled .callout-icon::before {
+  content: '📈';
+  background-image: none;
+}
+</style>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Statistics</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./"></a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Statistics</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Collecting Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Describing Data with Tables and Graphs</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Describing Data with Numbers</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#what-is-statistics" id="toc-what-is-statistics" class="nav-link active" data-scroll-target="#what-is-statistics"><span class="header-section-number">1.1</span> What is Statistics?</a>
+  <ul class="collapse">
+  <li><a href="#what-is-statistics-exactly" id="toc-what-is-statistics-exactly" class="nav-link" data-scroll-target="#what-is-statistics-exactly">What is “statistics,” exactly?</a></li>
+  <li><a href="#why-decisions-need-both-description-and-inference" id="toc-why-decisions-need-both-description-and-inference" class="nav-link" data-scroll-target="#why-decisions-need-both-description-and-inference">Why decisions need both description and inference</a></li>
+  <li><a href="#how-well-work-in-this-course" id="toc-how-well-work-in-this-course" class="nav-link" data-scroll-target="#how-well-work-in-this-course">How we’ll work in this course</a></li>
+  <li><a href="#recap" id="toc-recap" class="nav-link" data-scroll-target="#recap">Recap</a></li>
+  <li><a href="#check-your-understanding" id="toc-check-your-understanding" class="nav-link" data-scroll-target="#check-your-understanding">Check your understanding</a></li>
+  </ul></li>
+  <li><a href="#populations-and-samples" id="toc-populations-and-samples" class="nav-link" data-scroll-target="#populations-and-samples"><span class="header-section-number">1.2</span> Populations and Samples</a>
+  <ul class="collapse">
+  <li><a href="#defining-the-population" id="toc-defining-the-population" class="nav-link" data-scroll-target="#defining-the-population">Defining the population</a></li>
+  <li><a href="#what-counts-as-a-sample" id="toc-what-counts-as-a-sample" class="nav-link" data-scroll-target="#what-counts-as-a-sample">What counts as a sample?</a></li>
+  <li><a href="#parameters-and-statistics" id="toc-parameters-and-statistics" class="nav-link" data-scroll-target="#parameters-and-statistics">Parameters and statistics</a></li>
+  <li><a href="#why-sampling-works-and-when-it-doesnt" id="toc-why-sampling-works-and-when-it-doesnt" class="nav-link" data-scroll-target="#why-sampling-works-and-when-it-doesnt">Why sampling works (and when it doesn’t)</a></li>
+  <li><a href="#illustration-drawing-a-random-sample-from-a-sampling-frame-in-r" id="toc-illustration-drawing-a-random-sample-from-a-sampling-frame-in-r" class="nav-link" data-scroll-target="#illustration-drawing-a-random-sample-from-a-sampling-frame-in-r">Illustration: drawing a random sample from a sampling frame in R</a></li>
+  <li><a href="#recap-1" id="toc-recap-1" class="nav-link" data-scroll-target="#recap-1">Recap</a></li>
+  <li><a href="#check-your-understanding-1" id="toc-check-your-understanding-1" class="nav-link" data-scroll-target="#check-your-understanding-1">Check your understanding</a></li>
+  </ul></li>
+  <li><a href="#variables-and-types-of-data" id="toc-variables-and-types-of-data" class="nav-link" data-scroll-target="#variables-and-types-of-data"><span class="header-section-number">1.3</span> Variables and Types of Data</a>
+  <ul class="collapse">
+  <li><a href="#what-is-a-variable" id="toc-what-is-a-variable" class="nav-link" data-scroll-target="#what-is-a-variable">What is a variable?</a></li>
+  <li><a href="#the-two-big-families" id="toc-the-two-big-families" class="nav-link" data-scroll-target="#the-two-big-families">The two big families</a></li>
+  <li><a href="#measurement-scales-youll-hear-about" id="toc-measurement-scales-youll-hear-about" class="nav-link" data-scroll-target="#measurement-scales-youll-hear-about">Measurement scales you’ll hear about</a></li>
+  <li><a href="#identifier-and-datetime-variables" id="toc-identifier-and-datetime-variables" class="nav-link" data-scroll-target="#identifier-and-datetime-variables">“Identifier” and date/time variables</a></li>
+  <li><a href="#working-with-data-types-in-r" id="toc-working-with-data-types-in-r" class="nav-link" data-scroll-target="#working-with-data-types-in-r">Working with data types in R</a></li>
+  <li><a href="#recap-2" id="toc-recap-2" class="nav-link" data-scroll-target="#recap-2">Recap</a></li>
+  <li><a href="#check-your-understanding-2" id="toc-check-your-understanding-2" class="nav-link" data-scroll-target="#check-your-understanding-2">Check your understanding</a></li>
+  </ul></li>
+  <li><a href="#the-role-of-statistics-in-research" id="toc-the-role-of-statistics-in-research" class="nav-link" data-scroll-target="#the-role-of-statistics-in-research"><span class="header-section-number">1.4</span> The Role of Statistics in Research</a>
+  <ul class="collapse">
+  <li><a href="#from-question-to-estimand-to-design" id="toc-from-question-to-estimand-to-design" class="nav-link" data-scroll-target="#from-question-to-estimand-to-design">From question to estimand to design</a></li>
+  <li><a href="#the-statistical-process-a-workable-blueprint" id="toc-the-statistical-process-a-workable-blueprint" class="nav-link" data-scroll-target="#the-statistical-process-a-workable-blueprint">The statistical process: a workable blueprint</a></li>
+  <li><a href="#recap-3" id="toc-recap-3" class="nav-link" data-scroll-target="#recap-3">Recap</a></li>
+  <li><a href="#check-your-understanding-3" id="toc-check-your-understanding-3" class="nav-link" data-scroll-target="#check-your-understanding-3">Check your understanding</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Statistics</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="what-is-statistics" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="what-is-statistics"><span class="header-section-number">1.1</span> What is Statistics?</h2>
+<blockquote class="blockquote">
+<p>“The non-scientist in the street probably has a clearer notion of physics, chemistry and biology than of statistics, regarding statisticians as numerical philatelists, mere collector of numbers.” - Stephen Senn, <em>Dicing with Death: Chance, Risk and Health</em></p>
+</blockquote>
+<p>Suppose someone shows you a coin. It is a typical coin like the one you see below.</p>
+<div style="text-align: center;">
+<p><img src="images/heads.png" class="img-fluid" style="width:1in" alt="Heads"> <img src="images/tails.png" class="img-fluid" style="width:1in" alt="Tails"></p>
+</div>
+<p>Also suppose this individual claims that this coin will land on heads <strong>90% of the time</strong> when it is flipped.</p>
+<p>This claim seems unbelievable. A typical coin lands on heads bout 50% of time if the coin is <em>fair</em>.</p>
+<p>What would you say to this individual who is making this claim?</p>
+<p>You would likely say <strong>Show me some evidence.</strong></p>
+<p>So this individual flips the coin and it lands on heads.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/heads.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:1in"></p>
+</figure>
+</div>
+<p>This result is not surprising if the coin is fair or if the claim of 90% is true. If the coin landed on tails then you would likely have some doubt of the claim. Since we have heads, we really don’t have enough information to confirm the 90% claim. So we ask for the coin to be flipped again.</p>
+<p>Suppose it flipped to a heads again. So now we have two heads in two flips of this coin.</p>
+<div style="text-align: center;">
+<p><img src="images/heads.png" class="img-fluid" style="width:1in" alt="Heads"> <img src="images/heads.png" class="img-fluid" style="width:1in" alt="Tails"></p>
+</div>
+<p>Is this enough evidence to convince you of the 90% claim?</p>
+<p>To answer that question, you should consider the chances of getting this result under both scenarios:</p>
+<ol type="1">
+<li><p>If the coin if fair, the chances of getting two heads in two flips is 25%.</p></li>
+<li><p>If the 90% claim is true, the chances of getting two heads in two flips is 81%<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p></li>
+</ol>
+<p>Although the 90% claim has the higher chance of getting two heads in two flips, we cannot rule out the fair coin scenario. A chance of 25% is not high, but it is not impossible. If fact, we would not consider a result with chances of 25% to be <em>rare</em> or <em>unusual</em> if that result happens.</p>
+<p>We need more information. Suppose the coin if flipped 20 times. Here are the results:</p>
+<p><img src="images/heads.png" class="img-fluid" style="width:0.75in"> <img src="images/heads.png" class="img-fluid" style="width:0.75in"> <img src="images/tails.png" class="img-fluid" style="width:0.75in"> <img src="images/tails.png" class="img-fluid" style="width:0.75in"> <img src="images/heads.png" class="img-fluid" style="width:0.75in"> <img src="images/tails.png" class="img-fluid" style="width:0.75in"> <img src="images/tails.png" class="img-fluid" style="width:0.75in"> <img src="images/heads.png" class="img-fluid" style="width:0.75in"> <img src="images/tails.png" class="img-fluid" style="width:0.75in"> <img src="images/tails.png" class="img-fluid" style="width:0.75in"> <img src="images/heads.png" class="img-fluid" style="width:0.75in"> <img src="images/heads.png" class="img-fluid" style="width:0.75in"> <img src="images/heads.png" class="img-fluid" style="width:0.75in"> <img src="images/heads.png" class="img-fluid" style="width:0.75in"> <img src="images/tails.png" class="img-fluid" style="width:0.75in"> <img src="images/heads.png" class="img-fluid" style="width:0.75in"> <img src="images/tails.png" class="img-fluid" style="width:0.75in"> <img src="images/heads.png" class="img-fluid" style="width:0.75in"> <img src="images/tails.png" class="img-fluid" style="width:0.75in"> <img src="images/heads.png" class="img-fluid" style="width:0.75in"></p>
+<p><strong>In these 20 flips, we have 11 heads and 9 tails.</strong></p>
+<p>With this information, we do you think about the 90% claim? Let’s compare what we have seen in this result compared to what we expected to see under the two scenarios.</p>
+<ol type="1">
+<li><p>If the coin if fair, we expect to see around 10 heads. We saw 11 heads which is close.</p></li>
+<li><p>If the 90% claim is true, we expect to see around 18 heads. We saw 11 heads which is far off. In fact, the chances of seeing at most 11 heads under this scenario is less than 0.01%.</p></li>
+</ol>
+<p>These results appear to show the 90% claim is not true. But let’s look at another set of 20 flips.</p>
+<p><img src="images/tails.png" class="img-fluid" style="width:0.75in"> <img src="images/heads.png" class="img-fluid" style="width:0.75in"> <img src="images/heads.png" class="img-fluid" style="width:0.75in"> <img src="images/heads.png" class="img-fluid" style="width:0.75in"> <img src="images/heads.png" class="img-fluid" style="width:0.75in"> <img src="images/heads.png" class="img-fluid" style="width:0.75in"> <img src="images/heads.png" class="img-fluid" style="width:0.75in"> <img src="images/heads.png" class="img-fluid" style="width:0.75in"> <img src="images/heads.png" class="img-fluid" style="width:0.75in"> <img src="images/heads.png" class="img-fluid" style="width:0.75in"> <img src="images/heads.png" class="img-fluid" style="width:0.75in"> <img src="images/heads.png" class="img-fluid" style="width:0.75in"> <img src="images/heads.png" class="img-fluid" style="width:0.75in"> <img src="images/heads.png" class="img-fluid" style="width:0.75in"> <img src="images/heads.png" class="img-fluid" style="width:0.75in"> <img src="images/tails.png" class="img-fluid" style="width:0.75in"> <img src="images/tails.png" class="img-fluid" style="width:0.75in"> <img src="images/heads.png" class="img-fluid" style="width:0.75in"> <img src="images/heads.png" class="img-fluid" style="width:0.75in"> <img src="images/heads.png" class="img-fluid" style="width:0.75in"></p>
+<p><strong>In this set of 20 flips, we have 17 heads and 3 tails including 14 heads in a row.</strong></p>
+<p>Without even considering the chances under the two scenarios, you are likely more convinced of the 90% claim given these results. Let’s look at the chances anyways:</p>
+<ol type="1">
+<li><p>If the coin if fair, the chances of getting at least 17 heads out of 20 flips is around 0.13%.</p></li>
+<li><p>If the 90% claim is true, the chances of getting at least 17 heads out of 20 flips is around 87%.</p></li>
+</ol>
+<p>The evidence is clearly in favor of the 90% claim.</p>
+<p>Here’s the catch: that second set of 20 flips was not made up. They are actually the results of the coin toss of Super Bowls 31-50. If we let heads represent the NFC team winning the coin toss and tails represent the AFC team winning the toss, then the second set of flips would be the results.</p>
+<div class="columns">
+<div class="column" style="width:20%;">
+<p><img src="images/ne.png" class="img-fluid" style="width:12mm"><span style="color:red;">AFC</span><br>
+<img src="images/gb.png" class="img-fluid" style="width:12mm"><span style="color:blue;">NFC</span><br>
+<img src="images/atl.png" class="img-fluid" style="width:12mm"><span style="color:blue;">NFC</span><br>
+<img src="images/stl.png" class="img-fluid" style="width:12mm"><span style="color:blue;">NFC</span></p>
+</div><div class="column" style="width:20%;">
+<p><img src="images/nyg.png" class="img-fluid" style="width:12mm"><span style="color:blue;">NFC</span><br>
+<img src="images/stl.png" class="img-fluid" style="width:12mm"><span style="color:blue;">NFC</span><br>
+<img src="images/tb.png" class="img-fluid" style="width:12mm"><span style="color:blue;">NFC</span><br>
+<img src="images/car.png" class="img-fluid" style="width:12mm"><span style="color:blue;">NFC</span></p>
+</div><div class="column" style="width:20%;">
+<p><img src="images/phi.png" class="img-fluid" style="width:12mm"><span style="color:blue;">NFC</span><br>
+<img src="images/sea.png" class="img-fluid" style="width:12mm"><span style="color:blue;">NFC</span><br>
+<img src="images/chi.png" class="img-fluid" style="width:12mm"><span style="color:blue;">NFC</span><br>
+<img src="images/nyg.png" class="img-fluid" style="width:12mm"><span style="color:blue;">NFC</span></p>
+</div><div class="column" style="width:20%;">
+<p><img src="images/az.png" class="img-fluid" style="width:12mm"><span style="color:blue;">NFC</span><br>
+<img src="images/no.png" class="img-fluid" style="width:12mm"><span style="color:blue;">NFC</span><br>
+<img src="images/gb.png" class="img-fluid" style="width:12mm"><span style="color:blue;">NFC</span><br>
+<img src="images/ne.png" class="img-fluid" style="width:12mm"><span style="color:red;">AFC</span></p>
+</div><div class="column" style="width:20%;">
+<p><img src="images/bal.png" class="img-fluid" style="width:12mm"><span style="color:red;">AFC</span><br>
+<img src="images/sea.png" class="img-fluid" style="width:12mm"><span style="color:blue;">NFC</span><br>
+<img src="images/sea.png" class="img-fluid" style="width:12mm"><span style="color:blue;">NFC</span><br>
+<img src="images/car.png" class="img-fluid" style="width:12mm"><span style="color:blue;">NFC</span></p>
+</div>
+</div>
+<p>Does this seem impossible? Do we think the Super Bowl coin was somehow weighted to give the NFC team an advantage? Certainly not. In fact, each Super Bowl uses a different commemorative coin for the coin toss.</p>
+<p>What this illustrates is <strong>rare things happen</strong>. Even when a process is completely fair and governed only by chance, long streaks and surprising outcomes can still occur. That means that we cannot judge claims based on a few eye-catching outcomes or coincidences alone. Instead, we must step back and ask deeper questions:</p>
+<ul>
+<li><p>What outcomes would we expect to see if a claim were true?</p></li>
+<li><p>What outcomes would we expect to see if the claim were not true?</p></li>
+<li><p>Are the results we observed consistent with ordinary chance variation, or are they so unusual that they suggest something else is going on?</p></li>
+</ul>
+<p>In other words, real-world questions rarely come with certainty. Instead, they come with <strong>uncertainty</strong>, <strong>variability</strong>, <strong>chance</strong>, and <strong>incomplete information</strong>. We cannot rely on intuition alone. We need a disciplined way to use data to evaluate claims, measure evidence, and make informed decisions even when we cannot know the truth with absolute certainty.</p>
+<p>That disciplined way of thinking is what <strong>statistics</strong> is about.</p>
+<section id="what-is-statistics-exactly" class="level3">
+<h3 class="anchored" data-anchor-id="what-is-statistics-exactly">What is “statistics,” exactly?</h3>
+<p><strong>Statistics</strong> is the science of collecting, organizing, analyzing, and interpreting data to make decisions or draw conclusions. It’s not just about numbers-it’s about what those numbers tell us.</p>
+<p>If Statistics concerns data, then we should define “data.” First, note that “<strong>data</strong>” is a plural word. “<strong>Datum</strong>” is singular, although it is common to hear someone refer to “data” in the singular. A “datum” is a piece of information or fact. So “data” is a collection of facts or information we collect. That could mean</p>
+<ul>
+<li><p>the amount of profit a company makes,</p></li>
+<li><p>the growth of plants under some conditions,</p></li>
+<li><p>or how many people voted in an election.</p></li>
+</ul>
+<p>A helpful way to organize the subject of Statistics is to distinguish two complementary activities:</p>
+<ul>
+<li><p><strong>Descriptive statistics</strong> help us <em>summarize and visualize</em> what we observed-think graphs, tables, and numerical summaries. The goal is clarity.</p></li>
+<li><p><strong>Inferential statistics</strong> help us <em>generalize from a sample to a broader group (or process)</em> and quantify our <strong>uncertainty</strong> about that generalization. The goal is justified conclusions.</p></li>
+</ul>
+<p>Even in a short conversation about data, you’ll hear a few recurring ideas:</p>
+<ul>
+<li><p>A <strong>population</strong> is the full set of people, items, or occasions we care about (all Baylor first-years this fall, all batteries produced this week).</p></li>
+<li><p>A <strong>sample</strong> is the subset we actually observe.</p></li>
+<li><p>A <strong>parameter</strong> is a (usually unknown) number that describes a population (the true average battery life, for example).</p></li>
+<li><p>A <strong>statistic</strong> is a number we compute from a sample (the sample’s average battery life) that we use to learn about the parameter.</p></li>
+</ul>
+<p>We’ll study these terms in more detail soon; for now, hold on to the big idea: we summarize what we see (description) and we reason beyond what we see (inference).</p>
+</section>
+<section id="why-decisions-need-both-description-and-inference" class="level3">
+<h3 class="anchored" data-anchor-id="why-decisions-need-both-description-and-inference">Why decisions need both description and inference</h3>
+<p>Suppose a clinic tests a new flu-prevention program among 200 volunteer patients. A month later, 18% of the “usual care” group got the flu, compared to 12% of the “new program” group.</p>
+<p><strong>Descriptively</strong>, the new program looks better. <strong>Inferentially</strong>, we ask: could this gap be due to chance? If we ran the study again with different patients, might the difference shrink or flip? Statistics gives us a way to quantify that uncertainty and decide what to do next.</p>
+<p>A similar story plays out in business A/B tests, manufacturing quality checks, and sports analytics. The descriptive picture tells us what happened in the data; inference tells us how strongly that evidence supports a decision.</p>
+<!-- ### Variability, bias, and honest uncertainty -->
+<!-- Two forces shape every data story: -->
+<!-- - **Variability** is the natural fluctuation we see from case to case or study to study. Even fair coins produce streaks. -->
+<!-- - **Bias** is systematic deviation-our design, measurement, or selection method pushes results in a consistent direction. -->
+<!-- Good statistical practice aims to reduce bias and acknowledge variability. We’ll use design principles to minimize bias and inferential tools to express uncertainty honestly. -->
+</section>
+<section id="how-well-work-in-this-course" class="level3">
+<h3 class="anchored" data-anchor-id="how-well-work-in-this-course">How we’ll work in this course</h3>
+<p>Our general workflow:</p>
+<ol type="1">
+<li><p>Start with a clear question and name the <strong>observational units</strong> (what a single case is) and <strong>variables</strong> (what we record about each case).</p></li>
+<li><p>Decide how the data were or will be collected (survey, experiment, database pull).</p></li>
+<li><p>Use descriptive statistics and graphics to get oriented.</p></li>
+<li><p>Build an inferential argument when you need to generalize or compare.</p></li>
+<li><p>Communicate a conclusion in context-what it means, what it doesn’t, and what to do next.</p></li>
+</ol>
+<!-- <!-- **JMP 18 note.** In JMP, we’ll lean on *Graph Builder*, *Distribution*, and *Fit Y by X* for description; and on *Analyze* platforms (e.g., *Fit Y by X*, *Fit Model*) for inference. You’ll learn to read the output and connect it to the logic above. -->
+<!-- ### A first look at long-run regularity (illustration) -->
+<!-- To make “variability vs. long-run behavior” concrete, here’s a quick simulation of coin flips. Early on, the proportion of heads jumps around. As the number of flips grows, the proportion tends to settle near 0.5. We’ll rely on this idea-randomness in the short run, stability in the long run-throughout the course. -->
+<!-- ```{r} -->
+<!-- #| echo: false -->
+<!-- #| message: false -->
+<!-- #| warning: false -->
+<!-- set.seed(2381) -->
+<!-- n <- 1000 -->
+<!-- x <- rbinom(n, 1, 0.5) -->
+<!-- prop <- cumsum(x) / seq_along(x) -->
+<!-- plot(seq_along(prop), prop, type = "l", xlab = "Number of flips", -->
+<!--      ylab = "Proportion heads") -->
+<!-- abline(h = 0.5, lty = 2) -->
+<!-- ``` -->
+</section>
+<section id="recap" class="level3">
+<h3 class="anchored" data-anchor-id="recap">Recap</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 26%">
+<col style="width: 73%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Keyword</strong></th>
+<th><strong>Definition</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Statistics</strong></td>
+<td>The discipline of learning from data to describe patterns and make decisions under uncertainty.</td>
+</tr>
+<tr class="even">
+<td><strong>Data</strong></td>
+<td>Recorded information about cases (people/items/occasions) used as evidence for questions of interest.</td>
+</tr>
+<tr class="odd">
+<td><strong>Descriptive statistics</strong></td>
+<td>Methods for summarizing and visualizing what was observed (tables, graphs, numerical summaries).</td>
+</tr>
+<tr class="even">
+<td><strong>Inferential statistics</strong></td>
+<td>Methods for generalizing from a sample to a population and quantifying uncertainty.</td>
+</tr>
+</tbody>
+</table>
+<!-- | **Population**             | The full group or process we want to understand.                                                      | -->
+<!-- | **Sample**                 | The subset we actually observe and analyze.                                                           | -->
+<!-- | **Parameter**              | A (usually unknown) numerical characteristic of a population.                                         | -->
+<!-- | **Statistic**              | A numerical summary computed from a sample, used to learn about a parameter.                          | -->
+<!-- | **Variability**            | Natural fluctuation in data from case to case or study to study.                                      | -->
+<!-- | **Bias**                   | Systematic deviation caused by design, measurement, or selection issues.                              | -->
+<!-- | **Observational unit**     | The “one thing” a single row in the data represents (a person, part, game, etc.).                     | -->
+</section>
+<section id="check-your-understanding" class="level3">
+<h3 class="anchored" data-anchor-id="check-your-understanding">Check your understanding</h3>
+<div class="callout callout-style-default callout-note callout-titled" title="Problems">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Problems
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>In your own words, how is describing data different from inferring from data? Give a short example for each.</li>
+</ol>
+<!-- 2. Identify the population, sample, parameter, and statistic in this scenario: A battery company tests 60 batteries from today’s production line and finds an average life of 7.8 hours. The company wants to know the true average life of all batteries produced today. -->
+<ol start="2" type="1">
+<li>A streaming service tests two home-page designs on 5,000 visitors each. Version B produces a 0.6 percentage-point higher click-through rate than Version A. What questions would you ask before recommending the company switch to Version B?</li>
+</ol>
+<!-- 4. Explain the difference between variability and bias using a dartboard analogy. -->
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solutions">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solutions
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Description vs.&nbsp;inference. Description summarizes what happened in the observed data (e.g., “The median wait time yesterday was 11 minutes.”). Inference uses the sample to say something about a broader group or process, with uncertainty (e.g., “We estimate the typical wait time for all days like yesterday is 11 minutes, with margin of error ±2 minutes.”).</li>
+</ol>
+<!-- 2. Battery scenario. Population: all batteries produced today. Sample: the 60 tested batteries. Parameter: the true mean life of all batteries produced today. Statistic: the sample mean of 7.8 hours. -->
+<ol start="2" type="1">
+<li>How were visitors assigned to versions (randomly)? Were there differences in traffic sources or device types? Is the effect stable over time? What outcome do we ultimately care about (sign-ups, retention), and does the change affect it?</li>
+</ol>
+<!-- 4. Dartboard analogy. Variability: darts land around the bullseye but are spread out randomly. Bias: darts consistently land off to the lower-left-systematically shifted rather than centered. -->
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="populations-and-samples" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="populations-and-samples"><span class="header-section-number">1.2</span> Populations and Samples</h2>
+<blockquote class="blockquote">
+<p>“To understand God’s thoughts, we must study statistics, for these are the measures of his purpose.” - Florence Nightingale</p>
+</blockquote>
+<p>When you start any statistical investigation, the first two things to name are the <strong>population</strong> and the <strong>sample</strong>. The population is the full group or process you want to understand; the sample is the smaller set of cases you actually observe. Most of the time we can’t measure everyone or everything, so we sample wisely and then use statistics to bridge from the sample back to the population.</p>
+<section id="defining-the-population" class="level3">
+<h3 class="anchored" data-anchor-id="defining-the-population">Defining the population</h3>
+<p>At the heart of every statistical study is a <strong>population</strong>-the full set of individuals, objects, or events about which we want to learn. Sometimes this population is very concrete and well defined, such as <em>“all tires produced by Line A during the third shift this week.”</em> Other times it is more abstract or conceptual, such as <em>“all patients with this condition who would receive this treatment under similar circumstances.”</em> In both cases, the population exists independently of the data you happen to collect.</p>
+<p>Two important refinements help clarify what we really mean by “the population” in practice:</p>
+<ul>
+<li><p>The <strong>target population</strong> is the group you ultimately care about and want to draw conclusions about. This is the population referenced in your research question or claim. For example, a university might care about <em>all incoming first-year students</em>, or a manufacturer might care about <em>all tires it produces under normal operating conditions</em>.</p></li>
+<li><p>The <strong>accessible population</strong> is the portion of the target population that you can realistically reach or observe. This group is often represented by a <strong>sampling frame</strong>-a list, database, or mechanism that allows you to identify and select individuals for the study.</p></li>
+</ul>
+<p>In an ideal world, the accessible population would perfectly match the target population. In reality, they often differ. Practical constraints-time, cost, geography, incomplete records, or nonresponse-mean that some members of the target population are harder (or impossible) to include.</p>
+<p>Clarity about this distinction matters. Suppose your target population is <em>“all Baylor first-year students this fall.”</em> If your sampling frame consists of <em>“students who attend welcome week,”</em> you may systematically exclude commuters, students with work or family obligations, or those who arrive late to campus. If these excluded students differ in meaningful ways-academically, socially, or financially-then your sample may not represent the target population well. This mismatch introduces <strong>bias</strong>, meaning your results may consistently overestimate or underestimate the quantity you are trying to measure.</p>
+<p>Being explicit about the target population, the accessible population, and the sampling frame forces you to confront these limitations up front. It also helps you interpret results honestly: conclusions drawn from the accessible population should not automatically be generalized beyond it without careful justification. In statistics, knowing <em>who</em> your data represent is just as important as knowing <em>what</em> the data say.</p>
+<div class="callout callout-style-simple callout-example callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Example 1.1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>A hospital studying patient recovery times after knee surgery.</strong></p>
+<ul>
+<li><strong>Target population:</strong> All adults in the United States who undergo knee replacement surgery.</li>
+<li><strong>Accessible population:</strong> Adults who undergo knee replacement surgery at three partnering hospitals in Central Texas during the current calendar year.</li>
+<li><strong>Sampling frame:</strong> The electronic medical records system at those three hospitals, which lists every knee replacement patient with a valid follow-up address.</li>
+</ul>
+<p>Notice the gap: the target population is national, but the accessible population is limited to a specific region and time window. Patients at these Texas hospitals may differ from the national population in age distribution, insurance coverage, or access to physical therapy—all of which could affect recovery times. Results from this study should be generalized beyond Central Texas only with caution.</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-example callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Example 1.2
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>A university investigating student satisfaction with campus dining.</strong></p>
+<ul>
+<li><strong>Target population:</strong> All students enrolled at the university during the current semester.</li>
+<li><strong>Accessible population:</strong> Students who have an active university email account and have opted in to receive survey invitations.</li>
+<li><strong>Sampling frame:</strong> The registrar’s email list of currently enrolled students who have not opted out of institutional surveys.</li>
+</ul>
+<p>Here the sampling frame excludes students who opted out of surveys—and those students may have systematically different opinions (for example, they may be less engaged with campus life or more frustrated with institutional communications). The accessible population also misses any students with outdated or inactive email accounts. These gaps mean the survey results may overrepresent students who are more connected to campus and willing to share feedback.</p>
+</div>
+</div>
+</section>
+<section id="what-counts-as-a-sample" class="level3">
+<h3 class="anchored" data-anchor-id="what-counts-as-a-sample">What counts as a sample?</h3>
+<p>A <strong>sample</strong> is the subset of the population from which data are actually collected. It consists of the specific individuals, objects, or observations you measure in your study. While the population defines <em>what you care about</em>, the sample defines <em>what you observe</em>. Everything that follows in a statistical analysis-summary statistics, graphs, models, and conclusions-is based on the sample.</p>
+<p>We will study <em>how</em> to select samples carefully in Chapter 2. For now, the key idea is <em>what a good sample accomplishes</em>. A good sample <strong>represents the population well enough</strong> that quantities computed from the sample-such as means, proportions, or regression coefficients-provide useful information about the corresponding population quantities, called <strong>parameters</strong>. When this happens, the sample serves as a stand-in for the population.</p>
+<p>Importantly, a sample does not need to “look like” the population in every detail. Rather, it needs to capture the relevant sources of variability in the population without systematically favoring certain groups or outcomes over others. Poor samples can lead to misleading conclusions, not because the calculations are wrong, but because the data themselves fail to reflect the population of interest.</p>
+<p>A special case is a <strong>census</strong>, in which you attempt to measure every unit in the population. In principle, a census eliminates sampling variability, since there is no subset involved. In practice, however, censuses are rare. They are often expensive, time-consuming, and logistically complex. Even large-scale censuses can suffer from missing data, nonresponse, or measurement error, which means they are not immune to bias.</p>
+<p>For these reasons, <strong>sampling is the workhorse of statistics</strong>. Carefully designed samples allow us to learn about large or even infinite populations using a manageable amount of data. The central challenge of statistical inference is to quantify how much uncertainty remains when we use a sample to speak about a population-and that challenge begins with understanding exactly what our sample represents.</p>
+</section>
+<section id="parameters-and-statistics" class="level3">
+<h3 class="anchored" data-anchor-id="parameters-and-statistics">Parameters and statistics</h3>
+<p>A <strong>parameter</strong> is a numerical summary that describes a characteristic of the entire population. Examples include the true mean income of all households in a city, the proportion of all voters who support a particular candidate, or the standard deviation of tire lifetimes produced by a factory. Parameters are fixed values-they do not change-but they are usually <strong>unknown</strong>, because measuring an entire population is rarely feasible.</p>
+<p>A <strong>statistic</strong>, by contrast, is a numerical summary computed from a sample. Sample means, sample proportions, and sample standard deviations are all statistics. Unlike parameters, statistics <strong>depend on which individuals happen to be included in the sample</strong>, and therefore they can change from sample to sample. In practice, statistics are the quantities we can actually calculate, and we use them as <strong>estimates</strong> of the corresponding population parameters.</p>
+<p>This distinction is central to statistical thinking. When you report a sample mean, you are not claiming it <em>is</em> the population mean. Instead, you are using it as your best guess, based on the available data. Different samples from the same population would produce different statistics, even if the sampling method were perfectly fair.</p>
+<p>That inevitable variation from sample to sample is called <strong>sampling error</strong>. Sampling error does <em>not</em> mean that a mistake was made or that the data were collected incorrectly. Rather, it reflects the natural randomness involved in observing only a subset of the population. Even well-designed samples are subject to sampling error.</p>
+<p>A major goal of statistics is to <strong>measure and communicate this uncertainty</strong>. Later chapters will introduce tools such as <strong>margins of error</strong>, <strong>confidence intervals</strong>, and <strong>hypothesis tests</strong>, which allow us to quantify how close a statistic is likely to be to the true parameter. These tools do not eliminate uncertainty, but they help us reason carefully about what our data can-and cannot-tell us about the population.</p>
+<!-- ### Observational units vs. sampling units -->
+<!-- Two closely related ideas in data collection are often confused, but keeping them distinct is essential for good study design: -->
+<!-- * The **observational unit** is the basic unit on which measurements are taken. In a dataset, this typically corresponds to *one row of data*: one person, one tire, one game, one patient visit, or one manufactured item. Each observational unit contributes a single set of measurements to the dataset. -->
+<!-- * The **sampling unit** is the unit that is actually selected by the sampling process. This is “the thing you sample” when drawing your data. In simple random samples, the sampling unit and observational unit are the same-for example, you randomly sample individual students and record one row per student. -->
+<!-- In more complex designs, however, these units can differ. In a **cluster sampling** design, you might randomly sample entire groups-such as schools, classrooms, households, or hospitals-and then observe individuals within those groups. In that case, the **sampling unit** is the cluster (for example, the school), while the **observational units** are the individuals within each cluster (the students). Even though you collect data on many students, the randomness in the design operates at the level of schools, not individuals. -->
+<!-- This distinction matters because it affects both **data collection** and **analysis**. Treating observational units as if they were independently sampled when they were actually selected as part of clusters can lead to misleading conclusions. Observations within the same sampling unit often resemble each other more than observations from different units, and ignoring this dependence can underestimate variability and overstate precision. -->
+<!-- Being explicit about observational units and sampling units also helps prevent practical mistakes. It clarifies what “one data point” really means, avoids double-counting information, and ensures that summaries and models align with the study design. In short, knowing *what you measured* and *how you selected it* is a prerequisite for trustworthy statistical inference. -->
+</section>
+<section id="why-sampling-works-and-when-it-doesnt" class="level3">
+<h3 class="anchored" data-anchor-id="why-sampling-works-and-when-it-doesnt">Why sampling works (and when it doesn’t)</h3>
+<p>Sampling works when your sample is representative of the population and your measurement is trustworthy. It struggles when parts of the population are systematically excluded (coverage problems), when participation differs by outcome (nonresponse), or when the way you select units is related to the outcome (selection effects). We’ll study these threats, and how to reduce them, next chapter.</p>
+</section>
+<section id="illustration-drawing-a-random-sample-from-a-sampling-frame-in-r" class="level3">
+<h3 class="anchored" data-anchor-id="illustration-drawing-a-random-sample-from-a-sampling-frame-in-r">Illustration: drawing a random sample from a sampling frame in R</h3>
+<p>To make the ideas of sampling frames and random samples concrete, let’s walk through a simple example in R.</p>
+<p>Imagine a small university department has 20 students. We have a <strong>sampling frame</strong>—a complete list of their names—and we want to randomly select 5 students for a survey.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Our sampling frame: a list of 20 students</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>sampling_frame <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Alex"</span>,    <span class="st">"Brianna"</span>, <span class="st">"Carlos"</span>,  <span class="st">"Diana"</span>,   <span class="st">"Ethan"</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Fatima"</span>,  <span class="st">"George"</span>,  <span class="st">"Hannah"</span>,  <span class="st">"Isaac"</span>,   <span class="st">"Julia"</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Kevin"</span>,   <span class="st">"Lena"</span>,    <span class="st">"Marcus"</span>,  <span class="st">"Nora"</span>,    <span class="st">"Oscar"</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Priya"</span>,   <span class="st">"Quinn"</span>,   <span class="st">"Rosa"</span>,    <span class="st">"Sam"</span>,     <span class="st">"Tina"</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Draw a random sample of 5 students</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(sampling_frame, <span class="at">size =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Marcus" "George" "Carlos" "Tina"   "Hannah"</code></pre>
+</div>
+</div>
+<p>Run this code yourself and you will get a different set of 5 names. Run it again and you will get yet another set. This is the randomness at work—each time R draws a sample, it uses a different sequence of random numbers.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<section id="reproducibility-with-set.seed" class="level4">
+<h4 class="anchored" data-anchor-id="reproducibility-with-set.seed">Reproducibility with <code>set.seed()</code></h4>
+<p>In research and coursework, we often need results to be <strong>reproducible</strong>—meaning someone else (or your future self) can run the same code and get the same output. R’s <code>set.seed()</code> function makes this possible. It locks the random number generator to a specific starting point so that the “random” draws follow the same sequence every time.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1004</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(sampling_frame, <span class="at">size =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Kevin"  "Alex"   "Marcus" "Ethan"  "Priya" </code></pre>
+</div>
+</div>
+<p>No matter how many times you run the code above, you will always get the same five names. Change the seed number and you will get a different (but still reproducible) sample:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(sampling_frame, <span class="at">size =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Quinn" "Ethan" "Alex"  "Julia" "Diana"</code></pre>
+</div>
+</div>
+<p>Think of <code>set.seed()</code> as bookmarking a page in a very long book of random numbers. The draws are still “random” in the sense that they have no pattern you could predict, but the bookmark tells R exactly where to start reading. Without <code>set.seed()</code>, R picks a different starting place every time.</p>
+</section>
+<section id="different-samples-same-goal" class="level4">
+<h4 class="anchored" data-anchor-id="different-samples-same-goal">Different samples, same goal</h4>
+<p>The key insight is that <strong>every random sample is different, but they are all trying to estimate the same population truth</strong>. Let’s see this in action.</p>
+<p>Suppose the 20 students in our sampling frame have the following GPAs (these are the “population” for this illustration):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>gpa <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">3.2</span>, <span class="fl">3.8</span>, <span class="fl">2.9</span>, <span class="fl">3.5</span>, <span class="fl">3.1</span>, <span class="fl">3.9</span>, <span class="fl">2.7</span>, <span class="fl">3.4</span>, <span class="fl">3.6</span>, <span class="fl">3.0</span>,</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>         <span class="fl">3.3</span>, <span class="fl">3.7</span>, <span class="fl">2.8</span>, <span class="fl">3.5</span>, <span class="fl">3.2</span>, <span class="fl">3.8</span>, <span class="fl">3.1</span>, <span class="fl">3.4</span>, <span class="fl">2.6</span>, <span class="fl">3.6</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(gpa) <span class="ot">&lt;-</span> sampling_frame</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># The true population mean GPA</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(gpa)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.305</code></pre>
+</div>
+</div>
+<p>Now let’s draw 1,000 different random samples of size 5 and compute the sample mean GPA each time:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1004</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>sample_means <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">1000</span>, {</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  chosen <span class="ot">&lt;-</span> <span class="fu">sample</span>(sampling_frame, <span class="at">size =</span> <span class="dv">5</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(gpa[chosen])</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The figure below shows a histogram of these 1,000 sample means. The dashed line marks the true population mean.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="01_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Notice that the individual sample means vary—some are above the true mean, some below—but they <strong>center around the true population mean</strong>. No single sample is guaranteed to be exactly right, but the process of random sampling is unbiased: on average, it hits the target. This is precisely why random sampling works, and it is the foundation for the inferential tools we will develop later in the course.</p>
+</section>
+</section>
+<section id="recap-1" class="level3">
+<h3 class="anchored" data-anchor-id="recap-1">Recap</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 28%">
+<col style="width: 71%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Keyword</strong></th>
+<th><strong>Definition</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Population</strong></td>
+<td>The full group or process you want to understand.</td>
+</tr>
+<tr class="even">
+<td><strong>Target population</strong></td>
+<td>The group you truly care about answering a question for.</td>
+</tr>
+<tr class="odd">
+<td><strong>Accessible population</strong></td>
+<td>The portion of the target population you can practically reach.</td>
+</tr>
+<tr class="even">
+<td><strong>Sampling frame</strong></td>
+<td>The list or mechanism from which the sample is drawn.</td>
+</tr>
+<tr class="odd">
+<td><strong>Sample</strong></td>
+<td>The subset of units you actually observe and measure.</td>
+</tr>
+<tr class="even">
+<td><strong>Census</strong></td>
+<td>An attempt to measure every unit in the population.</td>
+</tr>
+<tr class="odd">
+<td><strong>Parameter</strong></td>
+<td>A numerical characteristic of a population (e.g., <span class="math inline">\(\mu, p\)</span>).</td>
+</tr>
+<tr class="even">
+<td><strong>Statistic</strong></td>
+<td>A numerical summary from a sample (e.g., <span class="math inline">\(\bar{x}, \hat{p}\)</span>) used to estimate a parameter.</td>
+</tr>
+<tr class="odd">
+<td><strong>Sampling error</strong></td>
+<td>Natural variation in a statistic from sample to sample.</td>
+</tr>
+<tr class="even">
+<td><strong>Bias</strong></td>
+<td>Systematic deviation caused by design, coverage, or selection issues.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="check-your-understanding-1" class="level3">
+<h3 class="anchored" data-anchor-id="check-your-understanding-1">Check your understanding</h3>
+<div class="callout callout-style-default callout-note callout-titled" title="Problems">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Problems
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>A battery plant tests 80 batteries from today’s production line and finds an average life of 7.8 hours. Identify the population, sample, parameter, and statistic.</p></li>
+<li><p>Your target is “all Baylor first-year students this fall.” You gather data from an email list of students who signed up for an early-interest program. What is the sampling frame? Name a potential source of bias.</p></li>
+<li><p>A marketing team uses comments on their Instagram post to judge product satisfaction among all customers. Explain why this may not represent the population.</p></li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solutions">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solutions
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>Population: all batteries produced today. Sample: the 80 tested batteries. Parameter: the true mean life of all batteries produced today. Statistic: the sample mean of 7.8 hours.</p></li>
+<li><p>Sampling frame: students on the early-interest email list. Potential bias: students who didn’t sign up (e.g., commuters, late enrollees) may be under-represented, creating coverage/selection bias.</p></li>
+<li><p>Instagram commenters are a self-selected subset; satisfied or dissatisfied users may be more likely to comment, and customers not on Instagram are excluded-both threaten representativeness.</p></li>
+</ol>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="variables-and-types-of-data" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="variables-and-types-of-data"><span class="header-section-number">1.3</span> Variables and Types of Data</h2>
+<blockquote class="blockquote">
+<p>“Not everything that can be counted counts, and not everything that counts can be counted.” - Albert Einstein</p>
+</blockquote>
+<p>Every data table is built from two essential ingredients: <strong>cases</strong> and <strong>variables</strong>. The <strong>cases</strong> form the <em>rows</em> of the table and represent the individual observational units-people, objects, events, or time points-on which data are collected. The <strong>variables</strong> form the <em>columns</em> and describe characteristics recorded for each case. Thinking clearly about both is crucial: a dataset only makes sense when you know what each row represents and what information each column contains.</p>
+<section id="what-is-a-variable" class="level3">
+<h3 class="anchored" data-anchor-id="what-is-a-variable">What is a variable?</h3>
+<p>A <strong>variable</strong> is any characteristic that can take different values across cases. For example, <em>resting heart rate</em> may vary from person to person, <em>major</em> differs across students, <em>state of residence</em> varies geographically, and <em>did the patient improve?</em> can differ from one patient to the next. If a characteristic does not vary-if it takes the same value for every case-it does not function as a variable and typically provides no information for analysis.</p>
+<p>Variables always live in <strong>context</strong>. For any dataset, we should be able to answer two basic questions:</p>
+<ul>
+<li>What does <strong>one row</strong> represent? This is the <strong>observational unit</strong> (for example, one student, one hospital visit, or one manufactured item).</li>
+<li>What does <strong>each column</strong> represent, and how was it measured or recorded? For numerical variables, this includes the <strong>unit of measurement</strong> (beats per minute, dollars, hours, miles, etc.).</li>
+</ul>
+<p>Context matters because the same-looking numbers can mean very different things depending on how they were collected. A column of values like <code>72, 68, 75</code> might represent heart rates, exam scores, or daily temperatures, and each interpretation leads to different conclusions and appropriate analyses. Even non-numeric variables require clear definitions: knowing whether “major” refers to a declared major at enrollment or at graduation can change how the data should be interpreted.</p>
+<p>Being explicit about variables and their meaning lays the groundwork for everything that follows. The choice of summary statistics, graphs, and statistical models depends not just on the values in a column, but on <strong>what kind of variable it is and what it represents</strong>.</p>
+</section>
+<section id="the-two-big-families" class="level3">
+<h3 class="anchored" data-anchor-id="the-two-big-families">The two big families</h3>
+<p>Most variables encountered in practice fall into two broad families. Different textbooks use slightly different names-<em>qualitative vs.&nbsp;quantitative</em>, <em>categorical vs.&nbsp;numerical</em>-but the underlying ideas are the same. The key question is whether the values represent <strong>group membership</strong> or <strong>measured quantities</strong>.</p>
+<section id="categorical-variables" class="level4">
+<h4 class="anchored" data-anchor-id="categorical-variables">Categorical variables</h4>
+<p>A <strong>categorical variable</strong> assigns each case to a group, category, or label. The values describe <em>what kind</em> of thing each case is, not <em>how much</em> of something it has. Because the categories are labels, performing arithmetic operations on them does not make sense-even if the categories are coded using numbers behind the scenes.</p>
+<p>For example, coding blood types as 1, 2, 3, and 4 does not imply that type 4 is “twice” type 2 or that averaging blood types is meaningful. The numbers are merely labels.</p>
+<p>Categorical variables commonly appear in three forms:</p>
+<ul>
+<li><p><strong>Nominal variables</strong> consist of categories with no natural ordering. One category is not inherently “higher” or “lower” than another. Examples include blood type, home state, eye color, device brand, or political party. For nominal variables, we typically summarize data using counts, proportions, or percentages and visualize them with bar charts or pie charts.</p></li>
+<li><p><strong>Ordinal variables</strong> have categories with a meaningful order, but the spacing between categories is uneven or unknown. Likert-scale responses such as “Strongly disagree,” “Disagree,” “Neutral,” “Agree,” and “Strongly agree” fall into this category, as do rankings like race finish places (1st, 2nd, 3rd) or course grades (A, B, C, D, F). While the order carries information, it is generally unsafe to treat the differences between categories as numerically equal.</p></li>
+<li><p><strong>Binary variables</strong> are categorical variables with exactly two categories. Common examples include yes/no, success/failure, pass/fail, or disease/no disease. Binary variables are especially important in statistics because they often encode outcomes of interest and are closely connected to proportions and probabilities.</p></li>
+</ul>
+<p>Recognizing a variable as categorical-and identifying which subtype it belongs to-guides nearly every analytical choice, from the graphs you make to the summary measures you report and the statistical methods you apply.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Likert Scale
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A <strong>Likert Scale</strong> is a common psychometric scale used in questionnaires to measure attitudes, opinions, or behaviors. It presents a statement and asks respondents to indicate their level of agreement or frequency on a symmetric, typically 5- or 7-point scale. The options range from one extreme (e.g., “Strongly Disagree”) to the opposite extreme (e.g., “Strongly Agree”), often including a neutral or middle point.</p>
+<p>Example:</p>
+<p>“How satisfied are you with our service?”</p>
+<ul>
+<li><p>Strongly Disagree</p></li>
+<li><p>Disagree</p></li>
+<li><p>Neutral</p></li>
+<li><p>Agree</p></li>
+<li><p>Strongly Agree</p></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="quantitative-variables" class="level4">
+<h4 class="anchored" data-anchor-id="quantitative-variables">Quantitative variables</h4>
+<p>A <strong>quantitative variable</strong> records numerical values for which arithmetic operations—such as addition, subtraction, averaging, and differences—are meaningful. These variables represent <em>how much</em>, <em>how many</em>, or <em>how long</em> of something, and they arise from counting or measuring. Because the numbers carry inherent magnitude, quantitative variables support a wide range of numerical summaries and graphical displays.</p>
+<p>One important subtype of quantitative variables is:</p>
+<ul>
+<li><strong>Discrete variables</strong>, which arise from <strong>counting</strong>. Discrete variables take on distinct, separated values—typically whole numbers—with gaps between possible values. Examples include the number of emergency room visits in a year, the number of defects on a manufactured item, the number of children in a household, or the number of emails received in a day. For these variables, values like 2.5 or 3.7 are not meaningful because you cannot have a fractional count of an event.</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+For those who want to see the math:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>In math, the possible values of discrete data form what is known as countable set. This means the values form a collection (set) of values that can be put into a one-to-one correspondence with the natural numbers. In other words, a set is countable if you can list its elements in a sequence, even if the list is infinitely long.</p>
+<p>There are two type of countable sets:</p>
+<ol type="1">
+<li><p>Finite Countable Set</p>
+<ul>
+<li><p>The set has a limited number of elements.</p></li>
+<li><p>Example: <span class="math inline">\(\{2, 4, 6, 8\}\)</span> - there are exactly 4 elements.</p></li>
+</ul></li>
+<li><p>Countably Infinite Set</p>
+<ul>
+<li><p>The set has infinitely many elements, but you can still list them in an ordered sequence.</p></li>
+<li><p>Example: The set of natural numbers <span class="math inline">\(\{1, 2, 3, 4, ...\}\)</span></p></li>
+<li><p>Even the set of all integers <span class="math inline">\(\{..., -2, -1, 0, 1, 2, ...\}\)</span> is countable - you can reorder them as <span class="math inline">\(0, 1, -1, 2, -2, 3, -3, ..\)</span> and still list them one by one.</p></li>
+</ul></li>
+</ol>
+</div>
+</div>
+</div>
+<ul>
+<li><strong>Continuous variables</strong> arise from <strong>measurement</strong> rather than counting. In principle, they can take on any value within an interval on the number line, limited only by the precision of the measuring instrument. Examples include blood pressure, time to failure, height, weight, temperature, and distance. For these variables, values such as 172.4, 172.43, or 172.431 are all meaningful, even if we choose to record them with fewer decimal places.</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+For those who want to see the math:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The possible values of continuous data form an uncountable set. A set is uncountable if there’s no way to list all its elements in a sequence, even infinitely.</p>
+<ul>
+<li><p>Example: Real numbers between 0 and 1 - there are infinitely more of these than there are natural numbers.</p></li>
+<li><p>In set notation, an example of an uncountable set is <span class="math inline">\(\{x: x\ge 3\}\)</span>.</p></li>
+</ul>
+</div>
+</div>
+</div>
+<p>To decide if a variable is discrete or continuous, first think of an interval of possible values of the variable<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. Can you count how many values are in that interval? If so, then it is <strong>discrete</strong>, if not, then it is <strong>continuous</strong>. In practice, we can simplify this further: counts are discrete, measurements are usually continuous.</p>
+</section>
+</section>
+<section id="measurement-scales-youll-hear-about" class="level3">
+<h3 class="anchored" data-anchor-id="measurement-scales-youll-hear-about">Measurement scales you’ll hear about</h3>
+<p>In addition to the broad distinction between categorical and quantitative variables, you may encounter another classification system based on <strong>measurement scales</strong>. These scales—<strong>nominal, ordinal, interval, and ratio</strong>—describe what kinds of comparisons and arithmetic operations are meaningful for a variable. While this taxonomy appears frequently in introductory texts, its real value lies in guiding <em>interpretation</em>, not in memorization. We have already defined nominal and ordinal scales above.</p>
+<ul>
+<li><p><strong>Interval scales</strong> are numeric scales where <strong>differences are meaningful</strong>, but the zero point is <strong>arbitrary</strong>. Temperature measured in degrees Fahrenheit or Celsius is the classic example. A difference of 10°F represents the same change anywhere on the scale, but ratios do not carry meaning: 40°F is not “twice as hot” as 20°F because zero does not represent the absence of temperature.</p></li>
+<li><p><strong>Ratio scales</strong> are numeric scales with a <strong>true zero</strong>, representing the absence of the quantity being measured. On these scales, both differences and ratios are meaningful. Examples include temperature measured in Kelvin, as well as length, mass, time, age, and income. Statements like “10 minutes is twice as long as 5 minutes” or “this object weighs three times as much as that one” are valid precisely because the zero point has real meaning.</p></li>
+</ul>
+<p>You do not need to memorize the full taxonomy to do good statistics. The practical takeaway is simpler: <strong>always think about what comparisons make sense for your variable</strong>. In particular, be cautious about interpreting ratios when working with interval scales, and ask yourself whether subtraction, averaging, or scaling by a factor has a clear real-world meaning. Keeping this perspective front and center helps prevent overinterpretation and ensures that numerical summaries align with the nature of the data.</p>
+</section>
+<section id="identifier-and-datetime-variables" class="level3">
+<h3 class="anchored" data-anchor-id="identifier-and-datetime-variables">“Identifier” and date/time variables</h3>
+<p>Not every column in a dataset is meant to be analyzed numerically. Some variables exist primarily to <strong>organize, link, or track observations</strong>, and treating them incorrectly can lead to serious analytical mistakes.</p>
+<ul>
+<li><strong>Identifier (ID) variables</strong> are used to uniquely label cases. Examples include student ID numbers, order or invoice numbers, patient IDs, license plate numbers, and ZIP codes. Although these values are often composed of digits, they are <strong>labels, not quantities</strong>. Arithmetic operations on ID variables are meaningless: averaging student ID numbers or computing differences between order numbers tells you nothing substantive about the data. Their purpose is to ensure that each row can be uniquely referenced, merged with other datasets, or traced back to its source—not to summarize or model.</li>
+</ul>
+<p>A common error is to accidentally treat ID variables as quantitative simply because they are stored as numbers. Good practice is to explicitly mark them as identifiers (or convert them to text) so they are not mistakenly included in summaries, plots, or statistical models.</p>
+<ul>
+<li><strong>Date and time variables</strong> record when an observation occurred. These variables are more subtle because they can legitimately play <strong>different roles depending on the question being asked</strong>. On one hand, dates and times can be treated as categorical—for example, grouping observations by day of the week, month, or season. On the other hand, they can be treated as quantitative by measuring elapsed time, such as minutes since the start of an experiment, days since enrollment, or time to failure.</li>
+</ul>
+<p>Because date/time variables are flexible, it is essential to be explicit about how they are being used. Are you comparing weekdays to weekends, or are you modeling a trend over time? The same column can support both approaches, but the analysis, visualization, and interpretation differ substantially.</p>
+<p>Being deliberate about identifiers and date/time variables helps ensure that each column is used appropriately. It prevents nonsensical calculations, clarifies analytical intent, and keeps the focus on variables that genuinely carry information about the phenomenon under study.</p>
+</section>
+<section id="working-with-data-types-in-r" class="level3">
+<h3 class="anchored" data-anchor-id="working-with-data-types-in-r">Working with data types in R</h3>
+<p>R has its own way of representing the variable types we have discussed. Understanding how R stores and handles different kinds of data is important because it affects which functions work, what summaries you get, and whether your analysis is valid.</p>
+<section id="numeric-vectors" class="level4">
+<h4 class="anchored" data-anchor-id="numeric-vectors">Numeric vectors</h4>
+<p>Quantitative variables—both discrete and continuous—are stored as <strong>numeric</strong> vectors. R does not distinguish between discrete and continuous; both are just numbers.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Continuous: heights in inches</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>heights <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">64.2</span>, <span class="fl">70.1</span>, <span class="fl">68.5</span>, <span class="fl">72.0</span>, <span class="fl">65.8</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>heights</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 64.2 70.1 68.5 72.0 65.8</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Discrete: number of siblings</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>siblings <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">1</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>siblings</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2 0 1 3 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(heights)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "numeric"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(siblings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "numeric"</code></pre>
+</div>
+</div>
+<p>Both report the same class. R treats them identically—it is up to you as the analyst to remember which represent counts and which represent measurements.</p>
+</section>
+<section id="character-vectors" class="level4">
+<h4 class="anchored" data-anchor-id="character-vectors">Character vectors</h4>
+<p>Nominal categorical variables are often stored as <strong>character</strong> vectors—simple text labels.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>eye_color <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Brown"</span>, <span class="st">"Blue"</span>, <span class="st">"Green"</span>, <span class="st">"Brown"</span>, <span class="st">"Blue"</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(eye_color)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+</div>
+<p>Character vectors are fine for storage, but R does not know these are categories. If you try to compute a summary, R cannot do much with plain text:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(eye_color)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Length     Class      Mode 
+        5 character character </code></pre>
+</div>
+</div>
+<p>To unlock categorical summaries, we need <strong>factors</strong>.</p>
+</section>
+<section id="factors-categorical-variables" class="level4">
+<h4 class="anchored" data-anchor-id="factors-categorical-variables">Factors (categorical variables)</h4>
+<p>A <strong>factor</strong> is R’s way of representing a categorical variable. Converting a character vector to a factor tells R that the values are categories, not arbitrary text.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>eye_color_f <span class="ot">&lt;-</span> <span class="fu">factor</span>(eye_color)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>eye_color_f</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] Brown Blue  Green Brown Blue 
+Levels: Blue Brown Green</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(eye_color_f)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Blue Brown Green 
+    2     2     1 </code></pre>
+</div>
+</div>
+<p>Now <code>summary()</code> returns counts for each category. Behind the scenes, R stores factors as integers with labels (called <strong>levels</strong>), which is efficient and enables many statistical functions.</p>
+</section>
+<section id="ordered-factors-ordinal-variables" class="level4">
+<h4 class="anchored" data-anchor-id="ordered-factors-ordinal-variables">Ordered factors (ordinal variables)</h4>
+<p>For ordinal variables, use <code>factor()</code> with <code>ordered = TRUE</code> and specify the level order. This tells R that the categories have a meaningful ranking.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>satisfaction <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Neutral"</span>, <span class="st">"Agree"</span>, <span class="st">"Strongly Agree"</span>, <span class="st">"Disagree"</span>, <span class="st">"Agree"</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>satisfaction_f <span class="ot">&lt;-</span> <span class="fu">factor</span>(satisfaction,</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Strongly Disagree"</span>, <span class="st">"Disagree"</span>,</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"Neutral"</span>, <span class="st">"Agree"</span>, <span class="st">"Strongly Agree"</span>),</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>                         <span class="at">ordered =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>satisfaction_f</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] Neutral        Agree          Strongly Agree Disagree       Agree         
+5 Levels: Strongly Disagree &lt; Disagree &lt; Neutral &lt; ... &lt; Strongly Agree</code></pre>
+</div>
+</div>
+<p>The <code>&lt;</code> symbols in the output confirm that R recognizes the ordering. This matters for certain analyses and visualizations that respect category order.</p>
+</section>
+<section id="logical-vectors-binary-variables" class="level4">
+<h4 class="anchored" data-anchor-id="logical-vectors-binary-variables">Logical vectors (binary variables)</h4>
+<p>Binary variables with two outcomes are naturally represented as <strong>logical</strong> vectors (<code>TRUE</code>/<code>FALSE</code>).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>passed_inspection <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(passed_inspection)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "logical"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(passed_inspection)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Mode   FALSE    TRUE 
+logical       2       3 </code></pre>
+</div>
+</div>
+<p>A useful property of logical vectors is that R treats <code>TRUE</code> as 1 and <code>FALSE</code> as 0 in arithmetic, so you can quickly compute counts and proportions:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(passed_inspection)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(passed_inspection)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6</code></pre>
+</div>
+</div>
+</section>
+<section id="why-getting-the-type-right-matters" class="level4">
+<h4 class="anchored" data-anchor-id="why-getting-the-type-right-matters">Why getting the type right matters</h4>
+<p>Storing a variable with the wrong type can lead to misleading results. Consider ZIP codes: they look like numbers but are really nominal labels.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>zip_codes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">76706</span>, <span class="dv">76710</span>, <span class="dv">76708</span>, <span class="dv">76706</span>, <span class="dv">76710</span>)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Wrong: treating ZIP codes as numeric</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(zip_codes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 76708</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Right: treating ZIP codes as a factor</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>zip_codes_f <span class="ot">&lt;-</span> <span class="fu">factor</span>(zip_codes)</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(zip_codes_f)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>76706 76708 76710 
+    2     1     2 </code></pre>
+</div>
+</div>
+<p>The mean of ZIP codes is nonsense—“average ZIP code” has no meaning. Converting to a factor gives us a frequency table, which is the appropriate summary for a nominal variable. The same caution applies to jersey numbers, ID numbers, and any other digits that serve as labels rather than quantities.</p>
+</section>
+<section id="quick-reference" class="level4">
+<h4 class="anchored" data-anchor-id="quick-reference">Quick reference</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 29%">
+<col style="width: 46%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Variable type</strong></th>
+<th><strong>R representation</strong></th>
+<th><strong>Example</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Quantitative (continuous or discrete)</td>
+<td><code>numeric</code></td>
+<td><code>c(3.2, 2.8, 3.5)</code></td>
+</tr>
+<tr class="even">
+<td>Categorical (nominal)</td>
+<td><code>factor</code></td>
+<td><code>factor(c("A", "B", "A"))</code></td>
+</tr>
+<tr class="odd">
+<td>Categorical (ordinal)</td>
+<td><code>ordered factor</code></td>
+<td><code>factor(x, levels = ..., ordered = TRUE)</code></td>
+</tr>
+<tr class="even">
+<td>Binary</td>
+<td><code>logical</code></td>
+<td><code>c(TRUE, FALSE, TRUE)</code></td>
+</tr>
+<tr class="odd">
+<td>Identifier</td>
+<td><code>character</code> (or <code>factor</code>)</td>
+<td><code>c("ID001", "ID002", "ID003")</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="recap-2" class="level3">
+<h3 class="anchored" data-anchor-id="recap-2">Recap</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 26%">
+<col style="width: 73%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Keyword</strong></th>
+<th><strong>Definition</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Categorical variable</strong></td>
+<td>Places a case into a group/label; arithmetic on labels is not meaningful.</td>
+</tr>
+<tr class="even">
+<td><strong>Nominal</strong></td>
+<td>Categorical with no natural order.</td>
+</tr>
+<tr class="odd">
+<td><strong>Ordinal</strong></td>
+<td>Categorical with a natural order but uneven/unknown spacing.</td>
+</tr>
+<tr class="even">
+<td><strong>Binary</strong></td>
+<td>A categorical variable with exactly two categories.</td>
+</tr>
+<tr class="odd">
+<td><strong>Quantitative variable</strong></td>
+<td>Numeric values where arithmetic is meaningful.</td>
+</tr>
+<tr class="even">
+<td><strong>Discrete</strong></td>
+<td>Quantitative counts that change in whole steps.</td>
+</tr>
+<tr class="odd">
+<td><strong>Continuous</strong></td>
+<td>Quantitative measurements on a (nearly) continuous scale.</td>
+</tr>
+<tr class="even">
+<td><strong>Identifier (ID)</strong></td>
+<td>A label used to distinguish cases; not for numerical analysis.</td>
+</tr>
+<tr class="odd">
+<td><strong>Date/time</strong></td>
+<td>A timestamped variable that can be treated as categorical or quantitative depending on the question.</td>
+</tr>
+<tr class="even">
+<td><strong>Measurement scale</strong></td>
+<td>Describes how numbers relate to the thing measured (nominal, ordinal, interval, ratio).</td>
+</tr>
+<tr class="odd">
+<td><strong>Interval</strong></td>
+<td>Numeric scale with arbitrary zero; differences meaningful, ratios not.</td>
+</tr>
+<tr class="even">
+<td><strong>Ratio</strong></td>
+<td>Numeric scale with a true zero; differences and ratios meaningful.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="check-your-understanding-2" class="level3">
+<h3 class="anchored" data-anchor-id="check-your-understanding-2">Check your understanding</h3>
+<div class="callout callout-style-default callout-note callout-titled" title="Problems">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Problems
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>Classify each variable as categorical nominal, categorical ordinal, binary, quantitative discrete, or quantitative continuous:</p>
+<ol type="a">
+<li><p>Number of missed classes this semester</p></li>
+<li><p>Pain rating on a 0–10 scale</p></li>
+<li><p>Whether a chip passes final inspection</p></li>
+<li><p>ZIP code</p></li>
+<li><p>Body temperature (°F)</p></li>
+</ol></li>
+<li><p>A researcher converts systolic blood pressure into “Low” (&lt;110), “Normal” (110–139), and “High” (≥140). Name one advantage and one drawback of this recoding.</p></li>
+<li><p>Give an example where a date/time variable should be treated as (a) categorical and (b) quantitative.</p></li>
+<li><p>For each of the following, say whether ratios are meaningful and explain briefly:</p>
+<ol type="a">
+<li><p>Temperatures in °C</p></li>
+<li><p>Hours of weekly exercise</p></li>
+<li><p>IQ scores</p></li>
+</ol></li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solutions">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solutions
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>(a)<em>Quantitative discrete</em> (counts). (b) <em>Categorical ordinal</em> (ordered scale with uneven spacing)-often treated as numeric for convenience, but it’s ordinal by design. (c) <em>Binary</em> (pass/fail). (d) <em>Identifier</em> (categorical nominal label; not a quantitative variable). (e) <em>Quantitative continuous</em>.</p></li>
+<li><p><em>Advantage:</em> simplifies communication and enables comparisons across broad groups. <em>Drawback:</em> throws away information; analyses lose power and can depend on arbitrary cutpoints.</p></li>
+<li><p>(a)Categorical: day of week when a call was received (Mon–Sun). (b) Quantitative: minutes since admission, time to recovery, or days from treatment to follow-up.</p></li>
+<li><p>(a)°C is an <em>interval</em> scale: ratios aren’t meaningful (20°C isn’t “twice as hot” as 10°C). (b) Hours of exercise is a <em>ratio</em> scale with a true zero: ratios <em>are</em> meaningful (4 hours is twice 2 hours). (c) IQ is typically treated as an <em>interval</em> scale: differences are interpretable; ratios are not.</p></li>
+</ol>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="the-role-of-statistics-in-research" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="the-role-of-statistics-in-research"><span class="header-section-number">1.4</span> The Role of Statistics in Research</h2>
+<blockquote class="blockquote">
+<p>“Scientific research is a process of guided learning. The object of statistical methods is to make that process as efficient as possible.” - George Box, William Hunter, and J. Stuart Hunter</p>
+</blockquote>
+<p>Research is not a matter of “run a test and see what comes out.” It is a <strong>disciplined, iterative process</strong> that begins with a well-defined question, moves through thoughtful study design and careful data collection, and ends with conclusions that are supported by evidence and honest about uncertainty. At every stage, judgment matters.</p>
+<p>Statistics is the connective tissue in this loop. It helps you plan <em>how</em> to learn from data, provides tools to summarize and visualize what you observed, and supplies a principled way to assess what you can responsibly claim about the population. Without statistical thinking, it is easy to overinterpret results, confuse noise for signal, or answer a question you never intended to ask.</p>
+<section id="from-question-to-estimand-to-design" class="level3">
+<h3 class="anchored" data-anchor-id="from-question-to-estimand-to-design">From question to estimand to design</h3>
+<p>Every sound statistical project should clearly articulate three elements <em>before</em> any data are analyzed:</p>
+<ul>
+<li><p>The <strong>research question</strong> is a plain-language statement of what you want to learn. It should be specific and tied to a population of interest. For example: <em>“Does the new tutoring program improve exam scores for Calculus I students?”</em></p></li>
+<li><p>The <strong>target parameter</strong> (often called the <strong>estimand</strong>) translates that question into a precise quantity in the population. In this example, the estimand might be <em>the difference in mean exam scores between students who receive tutoring and those who do not</em>. Naming the parameter forces clarity about what “improve” actually means.</p></li>
+<li><p>The <strong>study design</strong> describes how data will be collected to estimate that parameter. This includes the sampling plan, how variables will be measured, and whether treatments or interventions will be assigned.</p></li>
+</ul>
+<p>These three pieces must align. A mismatch—such as asking a causal question with a purely descriptive design—leads to weak or misleading conclusions.</p>
+<p>Two broad families of study designs appear throughout statistics:</p>
+<ul>
+<li><p>An <strong>observational study</strong> records what naturally occurs, without assigning treatments or interventions. These studies are common and often easier to carry out. They are well suited for describing patterns and associations, but they are vulnerable to <strong>confounding</strong>, where other variables are related to both the explanatory variable and the outcome. For example, an observational study might find that students who drink more coffee earn higher GPAs, but coffee drinkers may also be spending more hours studying. In that case, study time is a confounding variable: it is associated with both coffee consumption and GPA, making it unclear whether coffee itself has any effect.</p></li>
+<li><p>An <strong>experiment</strong> actively assigns a <strong>treatment</strong> to units and compares outcomes across groups. When well designed - with randomization, control, and careful implementation - experiments allow for stronger causal conclusions because they help isolate the effect of the treatment from other factors.</p></li>
+</ul>
+<p>The choice between these designs depends on the research question, ethical and practical constraints, and what kind of claim you ultimately want to make.</p>
+</section>
+<section id="the-statistical-process-a-workable-blueprint" class="level3">
+<h3 class="anchored" data-anchor-id="the-statistical-process-a-workable-blueprint">The statistical process: a workable blueprint</h3>
+<p>While real research is rarely linear, the following workflow provides a practical and reusable blueprint:</p>
+<ol type="1">
+<li><p><strong>Specify the problem clearly.</strong> Identify the population, the observational units, and the variables involved. Ambiguity here leads to confusion later.</p></li>
+<li><p><strong>Design the study.</strong> Choose an observational or experimental approach, plan how the sample will be obtained, and think carefully about potential sources of <strong>bias</strong> and confounding.</p></li>
+<li><p><strong>Collect data with quality in mind.</strong> Aim for reliable measurement, consistent procedures, and thorough documentation. Poor data quality cannot be fixed by clever analysis.</p></li>
+<li><p><strong>Explore first.</strong> Use <strong>exploratory data analysis (EDA)</strong> - graphs, tables, and summary statistics - to understand the data’s structure, detect errors or anomalies, and build intuition before formal modeling.</p></li>
+<li><p><strong>Model and infer.</strong> Select statistical methods that match the question and the data type, whether that involves comparing groups, studying relationships, or making predictions.</p></li>
+<li><p><strong>Quantify uncertainty.</strong> Report estimates along with measures of uncertainty, such as confidence intervals and (when appropriate) p-values. Always distinguish <strong>statistical significance</strong> from <strong>practical significance</strong>. These tools will be developed in later chapters.</p></li>
+<li><p><strong>Decide and communicate.</strong> Interpret results in context. Explain what the findings mean, what they do not imply, and what actions (if any) are justified based on the evidence.</p></li>
+<li><p><strong>Make it reproducible.</strong> Ensure that another person could follow your steps and reproduce your results from the same data. Reproducibility is a cornerstone of trustworthy science.</p></li>
+</ol>
+<p>In practice, this process is rarely a straight line. Insights from exploratory analysis often send you back to refine the research question or adjust the design. That looping is not a failure—it is a sign of careful, thoughtful science guided by statistical reasoning.</p>
+</section>
+<section id="recap-3" class="level3">
+<h3 class="anchored" data-anchor-id="recap-3">Recap</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 69%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Keyword</strong></th>
+<th><strong>Definition</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Research question</strong></td>
+<td>The plain-language question your study seeks to answer.</td>
+</tr>
+<tr class="even">
+<td><strong>Target parameter</strong></td>
+<td>The specific population quantity you aim to learn (e.g., mean difference, proportion).</td>
+</tr>
+<tr class="odd">
+<td><strong>Study design</strong></td>
+<td>The plan for collecting data (sampling, measurement, assignment) to answer the question.</td>
+</tr>
+<tr class="even">
+<td><strong>Observational study</strong></td>
+<td>A design that observes existing groups without assigning treatments.</td>
+</tr>
+<tr class="odd">
+<td><strong>Experiment</strong></td>
+<td>A design that assigns treatments (often at random) and compares outcomes.</td>
+</tr>
+<tr class="even">
+<td><strong>Treatment</strong></td>
+<td>The condition or intervention applied in an experiment.</td>
+</tr>
+<tr class="odd">
+<td><strong>Confounding</strong></td>
+<td>A third factor related to both treatment and outcome that distorts comparisons.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="check-your-understanding-3" class="level3">
+<h3 class="anchored" data-anchor-id="check-your-understanding-3">Check your understanding</h3>
+<div class="callout callout-style-default callout-note callout-titled" title="Problems">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Problems
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>A hospital asks: “Does a new scheduling system reduce ER wait times compared to the current system?”</p>
+<ol type="a">
+<li><p>State a suitable target parameter.</p></li>
+<li><p>Name a design choice (observational vs.&nbsp;experimental) and one reason for your choice.</p></li>
+</ol></li>
+<li><p>A university compares GPA between students who use tutoring and those who don’t, with no assignment or randomization. Name a potential confounder and how an experiment would address it.</p></li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solutions">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solutions
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>(a)<em>Target parameter:</em> the mean difference in ER wait time (new minus current) for all eligible ER visits. (b) <em>Design:</em> a randomized experiment (e.g., randomize days or shifts to “new” vs.&nbsp;“current”), so groups differ only by scheduling system on average, improving causal interpretation.</p></li>
+<li><p><em>Potential confounder:</em> prior academic preparation (e.g., incoming math placement). Students who seek tutoring might differ systematically. An experiment could randomly assign eligible students to tutoring or control (or randomize access), balancing confounders by design.</p></li>
+</ol>
+</div>
+</div>
+</div>
+<!-- ## The Statistical Process -->
+<!-- > "An approximate answer to the right problem is worth a good deal more than an exact answer to an approximate problem." -John Tukey -->
+<!-- **Guiding question:** *Why does context matter as much as calculation?* -->
+<!-- Two analysts can compute the same number and reach very different conclusions-because numbers live inside stories. The **context** of your data-who and what were measured, when and where, and under what conditions-determines which comparisons are fair, which models fit, and what your results mean. In short: good statistics is not just calculation; it’s thoughtful interpretation anchored in how the data were produced. -->
+<!-- ### What “context” actually includes -->
+<!-- When we say “use context,” we mean four concrete ingredients: -->
+<!-- - **Data context.** What are the *observational units*? What do the *variables* represent, and what are their *units of measurement*? -->
+<!-- - **Design context.** How were cases selected or assigned? Is this an *observational study* or an *experiment*? Where could *bias* or *confounding* sneak in? -->
+<!-- - **Measurement context.** What is the precise operational definition of each variable? Are instruments calibrated? Is the measurement *reliable* and *valid* for the construct? -->
+<!-- - **Analysis context.** What **assumptions** do your methods make, and are they plausible here? What domain constraints or conventions matter? -->
+<!-- Together, these pieces describe the **data-generating process (DGP)**-the mechanism by which the numbers in your table came to be. We make better choices when we reason about the DGP, not just the dataset. -->
+<!-- ### Same numbers, different stories: why stratification matters -->
+<!-- Comparisons can flip when you ignore a meaningful background factor-a classic “wait, what?” known as **Simpson’s paradox**. Below is a toy illustration with a medical “success” outcome, two treatments (A, B), and a background factor “severity” with two levels (Easy/Hard). Within each severity group, A does slightly better. But because B is given more often to Easy cases, B looks better overall. -->
+<!-- ```{r} -->
+<!-- #| echo: false -->
+<!-- #| message: false -->
+<!-- #| warning: false -->
+<!-- library(dplyr) -->
+<!-- dat <- tibble::tribble( -->
+<!--   ~severity, ~treatment, ~successes, ~total, -->
+<!--   "Easy",    "A",        93,          100, -->
+<!--   "Easy",    "B",        828,         900, -->
+<!--   "Hard",    "A",        657,         900, -->
+<!--   "Hard",    "B",        72,          100 -->
+<!-- ) |> -->
+<!--   dplyr::mutate(rate = successes/total) -->
+<!-- by_sev <- dat |> -->
+<!--   dplyr::select(severity, treatment, successes, total, rate) -->
+<!-- overall <- dat |> -->
+<!--   dplyr::group_by(treatment) |> -->
+<!--   dplyr::summarise(successes = sum(successes), total = sum(total), -->
+<!--                    rate = successes/total, .groups="drop") -->
+<!-- knitr::kable(by_sev, digits = 3, caption = "Success rates by severity (within-group)") -->
+<!-- knitr::kable(overall, digits = 3, caption = "Overall success rates (ignoring severity)") -->
+<!-- ``` -->
+<!-- Ignoring context (severity) leads to a different recommendation than comparing like with like. The fix is simple in principle: compare within relevant strata or adjust for them in a model. -->
+<!-- ### A practical context checklist (before you compute) -->
+<!-- Slow down-ask and answer these, in writing: -->
+<!-- * **Who/what is a row?** Name the observational unit. -->
+<!-- * **How were data obtained?** Sampling plan? Assignment? Time window? Inclusion/exclusion rules? -->
+<!-- * **What exactly was measured?** Give operational definitions and units. -->
+<!-- * **Which comparisons are fair?** Identify potential confounders and plan to **stratify** or adjust. -->
+<!-- * **What assumptions will you need?** Independence? Linearity? Constant variance? Distributional shape? (We will discuss these assumptions in later chapters) -->
+<!-- * **What will your claim be?** Descriptive statement, association, or causal effect? Match your language to your design. -->
+<!-- ### Working in JMP Pro 17: making context visible -->
+<!-- JMP gives you several context-friendly tools: -->
+<!-- * **Document units and roles.** Right-click a column → *Column Info* to set **Units**, **Modeling Type** (Nominal/Ordinal/Continuous), and notes. This prevents accidental “numeric” analysis of IDs. -->
+<!-- * **Compare like with like.** Use **Graph → Graph Builder** with *Group X/Y* or *Wrap* to make side-by-side comparisons within levels of a context variable (e.g., severity, grade level). -->
+<!-- * **Stratify or filter.** Turn on **Local Data Filter** (from the report’s red triangle) to subset or facet analyses without touching the source table. -->
+<!-- * **Adjust in a model.** In **Analyze → Fit Model**, include the context variable(s) as effects and consider an interaction to check for effect modification (i.e., whether the effect changes with context). -->
+<!-- * **Use “By” wisely.** Many platforms allow a **By** variable to run the same analysis separately within each level-great for quick stratified summaries. -->
+<!-- ### Language that respects context -->
+<!-- Be precise. In observational data, prefer “**associated with**,” not “**caused by**.” Reserve causal language for designs (or assumptions) that justify it. Match conclusions to the population actually studied to protect external validity (generalizability), and avoid threats to internal validity (biases that distort the effect). -->
+<!-- ### Recap -->
+<!-- | **Keyword**                                  | **Definition**                                                                                     | -->
+<!-- | -------------------------------------------- | -------------------------------------------------------------------------------------------------- | -->
+<!-- | **Context**                       | The who/what/when/where/how surrounding the data that shapes fair comparisons and interpretation.  | -->
+<!-- | **Data-generating process (DGP)** | The mechanism or process by which the observed data were produced.                                 | -->
+<!-- | **Stratification**                | Comparing groups within levels of a context variable to reduce confounding.                        | -->
+<!-- | **Simpson’s paradox**             | A reversal of an association when data are aggregated versus when compared within relevant strata. | -->
+<!-- ### Check your understanding -->
+<!-- 1. A hospital reports that Treatment B has a higher overall recovery rate than Treatment A. After stratifying by initial severity, A has a higher recovery rate in each severity group. Name the phenomenon. -->
+<!-- 2. A university analyzes GPA vs. tutoring usage from administrative records (no random assignment). What language should they use to describe the relationship? Name one likely confounder. -->
+<!-- ::: {.callout-tip collapse="true" title="Solutions"} -->
+<!-- 1. (a)*Simpson’s paradox.*  -->
+<!-- 2. Use association language: “Tutoring use is **associated with** higher GPA,” not causal. Likely confounders include prior preparation (placement scores), motivation, or course load. -->
+<!-- ::: -->
+
+
+</section>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>We will not discuss how to find these “chances” here. The chances of these two scenarios can be found using the binomial distribution discussed in <a href="#sec-binomial" class="quarto-xref"><span class="quarto-unresolved-ref">sec-binomial</span></a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Computers use <strong>pseudorandom number generators (PRNGs)</strong>; deterministic algorithms that produce sequences of numbers that <em>look</em> random but are entirely determined by a starting value (the seed). Given the same seed, you get the exact same sequence every time. That’s why <code>set.seed()</code> works. True randomness requires a physical source — atmospheric noise, radioactive decay, thermal fluctuations. What R (and most software) does instead is apply a mathematical formula that scrambles each number into the next one so thoroughly that the output passes every statistical test for randomness, even though it’s completely predictable if you know the seed. The practical takeaway is: pseudorandom numbers are “random enough” for simulation, sampling, and inference. The distinction only matters in cryptography or physics simulations where predictability is a security or accuracy concern.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>In real world applications, you are usually limited by how you measure. For instance, you may be measuring the length of insects and you measure to the nearest millimeter. This limitation should not play a role in determining continuous RVs. So in theory, insects could measure between 10 and 20 millimeters. You only measure in millimeters but an insect could be 10.1, 10.114, 10.675, 10.000004, etc. Since there are infinite number of values in 10 to 20 that insects could measure in theory, we say the length is continuous.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
