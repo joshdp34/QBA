@@ -1,0 +1,112 @@
+# Week 1: The Analytics Decision Cycle {#sec-week01-02}
+
+## Why Start Here?
+
+Before we open R, Excel, or any dataset, we need a shared mental model of *what analytics is for*. It is tempting to think of business analytics as a collection of techniques&mdash;a confidence interval here, a regression there, an optimization model somewhere else. But techniques are tools, not the goal. The goal is always a better business decision.
+
+Throughout this course, we will return again and again to the same recurring workflow:
+
+> **Frame the decision &rarr; obtain appropriate data &rarr; summarize the evidence &rarr; quantify uncertainty &rarr; build a model &rarr; recommend an action &rarr; communicate the result**
+
+We'll call this the **analytics decision cycle**. Every module in this course, and every case you analyze, will move through some or all of these steps. Learning to recognize *which step you are on* is often more valuable than mastering any single statistical formula, because it tells you what question you should be asking next.
+
+## The Seven Steps
+
+### 1. Frame the decision
+
+Every analysis starts with a decision someone actually has to make. Before touching data, ask:
+
+- What decision is on the table?
+- Who is making it, and what are the realistic options?
+- What would change if the analysis came out one way versus another?
+
+A shockingly large share of analytics work fails not because the statistics were wrong, but because no one clearly identified the decision at stake. If your analysis wouldn't change anyone's action, it probably wasn't the right analysis to run.
+
+### 2. Obtain appropriate data
+
+Once the decision is framed, you need data that actually speaks to it. This step involves identifying your **population** of interest, deciding how to **sample** from it (or recognizing that you already have full data), and being honest about whether your data is **observational** or the product of a designed **experiment**. Data that is convenient to collect is not always data that answers your question.
+
+### 3. Summarize the evidence
+
+Raw data is not evidence until it has been organized. This is where **descriptive statistics**&mdash;tables, graphs, means, proportions, spreads&mdash;turn a spreadsheet of rows into a picture you and others can reason about.
+
+### 4. Quantify uncertainty
+
+Almost everything we do in this course involves generalizing from limited information: a sample of customers, a quarter of sales, a handful of trial runs. Step 4 is where we attach a **margin of error** to our conclusions&mdash;confidence intervals, hypothesis tests&mdash;so that we (and the people we advise) know how much to trust a number, not just what the number is.
+
+### 5. Build a model
+
+Sometimes summarizing and quantifying uncertainty is enough. Often, though, the decision requires understanding a *relationship*: how does price relate to demand, how does a manager's behavior relate to team retention, how will sales grow next year? Regression, logistic regression, time-series forecasting, and optimization models all live here.
+
+### 6. Recommend an action
+
+A model output is not a recommendation. "The coefficient on price is -2.3" is not something a manager can act on directly. This step translates statistical results back into the language of the original decision from Step 1: *raise the price by this much*, *extend credit to these customers*, *staff the night shift with two more employees*.
+
+### 7. Communicate the result
+
+Finally, the recommendation has to reach the people who will act on it&mdash;and it has to be persuasive, honest about its limitations, and clear about the uncertainty carried over from Step 4. In this course, Quarto is our primary tool for this step: it lets us combine the analysis itself with the narrative that explains it.
+
+::: {.callout-note collapse="false" title="The cycle is not always linear"}
+In practice, you will often loop back. Summarizing the evidence (Step 3) might reveal a data problem that sends you back to Step 2. A model's poor fit (Step 5) might mean the decision needs to be reframed (Step 1). Treat the seven steps as a checklist of questions to revisit, not a rigid one-way pipeline.
+:::
+
+## Worked Examples
+
+::: {.example title="Example 1.1: Should a retailer extend store hours?"}
+A regional retailer is deciding whether to keep its stores open an extra two hours on weeknights. Walking through the cycle:
+
+1. **Frame the decision.** The choice is binary: extend hours at all stores, or don't. The relevant cost is additional staffing; the relevant benefit is additional sales revenue during the extended window.
+
+2. **Obtain appropriate data.** The company runs a pilot: 10 stores stay open late for one month, while 10 comparable stores keep normal hours (an experiment, not just observation of stores that happened to stay open late on their own).
+
+3. **Summarize the evidence.** Average nightly sales during the extended hours are computed for the pilot stores, alongside a comparison of total monthly revenue between the two groups.
+
+4. **Quantify uncertainty.** A confidence interval is built around the difference in average monthly revenue between the extended-hours stores and the control stores, since 20 stores is a sample, not the whole chain.
+
+5. **Build a model.** A regression is used to check whether the revenue difference holds up after controlling for store size and local population, in case the two groups of stores weren't perfectly comparable.
+
+6. **Recommend an action.** If the interval from Step 4 shows a reliably positive revenue effect that exceeds the added labor cost, the recommendation is to extend hours chain-wide; if not, the recommendation is to hold off, or to try a different intervention (e.g., extended hours only on weekends).
+
+7. **Communicate the result.** A short report to the VP of Operations states the estimated revenue effect, its uncertainty, the added labor cost, and a clear recommendation&mdash;not just a p-value.
+:::
+
+::: {.example title="Example 1.2: How many customer service reps should a call center staff?"}
+1. **Frame the decision.** The call center manager must decide staffing levels by hour of day, balancing customer wait times against labor cost.
+
+2. **Obtain appropriate data.** Historical call volume by hour is pulled from the phone system for the past 12 months&mdash;this is observational data the company already has.
+
+3. **Summarize the evidence.** Average call volume by hour and day of week is tabulated and graphed, revealing predictable peaks (e.g., Monday mornings) and lulls.
+
+4. **Quantify uncertainty.** Because next week's exact call volume is unknown, a forecast interval (not just a single predicted number) is constructed around next week's expected volume for each hour.
+
+5. **Build a model.** A time-series forecasting model, incorporating both weekly seasonality and a gradual upward trend in overall call volume, is used to predict volume several weeks ahead.
+
+6. **Recommend an action.** Staffing levels for each hour of each day are set based on the forecast plus a buffer informed by the forecast interval, ensuring wait times stay acceptable without overstaffing.
+
+7. **Communicate the result.** The staffing plan, along with the forecast and its uncertainty, is presented to the operations team responsible for building the actual weekly schedule.
+:::
+
+## Recap
+
+- Every analysis in this course exists to support a **decision**, not to produce a statistic for its own sake.
+- The analytics decision cycle&mdash;**frame, obtain, summarize, quantify, model, recommend, communicate**&mdash;is the recurring workflow we will apply to every module and every case.
+- The cycle often loops: a problem discovered at one step frequently sends you back to an earlier one.
+- Steps 6 and 7&mdash;turning a result into a recommendation and communicating it clearly&mdash;are just as important as the statistical machinery in Steps 3&ndash;5, and are often where analytics projects succeed or fail in practice.
+
+## Check Your Understanding
+
+::: {.callout-note collapse="false" title="Problems"}
+1. A hospital wants to know whether a new triage protocol reduces average patient wait time in the emergency room. Walk through the seven steps of the analytics decision cycle for this scenario, writing one or two sentences for each step.
+
+2. Suppose a company skips Step 1 (frame the decision) and jumps straight into collecting data and building a regression model. Describe one realistic way this could go wrong.
+
+3. A marketing analyst builds a highly accurate model predicting which customers will churn, but the company's leadership never changes any behavior as a result. Which step of the cycle most likely broke down, and why?
+:::
+
+::: {.callout-tip collapse="true" title="Solutions"}
+1. **Frame:** the decision is whether to adopt the new protocol chain-wide. **Obtain data:** run the new protocol in a subset of shifts or ER locations and record wait times, ideally alongside a comparable control group. **Summarize:** compute and graph average (and median) wait times under each protocol. **Quantify uncertainty:** build a confidence interval for the difference in average wait time between protocols, since only a sample of shifts was observed. **Model:** consider whether patient severity mix or time of day differed between groups and needs to be controlled for. **Recommend:** if the new protocol reliably reduces wait time without harming care quality, recommend adoption. **Communicate:** report the estimated reduction, its uncertainty, and any tradeoffs to hospital administration.
+
+2. Without framing the decision first, the analyst may collect data that doesn't actually speak to any real choice, build a model that answers a question no one asked, or produce a result that no one is positioned to act on. For example, the model might predict something leadership cannot change (e.g., a factor outside their control) rather than something actionable (e.g., staffing levels they can adjust).
+
+3. Most likely Step 6 (recommend an action) or Step 7 (communicate the result). An accurate predictive model is not, by itself, a business decision. If the analyst never translated "customer X has a 78% chance of churning" into a specific recommended action (e.g., "offer these customers a retention discount") and communicated it in terms leadership could act on, the analysis&mdash;however statistically sound&mdash;produces no business value.
+:::

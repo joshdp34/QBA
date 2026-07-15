@@ -13,3 +13,17 @@
 # OS files
 .DS_Store
 Thumbs.db
+
+# Course outline and case studies (not for public repo)
+course outline.qmd
+course outline.html
+course outline_files/
+*.pdf
+
+**/*.quarto_ipynb
+
+# Generated Canvas QTI quiz packages (regenerate from source .qmd)
+*_qti.zip
+
+# Live session material (instructor-only guides/slides, not part of the book)
+/Live session material/

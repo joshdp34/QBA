@@ -20,10 +20,17 @@ book:
   
   chapters:
     - index.qmd
-    - 01.qmd
-    - 02.qmd
-    - 03.qmd
-    - 04.qmd
+    - part: "Module 1"
+      chapters:
+        - week_01_01.qmd
+        - week_01_02.qmd
+        - week_01_03.qmd
+    # - part: "Module 2"
+    #   chapters:
+    #     - 01.qmd
+    #     - 02.qmd
+    # - 03.qmd
+    # - 04.qmd
     # - 05.qmd
     # - 06.qmd
     # - 07.qmd
