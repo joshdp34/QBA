@@ -74,7 +74,7 @@ Notice what we *haven't* done yet: every method so far compares groups or tests 
 |---|---|
 | **Practical significance** | Whether an effect is large enough, in real-world terms, to justify acting on it, independent of whether it's statistically significant. |
 | **Statistical significance with large samples** | With enough data, even a tiny, practically unimportant effect can produce a very small p-value. |
-| **Observational comparison** | Comparing groups that were not created by random assignment (like Project Oxygen's existing high- and low-scoring managers); vulnerable to confounding even when statistically significant. |
+| **Observational comparison** | Comparing groups that were not created by random assignment; vulnerable to confounding even when statistically significant. |
 
 ## Check Your Understanding
 
