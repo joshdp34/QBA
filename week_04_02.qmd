@@ -1,0 +1,127 @@
+# Week 4: The Sampling Distribution of the Sample Proportion {#sec-week04-02}
+
+## Why This Matters
+
+Last section we studied how a sample *mean* behaves across repeated samples, essential for quantities like average order value. But many of the outcomes businesses care about most aren't averages of a measurement at all; they're **proportions** of a binary outcome: What fraction of visitors convert? What fraction of loans default? What fraction of emails get opened? What fraction of customers renew? To build confidence intervals and hypothesis tests for these questions in the coming weeks, we need the sampling distribution of the **sample proportion**, $\hat{p}$, the direct counterpart to everything we just did for $\bar{x}$.
+
+## The Sample Proportion
+
+When an outcome is binary (success/failure, yes/no, convert/don't convert) the natural summary statistic is the **sample proportion**:
+$$
+\hat{p} = \frac{X}{n}
+$$
+where $X$ is the number of successes observed in a sample of size $n$. Because each success/failure outcome is itself a Bernoulli trial and $X$ counts successes across $n$ independent trials, $X$ follows a binomial distribution, $X \sim \text{Bin}(n, p)$, from @sec-week03-01 ,which means $\hat{p}$ is really just a rescaled binomial random variable ($\hat{p} = X/n$).
+
+::: {.example title="Example 4.5: Website conversion rate"}
+Suppose the true (unknown) proportion of website visitors who make a purchase is $p = 0.12$. A marketing analyst pulls a random sample of $n=200$ visitors and finds that 30 of them converted. The sample proportion is
+$$
+\hat{p} = \frac{30}{200} = 0.15
+$$
+Just like $\bar{x}$ in @sec-week04-01, $\hat{p}$ is a statistic. It will come out differently if the analyst pulls a different sample of 200 visitors, even though the true conversion rate $p$ hasn't changed.
+:::
+
+## The Sampling Distribution of $\hat{p}$
+
+The **sampling distribution of $\hat{p}$** describes how the sample proportion would vary if we repeated the same sampling process: draw $n$ observations, compute $\hat{p}$, over and over. When the underlying outcomes are independent and the true proportion is $p$, this sampling distribution has three properties, directly parallel to what we found for $\bar{x}$.
+
+### Center: The Mean of $\hat{p}$
+
+$$
+E(\hat{p}) = p
+$$
+Across repeated samples, the sample proportion is centered right on the true population proportion. It's neither systematically too high nor too low.
+
+### Spread: The Standard Error of $\hat{p}$
+
+$$
+\sigma_{\hat{p}} = \sqrt{\frac{p(1-p)}{n}}
+$$
+This formula falls directly out of the binomial distribution: since $\text{Var}(X) = np(1-p)$ for $X \sim \text{Bin}(n,p)$, and $\hat{p} = X/n$, dividing that variance by $n^2$ gives $\text{Var}(\hat{p}) = p(1-p)/n$. As with $\bar{x}$, larger samples shrink the standard error and give a more precise estimate of $p$.
+
+::: {.example title="Example 4.6: Standard error of the conversion rate"}
+For the website conversion example, with true $p=0.12$ and $n=200$:
+$$
+\sigma_{\hat{p}} = \sqrt{\frac{0.12 \times 0.88}{200}} \approx 0.023
+$$
+So a sample of 200 visitors typically produces a $\hat{p}$ within about 0.023 (2.3 percentage points) of the true 12% conversion rate, just from ordinary sampling variability.
+:::
+
+### Shape: The Normal Approximation
+
+Under the right conditions, the sampling distribution of $\hat{p}$ is approximately normal:
+$$
+\hat{p} \;\dot\sim\; \text{Normal}\left(p, \sqrt{\frac{p(1-p)}{n}}\right)
+$$
+This approximation works well as long as there are enough expected successes *and* enough expected failures in the sample. A common guideline is
+$$
+np \ge 15 \quad \text{and} \quad n(1-p) \ge 15
+$$
+$np$ is the expected number of successes and $n(1-p)$ is the expected number of failures. When either is too small (a rare event, or a very small sample), the underlying binomial distribution is noticeably skewed, and the normal curve is a poor stand-in for it.
+
+::: {.example title="Example 4.7: Checking the conditions"}
+For the website conversion example, $n=200$ and $p=0.12$:
+$$
+\begin{align*}
+np &= 200(0.12) = 24 \ge 15 \\
+n(1-p) &= 200(0.88) = 176 \ge 15
+\end{align*}
+$$
+Both conditions are comfortably satisfied, so treating $\hat{p}$ as approximately normal is reasonable here.
+
+Contrast this with a rare-event scenario: a fraud-detection team studying a fraud rate of $p=0.01$ with a sample of $n=200$ transactions. Here $np = 200(0.01) = 2$, which is far below 15. The sampling distribution of $\hat{p}$ would be noticeably right-skewed in this case, and a normal approximation would be unreliable. A much larger sample (or an exact binomial calculation, rather than a normal approximation) would be needed.
+:::
+
+## Finding Probabilities for a Sample Proportion Using R and Excel
+
+Once the normal approximation is justified, probability questions about $\hat{p}$ work exactly like probability questions about $\bar{x}$ from last section, just with $p$ in place of $\mu$ and $\sqrt{p(1-p)/n}$ in place of $\sigma/\sqrt{n}$.
+
+::: {.example title="Example 4.8: How likely is a conversion rate this high?"}
+Using the website example ($p=0.12$, $n=200$), what's the probability that a random sample of 200 visitors produces a sample conversion rate **above 15%** (i.e., $\hat{p} > 0.15$, exactly what the analyst observed in Example 4.5)?
+
+```{r}
+#| echo: true
+p <- 0.12
+n <- 200
+se <- sqrt(p * (1 - p) / n)
+
+1 - pnorm(0.15, mean = p, sd = se)
+```
+
+So there's roughly a 9% chance of observing a sample conversion rate of 15% or higher, purely from sampling variability, even when the true rate is 12%, a good reminder that a single sample proportion running a bit above the true rate isn't necessarily evidence that the true rate has changed.
+
+In Excel, the equivalent calculation is:
+```
+=1 - NORM.DIST(0.15, 0.12, SQRT(0.12*0.88/200), TRUE)
+```
+:::
+
+## Recap
+
+| **Keyword** | **Definition** |
+|---|---|
+| **Sample proportion** | $\hat{p} = X/n$, the fraction of successes in a sample of size $n$. |
+| **Mean of $\hat{p}$** | $E(\hat{p}) = p$, the true population proportion. |
+| **Standard error of $\hat{p}$** | $\sigma_{\hat{p}} = \sqrt{p(1-p)/n}$. |
+| **Normal approximation condition** | $np \ge 15$ and $n(1-p) \ge 15$; ensures the sampling distribution of $\hat{p}$ is reasonably symmetric. |
+
+## Check Your Understanding
+
+::: {.callout-note collapse="false" title="Problems"}
+1. A subscription service has a true monthly cancellation rate of $p=0.08$. For a random sample of $n=150$ customers, compute the mean and standard error of the sampling distribution of $\hat{p}$.
+
+2. Check whether the normal approximation is appropriate for Problem 1's scenario.
+
+3. A quality team wants to estimate a defect rate believed to be around $p=0.02$, using a sample of $n=300$ units. Check the normal-approximation conditions. If they aren't satisfied, what would you recommend?
+
+4. Using the subscription example from Problem 1 ($p=0.08$, $n=150$), find the probability that a random sample's cancellation rate comes out **below 5%** ($\hat{p} < 0.05$). Use R or Excel notation to express your answer.
+:::
+
+::: {.callout-tip collapse="true" title="Solutions"}
+1. $E(\hat{p}) = 0.08$. $\sigma_{\hat{p}} = \sqrt{0.08 \times 0.92 / 150} \approx 0.0222$.
+
+2. $np = 150(0.08) = 12$, which is below 15. $n(1-p) = 150(0.92) = 138$, comfortably above 15. Since $np < 15$, the normal approximation is questionable here. The sampling distribution of $\hat{p}$ may show some skew, and results based on the normal approximation should be treated cautiously.
+
+3. $np = 300(0.02) = 6$, well below 15, even though $n(1-p) = 294$ is easily large enough. Because the expected number of defects is small, the sampling distribution of $\hat{p}$ would be noticeably right-skewed, and the normal approximation is not appropriate. A larger sample size (enough to push $np$ to at least 15, i.e., $n \ge 750$ at this defect rate) or an exact binomial calculation would be more appropriate.
+
+4. We want $P(\hat{p} < 0.05)$ with mean $0.08$ and standard error $\sqrt{0.08 \times 0.92/150} \approx 0.0222$. In R: `pnorm(0.05, mean = 0.08, sd = sqrt(0.08*0.92/150))` $\approx 0.086$. In Excel: `=NORM.DIST(0.05, 0.08, SQRT(0.08*0.92/150), TRUE)`. About an 8.6% chance of observing a sample cancellation rate below 5%, even though the true rate is 8%.
+:::

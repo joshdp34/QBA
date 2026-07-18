@@ -1,0 +1,149 @@
+# Week 6: Paired Comparisons {#sec-week06-03}
+
+## When Two Samples Aren't Independent
+
+@sec-week06-02 assumed the two groups being compared were completely independent, no relationship between which observations ended up in group 1 versus group 2. Often that's not true: the same set of employees is measured before and after a training program, the same stores are compared under two pricing schemes in different weeks, the same customers rate two competing product designs. When each observation in one group is naturally linked to a specific observation in the other, we have **paired data**, and treating it as two independent samples throws away valuable information, or worse, can hide a real effect entirely. This section shows exactly how that can happen, and how to fix it.
+
+## A Motivating (Cautionary) Example
+
+A regional sales manager rolls out a new negotiation training program and measures eight sales reps' performance scores (a 0-100 composite metric based on close rate, deal size, and client retention) before and after completing the training.
+
+| Rep | Before | After | Difference (after − before) |
+|---|---|---|---|
+| 1 | 72 | 77 | 5 |
+| 2 | 68 | 74 | 6 |
+| 3 | 76 | 82 | 6 |
+| 4 | 68 | 73 | 5 |
+| 5 | 84 | 87 | 3 |
+| 6 | 68 | 69 | 1 |
+| 7 | 61 | 66 | 5 |
+| 8 | 76 | 80 | 4 |
+
+Look closely: **every single rep's score went up** after training, by at least 1 point and as much as 6. This looks like about as clear a pattern as data can show. Surely a hypothesis test would easily detect it?
+
+## Why the Independent-Samples Test Can Fail Here
+
+Suppose we (incorrectly) treated the "before" and "after" scores as two independent groups of 8 reps each, and ran the Welch's t-test from @sec-week06-02:
+$$
+H_0: \mu_{\text{before}} = \mu_{\text{after}} \qquad H_a: \mu_{\text{before}} < \mu_{\text{after}}
+$$
+The before-group mean is $71.6$ ($s=7.01$); the after-group mean is $76.0$ ($s=6.93$). The test statistic comes out to
+$$
+t = \frac{76.0 - 71.6}{\sqrt{7.01^2/8 + 6.93^2/8}} \approx 1.256
+$$
+with a one-sided p-value of approximately **0.115**. At $\alpha=0.05$ (or even $\alpha=0.10$), we would **fail to reject** $H_0$, despite every single rep improving.
+
+::: {.callout-note collapse="false" title="What went wrong?"}
+The independent-samples test treats the eight "before" scores and eight "after" scores as if they came from two entirely separate groups of people. But reps who start out stronger (rep 5, at 84) tend to also end up stronger (87), while reps who start weaker (rep 7, at 61) end up weaker too (66). This natural, person-to-person variation in baseline ability has nothing to do with the training, but it inflates the variability of both groups, which inflates the standard error and buries the real, consistent improvement each individual rep experienced. Treating paired data as independent throws away the one piece of information, which observations are linked, that would let us cancel that baseline variability out.
+:::
+
+## The Fix: Analyze the Differences
+
+Instead of comparing the two groups' raw scores, we look at each rep's own **within-pair difference**, $d_i = x_{\text{after},i} - x_{\text{before},i}$, and ask whether the *average difference* is zero:
+$$
+H_0: \mu_d = 0 \qquad H_a: \mu_d \neq 0 \;\; (\text{or } > 0, \text{ or } < 0)
+$$
+The test statistic uses the mean and standard deviation of the differences themselves, $\bar{d}$ and $s_d$, computed across the $n$ pairs:
+$$
+t = \frac{\bar{d}}{s_d/\sqrt{n}}
+$$
+which follows a $t$-distribution with $n-1$ degrees of freedom, exactly the one-sample t-test from @sec-week06-01, just applied to the differences instead of raw values.
+
+::: {.example title="Example 6.11: The paired test detects what the independent test missed"}
+From the table above, the eight differences are $5, 6, 6, 5, 3, 1, 5, 4$, with $\bar{d} = 4.375$ and $s_d \approx 1.685$.
+$$
+H_0: \mu_d = 0 \qquad H_a: \mu_d > 0
+$$
+The test statistic is
+$$
+t = \frac{4.375}{1.685/\sqrt{8}} \approx 7.343
+$$
+With $df=7$, the one-sided p-value is less than 0.0001. We **reject** $H_0$ decisively: the data provide very strong evidence that the training program increases performance scores, exactly the pattern that was obvious just from looking at the table, but that the (incorrect) independent-samples test failed to detect.
+:::
+
+::: {.callout-note collapse="false" title="Why pairing works"}
+By taking differences within each pair, every rep effectively serves as their own baseline. Whatever made rep 5 naturally stronger than rep 7 is present in *both* that rep's before and after score, and it cancels out when we subtract. What's left, the difference, isolates just the effect of the training itself, with the person-to-person variability that wasn't relevant to begin with removed. This is why a well-designed paired study is often far more statistically powerful than an independent-groups study of the same size.
+:::
+
+## Confidence Interval for the Mean Difference
+
+$$
+\bar{d} \;\pm\; t_{\alpha/2, \, n-1}\,\frac{s_d}{\sqrt{n}}
+$$
+
+::: {.example title="Example 6.12: Confidence interval for the training effect"}
+With $df=7$, the 95% critical value is $t_{0.025,7} = 2.365$. The margin of error is
+$$
+2.365 \times \frac{1.685}{\sqrt{8}} \approx 1.41
+$$
+The 95% confidence interval for the true mean improvement is
+$$
+4.375 \pm 1.41, \quad \text{or} \quad (2.97, \, 5.78)
+$$
+We're 95% confident that the training program improves performance scores by somewhere between about 3 and 5.8 points, on average.
+:::
+
+## Computing the Paired t-Test in R and Excel
+
+::: {.example title="Example 6.13: The training-program test in R and Excel"}
+If you have the raw before and after scores, R's `t.test()` runs a paired test directly with `paired = TRUE`:
+```{r}
+#| echo: true
+before <- c(72, 68, 76, 68, 84, 68, 61, 76)
+after  <- c(77, 74, 82, 73, 87, 69, 66, 80)
+
+t.test(after, before, paired = TRUE, alternative = "greater")
+```
+
+This is mathematically identical to running a one-sample t-test on the differences directly:
+```{r}
+#| echo: true
+d <- after - before
+t.test(d, mu = 0, alternative = "greater")
+```
+
+In Excel, `T.TEST()`'s fourth argument set to `1` requests the paired version:
+```
+=T.TEST(after_range, before_range, 1, 1)
+```
+:::
+
+## When to Use a Paired Test
+
+Use a paired test whenever each observation in one group has a natural, specific counterpart in the other, most commonly:
+
+- **The same subject, measured twice** (before/after a treatment, training program, or policy change).
+- **Naturally matched units** (two locations of the same store chain, matched on similar size and demographics; the same batch of product tested two ways).
+
+The paired t-test additionally assumes the differences $d_i$ are independent of one another and approximately normally distributed (or a large enough $n$ for the CLT to apply to $\bar{d}$). If the data are paired but you run an independent-samples test instead, as in the cautionary example above, you risk either missing a real effect or misjudging its size, since the test is answering a different question than the one your data can actually support.
+
+## Recap
+
+| **Keyword** | **Definition** |
+|---|---|
+| **Paired data** | Data in which each observation in one group has a specific, natural counterpart in the other group. |
+| **Difference** ($d_i$) | The within-pair difference, $d_i = x_{2i} - x_{1i}$, computed separately for each pair. |
+| **Paired t-test statistic** | $t = \bar{d}/(s_d/\sqrt{n})$, with $n-1$ degrees of freedom, where $\bar{d}$ and $s_d$ are the mean and standard deviation of the differences. |
+| **Confidence interval for $\mu_d$** | $\bar{d} \pm t_{\alpha/2,\,n-1}\,(s_d/\sqrt{n})$. |
+
+## Check Your Understanding
+
+::: {.callout-note collapse="false" title="Problems"}
+1. A company measures the same 10 warehouse workers' items-picked-per-hour before and after reorganizing the warehouse layout. Why would a paired t-test be more appropriate here than an independent two-sample t-test?
+
+2. Using the six differences $3, -1, 4, 2, 0, 5$ (after − before) from a small pilot study, compute $\bar{d}$ and $s_d$, then compute the paired t-test statistic for $H_0: \mu_d = 0$.
+
+3. A study reports "we compared the same 12 patients' cholesterol levels before and after a new diet, and found $\bar{d} = 8$ mg/dL with a paired t-test p-value of 0.002." Explain in plain language what this p-value means in context.
+
+4. Explain why a paired design with $n=8$ pairs can sometimes detect an effect that an independent-groups design with $n=8$ per group would miss, even though both designs collect 16 total measurements.
+:::
+
+::: {.callout-tip collapse="true" title="Solutions"}
+1. Because the same 10 workers are measured twice, their individual differences in speed, experience, and skill (unrelated to the layout change) are present in both measurements and would inflate the variability of an independent-samples comparison. A paired test looks at each worker's own before-versus-after change, canceling out that person-to-person variability and isolating the effect of the layout change itself.
+
+2. $\bar{d} = (3-1+4+2+0+5)/6 = 13/6 \approx 2.167$. Deviations from the mean: $0.833, -3.167, 1.833, -0.167, -2.167, 2.833$; squared: $0.694, 10.030, 3.361, 0.028, 4.694, 8.028$; sum $\approx 26.835$; $s_d^2 = 26.835/5 \approx 5.367$, so $s_d \approx 2.317$. The test statistic is $t = 2.167/(2.317/\sqrt{6}) \approx 2.167/0.946 \approx 2.291$, with $df=5$.
+
+3. This p-value means: if the diet truly had no effect on average cholesterol ($\mu_d=0$), there would only be about a 0.2% chance of seeing a mean within-patient change as large as 8 mg/dL (or larger) purely from chance variation across these 12 patients. Because that's quite unlikely, the data provide strong evidence that the diet does change average cholesterol levels, by an estimated 8 mg/dL on average, though this p-value alone doesn't establish whether an 8 mg/dL change is large enough to matter clinically.
+
+4. A paired design removes each pair's shared baseline variability (person-to-person, or unit-to-unit differences unrelated to the treatment) before comparing, which shrinks the effective standard error of the estimated effect. An independent-groups design with the same total sample size has no way to remove that baseline variability, so a real but modest effect can be swamped by ordinary between-subject differences, exactly what happened in Example 6.11 above.
+:::

@@ -8,6 +8,7 @@ book:
     STA 5330 Bus Analytics for Dec Making
   sidebar:
     style: "docked"
+    collapse-level: 1
     search: true
     title: " "
     background: "#154734"
@@ -25,10 +26,28 @@ book:
         - week_01_01.qmd
         - week_01_02.qmd
         - week_01_03.qmd
-    # - part: "Module 2"
-    #   chapters:
-    #     - 01.qmd
-    #     - 02.qmd
+    - part: "Module 2"
+      chapters:
+        - week_02_01.qmd
+        - week_02_02.qmd
+        - week_03_01.qmd
+        - week_03_02.qmd
+        - week_03_03.qmd
+        - week_04_01.qmd
+        - week_04_02.qmd
+        - week_04_03.qmd
+        - week_05_01.qmd
+        - week_05_02.qmd
+        - week_05_03.qmd
+    - part: "Module 3"
+      chapters:
+        - week_06_01.qmd
+        - week_06_02.qmd
+        - week_06_03.qmd
+        - week_07_01.qmd
+        - week_07_02.qmd
+        - week_07_03.qmd
+    # - 02.qmd
     # - 03.qmd
     # - 04.qmd
     # - 05.qmd

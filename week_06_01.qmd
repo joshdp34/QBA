@@ -1,0 +1,151 @@
+# Week 6: One-Sample Hypothesis Tests {#sec-week06-01}
+
+## From Vocabulary to Practice
+
+@sec-week05-03 gave us the vocabulary of hypothesis testing, null and alternative hypotheses, Type I and Type II errors, and the logic of a p-value, without computing an actual test statistic. This week we put that machinery to work on the simplest case: comparing a single group's mean or proportion against a fixed benchmark. These are called **one-sample tests**, because there's exactly one sample and no comparison group; the comparison is against a hypothesized value instead of against another group's data.
+
+## The One-Sample t-Test for a Mean
+
+To test a claim about a population mean $\mu$ against a hypothesized value $\mu_0$,
+$$
+\begin{align*}
+&H_0: \mu = \mu_0\\
+&H_a: \mu \neq \mu_0 \;\; (\text{or } \mu > \mu_0, \text{ or } \mu < \mu_0)
+\end{align*}
+$$
+we use the same $t$-distribution logic from @sec-week05-02. The **test statistic** measures how many standard errors the sample mean is from the hypothesized value:
+$$
+t = \frac{\bar{x} - \mu_0}{s/\sqrt{n}}
+$$
+Under $H_0$, this statistic follows a $t$-distribution with $n-1$ degrees of freedom. This test requires a random sample and either an approximately normal population or a large enough $n$ (a common guideline is $n \ge 30$) for the Central Limit Theorem to make the sampling distribution of $\bar{x}$ approximately normal on its own.
+
+::: {.example title="Example 6.1: Is average order value different from the historical benchmark?"}
+Recall the retailer's sample from @sec-week05-02: $n=25$ orders, $\bar{x}=\$71.50$, $s=\$42$. The company's long-standing benchmark average order value is $\mu_0 = \$65$. Has the true mean order value changed from that benchmark?
+$$
+H_0: \mu = 65 \qquad H_a: \mu \neq 65
+$$
+The test statistic is
+$$
+t = \frac{71.50 - 65}{42/\sqrt{25}} = \frac{6.5}{8.4} \approx 0.774
+$$
+With $df = 24$, a two-sided p-value for $t \approx 0.774$ is approximately 0.45 (found using software, shown below). Since $0.45 > 0.05$, we **fail to reject** $H_0$: this sample does not provide strong evidence that the true mean order value differs from \$65.
+
+This matches what we'd expect from the confidence interval already built in @sec-week05-02: that 95% interval, $(54.16, \, 88.84)$, contains $65$. A hypothesized value inside the confidence interval and a "fail to reject" conclusion at the matching significance level always go hand in hand, exactly the connection made in @sec-week05-03.
+:::
+
+## Computing the One-Sample t-Test in R and Excel
+
+::: {.example title="Example 6.2: The order-value test in R and Excel"}
+```{r}
+#| echo: true
+x_bar <- 71.50
+mu_0 <- 65
+s <- 42
+n <- 25
+df <- n - 1
+
+t_stat <- (x_bar - mu_0) / (s / sqrt(n))
+p_value <- 2 * pt(-abs(t_stat), df = df)
+
+c(t_stat = t_stat, p_value = p_value)
+```
+
+If you have the raw order values rather than just the summary statistics, R's `t.test()` runs the whole test directly:
+```{r}
+#| echo: true
+#| eval: false
+t.test(order_values, mu = 65)
+```
+
+In Excel, the two-sided p-value comes from `T.DIST.2T()`, which takes the *absolute value* of the test statistic (it doesn't accept negative numbers) and the degrees of freedom:
+```
+=T.DIST.2T(ABS((71.50-65)/(42/SQRT(25))), 24)
+```
+:::
+
+## The One-Sample Test for a Proportion
+
+To test a claim about a population proportion $p$ against a hypothesized value $p_0$,
+$$
+\begin{align*}
+&H_0: p = p_0 \\ 
+&H_a: p \neq p_0 \;\; (\text{or } p > p_0, \text{ or } p < p_0)
+\end{align*}
+$$
+we use a z-based test statistic, since the sampling distribution of $\hat{p}$ is approximately normal under the conditions from @sec-week04-02:
+$$
+z = \frac{\hat{p} - p_0}{\sqrt{p_0(1-p_0)/n}}
+$$
+Notice the denominator uses the *hypothesized* $p_0$, not $\hat{p}$, this is different from the confidence interval formula in @sec-week05-01, which used $\hat{p}$ instead, since a confidence interval doesn't start by assuming any particular value of $p$. This test requires $n p_0 \ge 15$ and $n(1-p_0) \ge 15$ for the normal approximation to be reasonable.
+
+::: {.example title="Example 6.3: Is the conversion rate different from the historical benchmark?"}
+Recall the website conversion example from @sec-week04-02 and @sec-week05-01: a sample of $n=200$ visitors produced $\hat{p} = 30/200 = 0.15$. The retailer's historical benchmark conversion rate is $p_0 = 0.12$. Checking the conditions: $np_0 = 200(0.12)=24 \ge 15$ and $n(1-p_0) = 200(0.88)=176 \ge 15$, so the normal approximation is reasonable.
+$$
+H_0: p = 0.12 \qquad H_a: p \neq 0.12
+$$
+The test statistic is
+$$
+z = \frac{0.15 - 0.12}{\sqrt{0.12(0.88)/200}} = \frac{0.03}{0.0230} \approx 1.305
+$$
+The two-sided p-value is $2 \times P(Z > 1.305) \approx 0.192$. Since $0.192 > 0.05$, we **fail to reject** $H_0$: the data don't provide strong evidence that the true conversion rate differs from 12%, even though the observed $\hat{p}=0.15$ is numerically higher.
+
+This is exactly the same conclusion reached in Example 5.7 (@sec-week05-03) using the confidence interval instead, since $p_0=0.12$ fell inside that interval. Computing the test statistic directly, as we just did, and checking whether the hypothesized value falls inside the confidence interval are two routes to the same answer.
+:::
+
+## Computing the One-Sample Proportion Test in R and Excel
+
+::: {.example title="Example 6.4: The conversion-rate test in R and Excel"}
+```{r}
+#| echo: true
+p_hat <- 30 / 200
+p_0 <- 0.12
+n <- 200
+
+z_stat <- (p_hat - p_0) / sqrt(p_0 * (1 - p_0) / n)
+p_value <- 2 * (1 - pnorm(abs(z_stat)))
+
+c(z_stat = z_stat, p_value = p_value)
+```
+
+R's `prop.test()` performs this test directly (again using a slightly different default method, so don't be surprised by small numerical differences):
+```{r}
+#| echo: true
+prop.test(x = 30, n = 200, p = 0.12, correct = FALSE)
+```
+
+In Excel, the same by-hand calculation looks like:
+```
+=2 * (1 - NORM.S.DIST(ABS((0.15-0.12)/SQRT(0.12*0.88/200)), TRUE))
+```
+:::
+
+## Recap
+
+| **Keyword** | **Definition** |
+|---|---|
+| **One-sample test** | A hypothesis test comparing a single group's mean or proportion against a fixed, hypothesized benchmark value. |
+| **One-sample t-test statistic** | $t = (\bar{x}-\mu_0)/(s/\sqrt{n})$, with $n-1$ degrees of freedom. |
+| **One-sample proportion test statistic** | $z = (\hat{p}-p_0)/\sqrt{p_0(1-p_0)/n}$. |
+| **CI-test agreement** | A hypothesized value inside a $(1-\alpha)$ confidence interval will fail to be rejected by the matching two-sided test at level $\alpha$, and vice versa. |
+
+## Check Your Understanding
+
+::: {.callout-note collapse="false" title="Problems"}
+1. A call center claims its average handle time is 6 minutes. A sample of 20 calls has $\bar{x}=6.8$ minutes and $s=1.5$ minutes. Test at $\alpha=0.05$ whether the true mean handle time differs from 6 minutes.
+
+2. A factory claims its defect rate is 3%. A sample of 250 units finds 12 defective. Test at $\alpha=0.05$ whether the true defect rate differs from 3%.
+
+3. A hotel chain claims at least 80% of guests would recommend it. In a sample of 150 guests, 111 said they would recommend it. Test at $\alpha=0.05$ whether the true recommendation rate is below 80% (a one-sided test).
+
+4. Suppose a 90% confidence interval for a population mean is $(101.2, \, 108.8)$. Without computing a new test statistic, state whether a two-sided test of $H_0: \mu=110$ at $\alpha=0.10$ would be rejected, and explain how you know.
+:::
+
+::: {.callout-tip collapse="true" title="Solutions"}
+1. $t = (6.8-6)/(1.5/\sqrt{20}) = 0.8/0.335 \approx 2.387$. With $df=19$, the two-sided p-value is approximately 0.028. Since $0.028 < 0.05$, we **reject** $H_0$: the true mean handle time appears to differ from 6 minutes.
+
+2. $\hat{p} = 12/250 = 0.048$. Check conditions: $np_0 = 250(0.03) = 7.5$, which is below 15, so the normal approximation is questionable here; the conclusion below should be treated cautiously. Proceeding anyway: $z = (0.048-0.03)/\sqrt{0.03(0.97)/250} \approx \dfrac{0.018}{0.0108} \approx 1.667$. The two-sided p-value is about 0.096. Since $0.096 > 0.05$, we **fail to reject** $H_0$, though given the failed condition, a method that doesn't rely on the normal approximation would be more trustworthy here.
+
+3. $\hat{p} = 111/150 = 0.74$. $np_0 = 150(0.80) = 120 \ge 15$ and $n(1-p_0) = 150(0.20) = 30 \ge 15$, conditions satisfied. $z = (0.74-0.80)/\sqrt{0.80(0.20)/150} \approx -0.06/0.0327 \approx -1.835$. For a left-tailed test, the p-value is $P(Z < -1.835) \approx 0.033$. Since $0.033 < 0.05$, we **reject** $H_0$: the data provide evidence that the true recommendation rate is below 80%.
+
+4. Since $110$ falls **outside** the interval $(101.2, 108.8)$, a two-sided test of $H_0: \mu=110$ at $\alpha=0.10$ would be **rejected**. A hypothesized value outside a $(1-\alpha)$ confidence interval is always rejected by the matching two-sided test at level $\alpha$.
+:::

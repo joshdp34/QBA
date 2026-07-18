@@ -1,0 +1,99 @@
+# Week 7: The Project Oxygen Case and a Course Recap {#sec-week07-03}
+
+## Introducing the Case
+
+Module 3 culminates in a real case: **Google's Project Oxygen**, which asked a deceptively simple question, **"do managers matter?"** In the early 2000s, some Google executives suspected the answer might be *no*. The company had briefly tried eliminating management layers entirely, and its engineering culture prized individual technical merit over hierarchy. Starting in 2009, Google's people analytics group set out to answer the question with data rather than opinion.
+
+Their approach: identify a cross-section of **high-scoring** managers (top quartile on a combination of employee survey ratings and performance review scores) and **low-scoring** managers (bottom quartile on both), and compare outcomes on their teams, satisfaction, retention, and team performance. This is exactly the kind of two-group comparison this module has spent weeks building tools for.
+
+::: {.callout-note collapse="false" title="A telling reaction from the research team"}
+One member of the research team recalled being skeptical at first, since even the lowest-scoring managers seemed to be doing reasonably well, leaving little reason to expect any real difference between the two groups. But precisely because they expected no difference at all, the team came away describing even small, incremental gains in manager quality as surprisingly meaningful.
+:::
+
+That quote is worth sitting with, because it's already doing exactly the kind of statistical reasoning this course has been building toward, and it raises the exact question this section tackles head-on: what does it mean for a "small difference" to be "impressive" or "powerful"? That's a question about **practical significance**, and it's one this course has mentioned in passing but never fully unpacked, until now.
+
+::: {.callout-note collapse="false" title="This case is a narrative, not a raw dataset"}
+Unlike our in-class examples, Project Oxygen doesn't come with row-level data for you to import and re-run a t-test on. The case describes the research design and summarizes what the team found. That's deliberate: your job in the live session isn't to recompute a number, it's to **evaluate the evidence as reported**, using everything from this module, and to identify what additional analysis or research design would strengthen (or weaken) the conclusion that managers matter.
+:::
+
+## Practical Significance: When "Small" Is Still Important
+
+Recall from @sec-week05-03 that a hypothesis test's p-value depends on three things bundled together: the size of the observed effect, how much the data varies, and the sample size. That last ingredient causes a problem that's easy to miss: **with a large enough sample, even a trivially small, practically meaningless effect can produce a tiny p-value.**
+
+::: {.example title="Example 7.5: A statistically significant difference that may not matter"}
+Suppose a large tech company runs an A/B test on a checkout redesign with 5 million users in each arm. The control group converts at 12.0%; the treatment group converts at 12.1%, a difference of just one-tenth of one percentage point.
+$$
+z = \frac{0.121 - 0.120}{\sqrt{0.1205(0.8795)\left(\frac{2}{5{,}000{,}000}\right)}} \approx 4.85
+$$
+This gives a p-value far below 0.0001, overwhelmingly "statistically significant." But is a one-tenth of a percentage point lift worth the engineering cost of redesigning checkout? That's not a statistical question at all, it's a business judgment about whether an effect of *this size* clears the bar for *this decision*, and the p-value alone can't answer it.
+:::
+
+**Practical significance** asks whether an effect is large enough, in real-world units that matter to the decision at hand, to justify acting on it, regardless of how small its p-value is. A few concrete ways to assess it:
+
+- **Look at the effect size itself**, in the original units (percentage points, dollars, minutes), not just whether the p-value cleared 0.05.
+- **Look at the confidence interval**, not just the test's conclusion. An interval of $(0.02, 0.18)$ percentage points tells you the effect is real but could be quite small; an interval of $(2.5, 4.1)$ percentage points tells a very different business story, even if both were "significant" at $\alpha=0.05$.
+- **Compare the effect to a pre-defined threshold of meaningful impact**, decided *before* seeing the results: how big would this effect need to be to justify the cost of acting on it?
+
+::: {.callout-note collapse="false" title="Small effects can still be practically significant, in the right context"}
+The reverse is also true, small isn't automatically unimportant. If a change costs almost nothing to implement and applies to millions of transactions, even a small, reliably-estimated effect can translate into a large total impact. This is arguably the situation Project Oxygen's own team was reasoning through: at Google's scale, a consistent, statistically defensible edge in retention or satisfaction across thousands of managers and teams can be worth pursuing even if the gap between an "average" and "somewhat better" manager looks modest for any one team. The size of the effect and the scale at which it applies are both part of the practical-significance judgment, not just the raw number.
+:::
+
+## Applying the Course's Tools to Project Oxygen
+
+Before the live session, it's worth running Project Oxygen through the checklist from @sec-week07-02:
+
+1. **Was there random assignment?** No. Project Oxygen compared managers who already existed in the top and bottom quartiles of existing scores, an **observational** comparison, not an experiment. No one was randomly assigned to be a "good" or "bad" manager.
+
+2. **Is there a plausible confounder?** Quite possibly. Better-rated managers might also, on average, inherit stronger teams, more resources, or more experienced employees to begin with, any of which could independently drive better outcomes, regardless of the manager's own behavior. It's also worth asking about the reverse direction: might a talented, high-performing, satisfied team make its manager *look* better on a survey, rather than the manager's behavior causing the team's success?
+
+3. **Could bias explain the pattern instead of a real effect?** Consider how "high-scoring" and "low-scoring" were defined (a combination of upward-feedback survey scores and performance reviews), and who chooses to respond to internal surveys in the first place.
+
+4. **Is the effect statistically significant, and is it practically significant?** The case describes the differences as reliable across many outcomes (satisfaction, retention, performance), but as the quote above shows, even the research team debated how *large* those differences really were.
+
+The research team was aware of at least some of this: one member noted they deliberately tried to prove the *opposite* case, that managers *don't* matter, precisely to guard against confirmation bias, and "failed" to do so. That's good practice, but it doesn't make the underlying comparison an experiment. In the live session, your team's job will be to work through evidence like this systematically: what does the data show, how strong is the case for a causal (not just associational) interpretation, and what additional analysis or research design, a randomized rollout of manager training to some teams but not others, for instance, would make the conclusion more convincing?
+
+## A Recap of the Course So Far, Through the Decision Cycle
+
+It's worth stepping back and seeing how everything since Week 1 fits into the analytics decision cycle from @sec-week01-02:
+
+> **Frame the decision &rarr; obtain appropriate data &rarr; summarize the evidence &rarr; quantify uncertainty &rarr; build a model &rarr; recommend an action &rarr; communicate the result**
+
+| Weeks | Topics | Decision-cycle step(s) |
+|---|---|---|
+| Week 1 | Framing business questions; importing data; observational unit and variable types; tables, graphs, descriptive statistics | Frame the decision; obtain appropriate data; summarize the evidence |
+| Weeks 2-3 | Probability rules, Bayes' Rule; random variables; binomial, uniform, and normal distributions | Building the vocabulary behind quantify uncertainty |
+| Week 4 | Sampling distributions of $\bar{x}$ and $\hat{p}$; the Central Limit Theorem; bootstrapping | Connecting a single sample's statistic to how it would behave across repeated samples |
+| Week 5 | Confidence intervals for a proportion and a mean; introduction to hypothesis testing | Quantify uncertainty, applied to real data for the first time |
+| Weeks 6-7 | One-sample and two-sample tests (means and proportions), paired comparisons, ANOVA and Tukey's HSD, research design, bias, and causality | Quantify uncertainty, deepened to compare groups and judge causal claims |
+
+Notice what we *haven't* done yet: every method so far compares groups or tests a single parameter against a benchmark. None of it builds a model that predicts one variable from another, or that describes a relationship's *shape*. That's exactly where Module 4 picks up: regression, the beginning of the **build a model** step of the cycle, moving from "is there a difference?" to "how does one thing relate to another, and what does that let us predict?"
+
+## Recap
+
+| **Keyword** | **Definition** |
+|---|---|
+| **Practical significance** | Whether an effect is large enough, in real-world terms, to justify acting on it, independent of whether it's statistically significant. |
+| **Statistical significance with large samples** | With enough data, even a tiny, practically unimportant effect can produce a very small p-value. |
+| **Observational comparison** | Comparing groups that were not created by random assignment (like Project Oxygen's existing high- and low-scoring managers); vulnerable to confounding even when statistically significant. |
+
+## Check Your Understanding
+
+::: {.callout-note collapse="false" title="Questions to think about before the live session"}
+1. Project Oxygen compared managers who were already in the top and bottom quartiles of existing ratings. Propose one specific confounding variable that could make "better" managers look like they cause better outcomes, even if their behavior weren't the true cause.
+
+2. Suppose a company reports: "Employees under our top-quartile managers have a turnover rate 2 percentage points lower than employees under bottom-quartile managers, and this difference is highly statistically significant ($p<0.001$), based on a sample of 40,000 employees." Is this difference necessarily practically significant? What additional information would help you decide?
+
+3. The Project Oxygen team said they tried to prove that managers *don't* matter, and failed. Why might deliberately trying to disprove your own hypothesis be good scientific practice? What does it guard against?
+
+4. What research design, short of a full company-wide randomized experiment, could Google have used to strengthen the causal claim that manager behavior (not confounding factors) drives better team outcomes?
+:::
+
+::: {.callout-tip collapse="true" title="Solutions"}
+1. One plausible confounder: **team composition or resources**. Managers who are already well-regarded may be more likely to be assigned experienced, high-performing teams or ample resources and headcount, either of which could independently produce better satisfaction, retention, and performance, regardless of anything the manager personally does differently. (Reverse causation is another reasonable answer: a team that is already high-performing and satisfied may simply rate its manager more favorably.)
+
+2. Not necessarily. A 2-percentage-point difference in turnover could be practically significant or not, depending on the actual base turnover rate, the cost of replacing an employee, and how large a change the company would consider worth acting on. With $n=40{,}000$, even a much smaller difference than 2 points could have been statistically significant, so the p-value alone doesn't tell you whether 2 points is a big deal. Additional useful information: the actual turnover rates being compared (2 points off a base of 5% is a much bigger relative change than 2 points off a base of 40%), the cost of turnover per employee, and a confidence interval for the difference.
+
+3. Deliberately trying to disprove your own hypothesis (sometimes called seeking disconfirming evidence) guards against **confirmation bias**, the tendency to notice, favor, or interpret evidence in a way that supports what you already expected or wanted to find. If a team only looks for evidence that managers matter, they risk overlooking data that would have told a more complicated (or contradictory) story.
+
+4. A stronger design would randomly assign an intervention, for example, providing manager-behavior coaching or training based on the Oxygen attributes to a randomly selected subset of managers, while a comparable set of managers continues without that training, then comparing team outcomes between the two groups afterward. Because assignment to training would be random, this would balance both observed and unobserved differences between managers up front, letting a resulting difference in team outcomes be attributed to the training itself rather than to pre-existing differences between naturally high- and low-scoring managers.
+:::

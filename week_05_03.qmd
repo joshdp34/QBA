@@ -1,0 +1,131 @@
+# Week 5: Introduction to Hypothesis Testing {#sec-week05-03}
+
+## Why This Matters
+
+The last two sections used confidence intervals to answer a question of the form "what is a plausible range for this parameter?" **Hypothesis testing** answers a related but different question: "does the evidence support (or contradict) a specific claim about that parameter?" Both tools quantify uncertainty from the same sampling-distribution machinery we built in Week 4, they're just aimed at different business questions. This section introduces the logic and vocabulary of hypothesis testing; the next module (Module 3) will cover the actual mechanics, the specific test statistics and procedures, for comparing one group to a benchmark, comparing two groups to each other, and comparing several groups at once .
+
+## The Logic of a Hypothesis Test
+
+Every hypothesis test starts with two competing claims about a population parameter:
+
+- The **null hypothesis** ($H_0$) is a baseline or default claim, usually "no change," "no difference," or "no effect."
+- The **alternative hypothesis** ($H_a$) is the claim we're trying to find evidence for, that there *is* an effect, a difference, or a change.
+
+The logic works like this: we assume $H_0$ is true, then ask whether the data we actually observed would be surprising under that assumption. If the data would be very unlikely if $H_0$ were really true, that's evidence against $H_0$, and we **reject** it in favor of $H_a$. If the data are consistent with $H_0$, we **fail to reject** it. Because sampling always involves randomness, this conclusion is never certain, it's a probabilistic judgment based on the evidence at hand.
+
+::: {.callout-note collapse="false" title="The legal analogy"}
+A courtroom is built around the same logic. The null hypothesis is like the presumption of **innocence**; the alternative is like **guilt**; the data are the **evidence**. A jury never "proves" innocence, it either finds enough evidence to convict or it doesn't. Likewise, a hypothesis test never proves $H_0$ true; we only ever reject it or fail to reject it. "Failing to reject" $H_0$ doesn't mean we've shown it's true, only that we didn't find strong enough evidence against it.
+:::
+
+## Writing Null and Alternative Hypotheses
+
+Hypotheses are usually statements about a **population parameter** (like $\mu$ or $p$), not about a sample statistic. The null hypothesis takes the form of an equality:
+$$
+H_0: \text{parameter} = \text{specific value}
+$$
+The alternative hypothesis can take one of three forms, depending on what kind of departure from the null actually matters for the decision at hand:
+
+- **Two-sided:** $H_a: \text{parameter} \neq \text{value}$ (a change in either direction matters)
+- **Right-tailed:** $H_a: \text{parameter} > \text{value}$ (only an increase matters)
+- **Left-tailed:** $H_a: \text{parameter} < \text{value}$ (only a decrease matters)
+
+::: {.example title="Example 5.5: Writing hypotheses for three business questions"}
+**Two-sided.** A retailer redesigns its homepage and wants to know if average time-on-page changes at all, in either direction, compared to the historical average of $\mu_0 = 45$ seconds.
+$$
+H_0: \mu = 45 \qquad H_a: \mu \neq 45
+$$
+
+**Right-tailed.** A sales manager wants to know if a new closing script increases the close rate above the historical rate of $p_0 = 0.20$. A decrease wouldn't change the manager's decision, only an increase would justify rolling the script out company-wide.
+$$
+H_0: p = 0.20 \qquad H_a: p > 0.20
+$$
+
+**Left-tailed.** A procurement team wants to know if a new supplier's defect rate is lower than the current supplier's historical rate of $p_0 = 0.05$. An increase would just mean sticking with the current supplier; only a decrease matters for switching.
+$$
+H_0: p = 0.05 \qquad H_a: p < 0.05
+$$
+
+Notice that in every case, the direction of $H_a$ was decided by what the decision-maker actually cares about, before looking at any data, not by whatever the sample happened to show.
+:::
+
+## Two Kinds of Mistakes
+
+Because conclusions from a hypothesis test are based on a sample, not a full census, there are two distinct ways a test can go wrong:
+
+- A **Type I error** (false positive) happens when we reject $H_0$ even though it's actually true, concluding there's an effect when there really isn't one. The probability of this mistake is the **significance level**, $\alpha$, a threshold we choose *before* collecting data, commonly 0.05.
+- A **Type II error** (false negative) happens when we fail to reject $H_0$ even though it's actually false, missing a real effect that's actually there. Its probability is denoted $\beta$.
+
+The **power** of a test, $1-\beta$, is the probability of correctly detecting a real effect when one exists.
+
+::: {.example title="Example 5.6: Errors in the checkout-redesign decision"}
+Suppose the retailer tests whether a redesigned checkout page changes the conversion rate from its historical 12%.
+
+A **Type I error** would mean concluding the redesign changed conversion when it actually didn't, leading the company to roll out (and maintain) a redesign that provides no real benefit, at real engineering and maintenance cost.
+
+A **Type II error** would mean concluding the redesign made no difference when it actually did improve conversion, causing the company to discard a genuinely better checkout page and leave revenue on the table.
+:::
+
+There's an inherent trade-off between the two: making $\alpha$ smaller (being more cautious about false positives) makes it harder to reject $H_0$, which raises the chance of a Type II error, and vice versa. The only way to reduce both simultaneously is to collect more data.
+
+## The P-Value: Quantifying the Evidence
+
+Once a test is run, the evidence against $H_0$ is summarized in a single number: the **p-value**, the probability of observing a result at least as extreme as what we actually got, *if the null hypothesis were true*. A small p-value means the observed data would be quite surprising under $H_0$, which counts as evidence against it. The decision rule is simple: if the p-value is less than $\alpha$, reject $H_0$; otherwise, fail to reject it.
+
+::: {.callout-note collapse="false" title="What a p-value is not"}
+A p-value is **not** the probability that $H_0$ is true. It's calculated *assuming* $H_0$ is true, so it can't simultaneously tell you the probability that assumption is correct. A p-value of 0.03 means: "if the null hypothesis were really true, there'd only be a 3% chance of seeing data this extreme (or more extreme)." It says nothing about how likely $H_0$ itself is, and it says nothing about how large or important the effect is either, only how surprising the data would be under the null.
+:::
+
+## Confidence Intervals and Hypothesis Tests Are Two Views of the Same Evidence
+
+Here's a connection worth making explicit: a two-sided hypothesis test at significance level $\alpha$ and a $(1-\alpha)$ confidence interval are, in a real sense, answering the same underlying question from two different angles. A hypothesized value gets **rejected** by a two-sided test exactly when it falls **outside** the corresponding confidence interval, and **fails to be rejected** exactly when it falls **inside** the interval.
+
+::: {.example title="Example 5.7: Using the Week 5 confidence interval to test a hypothesis"}
+Recall Example 5.1 (@sec-week05-01): the retailer sampled $n=200$ visitors, observed $\hat{p}=0.15$, and built a 95% confidence interval of $(0.101, \, 0.199)$ for the true conversion rate.
+
+Suppose the retailer's old benchmark conversion rate was $p_0 = 0.12$, and they want to test
+$$
+H_0: p = 0.12 \qquad H_a: p \neq 0.12
+$$
+at $\alpha = 0.05$. Rather than computing a new test statistic from scratch, notice that $0.12$ falls **inside** the interval $(0.101, 0.199)$. That alone tells us we would **fail to reject** $H_0$ at the 5% significance level: even though the observed $\hat{p}=0.15$ is numerically different from $0.12$, that difference isn't large enough, relative to the sampling variability captured by the interval, to count as statistically significant evidence against a true rate of 12%.
+
+Had the observed interval instead been, say, $(0.135, \, 0.223)$, excluding $0.12$ entirely, we would have rejected $H_0$ at the 5% level. This is exactly why a confidence interval is often more useful to report to a business audience than a bare hypothesis-test conclusion: it shows the whole range of values that are consistent with the data, not just whether one particular benchmark survives.
+:::
+
+## What's Next
+
+This section covered the vocabulary and logic of hypothesis testing, hypotheses, error types, and p-values, without yet computing an actual test statistic by hand. Module 3 picks up right here and covers the full workflow: the specific test statistics and procedures for comparing a single group's mean or proportion to a benchmark, comparing two groups to each other, and comparing several groups at once (ANOVA), along with a closer look at practical versus statistical significance. 
+
+
+## Recap
+
+| **Keyword** | **Definition** |
+|---|---|
+| **Null hypothesis ($H_0$)** | A baseline claim of no effect or no difference; assumed true as the starting point of a test. |
+| **Alternative hypothesis ($H_a$)** | The claim we're seeking evidence for; can be two-sided, right-tailed, or left-tailed. |
+| **Type I error** | Rejecting $H_0$ when it's actually true (a false positive); its probability is $\alpha$. |
+| **Type II error** | Failing to reject $H_0$ when it's actually false (a false negative); its probability is $\beta$. |
+| **Significance level ($\alpha$)** | The threshold p-value must fall below to reject $H_0$; chosen before collecting data. |
+| **Power ($1-\beta$)** | The probability of correctly rejecting $H_0$ when the alternative is true. |
+| **P-value** | The probability, assuming $H_0$ is true, of observing a result at least as extreme as what was actually observed. |
+
+## Check Your Understanding
+
+::: {.callout-note collapse="false" title="Problems"}
+1. A subscription service wants to know if a new onboarding flow changes its 30-day cancellation rate from the historical 8%, in either direction. Write $H_0$ and $H_a$, and state whether this is a two-sided, right-tailed, or left-tailed test.
+
+2. A factory tests whether a new supplier's defect rate is below the current 3% benchmark. Describe, in the context of this scenario, what a Type I error and a Type II error would mean, and which one seems more costly to the factory.
+
+3. A test of $H_0: \mu = 100$ versus $H_a: \mu \neq 100$ produces a p-value of 0.21 at $\alpha=0.05$. What is the conclusion? Does this p-value tell us that $H_0$ is probably true?
+
+4. A 95% confidence interval for a population mean is $(48.2, \, 55.6)$. Using the connection between confidence intervals and hypothesis tests, would a two-sided test of $H_0: \mu = 50$ at $\alpha=0.05$ be rejected? What about $H_0: \mu = 60$?
+:::
+
+::: {.callout-tip collapse="true" title="Solutions"}
+1. Let $p$ be the true 30-day cancellation rate under the new onboarding flow. $H_0: p = 0.08$, $H_a: p \neq 0.08$. This is a **two-sided** test, since the company cares about a change in either direction.
+
+2. A Type I error would mean concluding the new supplier's defect rate is below 3% when it actually isn't, leading the factory to switch suppliers and receive no real quality improvement (and possibly a worse one). A Type II error would mean failing to detect a real improvement, sticking with the current, worse supplier when the new one was actually better. Which is more costly depends on context, but if defective parts carry serious downstream costs (safety, recalls, customer harm), the factory may weight a Type I error (wrongly trusting an unproven supplier) as more serious; if switching costs are low and quality differences are the main concern, a Type II error (missing a genuine improvement) might be more costly.
+
+3. Because $0.21 > 0.05$, we **fail to reject** $H_0$; the data do not provide strong evidence that $\mu \neq 100$. This does not mean $H_0$ is probably true, only that this sample didn't produce evidence strong enough to reject it. A p-value never tells us the probability that the null hypothesis is true.
+
+4. Since $50$ falls **inside** the interval $(48.2, 55.6)$, we would **fail to reject** $H_0: \mu = 50$ at $\alpha=0.05$. Since $60$ falls **outside** the interval, we would **reject** $H_0: \mu = 60$ at $\alpha=0.05$.
+:::
