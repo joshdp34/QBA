@@ -47,20 +47,18 @@ book:
         - week_07_01.qmd
         - week_07_02.qmd
         - week_07_03.qmd
-    # - 02.qmd
-    # - 03.qmd
-    # - 04.qmd
-    # - 05.qmd
-    # - 06.qmd
-    # - 07.qmd
-    # - 08.qmd
-    # - 09.qmd
-    # - 10.qmd
-    # - 11.qmd
-    # - 12.qmd
-    # - 13.qmd
-    # - 14.qmd
-    
+    - part: "Module 4"
+      chapters:
+        - week_08_01.qmd
+        - week_08_02.qmd
+        - week_09_01.qmd
+        - week_09_02.qmd
+        - week_10_01.qmd
+        - week_10_02.qmd
+        - week_11_01.qmd
+        - week_11_02.qmd
+
+
 
 
 

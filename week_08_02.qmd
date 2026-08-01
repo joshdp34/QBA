@@ -1,0 +1,147 @@
+# Week 8: Interpreting Simple Regression Output {#sec-week08-02}
+
+## Why This Matters
+
+@sec-week08-01 fit a least-squares line to the advertising data and got a slope of about 0.0527. But a slope computed from a sample of 200 markets is still a **statistic**, an estimate carrying sampling variability, just like the sample means and proportions from earlier modules. If TV spending truly had no relationship with sales in the broader population of markets, could a sample this size still produce a slope of 0.0527 just by chance? Answering that question, and asking whether the relationship is large enough to matter for a real decision, is what this section covers.
+
+## Partitioning the Variability
+
+Just as ANOVA (@sec-week07-01) split total variability into between-group and within-group pieces, simple regression splits the total variability in $y$ into a piece the line explains and a piece it doesn't:
+$$
+\underbrace{\sum(y_i - \bar{y})^2}_{\text{SST}} \;=\; \underbrace{\sum(\hat{y}_i - \bar{y})^2}_{\text{SSR}} \;+\; \underbrace{\sum(y_i - \hat{y}_i)^2}_{\text{SSE}}
+$$
+
+- **SST** (total sum of squares): how much $y$ varies overall, ignoring $x$ entirely.
+- **SSR** (regression sum of squares): how much of that variability is explained by the fitted line.
+- **SSE** (error/residual sum of squares): how much is left over, the variability the line doesn't explain.
+
+::: {.example title="Example 8.6: The variability breakdown for the advertising data"}
+```{r}
+#| echo: true
+#| message: false
+library(tidyverse)
+ads <- read_csv("data/advertising.csv")
+model <- lm(sales ~ tv, data = ads)
+anova(model)
+```
+Reading the table: `tv` contributes $\text{SSR} = 4011.1$ with $\text{Mean Sq} = 4011.1$ (since it has 1 degree of freedom), while the leftover `Residuals` account for $\text{SSE} = 1608.4$ across $198$ degrees of freedom, giving $\text{MSE} = 1608.4/198 \approx 8.1$. Total variability is $\text{SST} = 4011.1 + 1608.4 = 5619.5$.
+:::
+
+## R-Squared: How Much Does the Line Explain?
+
+$$
+R^2 = \frac{\text{SSR}}{\text{SST}}
+$$
+$R^2$ is the proportion of variability in $y$ explained by $x$, always between 0 (the line explains nothing) and 1 (the line explains everything, every point falls exactly on it). In **simple** regression (one predictor), $R^2$ is exactly the square of the correlation coefficient from @sec-week08-01, $R^2 = r^2$, a useful check that the two ideas from this module agree with each other.
+
+::: {.example title="Example 8.7: R-squared for the advertising model"}
+$$
+R^2 = \frac{4011.1}{5619.5} \approx 0.714
+$$
+Equivalently, since $r \approx 0.845$ from Example 8.2, $r^2 \approx 0.845^2 \approx 0.714$. About **71.4%** of the market-to-market variability in sales is explained by TV advertising spend; the remaining 28.6% is due to other factors (radio and online spend, local competition, seasonality, and so on) not captured by this one-predictor model.
+:::
+
+::: {.callout-note collapse="false" title="A high R-squared is not the whole story"}
+A model can have a high $R^2$ and still be badly misused (for instance, extrapolated far outside the observed data, as warned in @sec-week08-01), and a model with a modest $R^2$ can still be genuinely useful if the relationship is real and the stakes are large. $R^2$ describes fit within the observed data; it says nothing on its own about causation, or about how the model will perform on markets unlike the ones it was fit to.
+:::
+
+## Testing Whether the Slope Is Real
+
+The central question: is the true population slope $\beta_1$ actually different from zero, or could a nonzero sample slope like $b_1=0.0527$ just be sampling noise?
+$$
+H_0: \beta_1 = 0 \qquad H_a: \beta_1 \neq 0
+$$
+$H_0$ says $x$ and $y$ have no linear relationship in the population; $H_a$ says they do. The test statistic compares the sample slope to its standard error,
+$$
+t = \frac{b_1 - 0}{SE(b_1)}
+$$
+following a $t$-distribution with $n-2$ degrees of freedom (one degree of freedom is spent estimating each of $b_0$ and $b_1$). Software reports $b_1$, $SE(b_1)$, $t$, and the p-value directly.
+
+::: {.example title="Example 8.8: Testing the TV advertising slope"}
+```{r}
+#| echo: true
+summary(model)
+```
+Reading the `tv` row: $b_1 = 0.0527$, $SE(b_1) = 0.00237$, so
+$$
+t = \frac{0.0527}{0.00237} \approx 22.22
+$$
+with $df = n - 2 = 198$. The p-value is reported as `<2e-16`, far below any conventional $\alpha$. We **reject** $H_0$: there is overwhelming evidence of a real linear relationship between TV spending and sales in the population of markets this sample represents.
+:::
+
+A 95% confidence interval for $\beta_1$ tells the same story with a range instead of a single conclusion:
+$$
+b_1 \pm t_{\alpha/2,\,n-2}\, SE(b_1)
+$$
+```{r}
+#| echo: true
+confint(model)
+```
+The interval for `tv`, approximately $(0.048,\, 0.057)$, excludes 0, consistent with rejecting $H_0$ above, and gives a plausible range for the true slope rather than just a yes/no verdict.
+
+::: {.callout-note collapse="false" title="Why the F-test in the ANOVA table gives the same answer"}
+The ANOVA table's F-test ($H_0: \beta_1=0$) and the t-test on the slope are testing the exact same hypothesis in simple regression, and always agree: $F = t^2$. Here, $22.22^2 \approx 493.7$, matching (up to rounding) the $F=493.8$ reported in Example 8.6. This equivalence is special to simple regression with one predictor; starting with multiple predictors in @sec-week09-01, the F-test and the individual t-tests answer genuinely different questions.
+:::
+
+## Statistical Significance vs. Practical Significance, Again
+
+@sec-week07-03 warned that with a large enough sample, even a tiny effect can be statistically significant. The same caution applies here. This model's p-value is essentially zero, but that alone doesn't tell us the relationship is *large*, only that we're confident it isn't exactly zero.
+
+::: {.example title="Example 8.9: Is a $0.0527 slope big enough to matter?"}
+The fitted slope says: each additional \$1,000 spent on TV advertising is associated with about \$52.70 more in sales, on average. Whether that's *practically* significant depends entirely on the business context, not the p-value. If TV advertising costs the company close to what it returns in incremental sales, a statistically ironclad relationship might still represent a poor return on the marginal dollar spent, worth a very different conversation than "the relationship is real." A p-value confirms the relationship exists; deciding whether to act on it, and how aggressively, is a business judgment that needs the effect size itself, in real dollars, not just the test's conclusion.
+:::
+
+## Correlation, Regression, and Causation
+
+Nothing about a small p-value or a high $R^2$ establishes that $x$ *causes* $y$. The advertising data is **observational**: markets weren't randomly assigned a TV budget, they chose (or were assigned by the company for business reasons) how much to spend, so the checklist from @sec-week07-02 still applies.
+
+::: {.example title="Example 8.10: A plausible confounder for the advertising model"}
+Suppose larger markets (bigger metro population) both receive larger TV advertising budgets *and* generate higher raw sales simply because more potential customers live there, independent of advertising's actual effect. **Market size** would then be a confounder: it drives both $x$ (TV spend) and $y$ (sales), inflating the apparent relationship between them beyond what advertising alone is responsible for. A company acting on this model without considering market size might overestimate how much *incremental* sales an extra advertising dollar would actually generate.
+:::
+
+Running the four-question causation checklist against this model:
+
+1. **Random assignment?** No, ad budgets were not randomly assigned to markets.
+2. **Plausible confounder?** Yes, market size (Example 8.10), among others.
+3. **Could bias explain the pattern?** Worth asking how `sales` and `tv` were measured and attributed to a market; misattributed sales (for instance, online sales credited to the wrong region) could distort the relationship.
+4. **Statistically and practically significant?** Statistically, yes (Example 8.8); practical significance depends on the actual cost of advertising relative to the estimated \$52.70-per-\$1,000 return (Example 8.9).
+
+None of this means the model is useless, a strong, statistically significant, observational relationship is still a reasonable starting point for a business decision. It means the model's slope should be described as an *association*, not unambiguous proof that spending another dollar on TV advertising *causes* a $0.0527 increase in sales, unless the company can rule out confounders like market size, or better yet, test the claim directly with a designed experiment (for example, randomly increasing TV budgets in a subset of comparable markets and comparing the results).
+
+## Recap
+
+| **Keyword** | **Definition** |
+|---|---|
+| **SST, SSR, SSE** | Total, regression (explained), and error (unexplained) sums of squares; $\text{SST}=\text{SSR}+\text{SSE}$. |
+| **$R^2$** | $\text{SSR}/\text{SST}$; the proportion of variability in $y$ explained by $x$. In simple regression, $R^2=r^2$. |
+| **Slope significance test** | $H_0:\beta_1=0$ vs. $H_a:\beta_1\neq0$; $t=b_1/SE(b_1)$ with $df=n-2$. |
+| **Confidence interval for $\beta_1$** | $b_1 \pm t_{\alpha/2,\,n-2}\,SE(b_1)$; excludes 0 exactly when the t-test rejects $H_0$. |
+| **F-test vs. t-test (simple regression)** | Equivalent in simple regression: $F=t^2$; both test $H_0:\beta_1=0$. |
+| **Statistical vs. practical significance** | A tiny p-value confirms a relationship is probably real; it does not by itself say the effect is large enough to matter for the decision at hand. |
+| **Confounder (regression context)** | A third variable driving both $x$ and $y$, inflating an observational relationship beyond $x$'s true effect on $y$. |
+
+## Check Your Understanding
+
+::: {.callout-note collapse="false" title="Problems"}
+1. A simple regression of employee performance rating on years of tenure, $n=60$, gives $b_1 = 0.42$ and $SE(b_1) = 0.11$. Compute the test statistic for $H_0:\beta_1=0$ and state the degrees of freedom.
+
+2. Using the result from Problem 1 and a $t$-table (critical value $\approx 2.00$ at $\alpha=0.05$, $df=58$), what do you conclude about $H_0$?
+
+3. A regression has $\text{SST}=800$ and $\text{SSE}=200$. Compute $\text{SSR}$ and $R^2$, and state, in a sentence, what the $R^2$ value means in context.
+
+4. If a simple regression's correlation is $r=-0.55$, what is $R^2$? Which of $r$ and $R^2$ would change if you switched the measurement units of $x$ from dollars to thousands of dollars, and which would stay the same?
+
+5. A company finds that a regression of monthly revenue on number of sales reps has $R^2=0.91$ and a highly significant slope ($p<0.0001$), based on data from existing store locations (reps were not randomly assigned to stores). The CEO wants to conclude that hiring more reps *causes* higher revenue and immediately triples headcount everywhere. What would you caution the CEO about before acting on this conclusion?
+:::
+
+::: {.callout-tip collapse="true" title="Solutions"}
+1. $t = 0.42/0.11 \approx 3.818$, with $df = n-2 = 58$.
+
+2. Since $|t|\approx 3.818 > 2.00$, we **reject** $H_0$: there is statistically significant evidence of a real linear relationship between tenure and performance rating at $\alpha=0.05$.
+
+3. $\text{SSR} = 800-200=600$. $R^2 = 600/800 = 0.75$. In context: 75% of the variability in the response variable is explained by the predictor; the remaining 25% is due to other factors not captured by this model.
+
+4. $R^2 = (-0.55)^2 = 0.3025$. Switching $x$'s units from dollars to thousands of dollars would change the **slope** $b_1$ (and its standard error), but **not** $r$ or $R^2$, both are unit-free measures of the strength of the linear relationship, regardless of how $x$ or $y$ happen to be scaled.
+
+5. Caution that this is an **observational**, not experimental, comparison, since reps weren't randomly assigned to stores, so the model shows an association, not proof of causation. A plausible confounder: stores that are already busier or in stronger markets may both justify hiring more reps *and* generate more revenue on their own, regardless of the reps' actual individual effect, so the true causal effect of an additional rep could be smaller (or larger) than the slope suggests. Before tripling headcount everywhere, it would be far safer to test the claim directly, for example, by adding reps to a randomly chosen subset of comparable stores and comparing the change in revenue against stores that didn't get additional reps.
+:::

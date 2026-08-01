@@ -1,0 +1,159 @@
+# Week 9: Multiple Linear Regression {#sec-week09-01}
+
+## Why This Matters
+
+The advertising model from Module 4 so far uses only `tv` to predict `sales`, but the company obviously spends on more than just TV, it also runs radio and online advertising. A model that explains sales using TV spend alone is ignoring information sitting right there in the data, and worse, if radio or online spend happen to be related to TV spend, the simple model's slope could be partly capturing their effects too, without saying so. **Multiple linear regression** extends the least-squares idea from @sec-week08-01 to more than one predictor at once, letting us ask a sharper question: what is the effect of TV spend specifically, *after accounting for* radio and online spend?
+
+## The Multiple Regression Model
+
+With $k$ predictors, the model becomes
+$$
+\hat{y} = b_0 + b_1x_1 + b_2x_2 + \cdots + b_kx_k
+$$
+Just as in simple regression, the $b$'s are chosen to minimize the sum of squared residuals, $\sum(y_i-\hat{y}_i)^2$, now across all $k$ predictors simultaneously. The formulas for computing them by hand get complicated fast (they involve matrix algebra), so from here on we'll rely on software, but the underlying least-squares idea, minimize the total squared prediction error, hasn't changed at all.
+
+The key difference in interpretation: each slope $b_j$ now represents the predicted change in $y$ for a one-unit increase in $x_j$, **holding all other predictors in the model fixed**. This "holding fixed" phrase is doing real work, it's what lets us separate TV's effect from radio's and online's, rather than lumping them together the way a simple regression using only `tv` would.
+
+::: {.example title="Example 9.1: Adding radio spend to the model"}
+```{r}
+#| echo: true
+#| message: false
+library(tidyverse)
+ads <- read_csv("data/advertising.csv")
+
+model_tv_radio <- lm(sales ~ tv + radio, data = ads)
+summary(model_tv_radio)
+```
+The fitted model is
+$$
+\widehat{\text{sales}} = 7.33 + 0.0523\,(\text{tv}) + 0.1370\,(\text{radio})
+$$
+:::
+
+## Interpreting the Coefficients
+
+::: {.example title="Example 9.2: What each slope means"}
+Continuing Example 9.1:
+
+- **$b_{\text{tv}} = 0.0523$**: holding radio spend fixed, each additional \$1,000 spent on TV advertising is associated with about \$52.30 more in sales, on average.
+- **$b_{\text{radio}} = 0.1370$**: holding TV spend fixed, each additional \$1,000 spent on radio advertising is associated with about \$137.00 more in sales, on average, a noticeably larger return per dollar than TV in this model.
+- **$b_0 = 7.33$**: predicted sales when both TV and radio spend are \$0.
+
+Compare $b_{\text{tv}}=0.0523$ here to the simple regression's slope of $0.0527$ from @sec-week08-01, they're close but not identical. Adding radio to the model changed the TV coefficient slightly, because part of what the simple model's slope was picking up has now been separated out and credited to radio instead.
+:::
+
+::: {.callout-important collapse="false" title="\"Holding other predictors constant\" is a statement about the model, not the real world"}
+This model can describe *what the data show* when TV and radio spend vary somewhat independently of each other, but it cannot literally hold radio spend fixed while TV spend changes in reality. If TV and radio spend are themselves strongly related (for instance, campaigns that increase one tend to increase the other), separating their individual effects becomes far less reliable, an issue called **multicollinearity**, covered in @sec-week10-01. For this dataset, TV and radio spend are only weakly correlated ($r \approx 0.02$), so their effects can be estimated fairly cleanly here.
+:::
+
+## Building Out the Full Model
+
+Nothing stops us from adding the third channel as well.
+
+::: {.example title="Example 9.3: The full three-predictor model"}
+```{r}
+#| echo: true
+model_full <- lm(sales ~ tv + radio + online, data = ads)
+summary(model_full)
+```
+The fitted model is
+$$
+\widehat{\text{sales}} = 6.42 + 0.0512\,(\text{tv}) + 0.1327\,(\text{radio}) + 0.0301\,(\text{online})
+$$
+All three slopes are positive and statistically significant ($p<0.0001$ for each), holding the other two predictors fixed: TV, radio, and online spend are each associated with higher sales, even after accounting for the other two channels.
+:::
+
+## R-Squared vs. Adjusted R-Squared
+
+Recall from @sec-week08-02 that $R^2$ measures the proportion of variability in $y$ explained by the model. A mechanical fact about $R^2$ in multiple regression: **adding any predictor to a model, even a useless one, can never decrease $R^2$**, and will almost always increase it at least slightly, simply because the least-squares fit has one more piece of information to work with. That makes raw $R^2$ a poor way to decide whether an added predictor is *actually* worth including.
+
+**Adjusted $R^2$** fixes this by penalizing the number of predictors in the model:
+$$
+R^2_{\text{adj}} = 1 - (1-R^2)\frac{n-1}{n-k-1}
+$$
+where $k$ is the number of predictors. Unlike $R^2$, adjusted $R^2$ can go *down* when a predictor is added that doesn't pull its weight, making it a fairer way to compare models with different numbers of predictors.
+
+::: {.example title="Example 9.4: Comparing the three models"}
+| Model | Predictors | $R^2$ | Adjusted $R^2$ |
+|---|---|---|---|
+| Simple (@sec-week08-01) | tv | 0.714 | 0.712 |
+| Two-predictor (Example 9.1) | tv, radio | 0.856 | 0.854 |
+| Full (Example 9.3) | tv, radio, online | 0.874 | 0.872 |
+
+Both $R^2$ and adjusted $R^2$ climb substantially when radio is added (0.714 to 0.856), and climb again, more modestly, when online is added (0.856 to 0.874). Because adjusted $R^2$ increases right alongside $R^2$ at each step, this is a sign that radio and online are both contributing genuine explanatory power, not just inflating $R^2$ by being present. Had a predictor added little real information, $R^2$ might have ticked up by a tiny amount while adjusted $R^2$ actually fell, a signal that the added complexity wasn't worth it.
+:::
+
+## The Overall F-Test
+
+Alongside each predictor's individual t-test, multiple regression output also reports an overall F-test:
+$$
+H_0: \beta_1 = \beta_2 = \cdots = \beta_k = 0 \qquad H_a: \text{at least one } \beta_j \neq 0
+$$
+This tests whether the predictors, **taken together**, explain a significant amount of variability in $y$, the same logic as the ANOVA F-test from @sec-week07-01, now applied to a regression model instead of group means.
+
+::: {.example title="Example 9.5: The overall F-test for the full model"}
+From Example 9.3's output, $F = 452.4$ on $(3, 196)$ degrees of freedom, $p<0.0001$. We reject $H_0$: at least one of TV, radio, and online spend has a real relationship with sales.
+:::
+
+::: {.callout-note collapse="false" title="The F-test and the individual t-tests are no longer the same question"}
+@sec-week08-02 showed that in *simple* regression, the F-test and the slope's t-test always agree, $F=t^2$, because there's only one predictor to test. With multiple predictors, that's no longer true. The overall F-test asks whether the predictors are jointly useful *as a group*; each t-test asks whether one specific predictor adds anything, *given that the others are already in the model*. It's entirely possible for the overall F-test to be significant while one particular predictor's t-test is not, that predictor simply isn't pulling its own weight once the others are accounted for.
+:::
+
+## Making a Prediction
+
+::: {.example title="Example 9.6: Predicting sales from all three channels"}
+What sales would the full model predict for a market spending \$150k on TV, \$25k on radio, and \$40k on online advertising?
+```{r}
+#| echo: true
+predict(model_full, newdata = data.frame(tv = 150, radio = 25, online = 40))
+```
+:::
+
+## Computing Multiple Regression in R and Excel
+
+::: {.example title="Example 9.7: The full model in R and Excel"}
+In R, additional predictors are simply added with `+` inside `lm()`, as shown throughout this section:
+```{r}
+#| echo: true
+#| eval: false
+lm(sales ~ tv + radio + online, data = ads)
+```
+
+In Excel, the Data Analysis ToolPak's **Regression** tool accepts multiple predictor columns at once, as long as they sit in **contiguous columns**, select all three (`tv`, `radio`, `online`) as the "Input X Range" and `sales` as the "Input Y Range." The output table reports each coefficient, its standard error, t-statistic, and p-value, along with $R^2$, adjusted $R^2$, and the overall F-test, in the same layout as R's `summary()` output above.
+:::
+
+## Recap
+
+| **Keyword** | **Definition** |
+|---|---|
+| **Multiple linear regression** | $\hat{y}=b_0+b_1x_1+\cdots+b_kx_k$; extends simple regression to more than one predictor. |
+| **Holding other predictors constant** | Each slope $b_j$ describes the predicted effect of $x_j$ on $y$ after accounting for the other predictors already in the model. |
+| **Adjusted $R^2$** | $R^2$ penalized for the number of predictors, $1-(1-R^2)\frac{n-1}{n-k-1}$; can decrease when an added predictor isn't useful, unlike raw $R^2$. |
+| **Overall F-test** | Tests $H_0:\beta_1=\cdots=\beta_k=0$; whether the predictors, jointly, explain significant variability in $y$. |
+| **Multicollinearity (preview)** | When predictors are strongly related to each other, individual coefficient estimates become unreliable; covered fully in @sec-week10-01. |
+
+## Check Your Understanding
+
+::: {.callout-note collapse="false" title="Problems"}
+1. A multiple regression predicting employee performance rating from `years_tenure` and `training_hours` gives $b_{\text{tenure}} = 0.35$ and $b_{\text{training}} = 0.08$. Interpret each coefficient in a full sentence, being explicit about what's being held constant.
+
+2. A model with 2 predictors has $R^2=0.61$; adding a third predictor raises $R^2$ to $0.615$ but lowers adjusted $R^2$ from $0.605$ to $0.598$. What does this pattern suggest about the third predictor, and which number, $R^2$ or adjusted $R^2$, should drive the decision to keep it?
+
+3. A regression of monthly revenue on `ad_spend` and `store_size` produces an overall F-test with $p<0.0001$, but the t-test for `store_size` alone has $p=0.41$. Explain how both results can be true at the same time, and what it implies about `store_size`'s role in this particular model.
+
+4. Explain, in your own words, why $R^2$ can never decrease when a predictor is added to a model, while adjusted $R^2$ can.
+
+5. Using the full advertising model from Example 9.3 ($\widehat{\text{sales}} = 6.42 + 0.0512\,\text{tv} + 0.1327\,\text{radio} + 0.0301\,\text{online}$), predict sales for a market spending \$100k on TV, \$10k on radio, and \$0 on online advertising.
+:::
+
+::: {.callout-tip collapse="true" title="Solutions"}
+1. Holding training hours constant, each additional year of tenure is associated with a predicted 0.35-point increase in performance rating, on average. Holding years of tenure constant, each additional hour of training is associated with a predicted 0.08-point increase in performance rating, on average.
+
+2. This pattern suggests the third predictor adds little genuine explanatory power, it nudges $R^2$ up only slightly (as any added predictor mechanically tends to), but adjusted $R^2$, which penalizes for the added complexity, actually falls, indicating the small gain in fit isn't worth the added predictor. The decision should be driven by **adjusted $R^2$**, not raw $R^2$, precisely because raw $R^2$ can't fall even when a predictor isn't pulling its weight.
+
+3. The overall F-test asks whether `ad_spend` and `store_size`, **together**, explain significant variability in revenue, while the t-test for `store_size` asks whether it contributes significantly **given that `ad_spend` is already in the model**. It's entirely possible for `ad_spend` alone to be driving nearly all of the joint significance, while `store_size` adds little once `ad_spend` is already accounted for, which is exactly what a high-significance F-test paired with a non-significant `store_size` t-test implies here.
+
+4. Adding a predictor gives the least-squares fitting process one more piece of information to work with, so it can never do worse (in terms of matching the observed $y$ values) than it did without that predictor, and will almost always do at least marginally better, even from a predictor with no real relationship to $y$, just by chance alone. Adjusted $R^2$ explicitly subtracts a penalty that grows with the number of predictors, $k$, in the denominator $n-k-1$, so if a new predictor's improvement to $R^2$ is smaller than what that added penalty costs, adjusted $R^2$ falls even though raw $R^2$ rose.
+
+5. $\widehat{\text{sales}} = 6.42 + 0.0512(100) + 0.1327(10) + 0.0301(0) = 6.42 + 5.12 + 1.327 + 0 = 12.867$, predicted sales of about \$12,867.
+:::

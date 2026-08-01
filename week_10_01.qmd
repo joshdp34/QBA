@@ -1,0 +1,256 @@
+# Week 10: Regression Diagnostics {#sec-week10-01}
+
+## Why This Matters
+
+Every confidence interval and hypothesis test in @sec-week08-02 and @sec-week09-01 was built on assumptions about how the data behaves. A high $R^2$ and a tiny p-value don't guarantee those assumptions actually hold, and a model built on violated assumptions can produce misleading standard errors, unreliable p-values, or predictions that quietly break down exactly where it matters most. **Regression diagnostics** are the checks that tell you whether a fitted model can actually be trusted, and this section covers the two things most worth checking: whether the model's core assumptions hold, and whether a handful of unusual data points are secretly driving the results.
+
+## The LINE Assumptions
+
+Simple and multiple linear regression rest on four assumptions, often remembered by the acronym **LINE**:
+
+- **L**inearity: the true relationship between the predictors and the average value of $y$ is linear.
+- **I**ndependence: observations (and their residuals) don't influence one another.
+- **N**ormality: the residuals are approximately normally distributed.
+- **E**qual variance (homoscedasticity): the spread of the residuals is roughly constant across all fitted values, not wider in some places than others.
+
+None of these can be checked by staring at $R^2$ or a p-value. All four are checked primarily by looking at the **residuals**, $e_i = y_i - \hat{y}_i$, the part of $y$ the model didn't explain.
+
+## Residual Plots: The Main Diagnostic Tool
+
+Two plots do most of the work:
+
+- **Residuals vs. fitted values**: plots $e_i$ against $\hat{y}_i$. A patternless cloud of points scattered evenly around 0 supports linearity and equal variance. A curve suggests linearity is violated; a funnel or fan shape (residuals spreading out, or narrowing, as $\hat y$ increases) suggests unequal variance.
+- **Normal Q-Q plot of the residuals**: plots the residuals' quantiles against those of a theoretical normal distribution. Points falling close to the diagonal reference line support normality; systematic curves or heavy tails suggest they don't.
+
+Base R can produce both (`plot(model, which = 1)` and `which = 2`), but the rest of this section uses the **`olsrr`** package instead, purpose-built for OLS regression diagnostics, with cleaner plots and formal tests to back up what the plots suggest.
+
+::: {.example title="Example 10.1: Diagnostics for the advertising model"}
+Returning to the full advertising model from @sec-week09-01:
+```{r}
+#| echo: true
+#| message: false
+library(tidyverse)
+library(olsrr)
+ads <- read_csv("data/advertising.csv")
+model <- lm(sales ~ tv + radio + online, data = ads)
+
+ols_plot_resid_fit(model)
+ols_plot_resid_qq(model)
+```
+The residuals-vs-fitted plot shows no strong curve and a reasonably even spread, no obvious linearity or equal-variance problem. The Q-Q plot's points track the reference line closely across most of the range. Two formal tests back up that visual read. `ols_test_normality()` runs four separate normality tests at once ($H_0$: the residuals are normally distributed):
+```{r}
+#| echo: true
+ols_test_normality(model)
+```
+The Shapiro-Wilk test gives $p \approx 0.51$, no evidence against normality. `ols_test_breusch_pagan()` formally tests the equal-variance assumption ($H_0$: the residual variance is constant):
+```{r}
+#| echo: true
+ols_test_breusch_pagan(model)
+```
+With $p \approx 0.53$, there's no evidence against equal variance either. Overall, this model's LINE assumptions look reasonably well satisfied, so the t-tests and confidence intervals computed for it in @sec-week09-01 can be trusted.
+:::
+
+## What a Violation Looks Like: Nonlinearity
+
+::: {.example title="Example 10.2: Fitting a straight line to a curved relationship"}
+Suppose a company's data actually follows a curved pattern, output rises with an input up to a point, then flattens or declines, but the analyst fits a straight line anyway:
+```{r}
+#| echo: true
+set.seed(7)
+n <- 150
+x2 <- runif(n, 0, 10)
+
+#simulate a genuinely curved (quadratic) relationship
+y2 <- 3 + 4*x2 - 0.5*x2^2 + rnorm(n, 0, 3)
+model_nonlin <- lm(y2 ~ x2)
+
+ols_plot_resid_fit(model_nonlin)
+```
+The straight-line fit has $R^2 \approx 0.40$ and a highly significant (but misleading) negative slope, but the residual plot shows a clear **U-shape**: residuals are positive at both low and high fitted values and negative in the middle. That curve is the signature of a linearity violation, the model is systematically over- and under-predicting in a *pattern*, not randomly. A straight line simply cannot capture this relationship; the fix isn't a different sample, it's a different functional form (for example, adding a squared term, covered further in later modules).
+:::
+
+## What a Violation Looks Like: Unequal Variance
+
+::: {.example title="Example 10.3: A funnel-shaped residual plot"}
+Suppose the variability in $y$ genuinely grows as $x$ grows, larger values are simply noisier:
+```{r}
+#| echo: true
+set.seed(42)
+n <- 150
+x3 <- runif(n, 10, 100)
+
+#simulate variance that grows with x
+y3 <- 5 + 2*x3 + rnorm(n, 0, x3 * 0.3)
+model_het <- lm(y3 ~ x3)
+
+ols_plot_resid_fit(model_het)
+```
+The residuals fan out into a clear cone shape, tightly clustered at low fitted values, much more spread out at high fitted values. This is **heteroscedasticity** (unequal variance). The Breusch-Pagan test confirms it formally:
+```{r}
+#| echo: true
+ols_test_breusch_pagan(model_het)
+```
+Compare this to Example 10.1's result on the healthy advertising model ($\text{Chi}^2 \approx 0.39$, $p \approx 0.53$): here, $\text{Chi}^2 \approx 28.6$ with $p < 0.0001$, decisively rejecting the equal-variance assumption. The fitted slope itself is still a reasonable estimate, but the standard errors, and therefore every p-value and confidence interval computed from this model, are no longer reliable, the formulas from @sec-week08-02 and @sec-week09-01 assume constant variance throughout. Common remedies include transforming the response (for example, modeling $\log(y)$ instead of $y$) or using standard errors specifically adjusted for unequal variance.
+:::
+
+::: {.callout-note collapse="false" title="A quick note on independence"}
+For data collected over time (daily sales, weekly call volume), residuals can be correlated with each other from one period to the next, a violation of independence called **autocorrelation**. It's checked with a residuals-vs-time plot (looking for trends or cycles rather than a patternless scatter) and matters most heavily once we reach time-series forecasting later in the course; for cross-sectional business data like the examples in this module, independence is usually satisfied as long as the observations (markets, stores, employees) genuinely don't influence one another.
+:::
+
+## Outliers, Leverage, and Influential Points
+
+Three related but distinct ideas describe unusual data points:
+
+- An **outlier** has an unusual $y$ value given its $x$, a large residual.
+- A **high-leverage point** has an unusual $x$ value, far from the center of the other predictors, regardless of its $y$ value.
+- An **influential point** is one whose removal would noticeably change the fitted model (its coefficients, predictions, or both). A point needs *both* some leverage and a nontrivial residual to be truly influential; an outlier with low leverage, or a high-leverage point that still falls close to the line, may not move the fit much at all.
+
+**Cook's distance** combines leverage and residual size into a single number per observation, summarizing how much the fitted model would change if that one point were removed. Common rules of thumb flag a point for closer inspection if its Cook's distance exceeds about 1, or, for a stricter threshold, $4/n$, the threshold `olsrr` uses by default in the plots below.
+
+::: {.example title="Example 10.4: One point changing the whole model"}
+```{r}
+#| echo: true
+set.seed(99)
+n4 <- 30
+x4 <- runif(n4, 1, 10)
+y4 <- 2 + 3*x4 + rnorm(n4, 0, 2)
+
+model_clean <- lm(y4 ~ x4)
+coef(model_clean)
+```
+Now add one extreme point ($x=9.5$, but with $y=45$, far above what the rest of the pattern would predict there):
+```{r}
+#| echo: true
+x4_out <- c(x4, 9.5)
+y4_out <- c(y4, 45)
+model_outlier <- lm(y4_out ~ x4_out)
+coef(model_outlier)
+```
+Adding a single point among 31 shifted the slope from about 3.36 to about 3.62 and the intercept from about $-0.13$ to about $-1.04$, a meaningful change from one observation. `olsrr` provides three tools that would flag this point directly, without needing to already know something was wrong.
+
+**A Cook's distance bar chart** flags any observation above the threshold:
+```{r}
+#| echo: true
+ols_plot_cooksd_bar(model_outlier)
+```
+Observation 31 (the added point) is flagged with a Cook's distance of about **1.30**, far above the plot's own $4/n \approx 0.129$ threshold.
+
+**A residual-vs-leverage plot** separates *why* a point is unusual, high leverage (an unusual $x$), a large residual (an unusual $y$ given its $x$), or both:
+```{r}
+#| echo: true
+ols_plot_resid_lev(model_outlier)
+```
+Observation 31 stands out here mainly for its enormous studentized residual (about **7.4**), an extreme $y$-value given its $x$, rather than for leverage alone, consistent with how it was constructed.
+
+**A formal outlier test** (`ols_test_outlier()`) applies a Bonferroni-corrected significance test to each observation's studentized residual, guarding against false alarms that would come from testing all 31 points at once:
+```{r}
+#| echo: true
+ols_test_outlier(model_outlier)
+```
+Observation 31's studentized residual of 7.42 is significant even after the Bonferroni correction ($p \approx 0.0000014$), formal confirmation that this point is a genuine, statistically extreme outlier, not just a visually striking one.
+:::
+
+```{r}
+#| echo: false
+#| message: false
+library(tidyverse)
+tibble(x = x4_out, y = y4_out, type = c(rep("Original data", n4), "Added point")) |>
+  ggplot(aes(x = x, y = y, color = type)) +
+  geom_point(size = 2) +
+  geom_smooth(data = tibble(x = x4, y = y4), aes(x = x, y = y), method = "lm",
+              se = FALSE, color = "#2c7fb8", linewidth = 0.8, inherit.aes = FALSE) +
+  geom_smooth(aes(x = x4_out, y = y4_out), method = "lm", se = FALSE,
+              color = "#e34a33", linewidth = 0.8, inherit.aes = FALSE, linetype = "dashed") +
+  labs(title = "One influential point pulling the fitted line",
+       subtitle = "Solid: original 30 points. Dashed: line refit with the added point.",
+       color = NULL)
+```
+
+::: {.callout-important collapse="false" title="Don't automatically delete influential points"}
+A high Cook's distance is a flag to **investigate**, not an automatic instruction to delete. Sometimes an influential point is a data-entry error (worth fixing or removing); sometimes it's a real, unusual, but entirely legitimate observation (a genuinely huge order, an exceptional store), and removing it would hide real business information just to make the model look tidier. Always ask *why* a point is unusual before deciding what to do about it.
+:::
+
+## Multicollinearity
+
+@sec-week09-01 flagged this issue when introducing multiple predictors: **multicollinearity** occurs when two or more predictors are strongly correlated with each other. It doesn't necessarily hurt the model's overall predictive accuracy, but it makes the *individual* coefficients unstable and their standard errors inflated, undermining exactly the "holding other predictors constant" interpretation that makes multiple regression useful in the first place.
+
+The **variance inflation factor (VIF)** measures this for each predictor:
+$$
+\text{VIF}_j = \frac{1}{1-R_j^2}
+$$
+where $R_j^2$ comes from regressing predictor $j$ on all the *other* predictors in the model. A VIF near 1 means that predictor is nearly unrelated to the others; a common rule of thumb flags VIF values above 10 as a real concern. `olsrr::ols_vif_tol()` computes this directly for every predictor in a model at once, alongside **tolerance** ($1/\text{VIF}$, the share of a predictor's variability *not* explained by the others), so there's no need to compute it by hand.
+
+::: {.example title="Example 10.5: Multicollinearity in action"}
+Simulate two predictors that are almost the same thing, $x_2$ tracks $x_1$ extremely closely, ($r \approx 0.98$), and $y$ genuinely depends on both:
+```{r}
+#| echo: true
+set.seed(11)
+n5 <- 100
+x1 <- rnorm(n5, 50, 10)
+x2 <- x1 + rnorm(n5, 0, 2)
+y5 <- 20 + 1.5*x1 + 1.5*x2 + rnorm(n5, 0, 8)
+
+model_multi <- lm(y5 ~ x1 + x2)
+summary(model_multi)$coefficients
+```
+Both coefficients are still statistically significant, but look at how unstable they are: the true effect was $1.5$ for each predictor, but the fitted model reports $1.20$ for $x_1$ and $1.78$ for $x_2$, with standard errors around four times larger than what a single, well-identified predictor would show. `ols_vif_tol()` confirms why:
+```{r}
+#| echo: true
+ols_vif_tol(model_multi)
+```
+A VIF of about **23** for both predictors, far above the rule-of-thumb threshold of 10, and a tolerance of only about **0.044** (each predictor's variability is about 96% explained by the other). Contrast this with the advertising model from Example 10.1:
+```{r}
+#| echo: true
+ols_vif_tol(model)
+```
+VIFs of about 1.02, 1.01, and 1.02 for TV, radio, and online spend, all close to 1, confirming what @sec-week09-01 already noted: the three channels are only weakly related to each other, so their individual coefficients can be trusted.
+
+Fitting $y_5$ on $x_1$ alone shows the problem clearly: with $x_2$ removed, $x_1$'s coefficient jumps to about $2.99$, nearly the *combined* true effect of both variables ($1.5+1.5=3.0$), because $x_1$ is now silently standing in for $x_2$ as well.
+:::
+
+::: {.callout-note collapse="false" title="Multicollinearity doesn't always need to be \"fixed\""}
+If the goal is purely prediction, and the correlated predictors will keep moving together in the future the same way they did in the sample, multicollinearity may not matter much for the model's overall accuracy. It becomes a real problem specifically when the goal is *interpretation*, isolating each predictor's individual effect, since that's exactly what becomes unreliable. Practical remedies include dropping one of the redundant predictors, or combining them into a single index if they're measuring essentially the same underlying thing.
+:::
+
+## Recap
+
+| **Keyword** | **Definition** |
+|---|---|
+| **LINE assumptions** | Linearity, Independence, Normality, Equal variance, the four conditions behind regression inference. |
+| **Residuals-vs-fitted plot** | Checks linearity (look for curves) and equal variance (look for funnels); should show a patternless cloud around 0. `olsrr::ols_plot_resid_fit()`. |
+| **Normal Q-Q plot** | Checks whether residuals are approximately normally distributed; points should track the diagonal reference line. `olsrr::ols_plot_resid_qq()`. |
+| **Heteroscedasticity** | Unequal variance in the residuals; inflates uncertainty in standard errors, p-values, and confidence intervals even when coefficients themselves are still reasonable. Formally tested with `olsrr::ols_test_breusch_pagan()`. |
+| **Leverage** | How unusual an observation's predictor value(s) are, independent of its $y$ value. |
+| **Influential point** | A point whose removal would meaningfully change the fitted model; needs both leverage and a notable residual. |
+| **Cook's distance** | A combined measure of leverage and residual size; commonly flagged above 1 (or $4/n$) for closer inspection. `olsrr::ols_plot_cooksd_bar()`. |
+| **Residual-vs-leverage plot** | Separates whether a flagged point stands out for its leverage, its residual, or both. `olsrr::ols_plot_resid_lev()`. |
+| **Bonferroni outlier test** | A significance test on each observation's studentized residual, corrected for testing every observation at once. `olsrr::ols_test_outlier()`. |
+| **Multicollinearity** | Strong correlation among predictors; inflates standard errors and destabilizes individual coefficients without necessarily hurting overall prediction. |
+| **Variance inflation factor (VIF)** | $1/(1-R_j^2)$; commonly flagged above 10 as a sign of problematic multicollinearity. `olsrr::ols_vif_tol()`. |
+| **Tolerance** | $1/\text{VIF}$; the share of a predictor's variability not explained by the other predictors in the model. |
+
+## Check Your Understanding
+
+::: {.callout-note collapse="false" title="Problems"}
+1. A residuals-vs-fitted plot shows points fanning out into a clear cone shape as fitted values increase. Which LINE assumption does this violate, and which parts of the regression output (coefficients, or standard errors/p-values) become unreliable as a result?
+
+2. A residuals-vs-fitted plot instead shows a clear U-shaped curve. Which assumption is violated, and what kind of fix does this call for (more data, a different sample, or something else)?
+
+3. Explain the difference between an outlier, a high-leverage point, and an influential point, using a specific hypothetical example for each.
+
+4. A regression has two predictors with a reported VIF of 15 for each. What does this number mean, and what specifically should an analyst be cautious about when interpreting this model's individual coefficients?
+
+5. A company drops an observation from its dataset because its Cook's distance was unusually high, without investigating why that point was unusual. What could go wrong with this approach?
+:::
+
+::: {.callout-tip collapse="true" title="Solutions"}
+1. This is **heteroscedasticity** (unequal variance), a violation of the "equal variance" part of LINE. The coefficient estimates themselves are typically still reasonable, but the standard errors, and therefore every p-value and confidence interval built from this model, become unreliable.
+
+2. This is a **linearity** violation, the true relationship isn't a straight line. This isn't fixed by collecting more data or a different random sample of the same relationship; it calls for a different functional form (e.g., adding a squared term or otherwise allowing curvature), since a straight line simply cannot capture the true pattern no matter how much more data of the same kind is collected.
+
+3. An **outlier** has an unusual $y$ given its $x$: for example, a store with typical square footage but a wildly higher-than-expected quarterly revenue. A **high-leverage point** has an unusual $x$ regardless of $y$: for example, by far the largest store in the dataset, even if its revenue falls exactly where the fitted line would predict. An **influential point** is one whose removal would meaningfully change the fitted model: the largest store in the dataset would only be truly influential if its revenue were also unusual relative to what its size would predict, high leverage alone, with a value right on the line, often doesn't move the fit much.
+
+4. A VIF of 15 means that predictor's variability is very strongly explained by the other predictor(s) already in the model ($R_j^2 = 1 - 1/15 \approx 0.933$), well above the common rule-of-thumb concern threshold of 10. The analyst should be cautious about trusting either predictor's individual coefficient as a clean, isolated effect, their estimates are likely unstable and their standard errors inflated, even if the model's overall predictions and $R^2$ remain reasonable.
+
+5. Without investigating first, the company risks deleting a **real, legitimate, and business-relevant observation** (an unusually large order, an exceptional location) simply because it doesn't fit the existing pattern well, potentially hiding genuinely important information to make the model look cleaner. A high Cook's distance should prompt investigation into *why* a point is unusual (a data-entry error versus a real outcome) before deciding whether removing it is actually appropriate.
+:::

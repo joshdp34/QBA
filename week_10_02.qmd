@@ -1,0 +1,161 @@
+# Week 10: Prediction Intervals and Model Limitations {#sec-week10-02}
+
+## Why This Matters
+
+@sec-week08-01 predicted sales for a market spending \$200k on TV advertising and got a single number, \$21,046. But a single number hides an important question: how confident should anyone be in that specific figure, and confident about *what*, exactly? "The average sales across every market that spends this much" is a very different claim from "what this one particular market will actually do," and business decisions often hinge on which of those two questions is really being asked. This section covers that distinction, along with two more ways a seemingly excellent model can still mislead: fitting too well to the data it was built on, and being pushed to predict somewhere it has no business predicting.
+
+## Two Kinds of Prediction Uncertainty
+
+A fitted regression line gives one predicted value, $\hat y_0$, at any $x_0$. But there are two different intervals to put around it, depending on the question:
+
+- A **confidence interval for the mean response** estimates the *average* $y$ across all observations at $x_0$. Its uncertainty comes only from not knowing $b_0$ and $b_1$ exactly.
+$$
+\hat{y}_0 \;\pm\; t_{\alpha/2,\,n-2}\; s\sqrt{\dfrac{1}{n} + \dfrac{(x_0-\bar{x})^2}{S_{xx}}}
+$$
+- A **prediction interval for a new observation** estimates one *specific, individual* future value of $y$ at $x_0$. It carries the same uncertainty about $b_0$ and $b_1$, **plus** the natural variability of any one observation around the true average, the same residual variability behind $s$ in every model this module has fit.
+$$
+\hat{y}_0 \;\pm\; t_{\alpha/2,\,n-2}\; s\sqrt{1 + \dfrac{1}{n} + \dfrac{(x_0-\bar{x})^2}{S_{xx}}}
+$$
+
+Here $s$ is the residual standard error, and $S_{xx}=\sum(x_i-\bar{x})^2$. The two formulas are identical except for that extra "$1+$" inside the prediction interval's square root, and because of it, **a prediction interval is always wider than the confidence interval at the same $x_0$**, often substantially. Both formulas also grow as $x_0$ moves further from $\bar{x}$, the fitted line is most trustworthy near the center of the data it was built from.
+
+::: {.example title="Example 10.6: CI vs. PI for the advertising model"}
+Continuing the simple advertising model from @sec-week08-01, what can we say about sales at $\text{tv}=200$?
+```{r}
+#| echo: true
+#| message: false
+library(tidyverse)
+ads <- read_csv("data/advertising.csv")
+model <- lm(sales ~ tv, data = ads)
+
+predict(model, newdata = data.frame(tv = 200), interval = "confidence")
+predict(model, newdata = data.frame(tv = 200), interval = "prediction")
+```
+Both intervals center on the same point estimate, \$21,046, but the confidence interval, roughly $(20.60, 21.49)$, is barely a dollar wide, while the prediction interval, roughly $(15.41, 26.68)$, spans over \$11,000. That's not a mistake, they're answering different questions:
+
+- **CI**: "if we could observe *many* markets that each spent \$200k on TV, we're 95% confident their *average* sales would fall between about \$20,600 and \$21,490."
+- **PI**: "for *one specific* market spending \$200k on TV, we're 95% confident its actual sales will fall between about \$15,410 and \$26,680."
+:::
+
+::: {.callout-important collapse="false" title="Which one does your business question actually need?"}
+Planning an *aggregate* budget across many similar markets (total expected revenue from a regional rollout) calls for the confidence interval, individual noise mostly averages out across many markets. Deciding whether *one specific* market's actual result would be a disappointment relative to plan calls for the prediction interval, since that market's outcome could reasonably land anywhere in that wider range, even if the model is exactly right on average. Reporting only the narrower confidence interval when a decision really concerns a single future outcome understates the real uncertainty involved.
+:::
+
+## Extrapolation, Revisited
+
+@sec-week08-01 warned against predicting far outside the range of observed data. Prediction intervals make the consequence concrete, and also reveal its limits.
+
+::: {.example title="Example 10.7: Predicting near the edge vs. far beyond it"}
+The observed `tv` values run from about \$0.81k to \$299.47k. Compare a prediction near the edge of that range to one well beyond it:
+```{r}
+#| echo: true
+predict(model, newdata = data.frame(tv = 290), interval = "prediction")
+predict(model, newdata = data.frame(tv = 600), interval = "prediction")
+```
+The interval does widen somewhat as $x_0$ moves further from $\bar{x}\approx 156$, from about $(20.1, 31.5)$ at $\text{tv}=290$ to about $(36.1, 48.1)$ at $\text{tv}=600$. But notice the formula still happily returns an answer at $\text{tv}=600$, more than double the largest TV spend ever observed in this data.
+:::
+
+::: {.callout-note collapse="false" title="The formula doesn't know it's extrapolating"}
+The widening interval reflects only the *mechanical* uncertainty formula, it does **not** know whether a straight line is even the right shape for the relationship out at $\text{tv}=600$. Nothing in the data confirms the relationship stays linear that far out; it could bend, flatten, or reverse entirely, and the model would have no way to detect that from data it's never seen. A believable-looking, moderately-widened interval at an extrapolated $x_0$ can create false confidence. The real safeguard isn't a wider interval, it's recognizing when $x_0$ falls outside the range the model was actually built from, as flagged already in @sec-week08-01, and treating any such prediction with real skepticism regardless of what the interval says.
+:::
+
+## Overfitting: When a Better Fit Is a Worse Model
+
+@sec-week09-01 noted that adding predictors can never decrease $R^2$, and introduced adjusted $R^2$ as a partial corrective. Taken to an extreme, this mechanical fact becomes a real danger: a model with enough predictors relative to its sample size can fit its own training data almost perfectly, not because it has found a genuine pattern, but because it has enough flexibility to bend around *every* data point, including the random noise in each one. This is **overfitting**, and a model that does it looks excellent on the data it was built from and performs noticeably worse on new data it hasn't seen.
+
+::: {.example title="Example 10.8: A model that memorizes noise"}
+Simulate 60 observations where $y$ genuinely depends only on $x$:
+```{r}
+#| echo: true
+set.seed(2025)
+n <- 60
+x <- runif(n, 0, 20)
+y <- 3 + 2*x + rnorm(n, 0, 5)
+train <- data.frame(x = x, y = y)
+
+#add 40 completely random, meaningless predictors
+noise_predictors <- as.data.frame(matrix(rnorm(n * 40), nrow = n))
+names(noise_predictors) <- paste0("z", 1:40)
+train_full <- cbind(train, noise_predictors)
+
+model_simple  <- lm(y ~ x, data = train_full)
+model_kitchen <- lm(y ~ ., data = train_full)   # every predictor, including all 40 noise columns
+
+c(simple_R2 = summary(model_simple)$r.squared, simple_adjR2 = summary(model_simple)$adj.r.squared)
+c(kitchen_R2 = summary(model_kitchen)$r.squared, kitchen_adjR2 = summary(model_kitchen)$adj.r.squared)
+```
+Adding 40 predictors that have, by construction, *no real relationship to* $y$ pushed $R^2$ from about 0.849 up to about 0.954, a large, misleading jump. Adjusted $R^2$ barely moved (0.847 to 0.849), correctly signaling that this "improvement" isn't real.
+
+The consequence shows up clearly when both models are evaluated on **new data** they weren't fit on:
+```{r}
+#| echo: true
+set.seed(999)
+x_new <- runif(n, 0, 20)
+y_new <- 3 + 2*x_new + rnorm(n, 0, 5)
+noise_new <- as.data.frame(matrix(rnorm(n * 40), nrow = n))
+names(noise_new) <- paste0("z", 1:40)
+test_full <- cbind(data.frame(x = x_new, y = y_new), noise_new)
+
+rmse <- function(actual, predicted) sqrt(mean((actual - predicted)^2))
+
+c(train_rmse_simple  = rmse(train_full$y, predict(model_simple)),
+  train_rmse_kitchen = rmse(train_full$y, predict(model_kitchen)))
+
+c(test_rmse_simple  = rmse(test_full$y, predict(model_simple, newdata = test_full)),
+  test_rmse_kitchen = rmse(test_full$y, predict(model_kitchen, newdata = test_full)))
+```
+On the training data, the kitchen-sink model looks far better (RMSE 2.78 vs. 5.03). On fresh data it has never seen, that ranking **flips**: the simple model's error barely changes (4.66), while the kitchen-sink model's error nearly triples relative to its own training performance (6.87), and is now noticeably worse than the simple model. The 40 noise predictors let the model chase random patterns specific to the training sample, patterns with no reason to repeat in new data.
+:::
+
+::: {.callout-note collapse="false" title="Guarding against overfitting"}
+A few practical habits help: be skeptical of a model with many predictors relative to its sample size, especially ones added without a clear business reason to expect a relationship; watch adjusted $R^2$ rather than raw $R^2$ when comparing models, as in @sec-week09-01; and whenever possible, evaluate a model's performance on data it wasn't fit on (a **holdout** or **test set**), exactly as Example 10.8 did, rather than trusting how well it fits the data used to build it.
+:::
+
+## Computing Prediction Intervals in R and Excel
+
+::: {.example title="Example 10.9: Intervals in R and Excel"}
+In R, `predict()`'s `interval` argument, shown throughout this section, computes both interval types directly from the fitted model.
+
+Excel has no single built-in function for either interval, but both can be built from the regression output (`SLOPE`, `INTERCEPT`, and the ToolPak's reported standard error `s`) plus `$\bar{x}$` and $S_{xx}=\text{DEVSQ}(x\_range)$:
+```
+' Prediction interval half-width at x0, using the ToolPak's residual standard error "s":
+=T.INV.2T(0.05, n-2) * s * SQRT(1 + 1/n + (x0 - AVERAGE(x_range))^2 / DEVSQ(x_range))
+```
+Dropping the leading `1 +` inside the square root gives the (narrower) confidence-interval half-width for the mean response instead.
+:::
+
+## Recap
+
+| **Keyword** | **Definition** |
+|---|---|
+| **Confidence interval for the mean response** | An interval for the *average* $y$ across all observations at a given $x_0$; narrower, since it only reflects uncertainty in $b_0$ and $b_1$. |
+| **Prediction interval for a new observation** | An interval for *one specific* future $y$ at a given $x_0$; wider, since it adds the natural variability of an individual observation around the mean. |
+| **Extrapolation risk (interval version)** | A prediction interval still widens somewhat far from $\bar{x}$, but the formula cannot detect whether the model's assumed shape (e.g., linearity) still holds that far outside the observed data. |
+| **Overfitting** | A model flexible enough (often, with too many predictors relative to $n$) to fit noise specific to its training data, producing excellent in-sample fit and poor performance on new data. |
+| **Holdout / test set** | Data withheld from model fitting, used afterward to check whether a model's apparent fit generalizes, rather than just describing the data it was built on. |
+
+## Check Your Understanding
+
+::: {.callout-note collapse="false" title="Problems"}
+1. A company wants to know the likely revenue range for one specific new store it's about to open, given its planned square footage. Should it use a confidence interval or a prediction interval for the mean response's $x_0$? Explain why.
+
+2. A different team wants to estimate total expected revenue across 50 new stores of a similar planned size, for a company-wide budget forecast. Which interval is more appropriate for reasoning about that *average*, and why would using the other interval type here likely overstate the real uncertainty in the average?
+
+3. Explain, using the "$1+$" term in the prediction-interval formula, why a prediction interval can never be narrower than the corresponding confidence interval at the same $x_0$.
+
+4. A regression built on 25 observations includes 18 predictors and reports $R^2=0.97$. What should this combination immediately make an analyst suspicious of, and what specific check would help confirm or resolve that suspicion?
+
+5. A model's $R^2$ rises from 0.65 to 0.67 after adding a new predictor, but its adjusted $R^2$ falls from 0.61 to 0.59. Explain what this pattern suggests, and which number should drive the decision to keep or drop the new predictor.
+:::
+
+::: {.callout-tip collapse="true" title="Solutions"}
+1. A **prediction interval**, since the question concerns the outcome for *one specific* store, not the average outcome across many similar stores. The confidence interval for the mean response would understate the real uncertainty in that single store's actual result.
+
+2. The **confidence interval for the mean response** is more appropriate, since the question concerns the *average* across 50 stores, not any one store's individual result. Using the (much wider) prediction interval, built for a single future observation, would substantially overstate the uncertainty in an averaged, company-wide forecast, individual stores' ups and downs partially cancel out when averaged, which the confidence interval already reflects and the prediction interval does not.
+
+3. The prediction interval's formula is identical to the confidence interval's, except for the extra "$1+$" added inside the square root. Since that term is strictly positive, the quantity under the square root (and therefore the margin of error) for the prediction interval is always larger than for the confidence interval at the same $x_0$, making the prediction interval strictly wider, never narrower or equal.
+
+4. This combination, 18 predictors from only 25 observations, is a strong warning sign of **overfitting**: with so few observations per predictor, the model has enormous flexibility to fit noise specific to this particular sample, and a very high $R^2$ here may reflect memorization rather than a genuine, generalizable relationship. The analyst should check adjusted $R^2$ (which would likely be much lower than 0.97 given so many predictors relative to $n$) and, ideally, evaluate the model's prediction accuracy on a holdout set of data it wasn't fit on.
+
+5. This pattern suggests the new predictor is not genuinely useful: it nudges raw $R^2$ up slightly, as any added predictor mechanically tends to do, but adjusted $R^2$, which penalizes for the added predictor, actually falls, indicating the small gain in fit isn't worth the added complexity. As in @sec-week09-01, **adjusted $R^2$** should drive this decision, and here it argues for dropping the new predictor.
+:::
