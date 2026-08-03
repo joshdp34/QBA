@@ -57,6 +57,15 @@ book:
         - week_10_02.qmd
         - week_11_01.qmd
         - week_11_02.qmd
+    - part: "Module 5"
+      chapters:
+        - week_12_01.qmd
+        - week_12_02.qmd
+        - week_12_03.qmd
+    - part: "Module 6"
+      chapters:
+        - week_13_01.qmd
+        - week_13_02.qmd
 
 
 

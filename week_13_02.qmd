@@ -1,0 +1,141 @@
+# Week 13: Binding Constraints, Slack, and Sensitivity Analysis {#sec-week13-02}
+
+## Why This Matters
+
+@sec-week13-01 found the furniture company's optimal production plan: 16 tables, 8 chairs, \$1,120 in weekly profit. A manager's next questions are rarely "is this really optimal?" (Solver already answered that), they're **"which resource is actually holding us back, and what would it be worth to have more of it?"** Answering those questions, not just reporting a single optimal number, is what turns a solved optimization model into an actual business recommendation, and it's exactly what the Petro Refinery case, introduced at the end of this section, will ask you to do.
+
+## Binding vs. Non-Binding Constraints
+
+Add a third, realistic limit to the furniture example: a **finishing** step (staining and varnishing), requiring 1 hour per table and 0.5 hours per chair, with 30 finishing-hours available this week.
+
+::: {.example title="Example 13.6: A third constraint"}
+$$
+\begin{align*}
+\text{Maximize} \quad & Z = 50x_1 + 40x_2 \\
+\text{subject to} \quad & 20x_1 + 10x_2 \leq 400 \quad \text{(wood)}\\
+& x_1 + x_2 \leq 24 \quad \text{(labor)}\\
+& x_1 + 0.5x_2 \leq 30 \quad \text{(finishing)}\\
+& x_1, x_2 \geq 0
+\end{align*}
+$$
+```{r}
+#| echo: true
+library(lpSolve)
+
+obj <- c(50, 40)
+mat <- matrix(c(20, 10,
+                  1,  1,
+                  1, 0.5), nrow = 3, byrow = TRUE)
+rhs <- c(400, 24, 30)
+dir <- c("<=", "<=", "<=")
+
+sol <- lp("max", obj, mat, dir, rhs, compute.sens = TRUE)
+sol$solution
+sol$objval
+```
+The optimal plan is unchanged, still 16 tables and 8 chairs, \$1,120 in profit. Adding a resource that turns out not to be the bottleneck doesn't change the answer at all.
+:::
+
+A constraint is **binding** if it holds with *exact* equality at the optimal solution, every unit of that resource is used. A constraint is **non-binding** if there's leftover, unused capacity, called **slack**:
+$$
+\text{slack} = \text{resource available} - \text{resource used}
+$$
+
+::: {.example title="Example 13.7: Checking slack for all three resources"}
+```{r}
+#| echo: true
+lhs_used <- mat %*% sol$solution
+data.frame(resource = c("Wood", "Labor", "Finishing"),
+           available = rhs, used = as.numeric(lhs_used),
+           slack = rhs - as.numeric(lhs_used))
+```
+Wood and labor are both **binding** (zero slack, every board-foot and every hour is fully used). Finishing is **non-binding**, with **10 hours of slack**: the company has real, unused finishing capacity sitting idle this week. Finishing isn't what's limiting profit; wood and labor are.
+:::
+
+## Shadow Prices: What Is an Extra Unit of a Resource Worth?
+
+For a binding constraint, the **shadow price** (also called the **dual value**) reports how much the objective would improve for one additional unit of that resource, holding everything else fixed. A non-binding constraint's shadow price is always **zero**, more of a resource you aren't even using to capacity has no immediate value.
+
+::: {.example title="Example 13.8: Shadow prices for the furniture problem"}
+```{r}
+#| echo: true
+data.frame(resource = c("Wood", "Labor", "Finishing"), shadow_price = sol$duals[1:3])
+```
+Wood's shadow price is **\$1 per board-foot**: one more board-foot of wood (available at no extra cost) would raise weekly profit by about \$1. Labor's shadow price is **\$30 per hour**, dramatically more valuable, one more hour of assembly labor is worth thirty times as much as one more board-foot of wood. Finishing's shadow price is **\$0**, exactly as expected for a non-binding constraint. If the company had to choose between paying for extra wood or extra labor, this tells it immediately, dollar for dollar of resource, labor is by far the more valuable place to invest.
+:::
+
+::: {.callout-important collapse="false" title="Shadow prices only hold over a limited range"}
+A shadow price is a *local* rate of change, valid only up to some limit. `lpSolve` (and Excel Solver) also report the **range** over which each resource's availability could shift before the shadow price itself would need to be recalculated:
+```{r}
+#| echo: true
+data.frame(resource = c("Wood", "Labor", "Finishing"),
+           available = rhs, valid_from = sol$duals.from[1:3], valid_to = sol$duals.to[1:3])
+```
+Labor's \$30/hour shadow price holds for anywhere between 20 and 40 available hours; push labor capacity far outside that range (say, to 100 hours) and an entirely different constraint would start to bind, making the \$30 figure no longer applicable.
+:::
+
+## Objective Coefficient Ranging: How Much Could Profit Margins Change?
+
+A related question: how much could a product's profit margin change before the *optimal product mix itself* would change (not just the total profit)?
+
+::: {.example title="Example 13.9: How sensitive is the mix to the profit numbers?"}
+```{r}
+#| echo: true
+data.frame(product = c("Table", "Chair"), profit = obj,
+           valid_from = sol$sens.coef.from, valid_to = sol$sens.coef.to)
+```
+Table's \$50 profit could actually range anywhere from \$40 to \$80, and chair's \$40 could range from \$25 to \$50, without changing the decision to produce 16 tables and 8 chairs. The *company should keep making exactly this mix* even if its margin estimates turn out to be somewhat off, useful reassurance when the profit numbers going into a model are themselves only estimates.
+:::
+
+## Reading Excel Solver's Sensitivity Report
+
+After solving in Excel, choosing **Sensitivity** from Solver's Results dialog produces a report with exactly this information, organized into two tables:
+
+- **Variable Cells**: each decision variable's final value, its objective coefficient, and the allowable increase/decrease before the optimal mix would change (Example 13.9, above).
+- **Constraints**: each constraint's final (used) value, its **shadow price**, and the allowable increase/decrease in its right-hand side before that shadow price changes (Examples 13.8 and its callout).
+
+Everything computed with `lpSolve` in this section has a direct counterpart in that report; per @sec-week13-01's division of labor, Excel Solver's Sensitivity Report is the primary way to get these numbers, with R available to double-check them.
+
+## Introducing the Petro Refinery Case
+
+Module 6 culminates in a real applied case: **Petro Refinery LLC**, a company that blends light and heavy crude oil into refined products. Like the furniture example built across this section, Petro's problem has exactly **two decision variables** (how much light crude and how much heavy crude to process) and a small number of resource constraints, deliberately structured as an accessible, realistic first exposure to product-mix optimization, not a sprawling, many-variable model.
+
+The live session will build Petro's model in Excel Solver from scratch, exactly following @sec-week13-01's setup steps, and then apply everything from this section to the result: which constraints bind, how much slack (if any) exists elsewhere, what each binding resource's shadow price implies for the business, and what that all means for a one-page executive recommendation, precisely the analytical arc practiced here on tables and chairs, now applied to a real, if simplified, business decision.
+
+## Recap
+
+| **Keyword** | **Definition** |
+|---|---|
+| **Binding constraint** | A constraint that holds with exact equality at the optimal solution; its resource is fully used. |
+| **Non-binding constraint** | A constraint with leftover capacity at the optimal solution. |
+| **Slack** | Resource available minus resource used; zero for a binding constraint, positive for a non-binding one. |
+| **Shadow price (dual value)** | The improvement in the objective per additional unit of a resource; always zero for a non-binding constraint. |
+| **Shadow price validity range** | The range of resource availability over which a given shadow price remains accurate. |
+| **Objective coefficient ranging** | The range an objective coefficient (e.g., a profit margin) could take without changing the optimal decision-variable mix. |
+| **Sensitivity Report (Excel Solver)** | Solver's report of shadow prices and allowable ranges for both constraints and variables, generated after solving. |
+
+## Check Your Understanding
+
+::: {.callout-note collapse="false" title="Problems"}
+1. At an LP's optimal solution, a constraint's slack is 0. What does this tell you, and what is that constraint's shadow price allowed to be (zero, positive, or could be either)?
+
+2. A different constraint has slack of 15 units. What is its shadow price, and why?
+
+3. A company's labor constraint has a shadow price of \$45 per hour, valid for labor availability between 30 and 50 hours. The company currently has 32 hours available. Should the company pay a premium to acquire 10 extra hours of labor if the extra hours would cost \$40 each? Explain using the shadow price and its valid range.
+
+4. Explain, in your own words, why an objective coefficient (like a profit margin) can change somewhat without changing the optimal product mix, and why that range is a genuinely useful piece of business information.
+
+5. Why does the Petro Refinery case use only two decision variables and a small number of constraints, rather than a large, many-variable model, for students' first applied optimization case?
+:::
+
+::: {.callout-tip collapse="true" title="Solutions"}
+1. Zero slack means the constraint is **binding**, every unit of that resource is being used at the optimal solution. A binding constraint's shadow price could be **zero or positive** (it's not automatically positive just because the constraint binds, though it's often positive in practice); what's guaranteed is that a *non-binding* constraint's shadow price is always exactly zero.
+
+2. Its shadow price is **\$0**. Positive slack means the constraint is non-binding, there's already unused capacity, so one more unit of that resource wouldn't improve the objective at all, since the company isn't even using all of what it currently has.
+
+3. Yes. Since 32 hours falls within the valid range (30 to 50 hours), the \$45/hour shadow price applies: each additional hour is worth \$45 in additional profit, and the extra hours only cost \$40 each, a net gain of \$5 per hour, or \$50 total for the 10 extra hours. The company should acquire them.
+
+4. Because the *optimal corner* of the feasible region is determined by the constraints, not by the exact objective coefficients; a small change in a profit margin tilts the objective function's slope slightly, but as long as that corner still produces a higher value than every other corner, the same production plan remains optimal, only the reported profit changes. This range is useful because profit margins are usually estimates, not certainties, and knowing the mix stays optimal even if those estimates are somewhat off gives a manager real confidence in committing to a decision.
+
+5. A small, two-variable model keeps the mechanics (setting up decision variables, an objective, and constraints; interpreting binding constraints, slack, and shadow prices) fully visible and checkable by hand or with a simple graph, exactly as this section did with the furniture example. A large, many-variable model would obscure those same concepts behind complexity that isn't the point of a first exposure to optimization; Petro is designed to teach the ideas cleanly before students encounter larger, messier real-world models.
+:::
