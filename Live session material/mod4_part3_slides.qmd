@@ -1,0 +1,101 @@
+---
+title: "Logistic Regression, Thresholds, and the Module 4 Deliverable"
+subtitle: "Module 4, Part 3 (November 13)"
+author: "QBA 5330"
+format:
+  revealjs:
+    theme: simple
+    slide-number: true
+    footer: "QBA 5330 | Module 4 | Part 3"
+    transition: fade
+    incremental: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+## From Numbers to Yes/No
+
+- Parts 1–2: predicting a **continuous** outcome (sales, revenue)
+- Now: predicting a **binary** outcome (churn: yes or no)
+
+## Why Not Just Use Linear Regression?
+
+```{r}
+#| echo: true
+#| message: false
+library(tidyverse)
+set.seed(2025)
+n <- 300
+tenure <- round(runif(n, 1, 60))
+logodds_true <- 1.5 - 0.08 * tenure
+churned <- rbinom(n, 1, 1 / (1 + exp(-logodds_true)))
+customers <- tibble(tenure = tenure, churned = churned)
+
+predict(lm(churned ~ tenure, data = customers), newdata = data.frame(tenure = 100))
+```
+
+A "probability" of about $-0.69$. Not usable.
+
+## The Churn Model, Live
+
+```{r}
+#| echo: true
+model <- glm(churned ~ tenure, data = customers, family = binomial)
+coef(model)
+exp(coef(model)["tenure"])
+```
+
+- Odds ratio $\approx 0.919$: each month of tenure, about **8.1% lower odds** of churn
+
+## One Customer, One Prediction
+
+```{r}
+#| echo: true
+predict(model, newdata = data.frame(tenure = 12), type = "response")
+```
+
+- A 12-month customer: about a **67% chance** of churning
+
+## Activity: Choose Your Threshold (25 minutes)
+
+- Retention offer: **\$50** per customer sent
+- Value of a retained customer: **\$600**
+- Threshold 0.5: sensitivity 63.2%, specificity 85.1%
+- Threshold 0.3: sensitivity 84.9%, specificity 69.1%
+
+- **Which threshold do you recommend, and why?**
+
+## The Numbers to Work With
+
+| Threshold | Flagged | Cost | Caught | Value | Net |
+|---|---|---|---|---|---|
+| 0.5 | 96 | \$4,800 | 67 | \$40,200 | ? |
+| 0.3 | 150 | \$7,500 | 90 | \$54,000 | ? |
+
+::: {.notes}
+Let teams compute "Net" themselves ($35,400 and $46,500). Push whichever team picks 0.5 to justify it against these numbers, or to name what would have to change for 0.5 to win.
+:::
+
+## Debrief
+
+- With *these* costs, the lower threshold wins
+- **What would have to be true for the higher threshold to win instead?**
+
+::: {.notes}
+A more expensive offer, a less valuable customer, or an offer that doesn't reliably retain a flagged churner. There is no universally correct threshold.
+:::
+
+## The Module 4 Deliverable
+
+- Build a **predictive model** (regression or logistic regression) on a business dataset
+- **Diagnose** it
+- Translate the result into a **specific managerial recommendation**
+- Calculated in R **and** Excel
+
+## Looking Ahead to December 4
+
+Module 4 added **build a model** to the decision cycle.
+
+Next: **forecasting**, predicting a value forward in **time**, culminating in the Ceres Gardening Company case.

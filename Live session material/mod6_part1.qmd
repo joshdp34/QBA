@@ -1,0 +1,98 @@
+# Instructor Guide — Part 1 (12/5, Hour 1): Building Petro Refinery's Model {#sec-mod6-part1-guide}
+
+::: {.callout-note collapse="false" title="How to use this guide"}
+This is a facilitation guide for the instructor, not student-facing reading. It pairs with the slide deck `mod6_part1_slides.qmd`. Students arrive having read the mechanics of linear optimization (@sec-week13-01) and binding constraints, slack, and sensitivity (@sec-week13-02) using a furniture-company example. This hour builds the real Petro Refinery LLC model from scratch in Excel Solver, following the exact setup steps from @sec-week13-01, then verifies and interprets the result.
+:::
+
+## Session Objectives
+
+By the end of this period, students should be able to:
+
+1. Translate Petro Refinery's product-mix decision into decision variables, an objective function, and constraints, in both words and math.
+2. Build and solve the model in Excel Solver, reproducing the case's own optimal answer.
+3. Correctly identify which of Petro's three resource constraints are binding and which have slack.
+
+## Timing at a Glance
+
+| Time | Segment | Format |
+|---|---|---|
+| 0:00–0:10 | Welcome and reconnecting to the reading | Instructor-led |
+| 0:10–0:20 | Setting up Petro's model in words and math | Instructor-led |
+| 0:20–0:45 | Live build: Petro in Excel Solver | Live coding (Excel) |
+| 0:45–0:55 | Verifying in R; identifying binding constraints | Live coding (R) |
+| 0:55–1:00 | Debrief and bridge to Part 2 | Instructor-led |
+
+## Detailed Run of Show
+
+### Welcome and Reconnecting to the Reading (10 min)
+
+Recall the furniture-company example from @sec-week13-01 and @sec-week13-02 (tables and chairs, wood and labor and finishing constraints). Restate the parallel explicitly: Petro Refinery's problem has exactly the same *shape*, two decision variables, a linear objective, a handful of resource constraints, just a different business (an oil refinery deciding how much light and heavy crude to process, rather than a furniture shop deciding how many tables and chairs to build).
+
+### Setting Up Petro's Model in Words and Math (10 min)
+
+Walk the room through the setup exactly as the case presents it:
+
+- **Decision variables**: $X_1$ = barrels of light crude to process (in thousands) each week; $X_2$ = barrels of heavy crude to process (in thousands) each week.
+- **Objective**: light crude contributes \$10 per barrel toward fixed costs, heavy crude \$12.5 per barrel. Maximize $10X_1 + 12.5X_2$ (total weekly contribution, in \$ thousands).
+- **Constraints**: three shared pieces of refinery equipment, distillation, conversion, and blending, each with limited weekly hours, and each barrel of light or heavy crude uses a different amount of each:
+$$
+\begin{align*}
+\text{Distillation:} \quad & 2X_1 + 2X_2 \leq 3{,}000 \\
+\text{Conversion:} \quad & 2X_1 + 3X_2 \leq 2{,}400 \\
+\text{Blending:} \quad & 3X_1 + 2.5X_2 \leq 2{,}400 \\
+& X_1, X_2 \geq 0
+\end{align*}
+$$
+
+### Live Build: Petro in Excel Solver (25 min)
+
+Reproduce @sec-week13-01's Solver setup steps live, on Petro's actual numbers:
+
+1. Decision variable cells for $X_1$ and $X_2$; an objective cell computing $10X_1 + 12.5X_2$.
+2. Three constraint-usage cells, one per resource, each a formula like the objective's (coefficients times decision variables).
+3. Open Solver: **Set Objective** to the contribution cell (**Max**), **By Changing Variable Cells** to $X_1$ and $X_2$, **Subject to the Constraints** for all three resource cells, **Simplex LP** as the solving method, **Make Unconstrained Variables Non-Negative** checked.
+4. **Solve.**
+
+Solver returns $X_1=300$ (thousand barrels of light crude), $X_2=600$ (thousand barrels of heavy crude), for a maximum weekly contribution of **\$10,500,000**.
+
+::: {.callout-note collapse="false" title="A natural student question to address directly"}
+Heavy crude has the higher per-barrel margin (\$12.5 vs. \$10), so why doesn't Petro just process heavy crude exclusively? Answer: because heavy crude also uses relatively *more* of the conversion and blending resources per barrel of contribution earned. The optimal mix reflects a genuine trade-off across three shared, limited resources, not just a ranking of which product is individually more profitable. This is exactly why the LP needs all three constraints, not just the objective, to find the real answer.
+:::
+
+### Verifying in R; Identifying Binding Constraints (10 min)
+
+```{r}
+#| echo: true
+library(lpSolve)
+
+obj <- c(10, 12.5)
+mat <- matrix(c(2, 2,
+                 2, 3,
+                 3, 2.5), nrow = 3, byrow = TRUE)
+rhs <- c(3000, 2400, 2400)
+dir <- c("<=", "<=", "<=")
+
+sol <- lp("max", obj, mat, dir, rhs)
+sol$solution
+sol$objval
+```
+Confirm this matches Solver exactly. Then compute resource usage and slack live:
+```{r}
+#| echo: true
+used <- mat %*% sol$solution
+data.frame(resource = c("Distillation", "Conversion", "Blending"),
+           available = rhs, used = as.numeric(used), slack = rhs - as.numeric(used))
+```
+**Conversion and blending are both fully used** (binding, zero slack); **distillation has 1,200 hours of slack**, only 60% of its available 3,000 hours are actually needed at the optimal mix. Distillation capacity is not what's limiting Petro's profit right now.
+
+### Debrief and Bridge to Part 2 (5 min)
+
+Ask the room: "if Petro's management wanted to increase profit further, would buying more distillation capacity help?" Let the (correct) answer, no, since it's non-binding, land before revealing why formally. Bridge: "Part 2 puts a precise dollar value on exactly this kind of question, for every resource, using the Sensitivity Report."
+
+## Recap for the Instructor
+
+| **Keyword** | **Where it was taught** |
+|---|---|
+| LP building blocks, Excel Solver setup | @sec-week13-01 |
+| Binding vs. non-binding constraints, slack | @sec-week13-02 |
+| Petro Refinery's actual model and solution | This session (drawn from the case) |

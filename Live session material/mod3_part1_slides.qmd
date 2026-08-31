@@ -1,0 +1,84 @@
+---
+title: "Choosing the Right Comparison Tool"
+subtitle: "Module 3, Part 1 (October 17)"
+author: "QBA 5330"
+format:
+  revealjs:
+    theme: simple
+    slide-number: true
+    footer: "QBA 5330 | Module 3 | Part 1"
+    transition: fade
+    incremental: true
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+## Where We're Headed Today
+
+- **Part 1:** Choosing the right comparison tool
+- **Part 2:** Working the Google Project Oxygen case
+- **Part 3:** Team report-outs, synthesis, and what's next
+
+::: {.notes}
+Friday was about quantifying uncertainty for a single estimate. Today shifts to comparing groups and evaluating whether a comparison supports a causal claim, the two threads that converge in today's case.
+:::
+
+## Yesterday vs. Today
+
+- **Friday:** quantifying uncertainty for *one* estimate (a mean, a proportion)
+- **Today:** *comparing groups*, and asking whether a comparison supports a *causal* claim
+
+## Your Toolkit So Far
+
+- One-sample tests
+- Two-sample independent tests (pooled / Welch)
+- Paired comparisons
+- ANOVA and Tukey's HSD
+
+- *(All already in your reading — today applies it.)*
+
+## Activity: Which Test Would You Use? 
+**one-sample, two-sample independent, paired, or ANOVA?**
+
+1. Average satisfaction score vs. an industry benchmark of 7.5
+2. Order value: email customers vs. social media customers
+3. The same 10 machines' output, before and after a maintenance upgrade
+4. Average daily sales across five store layouts
+5. The same 12 employees' engagement, before and after onboarding
+6. Cholesterol reduction across four drug dosages
+
+::: {.notes}
+Watch for the most common error: defaulting to an independent-samples test for scenarios 3 or 5 (same units measured twice) instead of recognizing the pairing.
+:::
+
+## Debrief
+
+For each scenario: **what would go wrong if you picked the wrong tool?**
+
+::: {.notes}
+Reinforce the paired-vs-independent lesson from Week 6: a paired design analyzed as independent groups can bury a real effect.
+:::
+
+## Recap: From Association to Causation
+
+1. Was there **random assignment**?
+2. Is there a plausible **confounder**?
+3. Could **bias** explain the pattern instead of a real effect?
+4. Is the effect **statistically** significant, and is it **practically** significant?
+
+## Today's Case
+
+> Google's people analytics team compared high-scoring and low-scoring managers' teams on satisfaction, retention, and performance.
+
+**Does better management *cause* better outcomes?**
+
+## Before the Break
+
+In Part 2, your job: apply everything from this hour to a real case.
+
+- Which comparison did Google effectively make?
+- Does the causation checklist support their conclusion?
+
+

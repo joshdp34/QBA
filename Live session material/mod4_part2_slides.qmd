@@ -1,0 +1,96 @@
+---
+title: "Diagnostics: Can This Model Be Trusted?"
+subtitle: "Module 4, Part 2 (November 13)"
+author: "QBA 5330"
+format:
+  revealjs:
+    theme: simple
+    slide-number: true
+    footer: "QBA 5330 | Module 4 | Part 2"
+    transition: fade
+    incremental: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+## Recall From Earlier
+
+We trusted every t-test and confidence interval at face value.
+
+**This part: is that trust earned?**
+
+## The LINE Assumptions
+
+- **L**inearity
+- **I**ndependence
+- **N**ormality
+- **E**qual variance
+
+::: {.notes}
+Cold-call the room for each letter before revealing. This is recall practice, not new content.
+:::
+
+## A Healthy Model
+
+```{r}
+#| echo: false
+#| message: false
+library(tidyverse)
+library(olsrr)
+ads <- read_csv("data/advertising.csv")
+```
+
+```{r}
+#| echo: true
+#| message: false
+model <- lm(sales ~ tv + radio + online, data = ads)
+ols_test_breusch_pagan(model)
+```
+
+
+## A Broken Model
+
+```{r}
+#| echo: false
+set.seed(42)
+n <- 150
+x3 <- runif(n, 10, 100)
+y3 <- 5 + 2*x3 + rnorm(n, 0, x3 * 0.3)
+```
+
+```{r}
+#| echo: true
+model_het <- lm(y3 ~ x3)
+ols_test_breusch_pagan(model_het)
+```
+
+**Same test. Same code. Opposite conclusion.**
+
+## Activity: Diagnose the Model
+
+Four plots. For each: which LINE assumption (if any) is violated, and what do you do next?
+
+- Plot A: patternless cloud
+- Plot B: U-shape
+- Plot C: funnel/cone shape
+- Plot D: one huge bar in a Cook's distance chart
+
+::: {.notes}
+Watch for teams treating Plot D as a LINE violation. It isn't, redirect: LINE is about the model, influence is about individual points.
+:::
+
+## Debrief
+
+- Plot A &rarr; no violation, trust it
+- Plot B &rarr; linearity, needs a new functional form
+- Plot C &rarr; equal variance, standard errors unreliable
+- Plot D &rarr; **not a LINE issue** &rarr; one influential point, investigate it
+
+## Before the Break
+
+- Every model today predicted a **number**
+- What about yes/no outcomes: will this customer churn?
+
+- **Next: logistic regression, live.**

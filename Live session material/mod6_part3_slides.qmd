@@ -1,0 +1,72 @@
+---
+title: "Executive Recommendation and Course Wrap-Up"
+subtitle: "Module 6, Part 3 (December 5)"
+author: "QBA 5330"
+format:
+  revealjs:
+    theme: simple
+    slide-number: true
+    footer: "QBA 5330 | Module 6 | Part 3"
+    transition: fade
+    incremental: true
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+## From Technical Answer to Recommendation
+
+The course outline's own steps for this case:
+
+1. Define variables, objective, constraints — in words
+2. Build and solve in Solver
+3. Identify the optimal quantities
+4. Identify binding and non-binding constraints
+5. Explain the managerial meaning of unused capacity
+6. Conduct **one** what-if analysis
+7. Write a one-page executive recommendation
+
+- **Parts 1–2 covered 1–6 with given examples. Now: design your own.**
+
+## Team Worksheet 
+
+1. **Design your own what-if scenario** — a specific number, not "more capacity would help"
+2. **Evaluate it** against the Sensitivity Report
+3. **Explain, in plain language**, what Petro's 1,200 unused distillation hours actually mean
+4. **Write a one-paragraph executive recommendation**
+
+::: {.notes}
+Q3 trap: watch for teams calling unused capacity "wasted." It isn't — it just was never the bottleneck for this product mix. Q4: push teams to name which specific constraint (conversion vs. blending) they'd prioritize, referencing the actual shadow prices.
+:::
+
+## Report-Outs
+
+**Which resource did your team prioritize — and why?**
+
+## Course Wrap-Up: The Full Decision Cycle
+
+| Step | Where it lived |
+|---|---|
+| Frame the decision | Module 1 |
+| Obtain data | Module 1 |
+| Summarize evidence | Module 1 |
+| Quantify uncertainty | Modules 2–3 |
+| Build a model | Modules 4–5 |
+| **Recommend an action** | **Module 6 — today** |
+| Communicate the result | Every deliverable, all course long |
+
+## What Module 6 Added
+
+"Recommend an action" stopped being a qualitative judgment call.
+
+**It became a literal, computable answer.**
+
+## Looking Ahead: The Final Exam
+
+- Selecting the right method
+- Interpreting R and Excel output
+- Recognizing a method's limitations
+- Making a defensible business recommendation
+
+- **Not lengthy hand calculations — exactly what this course has practiced all along.**

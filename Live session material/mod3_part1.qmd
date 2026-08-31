@@ -1,0 +1,71 @@
+# Instructor Guide — Part 1 (10/17, Hour 1): Choosing the Right Comparison Tool {#sec-mod3-part1-guide}
+
+::: {.callout-note collapse="false" title="How to use this guide"}
+This is a facilitation guide for the instructor, not student-facing reading. It pairs with the slide deck `mod3_part1_slides.qmd`. As the course's own design intends, Saturday applies Friday's ideas rather than introducing new mathematical machinery, students arrive having already read one-sample tests (@sec-week06-01), two-sample independent tests (@sec-week06-02), paired comparisons (@sec-week06-03), ANOVA and Tukey's HSD (@sec-week07-01), and research design, bias, and causality (@sec-week07-02). This hour is a fast, scenario-based synthesis of that entire comparison toolkit, plus a recap of the causation checklist, before the remaining two hours turn to the Google Project Oxygen case.
+:::
+
+## Session Objectives
+
+By the end of this period, students should be able to:
+
+1. Given a business scenario, correctly identify which comparison tool applies: one-sample, two-sample independent, paired, or ANOVA.
+2. Recall the four-question checklist for moving from association to causation.
+3. Connect today's toolkit to the question the rest of the session will apply it to: does the evidence support the claim that "managers matter"?
+
+## Timing at a Glance
+
+| Time | Segment | Format |
+|---|---|---|
+| 0:00–0:05 | Welcome and reconnecting to yesterday | Instructor-led |
+| 0:05–0:30 | Activity: which test would you use? | Small groups (3–4) |
+| 0:30–0:45 | Debrief the activity | Whole-class discussion |
+| 0:45–0:55 | Recap: the causation checklist | Mini-lecture + slides |
+| 0:55–1:00 | Bridge to the case; transition to break | Instructor-led |
+
+## Detailed Run of Show
+
+### Welcome and Reconnecting to Yesterday (5 min)
+
+Recall Friday's throughline explicitly: Friday was about *quantifying uncertainty* for a single estimate (a mean, a proportion). Today shifts to *comparing groups* and *evaluating whether a comparison supports a causal claim*, the two threads that converge in this afternoon's case: Google's Project Oxygen compared groups of managers and asked whether the difference was causal.
+
+### Activity: Which Test Would You Use? (25 min)
+
+Hand out (or project) six short scenarios. In groups of 3&ndash;4, students identify which tool applies: one-sample test, two-sample independent test, paired test, or ANOVA, and briefly justify why. Do not have them compute anything, this is a diagnosis exercise, not a calculation exercise.
+
+::: {.example title="Scenarios for the activity"}
+1. A company wants to know if its average customer satisfaction score differs from the industry benchmark of 7.5. *(One-sample test)*
+2. A retailer compares average order value between customers acquired through email versus social media, two separate groups of customers. *(Two-sample independent test)*
+3. A manufacturer measures the same 10 machines' output before and after a maintenance upgrade. *(Paired test)*
+4. A company compares average daily sales across five different store layouts. *(ANOVA)*
+5. An HR team measures the same 12 employees' engagement scores before and after a new onboarding program. *(Paired test)*
+6. A pharmaceutical company compares cholesterol reduction across four different drug dosages. *(ANOVA)*
+:::
+
+Circulate and listen for the most common error: students defaulting to a two-sample independent test for scenario 3 or 5 (same units measured twice) rather than recognizing the pairing. This is exactly the mistake @sec-week06-03 was built around, and it's worth calling out by name during debrief.
+
+### Debrief the Activity (15 min)
+
+Go scenario by scenario, cold-calling groups. For each, ask not just "which test?" but "what would go wrong if you picked the wrong one?", reinforcing the @sec-week06-03 lesson that a paired design analyzed as independent groups can bury a real effect.
+
+### Recap: The Causation Checklist (10 min)
+
+Quickly reconstruct the four-question checklist from @sec-week07-02:
+
+1. Was there random assignment?
+2. Is there a plausible confounder?
+3. Could bias explain the pattern instead of a real effect?
+4. Is the effect statistically significant, and is it practically significant?
+
+Don't linger, this is a recap. Its purpose is to have the checklist fresh and ready for Period 2.
+
+### Bridge to the Case; Transition to Break (5 min)
+
+Introduce Google's Project Oxygen in one sentence: Google's people analytics team compared high-scoring and low-scoring managers' teams on satisfaction, retention, and performance, and asked whether better management *causes* better outcomes. Tell students that in Period 2, their job is to apply everything from this hour (which comparison tool did Google effectively use, and does the causation checklist support their conclusion) to that real case.
+
+## Recap for the Instructor
+
+| **Keyword** | **Where it was taught** |
+|---|---|
+| One-sample, two-sample, paired, and ANOVA comparison tools | @sec-week06-01, @sec-week06-02, @sec-week06-03, @sec-week07-01 |
+| Causation checklist | @sec-week07-02 |
+| Introducing Project Oxygen | @sec-week07-03 |

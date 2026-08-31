@@ -1,0 +1,82 @@
+# Instructor Guide — Part 3 (11/13, Hour 3): Logistic Regression, Threshold Decisions, and the Module 4 Deliverable {#sec-mod4-part3-guide}
+
+::: {.callout-note collapse="false" title="How to use this guide"}
+This is a facilitation guide for the instructor, not student-facing reading. It pairs with the slide deck `mod4_part3_slides.qmd`. Students arrive having read the introduction to logistic regression (@sec-week11-01) and interpreting and using it, including odds ratios, classification thresholds, and the ROC curve/AUC (@sec-week11-02). This closing hour applies the threshold decision to a business scenario with real dollar costs, then launches the Module 4 deliverable.
+:::
+
+## Session Objectives
+
+By the end of this period, students should be able to:
+
+1. Reconstruct a logistic regression's odds ratio and a predicted probability live, and state both in plain business language.
+2. Given a scenario with different costs for false positives and false negatives, choose and defend a specific classification threshold.
+3. State clearly what the Module 4 deliverable requires.
+
+## Timing at a Glance
+
+| Time | Segment | Format |
+|---|---|---|
+| 0:00–0:05 | Re-entry: from continuous to yes/no | Instructor-led |
+| 0:05–0:20 | Live build: the churn model, odds ratio, and predicted probability | Live coding (R) |
+| 0:20–0:45 | Activity: Choose Your Threshold | Small groups (3–4) |
+| 0:45–0:55 | Report-outs and debrief | Whole-class discussion |
+| 0:55–1:00 | Launch the Module 4 deliverable; wrap-up and look ahead | Instructor-led |
+
+## Detailed Run of Show
+
+### Re-entry: From Continuous to Yes/No (5 min)
+
+Recall Parts 1–2 predicted a number (sales, revenue). Today's closing question is binary: will this customer churn? Recall from @sec-week11-01 why an ordinary linear regression breaks on a 0/1 outcome (predicted values can fall below 0 or above 1), motivating logistic regression's log-odds transformation.
+
+### Live Build: The Churn Model (15 min)
+
+Reconstruct the churn model live from @sec-week11-01 and @sec-week11-02 ($n=300$ customers, `tenure` predicting `churned`):
+$$
+\ln\!\left(\frac{\hat p}{1-\hat p}\right) = 1.720 - 0.0846(\text{tenure})
+$$
+Convert live to an odds ratio ($e^{-0.0846}\approx0.919$) and state it in plain language: each additional month of tenure is associated with about an 8.1% decrease in the odds of churning. Then predict a probability for a specific customer (tenure = 12 months: about 66.9%), reinforcing that the odds ratio and the predicted probability answer two different questions, one about the coefficient, one about a specific customer.
+
+### Activity: Choose Your Threshold (25 min)
+
+Present the business scenario:
+
+::: {.example title="Choose Your Threshold"}
+The company can send a **retention offer** to any customer flagged as a churn risk. The offer costs **\$50** per customer sent, whether or not that customer would actually have churned. A retained customer is worth about **\$600** in expected future revenue. Using the churn model's ROC curve (@sec-week11-02), the company is deciding between two thresholds:
+
+- **Threshold 0.5:** sensitivity 63.2%, specificity 85.1%
+- **Threshold 0.3:** sensitivity 84.9%, specificity 69.1%
+
+In your team: using the 300-customer sample (106 actual churners, 194 non-churners) as a stand-in for next quarter's customer base, estimate the total cost of retention offers and the total value of customers saved under **each** threshold. Which threshold would you recommend, and why?
+:::
+
+Provide (or let teams derive, if time allows) the confusion-matrix counts for both thresholds:
+
+- **Threshold 0.5:** TP=67, FP=29, FN=39, TN=165
+- **Threshold 0.3:** TP=90, FP=60, FN=16, TN=134
+
+A worked comparison (offer cost times every flagged customer, value times every true positive retained, assuming an offer successfully retains a flagged true churner):
+
+| Threshold | Customers flagged (TP+FP) | Offer cost | Churners caught (TP) | Value retained | Net |
+|---|---|---|---|---|---|
+| 0.5 | 96 | \$4,800 | 67 | \$40,200 | \$35,400 |
+| 0.3 | 150 | \$7,500 | 90 | \$54,000 | \$46,500 |
+
+::: {.callout-note collapse="false" title="This worked comparison is intentionally favorable to the lower threshold"}
+With these specific cost assumptions (\$50 offer vs. \$600 retained value), the lower threshold wins even though it wastes more offers on false positives, because each caught churner is worth so much more than each wasted offer. Push teams to ask what would have to be true for the *higher* threshold to win instead (a much more expensive offer, a much less valuable customer, or an offer that doesn't reliably retain a flagged churner). There's no universally correct threshold, only one that's correct for a specific cost structure, exactly the point @sec-week11-02 made without dollar figures attached.
+:::
+
+### Report-Outs and Debrief (10 min)
+
+Cold-call two or three teams for their recommendation and reasoning. If any team assumed the retention offer perfectly saves every flagged true churner, name that assumption explicitly and ask what would change if the offer only worked, say, half the time.
+
+### Launch the Module 4 Deliverable; Wrap-Up and Look Ahead (5 min)
+
+State the deliverable plainly: students build a predictive model, regression or logistic regression, on a business dataset of their choosing (or an approved workplace dataset), diagnose it, and translate the result into a specific managerial recommendation, calculated in R and Excel. Close the session: Module 4 added the **build a model** step to the decision cycle; the next module (12/4) shifts from predicting a single outcome to forecasting a value forward in time.
+
+## Recap for the Instructor
+
+| **Keyword** | **Where it was taught** |
+|---|---|
+| Logistic regression, odds ratios | @sec-week11-01, @sec-week11-02 |
+| Classification thresholds, ROC/AUC | @sec-week11-02 |
+| Full course toolkit through Module 4 | @sec-week01-02 |

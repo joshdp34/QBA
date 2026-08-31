@@ -1,0 +1,78 @@
+# Instructor Guide — Part 2 (11/13, Hour 2): Diagnostics — Can This Model Be Trusted? {#sec-mod4-part2-guide}
+
+::: {.callout-note collapse="false" title="How to use this guide"}
+This is a facilitation guide for the instructor, not student-facing reading. It pairs with the slide deck `mod4_part2_slides.qmd`. Students arrive having read regression diagnostics in full (@sec-week10-01) and prediction intervals and model limitations (@sec-week10-02), including the `olsrr` package's plots and tests. This hour is applied practice, diagnosing broken models by sight and by test, not re-teaching the concepts.
+:::
+
+## Session Objectives
+
+By the end of this period, students should be able to:
+
+1. Use a residuals-vs-fitted plot and the Breusch-Pagan test to correctly diagnose a LINE violation.
+2. Distinguish an outlier from a high-leverage point from a genuinely influential point, using `olsrr`'s Cook's distance and leverage tools.
+3. Explain, without hedging, why a model with excellent in-sample fit can still be untrustworthy.
+
+## Timing at a Glance
+
+| Time | Segment | Format |
+|---|---|---|
+| 0:00–0:05 | Re-entry: trust, but verify | Instructor-led |
+| 0:05–0:20 | Live diagnosis: three models, three plots | Live coding (R) |
+| 0:20–0:45 | Activity: Diagnose the Model | Small groups (3–4) |
+| 0:45–0:55 | Debrief | Whole-class discussion |
+| 0:55–1:00 | Bridge to Part 3 | Instructor-led |
+
+## Detailed Run of Show
+
+### Re-entry: Trust, But Verify (5 min)
+
+Recall Part 1's closing line: every model built this morning was trusted at face value. This hour supplies the verification step. Restate the LINE assumptions from @sec-week10-01 from memory as a class (Linearity, Independence, Normality, Equal variance), don't put them on the screen first, make the room recall them.
+
+### Live Diagnosis: Three Models, Three Plots (15 min)
+
+Live-run the three models from @sec-week10-01 side by side, and let the room call out the diagnosis before revealing it:
+
+1. **The healthy advertising model** (Example 10.1): `ols_plot_resid_fit()`, `ols_test_breusch_pagan()` ($p\approx0.53$). No violation.
+2. **The nonlinearity simulation** (Example 10.2): the same plot type, now a clear U-shape.
+3. **The heteroscedasticity simulation** (Example 10.3): `ols_test_breusch_pagan()` now gives $\text{Chi}^2\approx28.6$, $p<0.0001$.
+
+Emphasize the *contrast* between models 1 and 3, the identical test, run on different data, producing opposite conclusions. This is what "a formal test backing up the plot" buys you over eyeballing alone.
+
+### Activity: Diagnose the Model (25 min)
+
+Project (or hand out) four residual plots, unlabeled, drawn from models already built in @sec-week10-01 and Example 10.4:
+
+::: {.example title="Four plots to diagnose"}
+**Plot A:** a patternless cloud around 0, roughly constant spread.
+
+**Plot B:** a clear U-shape.
+
+**Plot C:** a cone/funnel shape, narrow on the left, wide on the right.
+
+**Plot D:** an `olsrr` Cook's distance bar chart with one bar (observation 31) far above every other bar and above the $4/n$ threshold line.
+:::
+
+For each plot, teams answer: which LINE assumption (if any) is violated, and what should the analyst do next?
+
+- **Plot A:** none, trust the model.
+- **Plot B:** linearity, needs a different functional form, not more data.
+- **Plot C:** equal variance, standard errors are unreliable, consider transforming $y$.
+- **Plot D:** this isn't a LINE violation at all, it's a single influential point, investigate before deciding whether to keep, fix, or drop it.
+
+Circulate; the most common error is treating Plot D as another LINE violation rather than a separate, point-level issue. Redirect explicitly: LINE assumptions are about the *model*, influence is about *individual observations*.
+
+### Debrief (10 min)
+
+Cold-call teams for each plot. Make the Plot D distinction explicit to the whole room before moving on, this is exactly the point students most often blur on the readiness quiz.
+
+### Bridge to Part 3 (5 min)
+
+"Everything today has predicted a continuous number, sales, revenue. What if the outcome is yes or no, will this customer churn?" Preview: Part 3 builds a logistic regression live and ends with the Module 4 deliverable.
+
+## Recap for the Instructor
+
+| **Keyword** | **Where it was taught** |
+|---|---|
+| LINE assumptions, residual plots | @sec-week10-01 |
+| Breusch-Pagan test, Cook's distance, olsrr | @sec-week10-01 |
+| Prediction intervals, overfitting | @sec-week10-02 |

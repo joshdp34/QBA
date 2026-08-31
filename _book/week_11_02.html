@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>28&nbsp; Week 11: Interpreting and Using Logistic Regression – STA 5330 Bus Analytics for Dec Making</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-ac731d99f942368ec2047317e7e82b91.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style type="text/css">
+.sidebar .chapter-number {
+color: #FFB81c;
+}
+.center-panel.quarto-layout-panel {
+justify-content: center;
+column-gap: 1rem;
+}
+</style>
+<style>
+div.callout-example.callout {
+  border-left-color: #008000;
+}
+div.callout-example.callout-style-default .callout-header {
+  background-color: rgba(0, 128, 0, 0.13);
+}
+div.callout-example .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-example.callout-style-default .callout-icon::before, div.callout-example.callout-titled .callout-icon::before {
+  content: '📈';
+  background-image: none;
+}
+</style>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./week_08_01.html">Module 4</a></li><li class="breadcrumb-item"><a href="./week_11_02.html"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Week 11: Interpreting and Using Logistic Regression</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./"></a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Module 1</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_01_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Week 1: Getting Set Up</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_01_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Week 1: The Analytics Decision Cycle</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_01_03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Week 1: Importing Data, Identifying Variables, and Creating a Graph</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Module 2</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_02_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Week 2: Probability Concepts</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_02_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Week 2: Random Variables</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_03_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Week 3: The Binomial Distribution</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_03_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Week 3: The Uniform Distribution</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_03_03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Week 3: The Normal Distribution</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_04_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Week 4: Sampling Distributions and the Sample Mean</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_04_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Week 4: The Sampling Distribution of the Sample Proportion</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_04_03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Week 4: Bootstrap Sampling Distributions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_05_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Week 5: Confidence Intervals for a Proportion</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_05_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Week 5: Confidence Intervals for a Mean</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_05_03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Week 5: Introduction to Hypothesis Testing</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Module 3</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_06_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Week 6: One-Sample Hypothesis Tests</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_06_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Week 6: Two-Sample Tests for Independent Means</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_06_03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Week 6: Paired Comparisons</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_07_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Week 7: Analysis of Variance (ANOVA)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_07_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Week 7: Research Design, Bias, and Causality</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_07_03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Week 7: The Project Oxygen Case and a Course Recap</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Module 4</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_08_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Week 8: Correlation and the Least-Squares Line</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_08_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Week 8: Interpreting Simple Regression Output</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_09_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Week 9: Multiple Linear Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_09_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Week 9: Categorical Predictors in Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_10_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Week 10: Regression Diagnostics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_10_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Week 10: Prediction Intervals and Model Limitations</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_11_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Week 11: Introduction to Logistic Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_11_02.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Week 11: Interpreting and Using Logistic Regression</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Module 5</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_12_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Week 12: Time Series Structure, Trend, Seasonality, and Naive Forecasts</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_12_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Week 12: Moving Averages and Exponential Smoothing</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_12_03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Week 12: Regression-Based Forecasting, Accuracy, and Scenario Analysis</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">Module 6</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_13_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Week 13: Introduction to Linear Optimization</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_13_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Week 13: Binding Constraints, Slack, and Sensitivity Analysis</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#why-this-matters" id="toc-why-this-matters" class="nav-link active" data-scroll-target="#why-this-matters"><span class="header-section-number">28.1</span> Why This Matters</a></li>
+  <li><a href="#from-log-odds-to-odds-ratios" id="toc-from-log-odds-to-odds-ratios" class="nav-link" data-scroll-target="#from-log-odds-to-odds-ratios"><span class="header-section-number">28.2</span> From Log-Odds to Odds Ratios</a></li>
+  <li><a href="#from-probability-to-a-decision-choosing-a-threshold" id="toc-from-probability-to-a-decision-choosing-a-threshold" class="nav-link" data-scroll-target="#from-probability-to-a-decision-choosing-a-threshold"><span class="header-section-number">28.3</span> From Probability to a Decision: Choosing a Threshold</a></li>
+  <li><a href="#the-confusion-matrix" id="toc-the-confusion-matrix" class="nav-link" data-scroll-target="#the-confusion-matrix"><span class="header-section-number">28.4</span> The Confusion Matrix</a></li>
+  <li><a href="#the-threshold-is-a-business-choice-not-just-a-default" id="toc-the-threshold-is-a-business-choice-not-just-a-default" class="nav-link" data-scroll-target="#the-threshold-is-a-business-choice-not-just-a-default"><span class="header-section-number">28.5</span> The Threshold Is a Business Choice, Not Just a Default</a></li>
+  <li><a href="#a-threshold-free-view-the-roc-curve-and-auc" id="toc-a-threshold-free-view-the-roc-curve-and-auc" class="nav-link" data-scroll-target="#a-threshold-free-view-the-roc-curve-and-auc"><span class="header-section-number">28.6</span> A Threshold-Free View: The ROC Curve and AUC</a></li>
+  <li><a href="#computing-classification-metrics-in-r-and-excel" id="toc-computing-classification-metrics-in-r-and-excel" class="nav-link" data-scroll-target="#computing-classification-metrics-in-r-and-excel"><span class="header-section-number">28.7</span> Computing Classification Metrics in R and Excel</a></li>
+  <li><a href="#recap" id="toc-recap" class="nav-link" data-scroll-target="#recap"><span class="header-section-number">28.8</span> Recap</a></li>
+  <li><a href="#check-your-understanding" id="toc-check-your-understanding" class="nav-link" data-scroll-target="#check-your-understanding"><span class="header-section-number">28.9</span> Check Your Understanding</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./week_08_01.html">Module 4</a></li><li class="breadcrumb-item"><a href="./week_11_02.html"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Week 11: Interpreting and Using Logistic Regression</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-week11-02" class="quarto-section-identifier"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Week 11: Interpreting and Using Logistic Regression</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="why-this-matters" class="level2" data-number="28.1">
+<h2 data-number="28.1" class="anchored" data-anchor-id="why-this-matters"><span class="header-section-number">28.1</span> Why This Matters</h2>
+<p><a href="week_11_01.html" class="quarto-xref"><span>Chapter 27</span></a> fit a logistic regression predicting customer churn from tenure and confirmed the coefficient’s <em>sign</em> made sense, longer tenure, lower log-odds of churning. But “log-odds” isn’t a number anyone reports to a manager, and a predicted <em>probability</em> isn’t yet a decision. This section closes both gaps: translating the coefficient into an <strong>odds ratio</strong> that’s actually interpretable, and turning a predicted probability into an actual <strong>classification</strong>, along with a way to judge whether that classification is any good.</p>
+</section>
+<section id="from-log-odds-to-odds-ratios" class="level2" data-number="28.2">
+<h2 data-number="28.2" class="anchored" data-anchor-id="from-log-odds-to-odds-ratios"><span class="header-section-number">28.2</span> From Log-Odds to Odds Ratios</h2>
+<p>Because the model is linear in log-odds, not in probability, a one-unit increase in <span class="math inline">\(x\)</span> doesn’t <em>add</em> a fixed amount to the probability, it <strong>multiplies</strong> the odds by a fixed factor. That factor is the <strong>odds ratio</strong>, found by exponentiating the coefficient: <span class="math display">\[
+\text{Odds Ratio} = e^{b_1}
+\]</span> - <span class="math inline">\(\text{OR} &gt; 1\)</span>: each one-unit increase in <span class="math inline">\(x\)</span> is associated with <strong>higher</strong> odds of the event. - <span class="math inline">\(\text{OR} &lt; 1\)</span>: each one-unit increase in <span class="math inline">\(x\)</span> is associated with <strong>lower</strong> odds of the event. - <span class="math inline">\(\text{OR} = 1\)</span>: <span class="math inline">\(x\)</span> has no association with the odds of the event (<span class="math inline">\(b_1=0\)</span>).</p>
+<div class="callout callout-style-simple callout-example callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Example</span>Example 11.5: The odds ratio for tenure
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Continuing <a href="week_11_01.html" class="quarto-xref"><span>Chapter 27</span></a>’s churn model (<span class="math inline">\(b_{\text{tenure}} = -0.0846\)</span>):</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2025</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">300</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>tenure <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">runif</span>(n, <span class="dv">1</span>, <span class="dv">60</span>))</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>logodds_true <span class="ot">&lt;-</span> <span class="fl">1.5</span> <span class="sc">-</span> <span class="fl">0.08</span> <span class="sc">*</span> tenure</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>p_true <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(<span class="sc">-</span>logodds_true))</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>churned <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(n, <span class="dv">1</span>, p_true)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>customers <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">tenure =</span> tenure, <span class="at">churned =</span> churned)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>model_logit <span class="ot">&lt;-</span> <span class="fu">glm</span>(churned <span class="sc">~</span> tenure, <span class="at">data =</span> customers, <span class="at">family =</span> binomial)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">coef</span>(model_logit))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept)      tenure 
+  5.5838532   0.9188929 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">confint.default</span>(model_logit))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                2.5 %    97.5 %
+(Intercept) 3.1646790 9.8523158
+tenure      0.9007475 0.9374039</code></pre>
+</div>
+</div>
+<p>The odds ratio for <code>tenure</code> is about <strong>0.919</strong>. In plain language: <strong>each additional month of tenure is associated with about an 8.1% decrease in the odds of churning</strong> (<span class="math inline">\(1-0.919=0.081\)</span>), holding nothing else in the model constant. The 95% confidence interval for this odds ratio, about <span class="math inline">\((0.901, 0.937)\)</span>, excludes 1, consistent with the coefficient’s significance in <a href="week_11_01.html" class="quarto-xref"><span>Chapter 27</span></a>, tenure’s protective association with churn is unlikely to be due to chance alone.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled" title="An odds ratio is not a probability statement">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>An odds ratio is not a probability statement
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>“An 8.1% decrease in odds” is <strong>not</strong> the same claim as “an 8.1 percentage-point decrease in probability,” and not even the same as “an 8.1% decrease in probability.” Odds and probability move together but aren’t proportional to each other, especially away from <span class="math inline">\(p=0.5\)</span>, so translating an odds ratio into an actual probability requires picking a specific starting point and using the logistic function directly, exactly what <a href="week_11_01.html" class="quarto-xref"><span>Chapter 27</span></a>’s <code>predict(..., type="response")</code> already did. Report the odds ratio as a statement about odds; report predicted probabilities separately when the audience needs an actual percentage.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="from-probability-to-a-decision-choosing-a-threshold" class="level2" data-number="28.3">
+<h2 data-number="28.3" class="anchored" data-anchor-id="from-probability-to-a-decision-choosing-a-threshold"><span class="header-section-number">28.3</span> From Probability to a Decision: Choosing a Threshold</h2>
+<p>A logistic regression’s direct output is a probability between 0 and 1. Turning that into an actual yes/no decision, will we flag this customer as a churn risk, requires choosing a <strong>threshold</strong>: classify as “positive” (churn) if <span class="math inline">\(\hat p\)</span> is at or above the threshold, “negative” otherwise. A threshold of 0.5 is the default starting point, but nothing forces that choice, as this section shows shortly.</p>
+<div class="callout callout-style-simple callout-example callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Example</span>Example 11.6: Classifying customers at a 0.5 threshold
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>customers <span class="ot">&lt;-</span> customers <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pred_prob =</span> <span class="fu">predict</span>(model_logit, <span class="at">type =</span> <span class="st">"response"</span>),</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">pred_class =</span> <span class="fu">if_else</span>(pred_prob <span class="sc">&gt;=</span> <span class="fl">0.5</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="at">Predicted =</span> customers<span class="sc">$</span>pred_class, <span class="at">Actual =</span> customers<span class="sc">$</span>churned)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         Actual
+Predicted   0   1
+        0 165  39
+        1  29  67</code></pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-confusion-matrix" class="level2" data-number="28.4">
+<h2 data-number="28.4" class="anchored" data-anchor-id="the-confusion-matrix"><span class="header-section-number">28.4</span> The Confusion Matrix</h2>
+<p>The table above is a <strong>confusion matrix</strong>, cross-tabulating predicted classifications against actual outcomes. Its four cells have standard names:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>Actual: No churn</th>
+<th>Actual: Churn</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Predicted: No churn</strong></td>
+<td>True Negative (TN)</td>
+<td>False Negative (FN)</td>
+</tr>
+<tr class="even">
+<td><strong>Predicted: Churn</strong></td>
+<td>False Positive (FP)</td>
+<td>True Positive (TP)</td>
+</tr>
+</tbody>
+</table>
+<p>From these four counts, several metrics summarize overall performance, two of which are already familiar under different names from <a href="week_02_01.html" class="quarto-xref"><span>Chapter 4</span></a>’s discussion of screening systems:</p>
+<p><span class="math display">\[
+\text{Accuracy} = \frac{TP+TN}{TP+TN+FP+FN} \qquad
+\text{Sensitivity (Recall)} = \frac{TP}{TP+FN} \qquad
+\text{Specificity} = \frac{TN}{TN+FP} \qquad
+\text{Precision} = \frac{TP}{TP+FP}
+\]</span></p>
+<ul>
+<li><strong>Sensitivity</strong> (recall): of customers who actually churned, what fraction did the model correctly flag? Exactly the same idea as a detection system’s sensitivity in <a href="week_02_01.html" class="quarto-xref"><span>Chapter 4</span></a>.</li>
+<li><strong>Specificity</strong>: of customers who didn’t churn, what fraction did the model correctly leave alone? Same concept as before, now applied to a predictive model instead of a diagnostic test.</li>
+<li><strong>Precision</strong>: of customers the model flagged as churn risks, what fraction actually churned? This is the classification-model analog of <strong>positive predictive value</strong> from <a href="week_02_01.html" class="quarto-xref"><span>Chapter 4</span></a>‘s Bayes’ Rule discussion.</li>
+</ul>
+<div class="callout callout-style-simple callout-example callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Example</span>Example 11.7: Evaluating the churn model at a 0.5 threshold
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="at">Predicted =</span> customers<span class="sc">$</span>pred_class, <span class="at">Actual =</span> customers<span class="sc">$</span>churned)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>TP <span class="ot">&lt;-</span> tab[<span class="st">"1"</span>, <span class="st">"1"</span>]; TN <span class="ot">&lt;-</span> tab[<span class="st">"0"</span>, <span class="st">"0"</span>]; FP <span class="ot">&lt;-</span> tab[<span class="st">"1"</span>, <span class="st">"0"</span>]; FN <span class="ot">&lt;-</span> tab[<span class="st">"0"</span>, <span class="st">"1"</span>]</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">accuracy =</span> (TP <span class="sc">+</span> TN) <span class="sc">/</span> <span class="fu">sum</span>(tab),</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">sensitivity =</span> TP <span class="sc">/</span> (TP <span class="sc">+</span> FN),</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">specificity =</span> TN <span class="sc">/</span> (TN <span class="sc">+</span> FP),</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">precision =</span> TP <span class="sc">/</span> (TP <span class="sc">+</span> FP))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   accuracy sensitivity specificity   precision 
+  0.7733333   0.6320755   0.8505155   0.6979167 </code></pre>
+</div>
+</div>
+<p>The model correctly classifies about <strong>77.3%</strong> of customers overall. It catches about <strong>63.2%</strong> of customers who actually churn (sensitivity) and correctly clears about <strong>85.1%</strong> of customers who don’t (specificity); of the customers it flags as churn risks, about <strong>69.8%</strong> actually do churn (precision).</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Always compare accuracy to a naive baseline">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Always compare accuracy to a naive baseline
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>About 64.7% of customers in this data didn’t churn, so a trivial model that predicts “no churn” for <em>everyone</em>, ignoring tenure entirely, would already be right 64.7% of the time. The fitted model’s 77.3% accuracy is a real improvement over that naive baseline, but this comparison matters generally: with an imbalanced outcome (churn is less common than staying), a high raw accuracy number can be far less impressive than it first sounds, and should always be checked against what guessing the majority class alone would achieve.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="the-threshold-is-a-business-choice-not-just-a-default" class="level2" data-number="28.5">
+<h2 data-number="28.5" class="anchored" data-anchor-id="the-threshold-is-a-business-choice-not-just-a-default"><span class="header-section-number">28.5</span> The Threshold Is a Business Choice, Not Just a Default</h2>
+<div class="callout callout-style-simple callout-example callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Example</span>Example 11.8: Lowering the threshold
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>customers <span class="ot">&lt;-</span> customers <span class="sc">|&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pred_class_30 =</span> <span class="fu">if_else</span>(pred_prob <span class="sc">&gt;=</span> <span class="fl">0.3</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>tab30 <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="at">Predicted =</span> customers<span class="sc">$</span>pred_class_30, <span class="at">Actual =</span> customers<span class="sc">$</span>churned)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>TP30 <span class="ot">&lt;-</span> tab30[<span class="st">"1"</span>,<span class="st">"1"</span>]; TN30 <span class="ot">&lt;-</span> tab30[<span class="st">"0"</span>,<span class="st">"0"</span>]; FP30 <span class="ot">&lt;-</span> tab30[<span class="st">"1"</span>,<span class="st">"0"</span>]; FN30 <span class="ot">&lt;-</span> tab30[<span class="st">"0"</span>,<span class="st">"1"</span>]</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">accuracy =</span> (TP30 <span class="sc">+</span> TN30) <span class="sc">/</span> <span class="fu">sum</span>(tab30),</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">sensitivity =</span> TP30 <span class="sc">/</span> (TP30 <span class="sc">+</span> FN30),</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">specificity =</span> TN30 <span class="sc">/</span> (TN30 <span class="sc">+</span> FP30))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   accuracy sensitivity specificity 
+  0.7466667   0.8490566   0.6907216 </code></pre>
+</div>
+</div>
+<p>Lowering the threshold from 0.5 to 0.3 (flagging more customers as churn risks) raises sensitivity from 63.2% to about <strong>84.9%</strong>, catching far more of the customers who actually churn, but specificity falls from 85.1% to about <strong>69.1%</strong>, and overall accuracy dips slightly, to about 74.7%.</p>
+</div>
+</div>
+<p>This is the same <strong>sensitivity/specificity tradeoff</strong> first introduced in <a href="week_02_01.html" class="quarto-xref"><span>Chapter 4</span></a>, now facing a concrete business decision: raising the threshold reduces false positives (customers wrongly flagged, and perhaps sent an unnecessary, costly retention offer) at the cost of more false negatives (actual churners who slip through unflagged). There’s no universally “correct” threshold; the right choice depends on the relative business cost of each type of mistake. If a retention offer is cheap and losing a customer is expensive, a lower threshold (catch more churners, tolerate more false alarms) is usually worth it; if the offer is costly and most flagged customers wouldn’t have churned anyway, a higher threshold makes more sense.</p>
+</section>
+<section id="a-threshold-free-view-the-roc-curve-and-auc" class="level2" data-number="28.6">
+<h2 data-number="28.6" class="anchored" data-anchor-id="a-threshold-free-view-the-roc-curve-and-auc"><span class="header-section-number">28.6</span> A Threshold-Free View: The ROC Curve and AUC</h2>
+<p>Every metric in the last two examples depends on picking one specific threshold. The <strong>ROC (receiver operating characteristic) curve</strong> removes that dependence by plotting sensitivity (true positive rate) against <span class="math inline">\(1-\text{specificity}\)</span> (false positive rate) at <em>every possible threshold at once</em>, tracing out the full range of tradeoffs a threshold choice can produce.</p>
+<div class="callout callout-style-simple callout-example callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Example</span>Example 11.9: The ROC curve for the churn model
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>thresholds <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">unique</span>(<span class="fu">c</span>(<span class="dv">0</span>, customers<span class="sc">$</span>pred_prob, <span class="dv">1</span>)), <span class="at">decreasing =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>roc_data <span class="ot">&lt;-</span> <span class="fu">map_dfr</span>(thresholds, <span class="cf">function</span>(t) {</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  pred_class <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(customers<span class="sc">$</span>pred_prob <span class="sc">&gt;=</span> t)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  TP <span class="ot">&lt;-</span> <span class="fu">sum</span>(pred_class <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> customers<span class="sc">$</span>churned <span class="sc">==</span> <span class="dv">1</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  FP <span class="ot">&lt;-</span> <span class="fu">sum</span>(pred_class <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> customers<span class="sc">$</span>churned <span class="sc">==</span> <span class="dv">0</span>)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  FN <span class="ot">&lt;-</span> <span class="fu">sum</span>(pred_class <span class="sc">==</span> <span class="dv">0</span> <span class="sc">&amp;</span> customers<span class="sc">$</span>churned <span class="sc">==</span> <span class="dv">1</span>)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  TN <span class="ot">&lt;-</span> <span class="fu">sum</span>(pred_class <span class="sc">==</span> <span class="dv">0</span> <span class="sc">&amp;</span> customers<span class="sc">$</span>churned <span class="sc">==</span> <span class="dv">0</span>)</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(<span class="at">threshold =</span> t, <span class="at">tpr =</span> TP <span class="sc">/</span> (TP <span class="sc">+</span> FN), <span class="at">fpr =</span> FP <span class="sc">/</span> (FP <span class="sc">+</span> TN))</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>}) <span class="sc">|&gt;</span> <span class="fu">arrange</span>(fpr)</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>marked_points <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">threshold =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.3</span>),</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">fpr =</span> <span class="fu">c</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.8505155</span>, <span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.6907216</span>),</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">tpr =</span> <span class="fu">c</span>(<span class="fl">0.6320755</span>, <span class="fl">0.8490566</span>)</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(roc_data, <span class="fu">aes</span>(<span class="at">x =</span> fpr, <span class="at">y =</span> tpr)) <span class="sc">+</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"#e34a33"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">slope =</span> <span class="dv">1</span>, <span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"gray50"</span>) <span class="sc">+</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> marked_points, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">"#2c7fb8"</span>) <span class="sc">+</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> marked_points, <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">paste</span>(<span class="st">"threshold ="</span>, threshold)),</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>            <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.15</span>, <span class="at">size =</span> <span class="fl">3.5</span>) <span class="sc">+</span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"ROC curve for the churn model"</span>,</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Diagonal: performance of random guessing"</span>,</span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"False positive rate (1 - specificity)"</span>, <span class="at">y =</span> <span class="st">"True positive rate (sensitivity)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="week_11_02_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The two marked points are exactly the threshold-0.5 and threshold-0.3 classifications from Examples 11.7 and 11.8: lowering the threshold slides <em>up and to the right</em> along the curve, trading a higher true positive rate for a higher false positive rate. The dashed diagonal line represents a model with no real predictive power, randomly guessing would trace that line; the further the curve bows toward the upper-left corner (100% sensitivity, 0% false positives), the better the model separates churners from non-churners at every threshold simultaneously.</p>
+</div>
+</div>
+<p>The <strong>area under the ROC curve (AUC)</strong> condenses that entire curve into a single number, answering: if you picked one random customer who churned and one random customer who didn’t, what’s the probability the model assigns a higher predicted probability to the one who actually churned?</p>
+<div class="callout callout-style-simple callout-example callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Example</span>Example 11.10: AUC for the churn model
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#computed directly as the area under Example 11.9's ROC curve</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">diff</span>(roc_data<span class="sc">$</span>fpr) <span class="sc">*</span> (<span class="fu">head</span>(roc_data<span class="sc">$</span>tpr, <span class="sc">-</span><span class="dv">1</span>) <span class="sc">+</span> <span class="fu">tail</span>(roc_data<span class="sc">$</span>tpr, <span class="sc">-</span><span class="dv">1</span>)) <span class="sc">/</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8297267</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#the same quantity, computed a faster way: how often does a random churner outrank a random non-churner?</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>pos <span class="ot">&lt;-</span> customers<span class="sc">$</span>pred_prob[customers<span class="sc">$</span>churned <span class="sc">==</span> <span class="dv">1</span>]</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>neg <span class="ot">&lt;-</span> customers<span class="sc">$</span>pred_prob[customers<span class="sc">$</span>churned <span class="sc">==</span> <span class="dv">0</span>]</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">outer</span>(pos, neg, <span class="st">"&gt;"</span>)) <span class="sc">+</span> <span class="fl">0.5</span> <span class="sc">*</span> <span class="fu">mean</span>(<span class="fu">outer</span>(pos, neg, <span class="st">"=="</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8297267</code></pre>
+</div>
+</div>
+<p>Both approaches agree exactly: an AUC of about <strong>0.83</strong>. An AUC of 0.5 means the model is no better than randomly guessing which of the two customers churned (the dashed diagonal in Example 11.9); an AUC of 1.0 means the model perfectly ranks every churner above every non-churner, a ROC curve that reaches the upper-left corner immediately. At 0.83, this model does a good job separating the two groups overall, well above chance, useful context beyond any single threshold’s accuracy, sensitivity, or specificity.</p>
+</div>
+</div>
+<p>Building the curve and computing the area by hand, as above, is worth doing once so the definitions actually mean something. In practice, the <strong><code>pROC</code></strong> package does both in two lines, and adds a confidence interval around the AUC estimate for free.</p>
+<div class="callout callout-style-simple callout-example callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Example</span>Example 11.11: Automating the ROC curve and AUC with pROC
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pROC)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>roc_obj <span class="ot">&lt;-</span> <span class="fu">roc</span>(customers<span class="sc">$</span>churned, customers<span class="sc">$</span>pred_prob, <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>roc_obj</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+roc.default(response = customers$churned, predictor = customers$pred_prob,     quiet = TRUE)
+
+Data: customers$pred_prob in 194 controls (customers$churned 0) &lt; 106 cases (customers$churned 1).
+Area under the curve: 0.8297</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggroc</span>(roc_obj, <span class="at">color =</span> <span class="st">"#e34a33"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">slope =</span> <span class="dv">1</span>, <span class="at">intercept =</span> <span class="dv">1</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"gray50"</span>) <span class="sc">+</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"ROC curve for the churn model (pROC)"</span>,</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Diagonal: performance of random guessing"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="week_11_02_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><code>roc()</code> reports the same AUC found by hand, <strong>0.8297</strong>, and <code>ggroc()</code> traces the identical curve from Example 11.9 (<code>pROC</code> plots specificity decreasing from 1 to 0 along the x-axis rather than the false positive rate increasing, the standard convention in most ROC software, but the shape and the diagonal reference line mean exactly the same thing). <code>pROC</code> also gives a <strong>confidence interval</strong> for the AUC itself, since 0.8297 is a statistic computed from one sample of 300 customers and would move around somewhat under a different sample, exactly the reasoning behind every confidence interval since <a href="week_05_02.html" class="quarto-xref"><span>Chapter 13</span></a>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ci.auc</span>(roc_obj)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>95% CI: 0.7826-0.8768 (DeLong)</code></pre>
+</div>
+</div>
+<p>The 95% confidence interval, about <span class="math inline">\((0.783, 0.877)\)</span>, is a range for the model’s <em>true</em> discriminating power, not just this one sample’s estimate of it. Because the interval sits well above 0.5 in either direction, there’s strong evidence this model genuinely separates churners from non-churners better than chance, not just in this particular sample of customers.</p>
+</div>
+</div>
+</section>
+<section id="computing-classification-metrics-in-r-and-excel" class="level2" data-number="28.7">
+<h2 data-number="28.7" class="anchored" data-anchor-id="computing-classification-metrics-in-r-and-excel"><span class="header-section-number">28.7</span> Computing Classification Metrics in R and Excel</h2>
+<div class="callout callout-style-simple callout-example callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Example</span>Example 11.12: Classification metrics in R and Excel
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In R, once predicted probabilities are obtained from <code>predict(..., type = "response")</code>, <code>table()</code> builds the confusion matrix directly, as shown throughout this section.</p>
+<p>In Excel, after computing each customer’s predicted probability (via the fitted logistic equation), a helper column applies the threshold:</p>
+<pre><code>=IF(predicted_prob_cell &gt;= 0.5, 1, 0)</code></pre>
+<p><code>COUNTIFS()</code> then builds each confusion-matrix cell, for example, true positives:</p>
+<pre><code>=COUNTIFS(predicted_range, 1, actual_range, 1)</code></pre>
+<p>with accuracy, sensitivity, specificity, and precision computed directly from those four counts using the formulas above.</p>
+</div>
+</div>
+</section>
+<section id="recap" class="level2" data-number="28.8">
+<h2 data-number="28.8" class="anchored" data-anchor-id="recap"><span class="header-section-number">28.8</span> Recap</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Keyword</strong></th>
+<th><strong>Definition</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Odds ratio</strong></td>
+<td><span class="math inline">\(e^{b_1}\)</span>; the multiplicative change in odds for a one-unit increase in <span class="math inline">\(x\)</span>.</td>
+</tr>
+<tr class="even">
+<td><strong>Classification threshold</strong></td>
+<td>The cutoff probability above which an observation is classified “positive”; 0.5 is a common default, not a requirement.</td>
+</tr>
+<tr class="odd">
+<td><strong>Confusion matrix</strong></td>
+<td>A table of predicted vs.&nbsp;actual classifications, broken into true/false positives/negatives.</td>
+</tr>
+<tr class="even">
+<td><strong>Accuracy</strong></td>
+<td><span class="math inline">\((TP+TN)/\text{total}\)</span>; overall proportion correctly classified, should be compared against a naive majority-class baseline.</td>
+</tr>
+<tr class="odd">
+<td><strong>Sensitivity (recall)</strong></td>
+<td><span class="math inline">\(TP/(TP+FN)\)</span>; the fraction of actual positives correctly identified.</td>
+</tr>
+<tr class="even">
+<td><strong>Specificity</strong></td>
+<td><span class="math inline">\(TN/(TN+FP)\)</span>; the fraction of actual negatives correctly identified.</td>
+</tr>
+<tr class="odd">
+<td><strong>Precision</strong></td>
+<td><span class="math inline">\(TP/(TP+FP)\)</span>; the fraction of predicted positives that are actually positive.</td>
+</tr>
+<tr class="even">
+<td><strong>ROC curve</strong></td>
+<td>A plot of sensitivity vs.&nbsp;<span class="math inline">\(1-\text{specificity}\)</span> across every possible threshold at once.</td>
+</tr>
+<tr class="odd">
+<td><strong>AUC</strong></td>
+<td>Area under the ROC curve; overall classification performance across all thresholds, from 0.5 (no better than chance) to 1.0 (perfect separation). Computed and plotted automatically with <code>pROC::roc()</code>, <code>auc()</code>, and <code>ggroc()</code>.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="check-your-understanding" class="level2" data-number="28.9">
+<h2 data-number="28.9" class="anchored" data-anchor-id="check-your-understanding"><span class="header-section-number">28.9</span> Check Your Understanding</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="Problems">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Problems
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>A logistic regression predicting loan default reports an odds ratio of 1.42 for a “missed a payment in the last year” predictor. Interpret this number in a full sentence.</p></li>
+<li><p>Explain why “the odds ratio is 0.60” cannot be directly restated as “the probability is 40% lower.”</p></li>
+<li><p>A fraud-detection model’s confusion matrix at a 0.5 threshold is: TP=40, FN=60, FP=200, TN=9,700. Compute accuracy, sensitivity, and precision. Given that only 100 of the 10,000 transactions were actually fraudulent, is accuracy a good headline metric here? Why or why not?</p></li>
+<li><p>A bank lowers its default-prediction threshold from 0.5 to 0.2. Explain what happens to sensitivity and specificity, and describe a business situation where this tradeoff would be worth making.</p></li>
+<li><p>Two models have the same accuracy at their default thresholds, but Model A has an AUC of 0.91 and Model B has an AUC of 0.68. What does this difference suggest about the two models, even though their single-threshold accuracy looks the same?</p></li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solutions">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solutions
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>Holding other predictors in the model constant, a customer who missed a payment in the last year has about 42% higher odds of defaulting than a customer who didn’t (<span class="math inline">\(1.42-1=0.42\)</span>, or 42% higher odds).</p></li>
+<li><p>Odds and probability are related but not proportional, especially away from <span class="math inline">\(p=0.5\)</span>, so a multiplicative change in odds does not translate into the same percentage (or percentage-point) change in probability. Correctly stating the probability effect requires converting specific starting and ending odds back into probabilities using the logistic function, not just applying the odds ratio directly to a probability.</p></li>
+<li><p>Accuracy <span class="math inline">\(= (40+9700)/10000 = 0.974\)</span> (97.4%). Sensitivity <span class="math inline">\(= 40/(40+60) = 0.40\)</span> (40%). Precision <span class="math inline">\(= 40/(40+200) = 0.167\)</span> (16.7%). Accuracy is a poor headline metric here: since only 1% of transactions are actually fraudulent, a trivial model that never flags anything would already score 99% accuracy, making this model’s 97.4% look unimpressive by comparison despite catching real fraud, while its low sensitivity (missing 60% of actual fraud) and low precision (most flags are false alarms) are the numbers that actually describe how well it’s doing its job.</p></li>
+<li><p>Lowering the threshold means more transactions (or customers) get classified as “positive” (predicted default), which raises <strong>sensitivity</strong> (catching more actual defaulters) but lowers <strong>specificity</strong> (more non-defaulters get incorrectly flagged too). This tradeoff is worth making when missing a true default is far more costly than the cost of extra scrutiny on a customer who wouldn’t have defaulted, for example, if failing to catch a large default risks a major loss, while a false flag just triggers an extra manual review.</p></li>
+<li><p>Even with identical accuracy at their default thresholds, Model A’s much higher AUC (0.91 vs.&nbsp;0.68) indicates it separates the two classes far better <strong>across all possible thresholds</strong>, not just the one currently being used. This means Model A likely has more room to be tuned toward a better threshold for the specific business tradeoff at hand (e.g., prioritizing sensitivity or precision), while Model B’s low AUC suggests its predicted probabilities carry much weaker overall discriminating power between the two groups, and adjusting its threshold is unlikely to help much.</p></li>
+</ol>
+</div>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

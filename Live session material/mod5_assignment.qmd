@@ -1,0 +1,102 @@
+# Module 5 Deliverable: Ceres Growth and Financing Memo {#sec-mod5-assignment}
+
+::: {.callout-important collapse="false" title="Due date"}
+**Due: [insert date — instructor to set; suggested: one to two weeks after the 12/4–12/5 weekend, before the course concludes]**, submitted on Canvas. See @sec-mod5-assignment-submission for exact submission instructions.
+
+Individual work, like the Module 1, 2, and 4 deliverables, not a repeat of the 12/4 live session's team activity.
+:::
+
+## Overview
+
+Your fifth deliverable extends the forecasting and scenario-analysis work from the 12/4 live session into a complete, individual written recommendation. The live session built a one-year (2007) revenue scenario for Ceres Gardening Company and checked it against one year of covenant data (2006E). This deliverable asks you to go one step further than what was done live: build a **two-year** projection (2007 and 2008), anchor your scenarios using the case's own **industry benchmark growth rates** rather than the exact adjustments used in the live session, and extend the covenant analysis to the scenario you judge most likely.
+
+This is a **forecasting-and-recommendation memo**, not a full exploratory report. You are not building a predictive model in the Module 4 sense (no regression or classification); the tools here are CAGR-based scenario projections and covenant arithmetic, exactly what @sec-week12-03 and the 12/4 session practiced.
+
+## The Numbers You'll Need
+
+::: {.callout-note collapse="false" title="Ceres's historical revenue and industry benchmarks (from the case)"}
+Ceres's revenue, in \$ thousands: 2002: \$24,652; 2003: \$26,797; 2004: \$29,289; 2005: \$35,088; 2006E: \$42,597.
+
+The case's own 2006 industry report estimates the broader organic gardening consumables market grew at a compound annual rate of about **8.2%** from 2002–2006, and projects industry-wide growth of about **9.5%** from 2006–2008.
+
+Ceres's 2006E financials (\$ thousands): Earnings before Interest & Taxes (EBIT) \$3,018; Depreciation & Amortization \$669; Interest expense \$658; annual long-term lease rentals \$965; long-term debt outstanding approximately \$9,000. The loan agreement requires long-term debt to stay under **3.25 times EBITDA**, and EBITDA to stay at or above **2.0 times fixed financial charges** (interest plus lease rentals).
+:::
+
+## What Your Report Must Include
+
+Your rendered Quarto report should contain the following sections, in this order.
+
+### 1. Framing (short)
+
+In 2–3 sentences, restate the decision Ceres's CEO actually faces (per @sec-week12-03 and the 12/4 session): not just "will revenue keep growing?" but what a bank meeting about growth prospects and cash-flow projections for 2007 and beyond actually requires.
+
+### 2. Historical Growth Rate
+
+Compute Ceres's own compound annual growth rate (CAGR) from the 2002–2006E figures above. Report it, and briefly compare it to the case's industry benchmark rates.
+
+### 3. A Two-Year Scenario Projection
+
+Build **base, optimistic, and pessimistic** revenue projections for **both 2007 and 2008** (not just 2007, as the live session did). At least one of your three scenarios must be explicitly anchored to one of the case's own industry benchmark growth rates (8.2% or 9.5%), not simply a $\pm$ adjustment invented without justification. State, in a sentence each, why you chose the specific rate behind each scenario.
+
+::: {.callout-tip collapse="true" title="What separates a strong scenario justification from a weak one"}
+A weak justification just asserts a number ("optimistic case: 20% growth"). A strong one ties the number to something in the case or a reasonable extrapolation of it ("the industry itself is projected to grow at 9.5% from 2006–2008; since Ceres has consistently outpaced the industry by several points in every year since 2004, an optimistic scenario of industry growth plus that historical margin is a defensible upper case, rather than an arbitrary round number").
+:::
+
+### 4. Financing and Covenant Implications
+
+Using **whichever scenario you judge most likely**, extend the live session's covenant analysis forward: state an assumption about how EBITDA and fixed charges might change alongside your projected revenue (for example, assuming margins and lease costs stay roughly proportional to their 2006E levels, or explicitly assuming they don't), and assess whether the 3.25x debt-to-EBITDA cap or the 2.0x EBITDA-to-fixed-charges minimum is closer to binding under your projection. State your assumption explicitly; there is no single correct number here, but there is a correct way to reason about it.
+
+### 5. Executive Recommendation
+
+A short paragraph (4–6 sentences), written **for Ceres's CEO, not a financial analyst**, that ties Sections 2–4 together. State whether you'd recommend pursuing growth as aggressively as the GetCeres™ program has enabled, more cautiously, or somewhere in between, and be explicit about which covenant (if either) is the real constraint on that decision, not just whether revenue itself looks healthy.
+
+::: {.callout-tip collapse="true" title="What separates a strong recommendation from a weak one"}
+A weak recommendation reports the projected revenue numbers and stops. A strong recommendation names the actual binding constraint ("our revenue outlook is strong under every scenario we modeled, but our fixed-charge coverage ratio has less cushion than our debt capacity does, so before committing to another year of GetCeres™-style growth, I'd want to understand how much further financing costs could rise without threatening that covenant") exactly the distinction @sec-week13-02's binding-vs-non-binding logic was built to make.
+:::
+
+## What Is *Not* Required for This Assignment
+
+- A predictive model in the Module 4 sense (no regression, no classification)
+- A month-by-month forecast; this deliverable works at the annual level, matching Ceres's own reporting
+- Optimization or Excel Solver (Module 6)
+- A repeat of the exact scenario assumptions used in the 12/4 live session; your scenarios must use your own reasoning and at least one real industry benchmark from the case
+
+## Format and Length
+
+- Written and rendered as a **Quarto document** (`.qmd` rendered to `.pdf`).
+- Use headings matching the five sections above.
+- Code chunks may be shown or hidden (`echo: true`/`false`) at your discretion, but your report should read cleanly even if a reader skips the code entirely.
+- A well-executed memo is typically **1–2 rendered pages**, not counting code output. Concise and clear beats long.
+
+## If You're Working in Excel
+
+You are welcome to do your calculations in Excel instead of R.
+
+1. **Compute your CAGR and scenario projections in Excel**, using simple formulas (`=(end/start)^(1/years)-1` for CAGR, straightforward multiplication for each scenario).
+2. **Report your results in your Quarto document as text and formulas**, showing the numbers you plugged in and the result.
+3. **Submit your Excel workbook as a third file** alongside your `.qmd` and `.pdf` (see @sec-mod5-assignment-submission).
+
+::: {.callout-note collapse="false" title="Why the workbook matters for grading"}
+A final number alone doesn't show us how you got there. Submitting the `.xlsx` file lets us verify your calculation was set up correctly, the same role a visible R code chunk plays for students working in R.
+:::
+
+## Grading Rubric
+
+| Component | Points |
+|---|---|
+| Framing (clear restatement of the actual decision) | 10 |
+| Historical CAGR (correctly computed and compared to industry benchmarks) | 15 |
+| Two-year scenario projection (three defensible, distinctly justified scenarios) | 25 |
+| Financing and covenant implications (correct arithmetic, explicit assumptions, correct identification of the binding covenant) | 30 |
+| Executive recommendation (clear, plain-language, names the actual constraint) | 15 |
+| Overall clarity and professionalism | 5 |
+| **Total** | **100** |
+
+## Submission Instructions {#sec-mod5-assignment-submission}
+
+::: {.callout-important collapse="false" title="Submit on Canvas"}
+1. Render your `.qmd` file to `.pdf`.
+2. Submit **both** your `.qmd` source file and the rendered `.pdf` file to the Module 5 Ceres Memo assignment on Canvas. **If you worked in Excel**, also submit your `.xlsx` workbook as a third file.
+3. Name your files `lastname_firstname_module5.qmd`, `lastname_firstname_module5.pdf`, and (if applicable) `lastname_firstname_module5.xlsx`.
+4. Late submissions follow the course late-work policy stated in the syllabus.
+:::

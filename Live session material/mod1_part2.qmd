@@ -1,0 +1,87 @@
+# Instructor Guide — Period 2 (9/4, Minutes 50–100 after break): Sampling and Observational vs. Experimental Data {#sec-week01-05-guide}
+
+::: {.callout-note collapse="false" title="How to use this guide"}
+This is a facilitation guide for the instructor, not student-facing reading. It pairs with the slide deck `week_01_05_slides.qmd`. Unlike Period 1, this period introduces material students have **not** already read — sampling methods and study design are covered in depth in Chapter 2, "Collecting Data" (@sec-sampling_methods and the "Experimental Design," "Observational Studies vs. Experiments," and "Sources of Bias" sections that follow it), which is assigned reading for later in the term. Today's goal is a first, practical pass at the ideas the Google Project Oxygen case (Module 3) will require, not the full depth of Chapter 2.
+:::
+
+## Session Objectives
+
+By the end of this period, students should be able to:
+
+1. Distinguish a population from a sample and explain why we sample at all.
+2. Describe, at a practical level, simple random sampling, stratified sampling, and convenience sampling, and identify which is being used in a short scenario.
+3. Distinguish observational data from experimental data, and explain why experiments support causal claims that observational data does not.
+4. Recognize at least one common source of bias in a described study.
+
+## Timing at a Glance
+
+| Time | Segment | Format |
+|---|---|---|
+| 0:00–0:05 | Re-entry from break | Instructor-led |
+| 0:05–0:20 | Populations, samples, and sampling methods | Mini-lecture + slides |
+| 0:20–0:35 | Observational vs. experimental data | Mini-lecture + slides |
+| 0:35–0:45 | Small-group activity: diagnose the study | Small groups (3–4) |
+| 0:45–0:50 | Debrief and transition to break | Instructor-led |
+
+## Detailed Run of Show
+
+### Re-entry (5 min)
+
+Reconnect to Period 1: "We framed a decision. Now: where does the data to answer it actually come from, and can we trust it?"
+
+### Populations, Samples, and Sampling Methods (15 min)
+
+Define terms concretely, using a running example (a retailer wanting to know average customer satisfaction across 40,000 loyalty-program members):
+
+- **Population** — all 40,000 loyalty members.
+- **Sample** — the members actually surveyed.
+- **Sampling frame** — the list you actually draw from (e.g., members with a valid email on file) — flag that this is often *not* the same as the true population, and that gap matters.
+
+Cover three methods at a practical, non-mathematical level (full treatment is in @sec-sampling_methods):
+
+- **Simple random sampling** — every member has an equal chance of selection. Gold standard for representativeness; often impractical to execute perfectly.
+- **Stratified sampling** — split into subgroups (e.g., by tier: Gold/Silver/Bronze) and sample within each. Useful when you need reliable results for each subgroup, not just the overall average.
+- **Convenience sampling** — surveying whoever is easiest to reach (e.g., the first 200 people who open an email). Cheap and fast, but risks a sample that doesn't represent the population.
+
+::: {.callout-tip collapse="true" title="A framing line that lands well"}
+"A convenience sample answers the question 'what do the people who were easy to reach think?' — which may or may not be the question you actually wanted answered." This previews the framing/data-matching idea from Period 1: the data has to match the *decision*, not just be convenient to collect.
+:::
+
+### Observational vs. Experimental Data (15 min)
+
+This is the conceptual heart of the period, and it sets up the Google Project Oxygen case in Module 3.
+
+- **Observational data** — we watch and record what naturally happens, without intervening. Example: comparing revenue at stores that happened to stay open late on their own initiative versus stores that didn't.
+- **Experimental data** — we deliberately assign an intervention and observe the result. Example: randomly assigning some stores to stay open late (a controlled pilot) and comparing to stores that were not assigned to.
+
+Core message: **only well-designed experiments, with random assignment, let us make confident causal claims.** Observational comparisons are often confounded — some other difference between the groups (store size, location, existing customer base) may be driving the result, not the thing we're interested in.
+
+::: {.example title="Live example: Does a wellness program reduce sick days?"}
+**Observational version:** compare sick days between employees who voluntarily enrolled in a company wellness program and those who didn't. Problem: employees who *choose* to enroll may already be healthier or more conscientious — the wellness program may get credit for a difference that was there beforehand.
+
+**Experimental version:** randomly assign employees to the wellness program or a control group. Because assignment was random, the two groups should be comparable on everything else *on average*, so any difference in sick days is more credibly attributable to the program itself.
+:::
+
+Briefly name **confounding** as the technical term for the alternative explanation problem in the observational version, without going deep into the formal treatment (that's Chapter 2 and Module 3).
+
+### Small-Group Activity: Diagnose the Study (10 min)
+
+Groups of 3–4. Each group gets one short scenario and answers three questions: (1) Is this observational or experimental? (2) What sampling method, if any, is described? (3) What is one thing that could go wrong with trusting the result?
+
+::: {.example title="Activity scenarios"}
+1. A bank emails a satisfaction survey to every customer whose email is on file, and 8% respond.
+2. A retailer randomly assigns 20 of its 100 stores to a new store layout and compares sales to the other 80 stores over the next quarter.
+3. A hospital compares recovery times between patients who asked for a specific surgeon (their preferred choice) and patients who were assigned to whichever surgeon was available.
+4. A university randomly selects 50 students from each of its four class years (200 total) to survey about textbook costs.
+:::
+
+Expected diagnoses:
+
+1. Observational; sampling frame = customers with email on file (not all customers); convenience-leaning because only responders answer — **nonresponse bias** is the key risk.
+2. Experimental (random assignment to layout); strong causal claim.
+3. Observational; patients self-selected surgeons, so healthier or less complex cases might disproportionately pick a particular surgeon — confounding risk.
+4. Observational sampling scenario, but the *sampling method* itself is stratified (by class year) — good for the survey's validity, but note that "stratified sampling" describes how data is collected, not whether the underlying comparison is experimental.
+
+### Debrief and Transition to Break (5 min)
+
+Close with the throughline into Period 3: "Now that we know where trustworthy data comes from, the next step is turning it into something we can actually look at — tables, graphs, and summary numbers."

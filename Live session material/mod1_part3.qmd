@@ -1,0 +1,131 @@
+# Instructor Guide — Period 3 (9/4, Minutes 100–150 after second break): Tables, Graphs, and Descriptive Statistics {#sec-week01-06-guide}
+
+::: {.callout-note collapse="false" title="How to use this guide"}
+This is a facilitation guide for the instructor, not student-facing reading. It pairs with the slide deck `week_01_06_slides.qmd`. This period does double duty: it introduces tables, graphs, and descriptive statistics at a practical level, *and* it launches the Module 1 deliverable — a short Quarto exploratory report (executive summary, tables, graphs, key descriptive statistics) that students complete individually after this session, using @sec-week01-03's importing/variable-classification skills as the mechanical foundation.
+:::
+
+## Session Objectives
+
+By the end of this period, students should be able to:
+
+1. Build and read a frequency table and an appropriate graph (bar chart, histogram) for a variable, choosing the graph type based on whether the variable is categorical or quantitative.
+2. Compute and interpret the mean, median, and standard deviation of a quantitative variable, and explain when the mean can be misleading.
+3. Compute and interpret a descriptive statistic for a categorical variable (a proportion or mode), and explain why a mean does not apply to categorical data.
+4. Distinguish a strong executive summary from a weak one, and draft one from real output.
+5. State clearly what is expected in the Module 1 deliverable and how the graded exploratory report differs from today's in-class exercise.
+
+## Timing at a Glance
+
+| Time | Segment | Format |
+|---|---|---|
+| 0:00–0:03 | Re-entry from break | Instructor-led |
+| 0:03–0:14 | Tables and graphs: matching the graph to the variable | Live demo (Excel + R) |
+| 0:14–0:26 | Descriptive statistics: center, spread, and categorical summaries | Mini-lecture + live demo |
+| 0:26–0:34 | Executive summary: strong vs. weak | Mini-lecture + individual write |
+| 0:34–0:47 | Hands-on: Putting It All Together, a mini dry run of the deliverable | Individual, laptops out |
+| 0:47–0:52 | Launch the Module 1 deliverable; wrap-up | Instructor-led |
+
+::: {.callout-tip collapse="true" title="If you're running short on time"}
+This runs a few minutes past the original 50-minute allocation. If you need to cut something, shorten the live demo in "Tables and graphs" (students can read the grouped-table example rather than watch it built live) before cutting the executive-summary or dry-run segments, those two most directly rehearse what's graded.
+:::
+
+## Detailed Run of Show
+
+### Re-entry (5 min)
+
+Reconnect: "We know how to frame a decision, and where trustworthy data comes from. Now: how do we actually look at it?"
+
+### Tables and Graphs: Matching the Graph to the Variable (11 min)
+
+Live-demo using `store_sales.csv` (same dataset from @sec-week01-03) in both Excel and R, projected side by side if possible.
+
+- For the **categorical** variable `region`: build a frequency table (count of rows per region), then a **bar chart**. Note explicitly: bar charts are for categorical variables; the bars' *order* is often arbitrary or chosen for clarity, not a scale.
+- For the **quantitative** variable `revenue`: build a **histogram**. Note explicitly: histograms are for quantitative variables; the x-axis is a genuine numeric scale, and bin width is a choice that affects what pattern you see.
+
+::: {.callout-tip collapse="true" title="A common student mix-up to head off"}
+Students frequently build a bar chart of a quantitative variable's raw values (e.g., one bar per row of `revenue`) instead of a histogram. Show this mistake deliberately, then show the corrected histogram, so the failure mode is memorable rather than abstract.
+:::
+
+::: {.example title="A richer table: a grouped summary"}
+The deliverable's rubric explicitly accepts "a table of summary statistics broken out by group" as an alternative to a plain frequency table, and it's usually the more useful kind. Build one live: mean `revenue` by `region`.
+```{r}
+#| echo: true
+sales |>
+  group_by(region) |>
+  summarize(mean_revenue = mean(revenue), n = n())
+```
+Point out explicitly why this table is more decision-relevant than the frequency table alone: it doesn't just say *how many* store-months came from each region, it says *how they performed*, directly setting up the kind of comparison an executive summary needs to make.
+:::
+
+### Descriptive Statistics: Center, Spread, and Categorical Summaries (12 min)
+
+Compute, live, for `revenue`:
+
+- **Mean** — the arithmetic average; sensitive to extreme values.
+- **Median** — the middle value when sorted; resistant to extreme values.
+- **Standard deviation** — a typical distance from the mean; larger means more spread out.
+
+::: {.example title="Live example: when the mean misleads"}
+Add one hypothetical outlier store with unusually high revenue (e.g., a flagship location) to the dataset live, and recompute the mean and median. The mean shifts noticeably; the median barely moves. Use this to make concrete the general principle: **means are pulled toward extreme values; medians are not.**
+:::
+
+Briefly preview, without going deep: this same center-and-spread idea returns in Module 2 as the foundation for confidence intervals — "spread" here is the intuitive ancestor of "standard error" later.
+
+::: {.callout-important collapse="false" title="A mistake worth making on purpose: the mean of a categorical variable"}
+Live-run this, and let it visibly fail or produce nonsense:
+```{r}
+#| echo: true
+#| eval: false
+mean(sales$region)
+```
+R either errors or silently coerces `region` into something meaningless, because "average region" isn't a real quantity, `region` has no numeric scale to average across. This is exactly the rubric's own instruction, "do not report a mean for a categorical variable", made concrete rather than abstract. The fix isn't a different formula; it's a different *kind* of statistic entirely.
+:::
+
+::: {.example title="A statistic that actually matches a categorical variable"}
+For a categorical variable, report a **proportion** (or, equivalently, a percentage) or the **mode** (the most frequent category), never a mean.
+```{r}
+#| echo: true
+sales |>
+  count(region) |>
+  mutate(proportion = n / sum(n))
+```
+"West stores account for about a third of all store-months in this dataset" is a real, correctly-matched descriptive statistic; "the average region is West" is not a sentence that means anything.
+:::
+
+### Executive Summary: Strong vs. Weak (8 min)
+
+Worth **20 of 100 points** on the actual rubric, the single largest line item, and the section students most often under-invest in relative to its weight. Show the exact contrast from the deliverable's own instructions (@sec-mod1-assignment):
+
+::: {.example title="Strong vs. weak executive summary"}
+**Weak** (restates a number): *"Average revenue was \$65,000."*
+
+**Strong** (interprets it, tied to a decision): *"Midwest stores generated noticeably less revenue per month than South or West stores, even after accounting for smaller store size, worth investigating before allocating next quarter's inventory evenly across regions."*
+:::
+
+Name the difference explicitly: the weak version could be copy-pasted into a report about almost any numeric column; the strong version connects a specific pattern in *this* data to a specific decision a manager could actually act on, exactly the framing skill from Part 1, now applied to results instead of a starting question.
+
+**Individual quick-write (2 min):** using the grouped table built earlier (mean `revenue` by `region`), have students write one sentence that could serve as the first line of their own executive summary, modeled on the strong example above, not the weak one.
+
+### Hands-On: Putting It All Together (13 min)
+
+This is a compressed, low-stakes dry run of the **entire** deliverable structure, not itself graded, using `store_sales.csv`. Students work individually:
+
+1. **One table**: either a frequency table for `region` or the grouped mean-`revenue`-by-`region` table from earlier.
+2. **One graph**: a histogram of `units_sold`.
+3. **Two descriptive statistics, correctly matched to variable type**: the mean *and* median of `units_sold` (quantitative), *and* the proportion of store-months in one region of their choice (categorical), deliberately requiring one of each type, exactly what the rubric asks for.
+4. **One sentence**, written in the style of the strong executive summary example, connecting whatever pattern they noticed to a decision.
+
+Circulate. The goal is to surface software friction (file paths, package loading, chart formatting) and writing friction (slipping back into "weak" summary language under time pressure) while help is still in the room, since both are easy to fix now and costly to discover for the first time while writing the graded version alone.
+
+### Launch the Module 1 Deliverable; Wrap-Up (5 min)
+
+State the deliverable plainly: **a short Quarto exploratory report**, due before the next module, containing:
+
+- A **framing** statement (Part 1's skill)
+- A **data description**, naming the observational unit and classifying at least four variables (Part 1's skill)
+- An **executive summary** (a few sentences, written for a manager, not a statistician)
+- At least one **table**
+- At least one **graph**
+- At least two **descriptive statistics**, correctly matched to variable type (e.g., don't report a mean for a categorical variable)
+
+Tell students they may use `store_sales.csv` or a dataset of their own choosing from their workplace, subject to instructor approval, and that the skills required are exactly what was practiced across all three periods today, framing and the observational unit from Part 1, and tables, graphs, descriptive statistics, and the executive summary from the last 45 minutes. Close the session.

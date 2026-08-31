@@ -1,0 +1,87 @@
+---
+title: "Working the Google Project Oxygen Case"
+subtitle: "Module 3, Part 2 (October 17)"
+author: "QBA 5330"
+format:
+  revealjs:
+    theme: simple
+    slide-number: true
+    footer: "QBA 5330 | Module 3 | Part 2"
+    transition: fade
+    incremental: true
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+## The Case, Restated
+
+Google's people analytics team compared managers in the **top and bottom quartiles** of a combined survey-and-performance-review score.
+
+They compared those managers' teams on **satisfaction, retention, and performance**.
+
+This is an **observational** comparison, not a randomized experiment.
+
+## Team Worksheet
+
+Same worksheet for every team, 40 minutes.
+
+1. Random assignment
+2. Confounders (find a **new** one)
+3. Bias in how "high/low-scoring" was defined
+4. Statistical vs. practical significance
+5. A **specific, concrete** stronger design
+6. Your team's verdict
+
+## 1. Random Assignment
+
+Was there random assignment in this study?
+
+What would a **randomized version** of this study look like in practice?
+
+## 2. Confounders
+
+The reading already named team quality/resources and reverse causation.
+
+**Find at least one more.**
+
+::: {.notes}
+If stuck: what else might cause someone to become a highly-rated manager in the first place, besides being a good manager? (Tenure, department, prior high performance as an individual contributor, self-selection into management.)
+:::
+
+## 3. Bias
+
+"High-scoring" and "low-scoring" managers were defined by a combination of upward-feedback survey scores and performance reviews.
+
+**What kind of bias could this introduce?**
+
+::: {.notes}
+Push for specificity: response bias (employees reluctant to rate a manager who controls their raises), or survivorship-bias-adjacent reasoning (managers who alienated their teams may have already left the company).
+:::
+
+## 4. Statistical vs. Practical Significance
+
+The differences are described as reliable, but sometimes small.
+
+**What additional information would you want before rolling this out company-wide?**
+
+## 5. A Stronger Design
+
+Propose a **specific** design. Not "do an experiment."
+
+- Who gets randomly assigned to what?
+- What's the treatment?
+- What do you measure, and on whom?
+
+## 6. Your Team's Verdict
+
+In one or two sentences:
+
+**Does the evidence support "managers matter"? What's your strongest reason?**
+
+## Before the Break
+
+Choose a spokesperson.
+
+Be ready to share your team's answer to **one** worksheet item in Part 3.

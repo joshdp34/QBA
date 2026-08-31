@@ -1,0 +1,118 @@
+# Module 1 Deliverable: Exploratory Report {#sec-mod1-assignment}
+
+::: {.callout-important collapse="false" title="Due date"}
+**Due: [insert date — instructor to set, before Module 2 on 10/16]**, submitted on Canvas. See @sec-mod1-assignment-submission for exact submission instructions.
+:::
+
+## Overview
+
+Your first deliverable is a short Quarto exploratory report analyzing a business dataset. This assignment applies the first two steps of the analytics decision cycle from Week 1: The Analytics Decision Cycle, frame the decision and obtain appropriate data, and then walks through summarizing the evidence using the skills from Week 1: Importing Data, Identifying Variables, and Creating a Graph and Part 3 of our September 4 session: importing data, identifying the observational unit and variable types, building tables and graphs, and computing descriptive statistics.
+
+This is a descriptive exercise. You are not expected to run a hypothesis test, build a confidence interval, or fit a model (those tools come in later modules). The goal here is to demonstrate that you can take a raw dataset and turn it into a clear, accurate, decision-relevant picture of what it shows.
+
+## Choosing Your Dataset
+
+You have two options:
+
+1. **Use `data/readiness_store_sales.csv`**, the retail dataset from our September 4 session (six stores, four months: `store_id`, `region`, `month`, `sq_ft`, `units_sold`, `revenue`).
+
+2. **Use a dataset from your own workplace**, provided it (a) has at least 20 rows and at least 4 variables, (b) contains a mix of categorical and quantitative variables, and (c) does not contain confidential, proprietary, or personally identifiable information you are not authorized to share. **Workplace datasets must be approved by the instructor before you begin.** Email a short description of the dataset (source, variables, number of rows) at least one week before the due date.
+
+## What Your Report Must Include
+
+Your rendered Quarto report should contain the following sections, in this order.
+
+### 1. Framing (short)
+
+In 2&ndash;3 sentences, state the business decision or question your dataset could inform, following the framing questions from @sec-week01-02: What decision is on the table? Who would make it? What would change depending on the answer?
+
+::: {.callout-note collapse="false" title="This does not need to be elaborate"}
+One good sentence naming a real, specific decision is worth more than a paragraph of generic background. If you're using `readiness_store_sales.csv`, you might frame it around whether the company should adjust staffing or inventory allocation across regions.
+:::
+
+### 2. Data Description
+
+State, in plain language:
+
+- Where the data came from and what one row represents (the **observational unit**).
+- How many rows and columns the dataset has.
+- Each variable's type: **categorical** or **quantitative**, and for quantitative variables, **discrete** or **continuous**.
+
+### 3. Executive Summary
+
+A short paragraph (3&ndash;6 sentences), written **for a manager, not a statistician**. Summarize the most important patterns you found and connect them back to the decision you framed in Section 1. Avoid statistical jargon; state what the numbers mean in plain business language.
+
+::: {.callout-tip collapse="true" title="What separates a strong executive summary from a weak one"}
+A weak summary restates a statistic ("Average revenue was $65,000."). A strong summary interprets it in context and connects it to the decision ("Midwest stores generated noticeably less revenue per month than South or West stores, even after accounting for smaller store size&mdash;this is worth investigating before allocating next quarter's inventory evenly across regions.").
+:::
+
+### 4. Tables
+
+Include **at least one table** summarizing your data (for example, a frequency table of a categorical variable, or a table of summary statistics broken out by group). Every table must have a caption and clearly labeled columns.
+
+### 5. Graphs
+
+Include **at least one graph**, chosen appropriately for the variable type(s) involved (bar chart or frequency table for categorical variables; histogram, boxplot, or scatterplot for quantitative variables). Every graph must have a title and labeled axes.
+
+### 6. Descriptive Statistics
+
+Report **at least two descriptive statistics**, correctly matched to variable type (for example, do not report a mean for a categorical variable). For quantitative variables, report at least one measure of center (mean or median) and interpret what it tells you in the context of your framing question.
+
+## What Is *Not* Required for This Assignment
+
+- Confidence intervals or margins of error (Module 2)
+- Hypothesis tests or p-values (Module 3)
+- Regression, forecasting, or any model (Modules 4&ndash;5)
+
+If you find yourself reaching for one of these, pull back to a descriptive statement instead. You'll get to use these tools soon.
+
+## Format and Length
+
+- Written and rendered as a **Quarto document** (`.qmd` rendered to `.pdf`).
+- Use headings matching the six sections above.
+- Code chunks may be shown or hidden (`echo: true`/`false`) at your discretion, but your report should read cleanly even if a reader skips the code entirely.
+- There is no strict page limit, but a well-executed report is typically **1&ndash;2 rendered pages**, not counting code output. Concise and clear beats long.
+
+## If You're Working in Excel
+
+You are welcome to do your analysis in Excel instead of R. Your final submission still needs to be a single rendered Quarto report, so here's how to bring Excel work into it:
+
+1. **Build your table or chart in Excel** as you normally would (a PivotTable, a formula-based summary table, an Insert \> Charts chart).
+
+2. **Export it as an image.** Select the table or chart, copy it, and use *Paste Special \> Picture* (or right-click a chart and *Save as Picture*) to get a clean image file. Save it into an `images` folder next to your `.qmd` file.
+
+3. **Insert the image into your Quarto document** using standard Markdown image syntax, with a caption:
+
+   ```markdown
+   ![Monthly revenue by region](images/revenue_by_region.png)
+   ```
+
+4. **Write your interpretation in prose around the image**, exactly as an R user would write around a `ggplot`. State what the table or chart shows and connect it back to your framing question&mdash;don't just paste the image and move on.
+
+5. **Submit your Excel workbook as a third file** alongside your `.qmd` and `.pdf` (see @sec-mod1-assignment-submission). This lets us see the actual formulas or PivotTable behind your numbers, which the image alone won't show.
+
+::: {.callout-note collapse="false" title="Why the workbook matters for grading"}
+A screenshot shows us the result, not how you got there. Submitting the `.xlsx` file is what lets us verify your table or chart was built correctly&mdash;the same role a visible R code chunk plays for students working in R.
+:::
+
+## Grading Rubric
+
+| Component | Points |
+|---|---|
+| Framing (clear, specific decision or question) | 10 |
+| Data description (observational unit and variable types correctly identified) | 15 |
+| Executive summary (clear, plain-language, tied to the framing) | 20 |
+| Table(s) (correctly built, labeled, and appropriate to the data) | 15 |
+| Graph(s) (correctly chosen for variable type, labeled, titled) | 20 |
+| Descriptive statistics (correctly computed and matched to variable type, interpreted) | 15 |
+| Overall clarity and professionalism (renders cleanly, organized, appropriate for a managerial audience) | 5 |
+| **Total** | **100** |
+
+## Submission Instructions {#sec-mod1-assignment-submission}
+
+::: {.callout-important collapse="false" title="Submit on Canvas"}
+1. Render your `.qmd` file to `.pdf`.
+2. Submit **both** your `.qmd` source file and the rendered `.pdf` file to the Module 1 Exploratory Report assignment on Canvas. **If you worked in Excel**, also submit your `.xlsx` workbook as a third file.
+3. Name your files `lastname_firstname_module1.qmd`, `lastname_firstname_module1.pdf`, and (if applicable) `lastname_firstname_module1.xlsx`.
+4. Late submissions follow the course late-work policy stated in the syllabus.
+:::

@@ -1,0 +1,85 @@
+---
+title: "Growth vs. Cash Flow: Preparing for the Bank"
+subtitle: "Module 5, Part 3 (December 4)"
+author: "QBA 5330"
+format:
+  revealjs:
+    theme: simple
+    slide-number: true
+    footer: "QBA 5330 | Module 5 | Part 3"
+    transition: fade
+    incremental: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+## What the Bank Actually Wants to Know
+
+- Not: "will revenue keep growing?" (Part 2 already answered: yes, comfortably)
+- Actually: **growth prospects *and* cash-flow projections**
+
+- **Revenue growth and cash-flow health are not the same question.**
+
+## Two Loan Covenants
+
+- Long-term debt cannot exceed **3.25 &times; EBITDA**
+- EBITDA must be at least **2.0 &times; fixed financial charges** (interest + lease rentals)
+
+## Computing Both, Live
+
+```{r}
+#| echo: true
+ebit_2006 <- 3018; da_2006 <- 669
+ebitda_2006 <- ebit_2006 + da_2006
+ebitda_2006
+
+interest_2006 <- 658; lease_rentals <- 965
+fixed_charges <- interest_2006 + lease_rentals
+coverage_ratio <- ebitda_2006 / fixed_charges
+coverage_ratio
+```
+
+## Two Very Different Pictures
+
+```{r}
+#| echo: true
+current_debt <- 9000
+max_allowed_debt <- 3.25 * ebitda_2006
+c(max_allowed = max_allowed_debt, headroom = max_allowed_debt - current_debt)
+```
+
+- Debt cap: **~25% headroom**
+- Coverage ratio: **2.27x vs. 2.0x minimum — only ~14% cushion**
+
+## Activity: Is Growth Financially Sustainable?
+
+Using the 2007 scenarios from Part 2 and the covenant numbers above:
+
+1. Would rising interest expense (from debt-financed growth) push coverage below 2.0x?
+2. Does EBITDA growth loosen the covenants, or could margin compression tighten them?
+3. Which covenant should the CEO actually worry about?
+4. **Draft a 2–3 sentence recommendation for the bank meeting.**
+
+::: {.notes}
+Q1: fixed charges can rise to EBITDA/2.0 ≈ $1,843,500 before breaching, versus $1,623,000 today — room for only about $220,000 more. Q3: the coverage ratio, since it has far less percentage cushion (14%) than the debt cap (25%) — same binding-vs-non-binding logic from week_13_02.
+:::
+
+## Report-Outs
+
+**Does your recommendation address the coverage-ratio cushion specifically, or just "pursue the optimistic scenario"?**
+
+## Module 5 Wrap-Up
+
+What this module added:
+
+- The full forecasting toolkit (naive &rarr; regression-based)
+- Formal accuracy and forecast-interval concepts
+- Scenario analysis — applied to a real financing decision
+
+## Looking Ahead to Tomorrow (12/5)
+
+From **prediction** ("what's likely to happen?") to **prescription** ("what should we do, given real limits on resources?").
+
+**Next: Module 6, the Petro Refinery case.**

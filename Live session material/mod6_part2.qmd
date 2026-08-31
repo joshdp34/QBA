@@ -1,0 +1,82 @@
+# Instructor Guide — Part 2 (12/5, Hour 2): The Value of an Extra Hour — Sensitivity Analysis {#sec-mod6-part2-guide}
+
+::: {.callout-note collapse="false" title="How to use this guide"}
+This is a facilitation guide for the instructor, not student-facing reading. It pairs with the slide deck `mod6_part2_slides.qmd`. Students arrive having read shadow prices, slack, and objective coefficient ranging (@sec-week13-02) on the furniture example, and just built and solved the real Petro Refinery model in Part 1. This hour generates Petro's actual Sensitivity Report and uses it to answer concrete "is it worth it?" capacity questions, exactly the kind of managerial judgment call the case is designed to teach.
+:::
+
+## Session Objectives
+
+By the end of this period, students should be able to:
+
+1. Generate and correctly read a Solver Sensitivity Report for a real product-mix problem.
+2. Compute the dollar value of a specific proposed capacity expansion, and correctly recognize when a proposed increase falls outside a shadow price's valid range.
+3. Explain why a non-binding resource has no value to expand, regardless of how cheaply it could be added.
+
+## Timing at a Glance
+
+| Time | Segment | Format |
+|---|---|---|
+| 0:00–0:05 | Reconnect: from binding/slack to dollar values | Instructor-led |
+| 0:05–0:20 | Live build: generating and reading the Sensitivity Report | Live coding (Excel + R) |
+| 0:20–0:50 | Team activity: Is It Worth It? | Small groups (3–4) |
+| 0:50–1:00 | Debrief | Whole-class discussion |
+
+## Detailed Run of Show
+
+### Reconnect: From Binding/Slack to Dollar Values (5 min)
+
+Recall Part 1's close: distillation is non-binding, conversion and blending are both binding. Pose the sharper question this hour answers: **exactly how much** would an extra hour of conversion or blending be worth, in dollars, and how far can capacity change before that dollar value stops applying?
+
+### Live Build: Generating and Reading the Sensitivity Report (15 min)
+
+In Excel, after Solver finds a solution, select **Sensitivity** from the Reports list before closing the Solver Results dialog. Walk through Petro's real report live:
+
+```{r}
+#| echo: true
+library(lpSolve)
+obj <- c(10, 12.5)
+mat <- matrix(c(2, 2,
+                 2, 3,
+                 3, 2.5), nrow = 3, byrow = TRUE)
+rhs <- c(3000, 2400, 2400)
+sol <- lp("max", obj, mat, c("<=", "<=", "<="), rhs, compute.sens = TRUE)
+
+data.frame(resource = c("Distillation", "Conversion", "Blending"),
+           shadow_price = sol$duals[1:3],
+           rhs_from = sol$duals.from[1:3], rhs_to = sol$duals.to[1:3])
+```
+Distillation's shadow price is **\$0** (non-binding, confirmed formally). Conversion's shadow price is **\$3.125 per hour**, valid as long as conversion capacity stays between 1,600 and 2,880 hours. Blending's shadow price is **\$1.25 per hour**, valid between 2,000 and 3,600 hours.
+
+::: {.example title="Reproducing the case's own worked example"}
+The case itself works through one example live: if Petro could add 100 hours of conversion capacity, the value would be $100 \times \$3{,}125 = \$312{,}500$ (100 hours falls comfortably within conversion's 480-hour allowable increase). Reproduce this calculation with the room before moving to the team activity, it's the exact template every "is it worth it?" question in this section follows.
+:::
+
+### Team Activity: Is It Worth It? (30 min)
+
+::: {.example title="Three capacity-expansion offers"}
+Using the shadow prices and valid ranges above, evaluate each offer. For each: compute the value of the added capacity, check whether the proposed increase falls within the shadow price's valid range, and decide whether Petro should accept.
+
+1. A contractor offers to add **150 hours of conversion capacity** for **\$400,000**.
+2. A supplier offers **500 extra hours of blending capacity** for **\$550,000**.
+3. An engineering firm offers to add **1,000 hours of distillation capacity** for **\$50,000**, a very low price.
+4. A fourth contractor offers to add **600 hours of conversion capacity** for **\$1,800,000** (note: this exceeds conversion's allowable increase).
+:::
+
+Circulate. Expected answers, and where teams tend to get stuck:
+
+1. **Worth it.** 150 hours is within conversion's 480-hour allowable increase. Value $= 150 \times 3.125 = \$468{,}750$, which exceeds the \$400,000 cost, a net gain of \$68,750.
+2. **Worth it.** 500 hours is within blending's 1,200-hour allowable increase. Value $= 500 \times 1.25 = \$625{,}000$, exceeding the \$550,000 cost, a net gain of \$75,000.
+3. **Not worth it, at any price above \$0.** Distillation is non-binding; its shadow price is zero regardless of how cheap the offer is. Watch for teams tempted by the low \$50,000 price tag, push them to justify the purchase in terms of *added contribution*, which is exactly zero here.
+4. **The trap question.** 600 hours *exceeds* conversion's 480-hour allowable increase, so simply multiplying $600 \times 3.125 = \$1{,}875{,}000$ and comparing it to the \$1,800,000 cost is **not valid**. Beyond 480 additional hours, a different constraint would become binding and the true marginal value per additional hour would change (almost certainly falling below \$3.125/hour). The honest answer is that the shadow price alone cannot evaluate this offer; re-solving the LP with the proposed new capacity would be required to know for certain.
+
+### Debrief (10 min)
+
+Cold-call teams for offers 3 and 4 specifically, these are the two designed to catch a common shortcut (ignoring a zero shadow price because the price is low; extrapolating a shadow price past its valid range). Make explicit that both are the same underlying lesson from @sec-week13-02: a shadow price is a *local* rate of change, not a universal price tag.
+
+## Recap for the Instructor
+
+| **Keyword** | **Where it was taught** |
+|---|---|
+| Shadow prices, valid ranges | @sec-week13-02 |
+| Petro's real Sensitivity Report | This session (drawn from the case) |
+| Evaluating capacity-expansion offers | This session (activity) |

@@ -1,0 +1,74 @@
+# Instructor Guide — Part 2 (10/16, Hour 2): Confidence Intervals for Proportions and Means {#sec-mod2-part2-guide}
+
+::: {.callout-note collapse="false" title="How to use this guide"}
+This is a facilitation guide for the instructor, not student-facing reading. It pairs with the slide deck `mod2_part2_slides.qmd`. This hour builds directly on Part 1: students already have the pilot point estimates and standard errors for the retailer's national-launch decision. Now they turn those into confidence intervals, using the machinery from @sec-week05-01 (proportions) and @sec-week05-02 (means), and use those intervals to actually inform the launch decision.
+:::
+
+## Session Objectives
+
+By the end of this period, students should be able to:
+
+1. Construct a 95% confidence interval for a proportion and for a mean, from pilot data, in both R and Excel.
+2. Correctly interpret a confidence interval (and correctly avoid the common "95% probability" misinterpretation).
+3. Use a confidence interval, not just a point estimate, to reason about whether the pilot data clears a business decision threshold.
+
+## Timing at a Glance
+
+| Time | Segment | Format |
+|---|---|---|
+| 0:00–0:05 | Re-entry: from standard error to a range | Instructor-led |
+| 0:05–0:20 | Live build: confidence interval for the pilot conversion rate | Live coding (R + Excel) |
+| 0:20–0:35 | Live build: confidence interval for the pilot order value | Live coding (R + Excel) |
+| 0:35–0:50 | Applied exercise: does the pilot clear leadership's bar? | Small groups (3–4) |
+| 0:50–1:00 | Debrief and transition to break | Instructor-led |
+
+## Detailed Run of Show
+
+### Re-entry: From Standard Error to a Range (5 min)
+
+Recall Part 1 ended on a cliffhanger: we have a point estimate and a standard error, but not yet a defensible range. Today's hour closes that gap: point estimate $\pm$ critical value $\times$ standard error.
+
+### Live Build: Confidence Interval for the Pilot Conversion Rate (15 min)
+
+Reconstruct Example 5.1 (@sec-week05-01) live, projected, rather than just reading it: $\hat{p}=0.15$, $n=200$, 95% confidence.
+$$
+0.15 \pm 1.96\sqrt{\frac{0.15(0.85)}{200}} = 0.15 \pm 0.0494 = (0.101, \, 0.199)
+$$
+Show both the by-hand calculation and the R/Excel versions from @sec-week05-01 (`qnorm(0.975)`, `NORM.S.INV(0.975)`). Say the result out loud the way you'd say it to a VP: "We're 95% confident the true national conversion rate is between about 10.1% and 19.9%."
+
+### Live Build: Confidence Interval for the Pilot Order Value (15 min)
+
+Reconstruct Example 5.3 (@sec-week05-02) live: $\bar{x}=\$71.50$, $s=\$42$, $n=25$, $df=24$, 95% confidence.
+$$
+71.50 \pm 2.064 \times \frac{42}{\sqrt{25}} = 71.50 \pm 17.34 = (54.16, \, 88.84)
+$$
+Flag explicitly that this uses a $t$ critical value, not $z$, since $\sigma$ is unknown and estimated by $s$. Show `qt(0.975, df = 24)` and `T.INV.2T(0.05, 24)` side by side.
+
+### Applied Exercise: Does the Pilot Clear Leadership's Bar? (15 min)
+
+Introduce a decision threshold, this is the moment the abstract intervals become a business call:
+
+::: {.example title="Leadership's stated bar for a national launch"}
+Leadership has said the launch is worth pursuing only if they can be reasonably confident that the *true* national conversion rate is **at least 10%**, and the *true* national average order value is **at least $60**.
+:::
+
+Have groups check both intervals against these thresholds and report out:
+
+- Conversion: the interval $(0.101, 0.199)$ sits *just* above 10%, the lower bound barely clears the bar. Worth a discussion: how comfortable should leadership be with "just barely"?
+- Order value: the interval $(54.16, 88.84)$ **includes** values below $60, so the pilot data cannot rule out a true average order value below leadership's threshold, even though the point estimate ($71.50) looks comfortably above it.
+
+::: {.callout-tip collapse="true" title="The point of this exercise"}
+This is deliberately a mixed signal, one metric barely clears the bar, the other's point estimate looks fine but its interval doesn't rule out falling short. That's realistic, and it's exactly why reporting an interval instead of a bare point estimate matters: a point-estimate-only report ($71.50, comfortably above $60) would have hidden real cause for caution.
+:::
+
+### Debrief and Transition to Break (10 min)
+
+Close by naming what's still missing: intervals tell us a *range* of plausible values, but leadership actually asked a yes/no question ("does the average order value exceed $60?"). Formalizing that yes/no question is exactly what a hypothesis test does, which is where the next hour picks up.
+
+## Recap for the Instructor
+
+| **Keyword** | **Where it was taught** |
+|---|---|
+| Confidence interval for a proportion | @sec-week05-01 |
+| Confidence interval for a mean ($t$-distribution) | @sec-week05-02 |
+| Correct interpretation of a confidence level | @sec-week05-01 |

@@ -4,7 +4,7 @@
 
 Before any analytical technique is useful, you need to get a dataset into your software, understand what each row and column actually represents, and look at it visually. These three skills&mdash;**importing**, **identifying**, and **graphing**&mdash;are the mechanical starting point of every module in this course, so it's worth slowing down and doing them carefully here, before the pace picks up.
 
-We'll work with a single running example throughout this reading: `readiness_store_sales.csv`, which tracks four months of performance across six retail stores.
+We'll work with a single running example throughout this reading: [`readiness_store_sales.csv`](data/readiness_store_sales.csv), which tracks four months of performance across six retail stores.
 
 | Column | Description |
 |---|---|
@@ -54,7 +54,7 @@ The line `sales <- read_csv(...)` reads the file and stores it in an object name
 
 ## Identifying the Observational Unit
 
-Once a dataset is imported, the very first question to ask&mdash;before computing anything&mdash;is: **what does one row represent?** This is called the **observational unit** (sometimes called the *unit of analysis*). Every other decision about how to summarize, graph, or model the data depends on getting this right.
+Once a dataset is imported, the very first question to ask, before computing anything, is: **what does one row represent?** This is called the **observational unit** (sometimes called the *unit of analysis*). Every other decision about how to summarize, graph, or model the data depends on getting this right.
 
 ::: {.example title="Example 1.5: Finding the observational unit"}
 In R, `glimpse()` is a quick way to see the shape of a dataset: how many rows and columns it has, along with each column's name, type, and a preview of its values.
@@ -64,7 +64,7 @@ In R, `glimpse()` is a quick way to see the shape of a dataset: how many rows an
 glimpse(sales)
 ```
 
-The output shows 24 rows. Looking at the data, each row corresponds to one combination of `store_id` and `month`&mdash;for example, store 101 in January is one row, and store 101 in February is a different row. So the observational unit here is **one store, in one month**&mdash;not "one store" (which would combine all four months together) and not "one month" (which would combine all six stores together).
+The output shows 24 rows. Looking at the data, each row corresponds to one combination of `store_id` and `month`: for example, store 101 in January is one row, and store 101 in February is a different row. So the observational unit here is **one store, in one month**. Not "one store" (which would combine all four months together) and not "one month" (which would combine all six stores together).
 :::
 
 Getting the observational unit wrong is a common source of mistakes. If you mistakenly treated each row as "one store" (ignoring that stores repeat across months), you might average `revenue` down to one number per store-month combination and then, without realizing it, treat multiple rows for the same store as though they were independent stores.

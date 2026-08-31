@@ -1,0 +1,99 @@
+# Module 2 Deliverable: Risk and Uncertainty Exercise {#sec-mod2-assignment}
+
+::: {.callout-important collapse="false" title="Due date"}
+**Due: [insert date — instructor to set; suggested: shortly after 10/17, before Module 4 on 11/13]**, submitted on Canvas. See @sec-mod2-assignment-submission for exact submission instructions.
+:::
+
+## Overview
+
+Your second deliverable applies the fourth step of the analytics decision cycle, quantify uncertainty, to a single business risk scenario. Across Weeks 2 through 6 and our October 16 live session, you built three complementary tools for reasoning about uncertainty: probability and expected value, confidence intervals, and hypothesis tests. This exercise asks you to apply all three to one scenario, calculating results in Excel and reproducing or extending the analysis in R, exactly as we did live for the retailer's pilot launch decision.
+
+This is a **calculation-and-interpretation exercise**, shorter and more focused than the Module 1 report. You are not comparing multiple groups to each other and you are not building a predictive model, those tools come later. The goal is to show that you can move cleanly from a business risk question to a defensible, uncertainty-aware answer.
+
+## Choosing Your Scenario
+
+You have two options:
+
+1. **Extend the retailer pilot-launch scenario** from our October 16 session. Using the launch-cost inputs from Part 1 (expected incremental profit of \$2,600,000, standard deviation \$1,800,000, launch cost \$2,000,000), and modeling incremental profit as approximately normally distributed, compute the probability the launch actually results in a loss. Then choose **one** of the two pilot metrics (conversion rate or order value) and build a fresh confidence interval and hypothesis test for it, at a **90% confidence level instead of 95%**, so your numbers are not simply a repeat of the live session.
+
+2. **Use a risk or uncertainty scenario from your own workplace**, involving demand, quality, conversion, or customer behavior, provided it includes (a) an uncertain outcome that can reasonably be modeled with a probability distribution, and (b) sample data (a proportion or a set of measurements) suitable for a confidence interval and a hypothesis test against some meaningful benchmark. **Workplace scenarios must be approved by the instructor before you begin.** Email a short description (the decision, the uncertain outcome, and your data source) at least one week before the due date.
+
+## What Your Report Must Include
+
+Your rendered Quarto report should contain the following sections, in this order.
+
+### 1. Framing (short)
+
+In 2&ndash;3 sentences, state the business decision your analysis informs and what's uncertain about it, following the framing questions from Week 1: The Analytics Decision Cycle: What decision is on the table? Who would make it? What would change depending on the answer?
+
+### 2. Probability and Expected Value Analysis
+
+Model the key uncertain outcome in your scenario as a random variable, using an appropriate distribution from Weeks 2&ndash;3 (binomial, normal, or a distribution built from your own data). Compute at least one of: an expected value, a probability relevant to the decision (e.g., the probability of a loss, a shortfall, or a defect), or both. State the result in plain business language, not just as a formula.
+
+::: {.callout-note collapse="false" title="This does not need to be elaborate"}
+One well-chosen probability, computed correctly and interpreted clearly, is worth more than several loosely connected calculations. If you're using the retailer scenario, this is the "probability of a loss" calculation from Option 1 above.
+:::
+
+### 3. Confidence Interval
+
+Build a confidence interval (for a proportion or a mean, whichever fits your scenario) from your sample data, and interpret it correctly, in the sense from @sec-week05-01, **not** as "a 90% (or 95%) probability the true value is in this interval."
+
+### 4. Hypothesis Test
+
+Test your sample result against a meaningful benchmark (a historical value, an industry standard, a target set by leadership), stating $H_0$ and $H_a$ clearly. Report your conclusion at your chosen significance level, and explicitly connect it back to your confidence interval, does the benchmark fall inside or outside your interval, and does that match your test's conclusion?
+
+### 5. Recommendation
+
+A short paragraph (3&ndash;5 sentences), written **for a manager, not a statistician**, that ties Sections 2&ndash;4 together into a recommendation. Be explicit about the uncertainty in your answer, avoid stating your point estimate as if it were a certainty, and avoid statistical jargon.
+
+::: {.callout-tip collapse="true" title="What separates a strong recommendation from a weak one"}
+A weak recommendation reports a number and stops ("The pilot conversion rate was 15%."). A strong recommendation states what the evidence does and doesn't support, given the uncertainty ("We can't yet rule out that the true conversion rate is as low as 10%, right at leadership's minimum bar, so I'd recommend a larger pilot before committing to a national rollout.").
+:::
+
+## What Is *Not* Required for This Assignment
+
+- Comparing two or more groups to each other, independent-samples tests, paired comparisons, or ANOVA (Module 3)
+- Regression, forecasting, or any predictive model (Modules 4&ndash;5)
+- A long narrative report; this is a calculation-and-interpretation exercise, not a full business report
+
+## Format and Length
+
+- Written and rendered as a **Quarto document** (`.qmd` rendered to `.pdf`).
+- Use headings matching the five sections above.
+- Code chunks may be shown or hidden (`echo: true`/`false`) at your discretion, but your report should read cleanly even if a reader skips the code entirely.
+- A well-executed exercise is typically **1 rendered page**, not counting code output. Concise and clear beats long.
+
+## If You're Working in Excel
+
+You are welcome to do your calculations in Excel instead of R. Your final submission still needs to be a single rendered Quarto report:
+
+1. **Do your calculations in Excel** (`NORM.DIST`, `NORM.S.INV`, `T.INV.2T`, or the by-hand formulas from your reading, whichever fit your scenario).
+
+2. **Report your results in your Quarto document as text and formulas**, showing the numbers you plugged in and the result, the same way you'd write up a calculation by hand.
+
+3. **Submit your Excel workbook as a third file** alongside your `.qmd` and `.pdf` (see @sec-mod2-assignment-submission), so we can see the actual formulas behind your numbers.
+
+::: {.callout-note collapse="false" title="Why the workbook matters for grading"}
+A final number alone doesn't show us how you got there. Submitting the `.xlsx` file lets us verify your calculation was set up correctly, the same role a visible R code chunk plays for students working in R.
+:::
+
+## Grading Rubric
+
+| Component | Points |
+|---|---|
+| Framing (clear, specific decision and source of uncertainty) | 10 |
+| Probability / expected value analysis (correct distribution, correct calculation, plain-language interpretation) | 20 |
+| Confidence interval (correctly constructed and correctly interpreted) | 25 |
+| Hypothesis test (correct hypotheses, correct conclusion, connected back to the confidence interval) | 25 |
+| Recommendation (clear, plain-language, honest about uncertainty) | 15 |
+| Overall clarity and professionalism (renders cleanly, organized, appropriate for a managerial audience) | 5 |
+| **Total** | **100** |
+
+## Submission Instructions {#sec-mod2-assignment-submission}
+
+::: {.callout-important collapse="false" title="Submit on Canvas"}
+1. Render your `.qmd` file to `.pdf`.
+2. Submit **both** your `.qmd` source file and the rendered `.pdf` file to the Module 2 Risk and Uncertainty Exercise assignment on Canvas. **If you worked in Excel**, also submit your `.xlsx` workbook as a third file.
+3. Name your files `lastname_firstname_module2.qmd`, `lastname_firstname_module2.pdf`, and (if applicable) `lastname_firstname_module2.xlsx`.
+4. Late submissions follow the course late-work policy stated in the syllabus.
+:::

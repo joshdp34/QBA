@@ -1,0 +1,87 @@
+---
+title: "Confidence Intervals for Proportions and Means"
+subtitle: "Module 2, Part 2 (October 16)"
+author: "QBA 5330"
+format:
+  revealjs:
+    theme: simple
+    slide-number: true
+    footer: "QBA 5330 | Module 2 | Part 2"
+    transition: fade
+    incremental: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+## Where We Left Off
+
+We have a point estimate and a standard error for the pilot launch data.
+
+**Missing:** a defensible range to bring to leadership.
+
+$$
+\text{point estimate} \;\pm\; \text{critical value} \times \text{standard error}
+$$
+
+## Confidence Interval for the Conversion Rate
+
+$\hat{p} = 0.15$, $n = 200$, 95% confidence
+
+```{r}
+#| echo: true
+p_hat <- 0.15
+n <- 200
+se <- sqrt(p_hat * (1 - p_hat) / n)
+z <- qnorm(0.975)
+
+c(lower = p_hat - z * se, upper = p_hat + z * se)
+```
+
+*"We're 95% confident the true national conversion rate is between about 10.1% and 19.9%."*
+
+## Confidence Interval for the Order Value
+
+$\bar{x} = \$71.50$, $s = \$42$, $n = 25$, 95% confidence
+
+```{r}
+#| echo: true
+x_bar <- 71.50
+s <- 42
+n <- 25
+se <- s / sqrt(n)
+t <- qt(0.975, df = n - 1)
+
+c(lower = x_bar - t * se, upper = x_bar + t * se)
+```
+
+::: {.notes}
+Flag explicitly: this uses a t critical value, not z, since sigma is unknown and estimated by s.
+:::
+
+## Your Turn: Does the Pilot Clear the Bar? (15 minutes)
+
+Leadership says the launch is worth pursuing only if:
+
+- True national conversion rate is **at least 10%**
+- True national average order value is **at least \$60**
+
+- **Check both intervals against these thresholds. Report out.**
+
+## What Your Group Should Find
+
+- Conversion: $(0.101, 0.199)$ — barely clears 10%
+- Order value: $(54.16, 88.84)$ — **includes** values below \$60
+
+::: {.notes}
+This is a deliberately mixed signal. One metric barely clears the bar; the other's point estimate looks fine but its interval doesn't rule out falling short. A point-estimate-only report would have hidden this.
+:::
+
+## Before the Break
+
+- Confidence intervals give us a **range** of plausible values.
+
+- But leadership asked a **yes/no question**: does the average order value exceed \$60?
+
+- Formalizing that yes/no question is exactly what a **hypothesis test** does.

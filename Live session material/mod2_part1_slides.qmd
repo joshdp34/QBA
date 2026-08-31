@@ -1,0 +1,104 @@
+---
+title: "Quantifying Uncertainty"
+subtitle: "QBA 5330 — Module 2, Part 1 (October 16)"
+author: "QBA 5330"
+format:
+  revealjs:
+    theme: simple
+    slide-number: true
+    footer: "QBA 5330 | Module 2 | Part 1"
+    transition: fade
+    incremental: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+## Where We're Headed Today
+
+- **Part 1:** Quantifying uncertainty, from probability to sampling distributions
+- **Part 2:** Confidence intervals for proportions and means
+- **Part 3:** Introduction to hypothesis testing, and launching the Module 2 deliverable
+
+::: {.notes}
+Module 1 handled framing, obtaining, and summarizing data. The five weeks since 9/4 built the entire toolkit for quantifying uncertainty. Today we use it, on one running business decision.
+:::
+
+## Today's Business Decision
+
+> A retailer has piloted a new online storefront in a sample of markets. Should it launch nationally?
+
+We'll carry this same decision through all three parts.
+
+## A Quick Example
+
+Leadership estimates:
+
+- National launch cost: **\$2,000,000**
+- Expected incremental profit: **\$2,600,000**
+- Standard deviation of that profit estimate: **\$1,800,000**
+
+- **Is this a "safe bet"?**
+
+::: {.notes}
+Expected value alone says yes (margin of $600,000), but the standard deviation is large relative to that margin, so the chance of a loss is far from zero. This is why we don't stop at a point estimate.
+:::
+
+## Recap: Expected Value and Risk
+
+- Expected value is a **long-run average**, not a guarantee for any one outcome
+- A positive expected value can still carry real risk
+- We need both the **center** (expected value) and the **spread** (standard deviation) to reason about risk
+
+## Recap: Sampling Distributions
+
+- A sample mean or sample proportion is a **statistic**
+- Every statistic has a **sampling distribution**: how much it would vary across repeated samples
+- The **standard error** is the standard deviation of that sampling distribution
+
+## The Two Standard Error Formulas
+
+$$
+\text{SE}_{\bar{x}} = \frac{s}{\sqrt{n}} \qquad\qquad \text{SE}_{\hat{p}} = \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}
+$$
+
+A bigger sample doesn't eliminate uncertainty. It **shrinks the standard error**.
+
+## The Pilot Data
+
+- **Conversion:** $n=200$ visitors, 30 converted, $\hat{p} = 0.15$
+- **Order value:** $n=25$ orders, $\bar{x} = \$71.50$, $s = \$42$
+
+*(You've seen these numbers before, in your Week 4–6 reading.)*
+
+## Your Turn (20 minutes)
+
+In your group, compute both standard errors:
+
+```{r}
+#| echo: true
+p_hat <- 0.15; n_conv <- 200
+
+```
+
+
+
+```{r}
+#| echo: true
+s <- 42; n_order <- 25
+
+```
+
+**Then discuss:** what does each number mean for the launch decision?
+
+## Before the Break
+
+We now have:
+
+- A point estimate ($\hat{p}=0.15$, $\bar{x}=\$71.50$)
+- A sense of how much each could bounce around (the standard errors)
+
+- **What we don't have yet:** a defensible *range* to bring to leadership.
+
+- That's next.

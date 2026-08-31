@@ -1,0 +1,78 @@
+# Instructor Guide — Part 3 (10/16, Hour 3): Hypothesis Testing and Launching the Module 2 Deliverable {#sec-mod2-part3-guide}
+
+::: {.callout-note collapse="false" title="How to use this guide"}
+This is a facilitation guide for the instructor, not student-facing reading. It pairs with the slide deck `mod2_part3_slides.qmd`. Students arrive having already read the mechanics of one-sample hypothesis tests (@sec-week06-01), so this hour reconstructs real test statistics live rather than only using the conceptual, computation-free version from @sec-week05-03. This is the final hour before the two-day weekend shifts into Module 3 territory (comparisons, ANOVA, causality, and the Google Project Oxygen case) on 10/17.
+:::
+
+## Session Objectives
+
+By the end of this period, students should be able to:
+
+1. Distinguish the business question a hypothesis test answers ("has this changed from a known benchmark?") from the question a confidence interval answers ("what range is the true value plausibly in?").
+2. Reconstruct a one-sample test for a proportion and a mean from real pilot data, and connect the conclusion back to the confidence intervals from Part 2.
+3. State clearly what the Module 2 deliverable requires.
+
+## Timing at a Glance
+
+| Time | Segment | Format |
+|---|---|---|
+| 0:00–0:05 | Re-entry: a different question than Part 2 asked | Instructor-led |
+| 0:05–0:20 | Live build: testing the pilot conversion rate against history | Live coding (R + Excel) |
+| 0:20–0:35 | Live build: testing the pilot order value against history | Live coding (R + Excel) |
+| 0:35–0:45 | Synthesis: three lenses on one pilot | Whole-class discussion |
+| 0:45–1:00 | Launch the Module 2 deliverable; wrap-up | Instructor-led |
+
+## Detailed Run of Show
+
+### Re-entry: A Different Question Than Part 2 Asked (5 min)
+
+Part 2 asked: *is the true national rate at least as high as leadership's minimum bar?* Today's question is related but distinct: *has the new storefront's pilot performance actually changed from the old storefront's historical numbers?* That second question is exactly what a hypothesis test answers, and @sec-week06-01 already gave us the mechanics.
+
+### Live Build: Testing the Pilot Conversion Rate Against History (15 min)
+
+Reconstruct Example 6.3 (@sec-week06-01) live: the old storefront's historical conversion rate is $p_0=0.12$; the pilot found $\hat{p}=0.15$ from $n=200$.
+$$
+H_0: p=0.12 \qquad H_a: p \neq 0.12
+$$
+$$
+z = \frac{0.15-0.12}{\sqrt{0.12(0.88)/200}} \approx 1.305, \qquad \text{two-sided } p\text{-value} \approx 0.192
+$$
+At $\alpha=0.05$, we **fail to reject** $H_0$. Reconnect this explicitly to Part 2: the 95% CI for $p$, $(0.101, 0.199)$, contains $0.12$, so the test and the interval agree, exactly the CI-test equivalence from @sec-week05-03 and @sec-week06-01.
+
+### Live Build: Testing the Pilot Order Value Against History (15 min)
+
+Reconstruct Example 6.1 (@sec-week06-01) live: the historical average order value is $\mu_0=65$; the pilot found $\bar{x}=\$71.50$, $s=\$42$, $n=25$.
+$$
+H_0: \mu=65 \qquad H_a: \mu \neq 65
+$$
+$$
+t = \frac{71.50-65}{42/\sqrt{25}} \approx 0.774, \qquad df=24, \qquad \text{two-sided } p\text{-value} \approx 0.45
+$$
+Again, **fail to reject** $H_0$, consistent with the Part 2 interval $(54.16, 88.84)$ containing $65$.
+
+### Synthesis: Three Lenses on One Pilot (10 min)
+
+Bring the whole hour (and the last two) together on the board or a shared slide:
+
+| Question | Tool | Answer for this pilot |
+|---|---|---|
+| What's our best single guess? | Point estimate | $\hat{p}=0.15$; $\bar{x}=\$71.50$ |
+| What range is the true value plausibly in? | Confidence interval | $(0.101,0.199)$; $(\$54.16,\$88.84)$ |
+| Does the true value clear leadership's minimum bar? | CI vs. threshold | Conversion barely clears 10%; order value's interval dips below \$60 |
+| Has performance actually changed from the old storefront? | Hypothesis test | Fail to reject for both, no statistically detectable change |
+
+::: {.callout-tip collapse="true" title="The honest, nuanced takeaway to draw out of the room"}
+None of these tools gives leadership a clean "yes, launch" or "no, don't." The new storefront hasn't been shown to perform *differently* from the old one in a statistically detectable way, and its order value in particular can't be confidently said to clear the minimum bar for a national launch. That's a realistic, not a disappointing, outcome: good analytics narrows the range of reasonable disagreement, it doesn't always resolve it. A larger pilot might narrow these intervals enough to settle the question either way, which is a natural segue if you want to briefly mention sample-size planning as a follow-up question, without going into the formal formula.
+:::
+
+### Launch the Module 2 Deliverable; Wrap-Up (15 min)
+
+State the deliverable plainly: a short **risk and uncertainty exercise**, applying this same three-lens approach (expected value/probability, confidence interval, hypothesis test) to a business scenario involving demand, quality, conversion, or customer behavior, calculated in Excel and reproduced or extended in R. Students may use a variation on today's retailer scenario or a scenario from their own workplace, subject to the same approval process used in Module 1. Close the session; remind students that Saturday (10/17) shifts from *quantifying* uncertainty to *comparing groups and evaluating causal claims*, using the Google Project Oxygen case.
+
+## Recap for the Instructor
+
+| **Keyword** | **Where it was taught** |
+|---|---|
+| One-sample test for a proportion | @sec-week06-01 |
+| One-sample $t$-test for a mean | @sec-week06-01 |
+| CI-test equivalence | @sec-week05-03, @sec-week06-01 |

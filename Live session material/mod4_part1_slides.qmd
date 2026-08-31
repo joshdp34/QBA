@@ -1,0 +1,121 @@
+---
+title: "From Comparing Groups to Modeling Relationships"
+subtitle: "Module 4, Part 1 (November 13)"
+author: "QBA 5330"
+format:
+  revealjs:
+    theme: simple
+    slide-number: true
+    footer: "QBA 5330 | Module 4 | Part 1"
+    transition: fade
+    incremental: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+## Where We're Headed Today
+
+- **Part 1:** From comparing groups to modeling relationships
+- **Part 2:** Diagnostics: can this model be trusted?
+- **Part 3:** Logistic regression and the Module 4 deliverable
+
+::: {.notes}
+Module 3 asked "is there a difference?" Today asks "how does x relate to y, and what can we predict?" This is the build-a-model step of the decision cycle.
+:::
+
+## Module 3 vs. Today
+
+- **Module 3:** comparing groups (means, proportions), ANOVA, causality
+- **Today:** *modeling relationships*, predicting one variable from another
+
+## The Analytics Decision Cycle, Revisited
+
+> Frame the decision &rarr; obtain data &rarr; summarize evidence &rarr; quantify uncertainty &rarr; **build a model** &rarr; recommend an action &rarr; communicate the result
+
+- Everything through Module 3 sat in steps 1&ndash;4
+- Today: step 5
+
+## A Familiar Dataset, One Predictor
+
+$$\widehat{\text{sales}} = 10.50 + 0.0527(\text{tv})$$
+
+```{r}
+#| echo: true
+#| message: false
+library(tidyverse)
+ads <- read_csv("data/advertising.csv")
+model_tv <- lm(sales ~ tv, data = ads)
+summary(model_tv)$r.squared
+```
+
+## What's Missing?
+
+- The company also spends on **radio** and **online** advertising
+- A model using only `tv` might be silently absorbing their effects too
+
+## Adding Predictors, Live
+
+```{r}
+#| echo: true
+model_full <- lm(sales ~ tv + radio + online, data = ads)
+summary(model_full)$coefficients
+```
+
+## Watch R-Squared Climb
+
+| Model | R² | Adjusted R² |
+|---|---|---|
+| tv only | 0.714 | 0.712 |
+| tv + radio | 0.856 | 0.854 |
+| tv + radio + online | 0.874 | 0.872 |
+
+- Adjusted R² rises **right alongside** raw R² &rarr; real signal, not padding
+
+## The tv Coefficient Actually Moved
+
+- Alone: $b_{tv} = 0.0527$
+- With radio and online in the model: $b_{tv} = 0.0512$
+
+- **"Holding other predictors constant" is not just a phrase, it changes the number.**
+
+## Quick Recap: Categorical Predictors
+
+- A dummy coefficient is a comparison **to the reference category**
+- Changing the reference category changes what's *reported*, not what's *predicted*
+
+::: {.notes}
+Recap only, from @sec-week09-02's store-format example. Don't re-derive it.
+:::
+
+## Activity: Interpret This Output (20 minutes)
+
+A snack company surveys 200 households on income, region, and daily servings of fruits/vegetables.
+
+**In groups: what does this model actually tell the company?**
+
+## The Output
+
+```
+household_income  -1.277e-06   p = 0.845
+regionNorth         0.0342     p = 0.879
+regionSouth        -0.3555     p = 0.102
+regionWest         -0.1654     p = 0.449
+
+Adjusted R-squared: 0.0001
+```
+
+::: {.notes}
+Watch for groups calling regionSouth's p = 0.102 "marginally significant." It isn't. This is a deliberately chosen null result.
+:::
+
+## Debrief
+
+- What *is* the honest conclusion here?
+- Is "we found nothing" still a useful answer for the company?
+
+## Before the Break
+
+- We've been trusting every t-test and confidence interval at face value
+- **Hour:** is that trust actually earned?

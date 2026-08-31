@@ -1,0 +1,93 @@
+---
+title: "Sampling and Observational vs. Experimental Data"
+subtitle: "QBA 5330 — Module 1, Part 2 (September 4)"
+author: "QBA 5330"
+format:
+  revealjs:
+    theme: simple
+    slide-number: true
+    footer: "QBA 5330 | Module 1 | Part 2"
+    transition: fade
+    incremental: true
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+## 
+
+We framed a decision in Part 1.
+
+**Now:** where does the data actually come from — and can we trust it?
+
+## Population vs. Sample
+
+Example: a retailer wants average satisfaction across 40,000 loyalty members.
+
+- **Population** — all 40,000 members
+- **Sample** — the members actually surveyed
+- **Sampling frame** — the list you actually draw from (e.g., members with a valid email)
+
+::: {.notes}
+Flag that the sampling frame is often not the same as the true population, and that gap matters.
+:::
+
+## Three Sampling Methods
+
+- **Simple random sampling** — every member has an equal chance
+- **Stratified sampling** — split into subgroups (e.g., tier), sample within each
+- **Convenience sampling** — survey whoever is easiest to reach
+
+## A Line Worth Remembering
+
+> A convenience sample answers "what do the people who were easy to reach think?" — which may or may not be the question you wanted answered.
+
+## Observational Data
+
+We **watch and record** what naturally happens, without intervening.
+
+*Example: comparing revenue at stores that happened to stay open late on their own, vs. stores that didn't.*
+
+## Experimental Data
+
+We **deliberately assign** an intervention and observe the result.
+
+*Example: randomly assigning some stores to stay open late, and comparing to stores that weren't assigned to.*
+
+## The Core Message
+
+Only well-designed experiments, with **random assignment**, let us make confident **causal** claims.
+
+Observational comparisons are often **confounded** — some other difference between groups may be driving the result.
+
+## Does a Wellness Program Reduce Sick Days?
+
+**Observational:** compare sick days between employees who *chose* to enroll and those who didn't.
+
+- Problem: enrollees may already be healthier or more conscientious
+
+**Experimental:** *randomly assign* employees to the program or a control group.
+
+- Groups should be comparable on everything else, *on average*
+
+## Activity: Diagnose the Study {.smaller}
+
+For your scenario, answer:
+
+1. Observational or experimental?
+2. What sampling method (if any)?
+3. What could go wrong with trusting the result?
+
+::: {.notes}
+1. Bank emails survey to all customers with email on file; 8% respond.
+2. Retailer randomly assigns 20 of 100 stores to a new layout, compares to the other 80.
+3. Hospital compares recovery times: patients who requested a specific surgeon vs. assigned-whoever's-available.
+4. University randomly samples 50 students from each of 4 class years (200 total) about textbook costs.
+:::
+
+## Before the Next Break
+
+We now know where trustworthy data comes from.
+
+**Next:** turning it into something we can actually look at — tables, graphs, and summary numbers.

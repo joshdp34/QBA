@@ -1,0 +1,69 @@
+---
+title: "The Value of an Extra Hour: Sensitivity Analysis"
+subtitle: "Module 6, Part 2 (December 5)"
+author: "QBA 5330"
+format:
+  revealjs:
+    theme: simple
+    slide-number: true
+    footer: "QBA 5330 | Module 6 | Part 2"
+    transition: fade
+    incremental: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+## From Binding/Slack to Dollar Values
+
+- Distillation: non-binding
+- Conversion & blending: binding
+
+- **Exactly how much would an extra hour of each be worth?**
+
+## Generating the Sensitivity Report
+
+```{r}
+#| echo: true
+library(lpSolve)
+obj <- c(10, 12.5)
+mat <- matrix(c(2,2, 2,3, 3,2.5), nrow = 3, byrow = TRUE)
+rhs <- c(3000, 2400, 2400)
+sol <- lp("max", obj, mat, c("<=","<=","<="), rhs, compute.sens = TRUE)
+
+data.frame(resource = c("Distillation","Conversion","Blending"),
+           shadow_price = sol$duals[1:3],
+           rhs_from = sol$duals.from[1:3], rhs_to = sol$duals.to[1:3])
+```
+
+## The Case's Own Worked Example
+
+**Adding 100 hours of conversion:**
+
+$$100 \times \$3.125 = \$312{,}500$$
+
+(100 hours is within conversion's 480-hour allowable increase.)
+
+## Activity: Is It Worth It? 
+
+1. +150 conversion hours for **\$400,000**
+2. +500 blending hours for **\$550,000**
+3. +1,000 distillation hours for **\$50,000**
+4. +600 conversion hours for **\$1,800,000**
+
+- **For each: compute the value, check the valid range, decide.**
+
+::: {.notes}
+1. Worth it: 150×3.125=$468,750 > $400,000, gain $68,750.
+2. Worth it: 500×1.25=$625,000 > $550,000, gain $75,000.
+3. Not worth it at any price — distillation is non-binding, shadow price $0.
+4. Trap: 600 hours exceeds conversion's 480-hour allowable increase, so 600×3.125=$1,875,000 is NOT a valid calculation. Would need to re-solve the LP.
+:::
+
+## Debrief
+
+- Offer 3: does a **low price** change the answer?
+- Offer 4: does the shadow price still apply?
+
+- **A shadow price is a *local* rate of change — not a universal price tag.**

@@ -1,0 +1,60 @@
+# Instructor Guide — Part 3 (10/17, Hour 3): Team Report-Outs, Synthesis, and What's Next {#sec-mod3-part3-guide}
+
+::: {.callout-note collapse="false" title="How to use this guide"}
+This is a facilitation guide for the instructor, not student-facing reading. It pairs with the slide deck `mod3_part3_slides.qmd`. This hour closes out both the case discussion and Module 3 as a whole, then previews Module 4. Per the course outline, Project Oxygen's applied work *is* this team-based evaluation of the evidence and proposed improvements, this hour's report-outs and synthesis satisfy that requirement; there is no separate written case deliverable unless you choose to assign one.
+:::
+
+## Session Objectives
+
+By the end of this period, students should be able to:
+
+1. Compare their team's reasoning about Project Oxygen against other teams' reasoning, surfacing disagreement and consensus.
+2. Articulate, as a class, a short list of concrete improvements that would strengthen the causal claim that "managers matter."
+3. Summarize how Module 3's toolkit (comparisons, causation checklist) fits into the full analytics decision cycle, and what's coming next in Module 4.
+
+## Timing at a Glance
+
+| Time | Segment | Format |
+|---|---|---|
+| 0:00–0:05 | Re-entry: quick reminder of the worksheet | Instructor-led |
+| 0:05–0:35 | Team report-outs | Whole-class discussion |
+| 0:35–0:50 | Synthesis: the class's consolidated position | Instructor-led + discussion |
+| 0:50–1:00 | Module 3 wrap-up and Module 4 preview | Instructor-led |
+
+## Detailed Run of Show
+
+### Re-entry: Quick Reminder of the Worksheet (5 min)
+
+Briefly restate the six worksheet prompts from Part 2 so the room is oriented before report-outs begin.
+
+### Team Report-Outs (30 min)
+
+Call on each team's spokesperson for their assigned item (roughly 3&ndash;4 minutes per team, depending on class size). As each team reports, note points of **agreement and disagreement** on the board, especially:
+
+- Which confounders came up more than once (a strong signal they're genuinely important, not idiosyncratic).
+- Whether teams' proposed "stronger designs" actually specified who gets randomly assigned to what, or stayed vague, this is worth calling out live if it happens.
+- Whether teams' final verdicts differed, and why. Disagreement here is a feature, not a problem, this is exactly the kind of judgment call real people-analytics teams have to make.
+
+### Synthesis: The Class's Consolidated Position (15 min)
+
+Pull the board's contents into a short, class-generated list:
+
+::: {.callout-tip collapse="true" title="A representative synthesis (yours will vary by class)"}
+- **Strongest confounders identified:** team quality/resources at time of manager assignment; reverse causation (good teams make managers look good); self-selection into management roles.
+- **Most concrete stronger design proposed:** randomly assign manager-behavior coaching (based on the eight identified attributes) to a subset of managers, holding a comparable group back as a control, then compare team outcomes after a fixed period.
+- **Class verdict:** the evidence is suggestive and internally consistent across several outcomes, but remains observational; a randomized coaching rollout, even a modest pilot, would meaningfully strengthen the causal claim.
+:::
+
+Explicitly tie this back to the analytics decision cycle: the class has just done "quantify uncertainty" and a first pass at "recommend an action" (propose a stronger design), using real, messy business evidence rather than a clean textbook dataset.
+
+### Module 3 Wrap-Up and Module 4 Preview (10 min)
+
+Close out Module 3 by naming what it added to the toolkit: one-sample and two-sample comparisons, paired designs, ANOVA and Tukey's HSD, and, critically, the judgment to ask whether a statistically supported comparison actually supports a *causal* claim. Preview Module 4 (11/13): the course moves from *comparing groups* to *modeling relationships*, regression, the start of the **build a model** step of the decision cycle, letting us predict one variable from another rather than just comparing groups to each other.
+
+## Recap for the Instructor
+
+| **Keyword** | **Where it was taught** |
+|---|---|
+| Team-based case evaluation | This session (Parts 2–3) |
+| The full comparisons toolkit | @sec-week06-01 through @sec-week07-02 |
+| Analytics decision cycle | @sec-week01-02 |

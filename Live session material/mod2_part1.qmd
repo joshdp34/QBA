@@ -1,0 +1,71 @@
+# Instructor Guide — Part 1 (10/16, Hour 1): Quantifying Uncertainty, From Probability to Sampling Distributions {#sec-mod2-part1-guide}
+
+::: {.callout-note collapse="false" title="How to use this guide"}
+This is a facilitation guide for the instructor, not student-facing reading. It pairs with the slide deck `mod2_part1_slides.qmd`. Students arrive having completed five weeks of pre-session reading: probability and Bayes' Rule (@sec-week02-01), random variables and expected value (@sec-week02-02), the binomial, uniform, and normal distributions (@sec-week03-01, @sec-week03-02, @sec-week03-03), sampling distributions and bootstrapping (@sec-week04-01, @sec-week04-02, @sec-week04-03), and confidence intervals and intro hypothesis testing (@sec-week05-01, @sec-week05-02, @sec-week05-03). Per the course's own design, today's three-hour session is specifically about **uncertainty, confidence intervals, and hypothesis testing**, not a re-teaching of probability and named distributions from scratch. This first hour is a fast synthesis that reconnects that machinery into one narrative, applied to a single running business decision, before Parts 2 and 3 build confidence intervals and a hypothesis test from it.
+:::
+
+## Session Objectives
+
+By the end of this period, students should be able to:
+
+1. Explain why a single point estimate understates risk, and how expected value and variance quantify that risk.
+2. Reconnect the standard error of a mean and of a proportion to the idea of a sampling distribution.
+3. Apply both standard error formulas to a real pilot dataset, setting up the confidence intervals built in Part 2.
+
+## Timing at a Glance
+
+| Time | Segment | Format |
+|---|---|---|
+| 0:00–0:05 | Welcome and reconnecting to the decision cycle | Instructor-led |
+| 0:05–0:20 | Quick-fire recap: probability, expected value, and risk | Mini-lecture + slides |
+| 0:20–0:35 | Quick-fire recap: sampling distributions and standard error | Mini-lecture + slides |
+| 0:35–0:55 | Applied exercise: the pilot launch decision | Small groups (3–4), Excel + R |
+| 0:55–1:00 | Debrief and transition to break | Instructor-led |
+
+## Detailed Run of Show
+
+### Welcome and Reconnecting to the Decision Cycle (5 min)
+
+Open by placing today squarely in the analytics decision cycle from @sec-week01-02: Module 1 handled framing, obtaining, and summarizing; the five weeks since 9/4 built the entire toolkit for **quantifying uncertainty**. Today we use it. Name the business decision that will run through all three hours: *a retailer has piloted a new online storefront in a sample of markets and must decide whether to launch it nationally.*
+
+### Quick-Fire Recap: Probability, Expected Value, and Risk (15 min)
+
+This is a recap, not new material, move quickly and cold-call rather than re-deriving anything. The point is to re-establish *why* we quantify uncertainty at all, before the hour turns to the mechanics.
+
+Revisit expected value as a decision tool (@sec-week02-02): a decision with a positive expected value can still carry real risk, since expected value describes a long-run average, not a guarantee for any single outcome (the extended-warranty and lottery examples from that reading are good callbacks). Pose a fresh version live:
+
+::: {.example title="Quick example to pose to the room"}
+Leadership estimates that a national launch costs \$2,000,000 up front. Based on the pilot, they model incremental profit as a random variable with an expected value of \$2,600,000 and a standard deviation of \$1,800,000. Ask the room: *is this launch a "safe bet"?* The expected value alone says yes (expected profit exceeds cost by \$600,000), but the standard deviation is large relative to that margin, so the chance of a loss is far from zero. This is exactly why we don't stop at a point estimate.
+:::
+
+### Quick-Fire Recap: Sampling Distributions and Standard Error (15 min)
+
+Reconnect @sec-week04-01 and @sec-week04-02: a sample mean or sample proportion is a statistic, and every statistic has a sampling distribution describing how much it would vary if the pilot were repeated. The standard error is the standard deviation of that sampling distribution, for a mean it's $s/\sqrt{n}$; for a proportion, $\sqrt{\hat{p}(1-\hat{p})/n}$. Emphasize: **a bigger pilot sample doesn't eliminate uncertainty, it shrinks the standard error**, which is a different thing.
+
+### Applied Exercise: The Pilot Launch Decision (20 min)
+
+Introduce the actual pilot data, the same retailer numbers students have already seen in their reading, now recast as this launch decision:
+
+::: {.example title="The pilot dataset"}
+- **Conversion rate:** out of $n=200$ pilot-market visitors, 30 converted, so $\hat{p} = 0.15$ (from @sec-week04-02 and @sec-week05-01).
+- **Order value:** a sample of $n=25$ pilot orders has $\bar{x}=\$71.50$ and $s=\$42$ (from @sec-week05-02 and @sec-week06-01).
+:::
+
+In small groups, have students compute both standard errors by hand or in R/Excel:
+$$
+\text{SE}_{\hat{p}} = \sqrt{\frac{0.15(0.85)}{200}} \approx 0.0252 \qquad \text{SE}_{\bar{x}} = \frac{42}{\sqrt{25}} = 8.4
+$$
+Ask each group to state, in plain language, what each standard error means for the launch decision (roughly how far the *true* national conversion rate or order value might plausibly be from this pilot's numbers). Do **not** build the actual confidence intervals yet, that's Part 2, save it as a cliffhanger.
+
+### Debrief and Transition to Break (5 min)
+
+Close with the throughline: "We now have a point estimate and a sense of how much it could bounce around. What we don't have yet is a defensible *range* to bring to leadership. That's next."
+
+## Recap for the Instructor
+
+| **Keyword** | **Where it was taught** |
+|---|---|
+| Expected value and variance as risk tools | @sec-week02-02 |
+| Sampling distribution, standard error | @sec-week04-01, @sec-week04-02 |
+| Pilot conversion rate ($\hat{p}=0.15$, $n=200$) | @sec-week04-02, @sec-week05-01 |
+| Pilot order value ($\bar{x}=\$71.50$, $s=\$42$, $n=25$) | @sec-week05-02, @sec-week06-01 |

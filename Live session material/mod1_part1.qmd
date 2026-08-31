@@ -1,0 +1,141 @@
+# Instructor Guide — Period 1 (9/4, Minutes 0–50): Introduction to Business Analytics & Framing Business Questions {#sec-week01-04-guide}
+
+::: {.callout-note collapse="false" title="How to use this guide"}
+This is a facilitation guide for the instructor, not student-facing reading. It pairs with the slide deck `week_01_04_slides.qmd`. Students arrive having completed the pre-session materials: @sec-week01 (software setup), @sec-week01-02 (the analytics decision cycle), and @sec-week01-03 (importing data, observational unit, variable types). This period should feel like a continuation of that reading, not a repeat of it.
+:::
+
+## Session Objectives
+
+By the end of this period, students should be able to:
+
+1. Describe the difference between descriptive, predictive, and prescriptive analytics.
+2. Explain why every analytics project starts with framing a decision, and turn a vague business concern into an answerable question.
+3. Recall and apply the categorical/quantitative and discrete/continuous distinctions from the pre-reading to a new example.
+4. Correctly name the observational unit of a dataset, and write a Module-1-deliverable-quality framing statement.
+
+## Timing at a Glance
+
+| Time | Segment | Format |
+|---|---|---|
+| 0:00–0:05 | Welcome and framing for the course | Instructor-led |
+| 0:05–0:15 | What is business analytics? | Mini-lecture + slides |
+| 0:15–0:28 | Framing business questions | Mini-lecture + slides |
+| 0:28–0:36 | Data types and measurement recap | Quick-fire review |
+| 0:36–0:41 | Naming the observational unit | Mini-lecture + slides |
+| 0:41–0:49 | Small-group activity: frame a business question | Small groups (3–4) |
+| 0:49–0:55 | Framing for the Module 1 deliverable, and a quick individual write | Instructor-led + individual |
+| 0:55–0:58 | Debrief and transition to break | Instructor-led |
+
+::: {.callout-tip collapse="true" title="If you're running short on time"}
+This version of the period runs about 8 minutes past the original 50-minute allocation, mostly to add direct practice for the graded deliverable. If time is tight, compress the "Framing business questions" mini-lecture (students already read the three framing questions) and keep both new segments below, they're the ones that most directly rehearse what's actually graded.
+:::
+
+## Detailed Run of Show
+
+### Welcome and Framing (5 min)
+
+Open by naming the arc of the whole course explicitly: every module we cover will map onto the same seven-step analytics decision cycle from the pre-reading. Today is about steps 1 and 2 (frame the decision, obtain appropriate data) plus the descriptive vocabulary (data types) we need before we can do anything else.
+
+Ask the room: *"Show of hands—who got through all three pre-session readings?"* This isn't a gotcha; it tells you how much you can lean on the pre-reading versus how much needs re-explaining live.
+
+### What Is Business Analytics? (10 min)
+
+Introduce the three-part taxonomy used throughout the course:
+
+- **Descriptive analytics** — what happened? (tables, graphs, summary statistics — Module 1)
+- **Predictive analytics** — what is likely to happen? (regression, forecasting — Modules 4 and 5)
+- **Prescriptive analytics** — what should we do about it? (optimization — Module 6)
+
+Emphasize that inferential statistics (confidence intervals, hypothesis tests — Modules 2 and 3) is the connective tissue that lets us move from *descriptive* claims about a sample to *justified* claims about a broader population or process — which is what makes prediction and prescription trustworthy rather than just plausible-looking.
+
+::: {.callout-tip collapse="true" title="If the room is quiet"}
+Ask for an example of each type from their own workplace before you supply one. EMBA students almost always have a live example on hand (a monthly sales dashboard = descriptive; a churn model = predictive; a staffing or pricing tool = prescriptive). Real examples from the room land better than manufactured ones.
+:::
+
+### Framing Business Questions (15 min)
+
+This is the most important segment of the period. The core message: **a vague business concern is not yet an analytics question.** Walk through the difference using a live example.
+
+**Vague concern:** "Our customer satisfaction seems to be dropping."
+
+**Framed decision:** "Should we change our current return policy for the upcoming quarter, given a hypothesis that a stricter policy introduced in March is driving dissatisfaction?"
+
+Walk through why the second version is usable and the first is not:
+
+- It names a specific **decision** (change the policy or not).
+- It names a **timeframe** (upcoming quarter).
+- It names a candidate **explanation** to investigate (the March policy change), which tells you what data to go get.
+- It implies what would count as **evidence for or against** acting.
+
+Use the three framing questions from @sec-week01-02 explicitly:
+
+- What decision is on the table?
+- Who is making it, and what are the realistic options?
+- What would change if the analysis came out one way versus another?
+
+::: {.callout-tip collapse="true" title="A useful gut-check to give students"}
+"If your analysis wouldn't change anyone's action, it probably wasn't the right analysis to run." Have students apply this test to the vague version above — nobody can act on "satisfaction seems to be dropping" as stated.
+:::
+
+### Data Types and Measurement Recap (10 min)
+
+This is a **recap**, not new material — students read @sec-week01-03 before class. Move quickly. Cold-call using a dataset different from `readiness_store_sales.csv` so students have to apply the ideas rather than recite the reading. Suggested example: an EMBA cohort roster with columns `student_id`, `industry`, `years_experience`, `undergrad_gpa`, `completed_capstone` (yes/no).
+
+For each column, ask the room to call out: categorical or quantitative, and if quantitative, discrete or continuous. Expected answers:
+
+- `student_id` — categorical (a label)
+- `industry` — categorical
+- `years_experience` — quantitative, continuous (can include fractional years) — accept "discrete" as a reasonable answer too if a student reasons in whole years only, and use the disagreement as a teaching moment about how measurement precision, not just the underlying concept, affects this classification
+- `undergrad_gpa` — quantitative, continuous
+- `completed_capstone` — categorical (binary)
+
+Close by connecting this back to *why it matters*: every summary statistic, every graph, and every model choice later in the course depends on getting this classification right first.
+
+### Naming the Observational Unit (5 min)
+
+Introduce one more piece of vocabulary students will need for the Module 1 deliverable: the **observational unit**, what one row of the dataset actually represents. Getting this right (and stating it explicitly) is worth real points on the graded report, and it's a surprisingly common place for students to trip up.
+
+Work through two examples live:
+
+::: {.example title="Naming the observational unit"}
+**`store_sales.csv`** (six stores, four months each, columns `store_id`, `region`, `month`, `sq_ft`, `units_sold`, `revenue`): one row is **one store's performance in one month**, a "store-month," *not* just "one store." Flag this explicitly, since `store_id` repeats four times in the data, a student who says the observational unit is simply "a store" hasn't quite looked closely enough.
+
+**The EMBA cohort roster** from the data-types recap above: one row is **one student**. Here the observational unit is more obvious, columns like `student_id` don't repeat.
+:::
+
+Pose a third one as a quick cold-call check, without projecting the answer immediately: a dataset of `date`, `website_visits`, `bounce_rate` recorded once per day for a year. *(Answer: one row is one day.)*
+
+::: {.callout-tip collapse="true" title="Why this is worth slowing down for"}
+Getting the observational unit right isn't just a definitional exercise, it determines what a descriptive statistic computed from the data actually means. "Average revenue" in `store_sales.csv` is an average *per store-month*, not per store and not per year, and a report that's vague about this can quietly mislead a reader who assumes otherwise.
+:::
+
+### Small-Group Activity: Frame a Business Question (8 min)
+
+Break into groups of 3–4. Each group gets one prompt (rotate through the four below across sections, or assign by table). Groups have 5 minutes to write a **framed decision** (not just a topic) and identify one **data type** they'd need to answer it.
+
+::: {.example title="Activity prompts"}
+1. A regional bank is worried about branch staffing costs.
+2. A hospital system is worried about patient no-shows.
+3. A software company is worried about free-trial users not converting to paid subscriptions.
+4. A manufacturer is worried about a rise in product returns.
+:::
+
+Cold-call 2–3 groups to share their framed decision. Push back gently if a group's answer is still a vague concern rather than a decision with options attached.
+
+### Framing for the Module 1 Deliverable (6 min)
+
+Everything so far has been framing in the abstract. Show the room what it looks like when it's actually the graded "Framing" section of the Module 1 deliverable (@sec-mod1-assignment), worth 10 of 100 points on that rubric.
+
+::: {.example title="Strong vs. weak framing, side by side"}
+**Weak** (a topic, not a decision): *"This report analyzes store sales data. Sales are an important part of any business, and understanding them can help a company succeed."*
+
+**Strong** (a decision, using the three framing questions): *"This analysis uses four months of sales data from six stores across three regions. The company must decide how to allocate next quarter's inventory and staffing budget across regions. If one region is consistently outperforming the others relative to store size, that would support shifting resources toward it rather than distributing them evenly."*
+:::
+
+Name exactly what makes the strong version work: it states a real decision (how to allocate budget), names who's making it (company leadership, implicitly), and states what would change the answer (a region outperforming relative to size). The weak version could be describing almost any dataset; the strong version could only be describing this one.
+
+**Individual quick-write (2 min):** Have students open a blank document and write **one sentence** framing whichever dataset they're leaning toward for their own deliverable, `store_sales.csv` or a workplace dataset, as a decision, not a topic. This isn't collected or shared; the goal is simply to produce a first draft while the strong/weak contrast is still fresh, before students leave the room and forget what "strong" looked like.
+
+### Debrief and Transition to Break (2 min)
+
+Close with the throughline: *"Everything after the break assumes you've already framed the decision. Sampling and data collection — up next — only make sense once you know what question you're trying to answer."* Send students to break.

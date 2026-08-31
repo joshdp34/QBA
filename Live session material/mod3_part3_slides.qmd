@@ -1,0 +1,69 @@
+---
+title: "Team Report-Outs, Synthesis, and What's Next"
+subtitle: "Module 3, Part 3 (October 17)"
+author: "QBA 5330"
+format:
+  revealjs:
+    theme: simple
+    slide-number: true
+    footer: "QBA 5330 | Module 3 | Part 3"
+    transition: fade
+    incremental: true
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+## Quick Reminder: The Worksheet
+
+1. Random assignment
+2. Confounders (a **new** one)
+3. Bias in measurement
+4. Statistical vs. practical significance
+5. A **specific** stronger design
+6. Your team's verdict
+
+## Team Report-Outs (30 minutes)
+
+Each team: **~3–4 minutes** on your assigned item.
+
+We'll track agreement and disagreement as we go.
+
+::: {.notes}
+Note especially: which confounders came up more than once, whether "stronger design" proposals were actually specific, and where team verdicts differed.
+:::
+
+## A Representative Synthesis {.smaller}
+
+- **Strongest confounders:** team quality/resources at time of assignment; reverse causation; self-selection into management
+- **Most concrete stronger design:** randomly assign manager-behavior coaching to a subset of managers, hold a comparable group back as a control, compare outcomes afterward
+- **Class verdict:** suggestive and internally consistent, but still observational, a randomized pilot would meaningfully strengthen the claim
+
+## Where This Fits
+
+We just did:
+
+- **Quantify uncertainty** (evaluating the evidence)
+- A first pass at **recommend an action** (proposing a stronger design)
+
+Using real, messy business evidence, not a clean textbook dataset.
+
+## Module 3 Wrap-Up
+
+What Module 3 added to your toolkit:
+
+- One-sample and two-sample comparisons
+- Paired designs
+- ANOVA and Tukey's HSD
+- The judgment to ask: does this comparison support a **causal** claim?
+
+## Looking Ahead to Module 4 (11/13)
+
+From **comparing groups** to **modeling relationships**.
+
+**Regression**: the start of *build a model*, the next step of the analytics decision cycle.
+
+From "is there a difference?" to "how does one thing relate to another, and what can we predict?"
+
+

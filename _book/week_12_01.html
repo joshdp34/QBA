@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>29&nbsp; Week 12: Time Series Structure, Trend, Seasonality, and Naive Forecasts – STA 5330 Bus Analytics for Dec Making</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-ac731d99f942368ec2047317e7e82b91.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style type="text/css">
+.sidebar .chapter-number {
+color: #FFB81c;
+}
+.center-panel.quarto-layout-panel {
+justify-content: center;
+column-gap: 1rem;
+}
+</style>
+<style>
+div.callout-example.callout {
+  border-left-color: #008000;
+}
+div.callout-example.callout-style-default .callout-header {
+  background-color: rgba(0, 128, 0, 0.13);
+}
+div.callout-example .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-example.callout-style-default .callout-icon::before, div.callout-example.callout-titled .callout-icon::before {
+  content: '📈';
+  background-image: none;
+}
+</style>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./week_12_01.html">Module 5</a></li><li class="breadcrumb-item"><a href="./week_12_01.html"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Week 12: Time Series Structure, Trend, Seasonality, and Naive Forecasts</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./"></a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Module 1</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_01_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Week 1: Getting Set Up</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_01_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Week 1: The Analytics Decision Cycle</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_01_03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Week 1: Importing Data, Identifying Variables, and Creating a Graph</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Module 2</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_02_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Week 2: Probability Concepts</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_02_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Week 2: Random Variables</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_03_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Week 3: The Binomial Distribution</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_03_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Week 3: The Uniform Distribution</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_03_03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Week 3: The Normal Distribution</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_04_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Week 4: Sampling Distributions and the Sample Mean</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_04_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Week 4: The Sampling Distribution of the Sample Proportion</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_04_03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Week 4: Bootstrap Sampling Distributions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_05_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Week 5: Confidence Intervals for a Proportion</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_05_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Week 5: Confidence Intervals for a Mean</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_05_03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Week 5: Introduction to Hypothesis Testing</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Module 3</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_06_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Week 6: One-Sample Hypothesis Tests</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_06_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Week 6: Two-Sample Tests for Independent Means</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_06_03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Week 6: Paired Comparisons</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_07_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Week 7: Analysis of Variance (ANOVA)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_07_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Week 7: Research Design, Bias, and Causality</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_07_03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Week 7: The Project Oxygen Case and a Course Recap</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Module 4</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_08_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Week 8: Correlation and the Least-Squares Line</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_08_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Week 8: Interpreting Simple Regression Output</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_09_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Week 9: Multiple Linear Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_09_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Week 9: Categorical Predictors in Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_10_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Week 10: Regression Diagnostics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_10_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Week 10: Prediction Intervals and Model Limitations</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_11_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Week 11: Introduction to Logistic Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_11_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Week 11: Interpreting and Using Logistic Regression</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Module 5</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_12_01.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Week 12: Time Series Structure, Trend, Seasonality, and Naive Forecasts</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_12_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Week 12: Moving Averages and Exponential Smoothing</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_12_03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Week 12: Regression-Based Forecasting, Accuracy, and Scenario Analysis</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">Module 6</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_13_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Week 13: Introduction to Linear Optimization</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_13_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Week 13: Binding Constraints, Slack, and Sensitivity Analysis</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#why-this-matters" id="toc-why-this-matters" class="nav-link active" data-scroll-target="#why-this-matters"><span class="header-section-number">29.1</span> Why This Matters</a></li>
+  <li><a href="#introducing-the-fpp3-package" id="toc-introducing-the-fpp3-package" class="nav-link" data-scroll-target="#introducing-the-fpp3-package"><span class="header-section-number">29.2</span> Introducing the fpp3 Package</a></li>
+  <li><a href="#the-tsibble-a-time-aware-data-frame" id="toc-the-tsibble-a-time-aware-data-frame" class="nav-link" data-scroll-target="#the-tsibble-a-time-aware-data-frame"><span class="header-section-number">29.3</span> The tsibble: A Time-Aware Data Frame</a></li>
+  <li><a href="#visualizing-a-time-series" id="toc-visualizing-a-time-series" class="nav-link" data-scroll-target="#visualizing-a-time-series"><span class="header-section-number">29.4</span> Visualizing a Time Series</a></li>
+  <li><a href="#the-components-of-a-time-series" id="toc-the-components-of-a-time-series" class="nav-link" data-scroll-target="#the-components-of-a-time-series"><span class="header-section-number">29.5</span> The Components of a Time Series</a></li>
+  <li><a href="#seeing-seasonality-two-ways" id="toc-seeing-seasonality-two-ways" class="nav-link" data-scroll-target="#seeing-seasonality-two-ways"><span class="header-section-number">29.6</span> Seeing Seasonality Two Ways</a></li>
+  <li><a href="#formal-decomposition-with-stl" id="toc-formal-decomposition-with-stl" class="nav-link" data-scroll-target="#formal-decomposition-with-stl"><span class="header-section-number">29.7</span> Formal Decomposition with STL</a></li>
+  <li><a href="#naive-forecasts" id="toc-naive-forecasts" class="nav-link" data-scroll-target="#naive-forecasts"><span class="header-section-number">29.8</span> Naive Forecasts</a></li>
+  <li><a href="#the-seasonal-naive-forecast" id="toc-the-seasonal-naive-forecast" class="nav-link" data-scroll-target="#the-seasonal-naive-forecast"><span class="header-section-number">29.9</span> The Seasonal Naive Forecast</a></li>
+  <li><a href="#naive-forecasts-in-excel" id="toc-naive-forecasts-in-excel" class="nav-link" data-scroll-target="#naive-forecasts-in-excel"><span class="header-section-number">29.10</span> Naive Forecasts in Excel</a></li>
+  <li><a href="#recap" id="toc-recap" class="nav-link" data-scroll-target="#recap"><span class="header-section-number">29.11</span> Recap</a></li>
+  <li><a href="#check-your-understanding" id="toc-check-your-understanding" class="nav-link" data-scroll-target="#check-your-understanding"><span class="header-section-number">29.12</span> Check Your Understanding</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./week_12_01.html">Module 5</a></li><li class="breadcrumb-item"><a href="./week_12_01.html"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Week 12: Time Series Structure, Trend, Seasonality, and Naive Forecasts</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-week12-01" class="quarto-section-identifier"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Week 12: Time Series Structure, Trend, Seasonality, and Naive Forecasts</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="why-this-matters" class="level2" data-number="29.1">
+<h2 data-number="29.1" class="anchored" data-anchor-id="why-this-matters"><span class="header-section-number">29.1</span> Why This Matters</h2>
+<p>Module 4 built models that predict one variable from others, order didn’t matter, any row could have been shuffled without losing information. <strong>Forecasting</strong> is a special, extremely common case of the same “build a model” step (<a href="week_01_02.html" class="quarto-xref"><span>Chapter 2</span></a>), but with one crucial difference: the goal is predicting a variable’s <em>own future values</em> from its <em>own past</em>, and the order of observations is the whole point. A retailer forecasting next month’s sales, a call center forecasting next week’s volume, a hospital forecasting next quarter’s admissions, all of these are asking the same kind of question: given what happened up to now, what’s likely to happen next?</p>
+<p>Recall from <a href="week_10_01.html" class="quarto-xref"><span>Chapter 25</span></a> that ordinary regression assumes <strong>independence</strong>, observations don’t influence one another. Time-ordered data breaks that assumption almost by design: yesterday’s sales genuinely help predict today’s. Rather than fighting this dependence, forecasting methods are built specifically around it, and this module uses a set of R tools purpose-built for exactly that job.</p>
+</section>
+<section id="introducing-the-fpp3-package" class="level2" data-number="29.2">
+<h2 data-number="29.2" class="anchored" data-anchor-id="introducing-the-fpp3-package"><span class="header-section-number">29.2</span> Introducing the fpp3 Package</h2>
+<p>Every regression tool so far has come from base R or the tidyverse. Time series data has enough special structure, an explicit order, gaps that need to be handled carefully, seasonal cycles, that it benefits from its own toolkit. <strong><code>fpp3</code></strong> is that toolkit: it’s the companion R package to Hyndman and Athanasopoulos’s textbook <em>Forecasting: Principles and Practice</em> (3rd edition), the standard reference this module draws on.</p>
+<p>Like <code>tidyverse</code>, <code>fpp3</code> isn’t really one package, it’s a collection of packages loaded together, sometimes called the <strong>tidyverts</strong> (a play on “tidyverse” for time series):</p>
+<ul>
+<li><strong><code>tsibble</code></strong>: a time-series-aware version of a tibble, the data structure everything else builds on.</li>
+<li><strong><code>feasts</code></strong>: <strong>F</strong>eature <strong>E</strong>xtraction <strong>A</strong>nd <strong>S</strong>tatistics for <strong>T</strong>ime <strong>S</strong>eries, tools for visualizing and decomposing series (what this section uses).</li>
+<li><strong><code>fable</code></strong>: <strong>F</strong>oreca<strong>s</strong>ting mod<strong>els</strong> in a tid<strong>able</strong> framework, for fitting forecasting models (used starting later in this section, and throughout the rest of this module).</li>
+<li><strong><code>fabletools</code></strong>: shared infrastructure the modeling packages build on.</li>
+</ul>
+<p>One <code>library(fpp3)</code> call loads all of them, along with the core <code>tidyverse</code> packages this course already uses. Everything in <code>fpp3</code> is designed to work with the same <code>dplyr</code>-style pipes and <code>ggplot2</code>-style plotting already familiar from the rest of this course, time series just needs a few new, specialized verbs layered on top.</p>
+</section>
+<section id="the-tsibble-a-time-aware-data-frame" class="level2" data-number="29.3">
+<h2 data-number="29.3" class="anchored" data-anchor-id="the-tsibble-a-time-aware-data-frame"><span class="header-section-number">29.3</span> The tsibble: A Time-Aware Data Frame</h2>
+<p>The foundation of everything in this module is the <strong>tsibble</strong> (time-series tibble), created with <code>as_tsibble()</code> and an explicit <strong>index</strong>, the column that represents time.</p>
+<div class="callout callout-style-simple callout-example callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Example</span>Example 12.1: Building a tsibble
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A coffee shop tracks daily revenue for 180 days (January 1 through June 28, 2024).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fpp3)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>coffee <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/coffee_shop_daily.csv"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tsibble</span>(<span class="at">index =</span> date)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>coffee</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tsibble: 180 x 2 [1D]
+   date       revenue
+   &lt;date&gt;       &lt;dbl&gt;
+ 1 2024-01-01    59  
+ 2 2024-01-02    57.6
+ 3 2024-01-03    57.8
+ 4 2024-01-04    47.5
+ 5 2024-01-05    44.4
+ 6 2024-01-06    45  
+ 7 2024-01-07    51.2
+ 8 2024-01-08    54.6
+ 9 2024-01-09    60.6
+10 2024-01-10    62.8
+# ℹ 170 more rows</code></pre>
+</div>
+</div>
+<p>The <code>[1D]</code> in the printed output is <code>tsibble</code> confirming it detected a regular <strong>1-day</strong> interval between observations, exactly the kind of structural check a plain tibble doesn’t do automatically. Once a data frame is a tsibble, the rest of this module’s tools know how to work with it directly.</p>
+</div>
+</div>
+</section>
+<section id="visualizing-a-time-series" class="level2" data-number="29.4">
+<h2 data-number="29.4" class="anchored" data-anchor-id="visualizing-a-time-series"><span class="header-section-number">29.4</span> Visualizing a Time Series</h2>
+<div class="callout callout-style-simple callout-example callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Example</span>Example 12.2: autoplot()
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>coffee <span class="sc">|&gt;</span> <span class="fu">autoplot</span>(revenue) <span class="sc">+</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Daily coffee shop revenue, Jan–Jun 2024"</span>, <span class="at">y =</span> <span class="st">"Revenue ($)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="week_12_01_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><code>autoplot()</code> recognizes that <code>coffee</code> is a tsibble and automatically produces a line plot against time, no need to specify <code>x</code> and <code>y</code> by hand the way a raw <code>ggplot()</code> call would require. Two patterns jump out immediately: revenue drifts gradually <strong>upward</strong> over the six months (a trend), and it visibly rises and falls in a repeating rhythm within each week (seasonality).</p>
+</div>
+</div>
+</section>
+<section id="the-components-of-a-time-series" class="level2" data-number="29.5">
+<h2 data-number="29.5" class="anchored" data-anchor-id="the-components-of-a-time-series"><span class="header-section-number">29.5</span> The Components of a Time Series</h2>
+<p>Most business time series can be usefully thought of as a combination of three pieces:</p>
+<ul>
+<li><strong>Trend</strong>: the series’ long-run direction, upward, downward, or roughly flat, once short-term fluctuations are averaged out.</li>
+<li><strong>Seasonality</strong>: a pattern that repeats at a fixed, known frequency tied to the calendar (a weekly cycle, a monthly or quarterly cycle within each year). Critically, seasonality always repeats at the <em>same</em> interval; it’s not just “any repeating wiggle.”</li>
+<li><strong>Remainder</strong> (or irregular component): whatever’s left over once trend and seasonality are removed, the time-series equivalent of a regression residual.</li>
+</ul>
+<p>The simplest way to combine these, <strong>additive decomposition</strong>, treats the series as a sum: <span class="math display">\[
+y_t = \text{Trend}_t + \text{Seasonal}_t + \text{Remainder}_t
+\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled" title="When seasonality isn't additive">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>When seasonality isn’t additive
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>Additive decomposition assumes the seasonal swing stays roughly the same <em>size</em> regardless of the series’ overall level. If a series’ seasonal ups and downs grow proportionally as the series itself grows, a <strong>multiplicative</strong> decomposition fits better. This course focuses on the additive case, but recognize the symptom, a seasonal pattern that visibly grows or shrinks alongside the trend, if you encounter it.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="seeing-seasonality-two-ways" class="level2" data-number="29.6">
+<h2 data-number="29.6" class="anchored" data-anchor-id="seeing-seasonality-two-ways"><span class="header-section-number">29.6</span> Seeing Seasonality Two Ways</h2>
+<p><code>feasts</code> provides two purpose-built plots for inspecting seasonality directly, before any formal decomposition.</p>
+<div class="callout callout-style-simple callout-example callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Example</span>Example 12.3: A season plot
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>coffee <span class="sc">|&gt;</span> <span class="fu">gg_season</span>(revenue, <span class="at">period =</span> <span class="st">"week"</span>) <span class="sc">+</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Daily revenue by day of week, one line per week"</span>, <span class="at">y =</span> <span class="st">"Revenue ($)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="week_12_01_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Each line traces one calendar week, colored from early (orange) to late (pink) in the data. Despite six months of week-to-week variation and an overall upward drift, every line traces the <strong>same basic weekly shape</strong>: high on Monday and Tuesday, a steady decline into Friday, then a partial recovery over the weekend. That consistency across differently-colored lines is exactly what real seasonality looks like.</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-example callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Example</span>Example 12.4: A subseries plot
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>coffee <span class="sc">|&gt;</span> <span class="fu">gg_subseries</span>(revenue, <span class="at">period =</span> <span class="st">"week"</span>) <span class="sc">+</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Daily revenue, one panel per day of week"</span>, <span class="at">y =</span> <span class="st">"Revenue ($)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="week_12_01_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Each panel isolates one day of the week across all 26 weeks, with a horizontal blue line marking that day’s average. The panels’ heights tell the seasonal story directly (Monday and Tuesday sit noticeably higher than Friday), while the upward drift <em>within</em> each panel shows the trend still holding separately for every day of the week.</p>
+</div>
+</div>
+</section>
+<section id="formal-decomposition-with-stl" class="level2" data-number="29.7">
+<h2 data-number="29.7" class="anchored" data-anchor-id="formal-decomposition-with-stl"><span class="header-section-number">29.7</span> Formal Decomposition with STL</h2>
+<p><code>feasts</code> formalizes what Examples 12.3 and 12.4 already showed visually with <strong>STL</strong> (Seasonal and Trend decomposition using Loess), fit like any other model in the tidyverts framework: with <code>model()</code>.</p>
+<div class="callout callout-style-simple callout-example callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Example</span>Example 12.5: STL decomposition
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>coffee <span class="sc">|&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">model</span>(<span class="fu">STL</span>(revenue <span class="sc">~</span> <span class="fu">season</span>(<span class="at">window =</span> <span class="st">"periodic"</span>))) <span class="sc">|&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">components</span>() <span class="sc">|&gt;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autoplot</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="week_12_01_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The panels read top to bottom: the original series, the extracted trend (smoothed, gradually rising from about 52 in January toward 65 by June), the repeating weekly seasonal pattern, and whatever’s left over. This is the same story as Examples 12.2–12.4, now split apart into one picture, and computed automatically rather than by hand.</p>
+</div>
+</div>
+</section>
+<section id="naive-forecasts" class="level2" data-number="29.8">
+<h2 data-number="29.8" class="anchored" data-anchor-id="naive-forecasts"><span class="header-section-number">29.8</span> Naive Forecasts</h2>
+<p>The simplest possible forecasting method, the <strong>naive forecast</strong>, predicts that the next period will equal the <strong>most recently observed value</strong>: <span class="math display">\[
+\hat{y}_{T+1} = y_T
+\]</span> It ignores trend and seasonality entirely, and yet it’s a surprisingly important benchmark: any more sophisticated method (moving averages, exponential smoothing, or regression-based forecasting, all coming in the rest of this module) should be judged by how much better it does than this trivial baseline. A method that can’t beat the naive forecast isn’t adding value.</p>
+</section>
+<section id="the-seasonal-naive-forecast" class="level2" data-number="29.9">
+<h2 data-number="29.9" class="anchored" data-anchor-id="the-seasonal-naive-forecast"><span class="header-section-number">29.9</span> The Seasonal Naive Forecast</h2>
+<p>When a series has clear seasonality, a small but important upgrade is the <strong>seasonal naive forecast</strong>: predict the next period using the value from the same point in the <strong>last full seasonal cycle</strong>, rather than just the most recent observation: <span class="math display">\[
+\hat{y}_{T+1} = y_{T+1-m}
+\]</span> where <span class="math inline">\(m\)</span> is the length of one seasonal cycle (<span class="math inline">\(m=7\)</span> for a weekly cycle in daily data).</p>
+<div class="callout callout-style-simple callout-example callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Example</span>Example 12.6: Fitting NAIVE() and SNAIVE() with fable
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The <code>fable</code> package fits both models the same way you’d fit a regression, with <code>model()</code>, and produces forecasts with <code>forecast()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> coffee <span class="sc">|&gt;</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">model</span>(</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">naive =</span> <span class="fu">NAIVE</span>(revenue), </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">snaive =</span> <span class="fu">SNAIVE</span>(revenue)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>fc <span class="ot">&lt;-</span> fit <span class="sc">|&gt;</span> <span class="fu">forecast</span>(<span class="at">h =</span> <span class="st">"1 day"</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>fc <span class="sc">|&gt;</span> <span class="fu">hilo</span>(<span class="at">level =</span> <span class="dv">95</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tsibble: 2 x 5 [1D]
+# Key:       .model [2]
+  .model date      
+  &lt;chr&gt;  &lt;date&gt;    
+1 naive  2024-06-29
+2 snaive 2024-06-29
+# ℹ 3 more variables: revenue &lt;dist&gt;, .mean &lt;dbl&gt;, `95%` &lt;hilo&gt;</code></pre>
+</div>
+</div>
+<p>Both methods forecast <strong>Saturday, June 29</strong>. The plain naive forecast uses Friday’s revenue, <strong>$52.60</strong>, with a wide 95% interval of about <span class="math inline">\((\$39.90, \$65.30)\)</span>. The seasonal naive forecast, last Saturday’s actual revenue of <strong>$54.10</strong>, comes with a noticeably <em>narrower</em> interval, about <span class="math inline">\((\$45.50, \$62.70)\)</span>, because it accounts for the fact that tomorrow isn’t just “another day,” it’s specifically a <em>Saturday</em>, and using that information produces a more precise forecast, not just a different one.</p>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>fc <span class="sc">|&gt;</span> <span class="fu">autoplot</span>(coffee <span class="sc">|&gt;</span> <span class="fu">filter</span>(date <span class="sc">&gt;</span> <span class="fu">as.Date</span>(<span class="st">"2024-05-30"</span>))) <span class="sc">+</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Naive and seasonal naive forecasts for June 29"</span>, <span class="at">y =</span> <span class="st">"Revenue ($)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="week_12_01_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled" title="Naive forecasts are baselines, not final answers">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Naive forecasts are baselines, not final answers
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>Neither naive method uses trend information, and the seasonal naive method still ignores everything except one specific past value. Their entire purpose in this course is to set a floor: if a more sophisticated forecasting method from the rest of this module can’t outperform a naive or seasonal naive baseline, that’s a real finding, not a technicality, and it should change what method you actually use in practice.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="naive-forecasts-in-excel" class="level2" data-number="29.10">
+<h2 data-number="29.10" class="anchored" data-anchor-id="naive-forecasts-in-excel"><span class="header-section-number">29.10</span> Naive Forecasts in Excel</h2>
+<p><code>fpp3</code> is an R-only toolkit; Excel has no equivalent package, but the two simplest forecasts translate directly into cell references:</p>
+<pre><code>=B180                  ' naive forecast (last observed value)
+=B174                  ' seasonal naive forecast (value from 7 rows, one week, earlier)</code></pre>
+</section>
+<section id="recap" class="level2" data-number="29.11">
+<h2 data-number="29.11" class="anchored" data-anchor-id="recap"><span class="header-section-number">29.11</span> Recap</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Keyword</strong></th>
+<th><strong>Definition</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>fpp3</strong></td>
+<td>An R meta-package (the “tidyverts”: <code>tsibble</code>, <code>feasts</code>, <code>fable</code>, <code>fabletools</code>) built for time series analysis and forecasting, companion to the <em>Forecasting: Principles and Practice</em> textbook.</td>
+</tr>
+<tr class="even">
+<td><strong>tsibble</strong></td>
+<td>A time-series-aware data frame, created with <code>as_tsibble(index = ...)</code>, that explicitly tracks the time index and its interval.</td>
+</tr>
+<tr class="odd">
+<td><strong>Trend</strong></td>
+<td>The long-run direction of a series, apart from short-term fluctuations.</td>
+</tr>
+<tr class="even">
+<td><strong>Seasonality</strong></td>
+<td>A pattern that repeats at a fixed, calendar-tied frequency (e.g., weekly, yearly).</td>
+</tr>
+<tr class="odd">
+<td><strong>Remainder (irregular component)</strong></td>
+<td>Whatever’s left in a series after trend and seasonality are removed.</td>
+</tr>
+<tr class="even">
+<td><strong><code>gg_season()</code> / <code>gg_subseries()</code></strong></td>
+<td><code>feasts</code> plots for visually inspecting seasonality before any formal decomposition.</td>
+</tr>
+<tr class="odd">
+<td><strong>STL decomposition</strong></td>
+<td><code>feasts::STL()</code>, fit via <code>model()</code>; splits a series into trend, seasonal, and remainder components.</td>
+</tr>
+<tr class="even">
+<td><strong>Naive forecast</strong></td>
+<td><span class="math inline">\(\hat{y}_{T+1} = y_T\)</span>; <code>fable::NAIVE()</code>. Predicts the next period equals the most recent observed value.</td>
+</tr>
+<tr class="odd">
+<td><strong>Seasonal naive forecast</strong></td>
+<td><span class="math inline">\(\hat{y}_{T+1} = y_{T+1-m}\)</span>; <code>fable::SNAIVE()</code>. Predicts the next period equals the value from one full seasonal cycle earlier.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="check-your-understanding" class="level2" data-number="29.12">
+<h2 data-number="29.12" class="anchored" data-anchor-id="check-your-understanding"><span class="header-section-number">29.12</span> Check Your Understanding</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="Problems">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Problems
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>A hotel’s occupancy data is collected once per quarter for the past 10 years. Is this a time series? What would make it inappropriate to analyze with the cross-sectional regression tools from Module 4 alone?</p></li>
+<li><p>A company’s monthly sales rise every November and December, then fall back each January, in a pattern that repeats every year at roughly the same size. Is this trend, seasonality, or remainder? Explain.</p></li>
+<li><p>What is a tsibble, and what does it check for that an ordinary tibble does not?</p></li>
+<li><p>A retailer’s daily foot traffic has <span class="math inline">\(y_{100} = 420\)</span> visitors. Using the naive forecast, what is <span class="math inline">\(\hat{y}_{101}\)</span>? If the data instead shows a strong day-of-week pattern with a 7-day cycle, and <span class="math inline">\(y_{94}=460\)</span>, what would the seasonal naive forecast for day 101 be instead, and why might it be preferred here?</p></li>
+<li><p>Explain, in your own words, why a forecasting method that fails to beat a naive or seasonal naive baseline is not a good candidate for actual use, even if it seems more “sophisticated.”</p></li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solutions">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solutions
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>Yes, this is a time series: it’s the same variable (occupancy), recorded at regular, ordered intervals (quarterly). Cross-sectional regression tools from Module 4 generally assume independence between observations; quarterly occupancy readings from the same hotel are very likely correlated with recent quarters (a busy summer is often followed by a comparatively busy fall), violating that assumption and calling for time-series-specific methods instead.</p></li>
+<li><p>This is <strong>seasonality</strong>: it repeats at a fixed, calendar-tied interval (every November/December, every year) and returns to roughly the same size each cycle, exactly the definition distinguishing it from trend (a persistent long-run direction) or remainder (leftover, non-repeating noise).</p></li>
+<li><p>A tsibble is a time-series-aware data frame, created with <code>as_tsibble()</code> by declaring an explicit time <strong>index</strong> column. Unlike an ordinary tibble, it checks that observations are spaced at a regular interval (and reports that interval, like the <code>[1D]</code> seen in Example 12.1), a structural check specific to time-ordered data that a plain tibble has no concept of.</p></li>
+<li><p>Naive forecast: <span class="math inline">\(\hat{y}_{101} = y_{100} = 420\)</span>. Seasonal naive forecast (using <span class="math inline">\(m=7\)</span>): <span class="math inline">\(\hat{y}_{101} = y_{101-7} = y_{94} = 460\)</span>. The seasonal naive forecast might be preferred if day 101 and day 94 fall on the <em>same day of the week</em>, since it accounts for a real day-of-week pattern that the plain naive forecast (which just repeats the most recent day, regardless of which day of the week that was) ignores entirely.</p></li>
+<li><p>Naive and seasonal naive forecasts are simple by design, using little more than the last observation or the last seasonal cycle. If a more complex method (with more assumptions, more parameters, or more effort to build and maintain) can’t produce forecasts more accurate than these trivial baselines, the added complexity isn’t earning its keep, it’s not capturing any real pattern the simple method misses, and a business should prefer the simpler, cheaper method instead.</p></li>
+</ol>
+</div>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,0 +1,138 @@
+# Midterm Take-Home Exam: The Superstore Analysis {#sec-mod3-midterm}
+
+::: {.callout-important collapse="false" title="Exam window and policy"}
+**Distributed: [instructor to set, following the 10/17 session]**\
+**Due: [instructor to set; suggested: 7 days after distribution]**, submitted on Canvas. See @sec-mod3-midterm-submission for exact submission instructions.
+
+This is a **take-home exam, not a team deliverable**. It is open-book and open-note, you may use your course readings, prior deliverables, and your own code from this course, but it must be **your own individual work**. Do not discuss your specific analysis, results, or write-up with classmates. If you have a clarifying question about the exam itself (not about your results), email the instructor.
+:::
+
+## Overview
+
+This exam covers the full analytics decision cycle as you've applied it so far this semester: framing a decision, summarizing evidence (Module 1), quantifying uncertainty with a single estimate (Module 2), and comparing groups while evaluating whether a comparison supports a causal claim (Module 3). Roughly half of the exam is weighted toward Module 3, one-sample and two-sample tests, a paired comparison, ANOVA with Tukey's HSD, and a causality assessment, since that's the most recent and most comprehensive material.
+
+Everyone will work from the **same dataset**, so your results should be directly comparable to a correctly worked answer key, choose your own workplace data for this one.
+
+## The Dataset
+
+You'll use the **Sample Superstore** dataset, a widely used, freely available retail sales dataset (originally distributed by Tableau as sample data, now hosted in many places on Kaggle). It contains 9,994 rows and 21 columns of U.S. retail order data.
+
+::: {.callout-note collapse="false" title="Where to get it"}
+Search Kaggle for **"Superstore Dataset"** (for example, the dataset published by user `vivek468`, titled "Superstore Dataset Final", is a stable, popular version) and download the CSV. You will need a free Kaggle account. Place the file in your project's `data` folder, exactly as you did with `readiness_store_sales.csv` in Module 1.
+
+If your downloaded version's exact row count or column names differ slightly from what's described below (different uploads occasionally vary a little), use whatever columns are present that match the descriptions; the core columns (`Region`, `Segment`, `Category`, `Sub-Category`, `Sales`, `Profit`, `Discount`, `Order Date`) are present in essentially every version of this dataset.
+:::
+
+Relevant columns for this exam:
+
+| Column | Description |
+|---|---|
+| `Order ID` | Identifier for the order (one order can include multiple line items) |
+| `Order Date` | Date the order was placed |
+| `Segment` | Customer segment: Consumer, Corporate, or Home Office |
+| `Region` | Central, East, South, or West |
+| `Category` | Furniture, Office Supplies, or Technology |
+| `Sub-Category` | A more specific product grouping within Category |
+| `Sales` | Revenue for that line item, in dollars |
+| `Quantity` | Number of units in that line item |
+| `Discount` | Discount rate applied to that line item (0 to 1) |
+| `Profit` | Profit or loss for that line item, in dollars |
+
+## What Your Report Must Include
+
+Your rendered Quarto report should contain the following sections, in this order.
+
+### 1. Framing (short)
+
+In 2&ndash;3 sentences, state a business decision this analysis could inform (for example, whether the company should adjust its regional strategy, its discounting practices, or its customer-segment focus).
+
+### 2. Module 1: Exploring the Data
+
+- State the **observational unit** (what does one row represent?).
+- Classify at least four variables as categorical or quantitative, and for quantitative variables, discrete or continuous.
+- Include **one table** (for example, a frequency table of `Region` or `Category`).
+- Include **one graph**, appropriately chosen for the variable type(s) involved.
+- Report **at least two descriptive statistics**, correctly matched to variable type.
+
+### 3. Module 2: Quantifying Uncertainty for a Single Estimate
+
+- **Probability.** Compute the sample proportion of line items that are profitable (`Profit > 0`). Interpret it in plain language.
+- **Confidence interval.** Build and correctly interpret a 95% confidence interval for the true mean `Profit` per line item.
+
+### 4. Module 3, Part A: One-Sample Hypothesis Test
+
+Company policy assumes an average discount rate of **15%** across all orders. Using your sample, test whether the true mean `Discount` differs from 0.15. State $H_0$ and $H_a$, report your test statistic and p-value, and state your conclusion at $\alpha=0.05$.
+
+### 5. Module 3, Part B: Two-Sample Independent Comparison
+
+Compare mean `Profit` per line item between the **Consumer** and **Corporate** segments, treating them as two independent groups. State your hypotheses, choose and justify pooled vs. Welch's test, report your conclusion, and construct a confidence interval for the difference in means.
+
+### 6. Module 3, Part C: Paired Comparison
+
+Identify the **two most recent full calendar years** present in your data (based on `Order Date`). For each `Sub-Category`, compute the mean `Profit` in the earlier year and the mean `Profit` in the later year, one pair of values per sub-category. Treat each `Sub-Category` as one paired observational unit, and run a paired t-test on the year-over-year difference in mean profit. Report your conclusion and a confidence interval for the mean difference.
+
+::: {.callout-note collapse="false" title="Why this counts as a paired design"}
+Each `Sub-Category` is measured twice, once in each year, the same way the same employee's performance was measured before and after training in @sec-week06-03. Analyzing this as two independent samples (all sub-categories' year-1 profits vs. all sub-categories' year-2 profits, unpaired) would throw away the fact that the same sub-categories appear in both years, exactly the mistake that section warned about.
+:::
+
+### 7. Module 3, Part D: ANOVA and Tukey's HSD
+
+Compare mean `Profit` per line item across the four **Regions**. Run a one-way ANOVA, report the F-statistic, degrees of freedom, and p-value, and if the result is significant, run Tukey's HSD to identify which specific pairs of regions differ.
+
+### 8. Module 3, Part E: Evaluating Causality
+
+Using your ANOVA result from Part D and the causation checklist from @sec-week07-02, evaluate whether this data supports the claim that **Region causes different profit levels**. Explicitly address: is this an observational or experimental comparison? Identify **at least one plausible confounder** specific to this dataset (for example, differences in product mix, shipping costs, or discounting practices across regions). State whether you think the evidence supports a causal interpretation, and why.
+
+### 9. Executive Recommendation
+
+A short paragraph (4&ndash;6 sentences), written **for a manager, not a statistician**, that ties your findings together into a recommendation addressing the decision you framed in Section 1. Be explicit about the uncertainty in your findings and avoid statistical jargon.
+
+## What Is *Not* Required for This Exam
+
+- Regression, forecasting, or any predictive model (Modules 4&ndash;5)
+- Two-way ANOVA, repeated-measures ANOVA, or any comparison design beyond what's specified above
+- A survey of every possible variable in the dataset; use only what each section asks for
+
+## Format and Length
+
+- Written and rendered as a **Quarto document** (`.qmd` rendered to `.pdf`).
+- Use headings matching the nine sections above.
+- Code chunks may be shown or hidden (`echo: true`/`false`) at your discretion, but your report should read cleanly even if a reader skips the code entirely.
+- A well-executed exam is typically **3&ndash;4 rendered pages**, not counting code output. Concise and clear beats long.
+
+## If You're Working in Excel
+
+You are welcome to do your calculations in Excel instead of R (note that Tukey's HSD and the paired-differences setup in Part C are easiest to construct in R; if you use Excel for the rest, you may still use R only for those two pieces if needed, and should say so in your report).
+
+1. **Do your calculations in Excel**, using the Data Analysis ToolPak where applicable (`T-Test`, `Anova: Single Factor`) or the by-hand formulas from your reading.
+2. **Report your results in your Quarto document as text and formulas**, showing the numbers you plugged in and the result.
+3. **Submit your Excel workbook as a third file** alongside your `.qmd` and `.pdf` (see @sec-mod3-midterm-submission).
+
+::: {.callout-note collapse="false" title="Why the workbook matters for grading"}
+A final number alone doesn't show us how you got there. Submitting the `.xlsx` file lets us verify your calculation was set up correctly, the same role a visible R code chunk plays for students working in R.
+:::
+
+## Grading Rubric
+
+| Component | Points |
+|---|---|
+| Framing | 5 |
+| Module 1: data description, table, graph, descriptive statistics | 12 |
+| Module 2: probability/proportion and confidence interval | 13 |
+| Module 3A: one-sample hypothesis test | 10 |
+| Module 3B: two-sample independent comparison | 10 |
+| Module 3C: paired comparison | 10 |
+| Module 3D: ANOVA and Tukey's HSD | 15 |
+| Module 3E: evaluating causality | 10 |
+| Executive recommendation | 10 |
+| Overall clarity and professionalism | 5 |
+| **Total** | **100** |
+
+## Submission Instructions {#sec-mod3-midterm-submission}
+
+::: {.callout-important collapse="false" title="Submit on Canvas"}
+1. Render your `.qmd` file to `.pdf`.
+2. Submit **both** your `.qmd` source file and the rendered `.pdf` file to the Midterm Exam assignment on Canvas. **If you worked in Excel**, also submit your `.xlsx` workbook as a third file.
+3. Name your files `lastname_firstname_midterm.qmd`, `lastname_firstname_midterm.pdf`, and (if applicable) `lastname_firstname_midterm.xlsx`.
+4. Late submissions follow the course late-work policy stated in the syllabus. Because this is a timed take-home exam rather than an open-ended deliverable, late submissions may be subject to stricter penalties than usual, check the syllabus.
+:::

@@ -1,0 +1,87 @@
+# Instructor Guide — Part 3 (12/4, Hour 3): Growth vs. Cash Flow — Preparing for the Bank {#sec-mod5-part3-guide}
+
+::: {.callout-note collapse="false" title="How to use this guide"}
+This is a facilitation guide for the instructor, not student-facing reading. It pairs with the slide deck `mod5_part3_slides.qmd`. This closing hour resolves the tension Part 2 deliberately left open: Ceres's revenue is forecast to keep growing comfortably under every scenario, but growth alone was never the question the case's CEO actually has to answer. The bank wants to know about **cash flow and financing**, and this hour works through the real numbers behind that question before closing out Module 5.
+:::
+
+## Session Objectives
+
+By the end of this period, students should be able to:
+
+1. Compute EBITDA and a fixed-charge-coverage ratio from real financial statement figures, and compare it against a stated debt covenant.
+2. Identify which of two loan covenants is closer to actually binding, and explain why that matters more than the one with more headroom.
+3. Produce a short, defensible executive recommendation about pursuing continued growth, addressed to Ceres's CEO ahead of a bank meeting.
+
+## Timing at a Glance
+
+| Time | Segment | Format |
+|---|---|---|
+| 0:00–0:05 | Reconnect: what the bank actually wants to know | Instructor-led |
+| 0:05–0:15 | Live calculation: EBITDA, fixed charges, and both covenants | Live coding (R + Excel) |
+| 0:15–0:45 | Team worksheet: is growth financially sustainable? | Small groups (3–4) |
+| 0:45–0:55 | Report-outs | Whole-class discussion |
+| 0:55–1:00 | Wrap-up: Module 5 recap and look ahead to Module 6 | Instructor-led |
+
+## Detailed Run of Show
+
+### Reconnect: What the Bank Actually Wants to Know (5 min)
+
+Restate plainly: Ceres's CEO must meet with the bank about **growth prospects and cash-flow projections for 2007 and beyond**, not simply "will revenue keep growing?" (Part 2 already answered that comfortably). Revenue growth and cash-flow health are related but genuinely different questions, exactly @sec-week12-03's point when introducing this case.
+
+### Live Calculation: EBITDA, Fixed Charges, and Both Covenants (10 min)
+
+Ceres's long-term debt agreement contains two covenants: long-term debt cannot exceed **3.25 times EBITDA**, and EBITDA must be at least **2.0 times fixed financial charges** (interest plus long-term lease rentals). Build both live from the 2006E figures.
+
+```{r}
+#| echo: true
+ebit_2006 <- 3018       # Earnings before Interest & Taxes, 2006E ($000s)
+da_2006 <- 669          # Depreciation & Amortization, 2006E ($000s)
+ebitda_2006 <- ebit_2006 + da_2006
+ebitda_2006
+
+interest_2006 <- 658    # Interest expense, 2006E ($000s)
+lease_rentals <- 965    # Annual long-term lease rentals ($000s)
+fixed_charges <- interest_2006 + lease_rentals
+fixed_charges
+
+coverage_ratio <- ebitda_2006 / fixed_charges
+coverage_ratio
+
+current_debt <- 9000    # approximate long-term debt, end of 2006 ($000s)
+max_allowed_debt <- 3.25 * ebitda_2006
+c(max_allowed = max_allowed_debt, headroom = max_allowed_debt - current_debt)
+```
+Two very different pictures emerge: the debt-level covenant has real headroom (about **\$3.0 million**, roughly 25%, before the 3.25x cap binds), but the fixed-charge-coverage covenant is sitting at about **2.27x**, only about **14% above** its 2.0x minimum. That coverage ratio, not the debt cap, is the one actually worth worrying about.
+
+### Team Worksheet: Is Growth Financially Sustainable? (30 min)
+
+::: {.example title="Team worksheet"}
+Using Part 2's 2007 revenue scenarios (Pessimistic \$44.6M, Base \$48.8M, Optimistic \$51.0M) and the covenant figures above:
+
+1. **If Ceres funds continued dealer-inventory growth (more GetCeres™-style receivables) with additional debt, interest expense will rise.** Holding EBITDA fixed, would a meaningful increase in interest expense push the fixed-charge-coverage ratio below the required 2.0x? Roughly how much could fixed charges rise before that covenant is breached?
+2. **EBITDA typically grows alongside revenue.** If EBITDA grows roughly in line with the revenue scenarios from Part 2 (i.e., faster in the optimistic case), does that give Ceres more room to take on debt-financed growth, or less? Explain.
+3. **Which covenant should Ceres's CEO be more worried about heading into the bank meeting: the debt-level cap or the coverage ratio?** Justify your answer using the actual numbers.
+4. **Draft a two-to-three sentence recommendation** for Wydown to bring into the bank meeting: should Ceres pursue the optimistic growth scenario as aggressively as GetCeres™ made possible, or does the coverage-ratio cushion argue for a more measured pace? What would you want the bank to know?
+:::
+
+Circulate. Common places teams get stuck:
+
+- **On Question 1:** guide them to solve directly, fixed charges can rise to $\text{EBITDA}/2.0 = 3687/2.0 \approx 1843.5$ before the covenant breaks, versus the current 1,623, room for about **\$220,000** more in fixed charges (interest and lease costs combined), not a large cushion for a company financing rapid receivables growth.
+- **On Question 2:** push teams to notice that EBITDA growth *does* loosen both covenants, but only if profitability grows in step with revenue, if margins compress while chasing growth (a real risk when discounting more aggressively to dealers, as GetCeres™ does), the cushion could shrink even while revenue rises.
+- **On Question 3:** the correct answer is the **coverage ratio**, precisely because it has far less percentage headroom (about 14%) than the debt cap (about 25%), a direct echo of @sec-week13-02's binding-vs-non-binding logic: the constraint closest to its limit is the one that actually matters, not the one with the bigger absolute number attached to it.
+
+### Report-Outs (10 min)
+
+Cold-call two or three teams for their recommendation (Question 4). Push back on any team that simply says "pursue the optimistic scenario" without addressing the coverage-ratio cushion explicitly.
+
+### Wrap-Up: Module 5 Recap and Look Ahead to Module 6 (5 min)
+
+Close Module 5 by naming what it added: the forecasting toolkit (naive through regression-based methods), formal accuracy and interval concepts, and scenario analysis, applied here to a real company facing a real financing decision. Preview Module 6, tomorrow (12/5): from *prediction* ("what's likely to happen?") to *prescription* ("what should we do, given real limits on resources?"), using the Petro Refinery case.
+
+## Recap for the Instructor
+
+| **Keyword** | **Where it was taught** |
+|---|---|
+| Scenario analysis applied to Ceres | @sec-mod5-part2-guide |
+| Debt covenants and coverage ratios | This session (drawn from the case's financial exhibits) |
+| Binding vs. non-binding constraints (conceptual preview) | @sec-week13-02 |

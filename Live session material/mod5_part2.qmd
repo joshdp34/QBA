@@ -1,0 +1,106 @@
+# Instructor Guide — Part 2 (12/4, Hour 2): Forecasting Ceres's Growth {#sec-mod5-part2-guide}
+
+::: {.callout-note collapse="false" title="How to use this guide"}
+This is a facilitation guide for the instructor, not student-facing reading. It pairs with the slide deck `mod5_part2_slides.qmd`. Students arrive having read @sec-week12-03's introduction to the Ceres Gardening Company case. This hour does the actual quantitative work the case calls for: a scenario-based revenue projection from Ceres's own (real, annual) historical numbers, and a hands-on monthly-cadence forecasting exercise on a supplementary series, since Ceres's own reporting can't support the moving-average and seasonality tools on its own.
+:::
+
+## Session Objectives
+
+By the end of this period, students should be able to:
+
+1. Compute a compound annual growth rate (CAGR) from real historical revenue figures and use it to build base, optimistic, and pessimistic projections.
+2. Fit and interpret a monthly forecasting model (Holt-Winters) on a seasonal business series.
+3. State why a revenue projection alone doesn't yet answer the question Ceres's bank is actually asking.
+
+## Timing at a Glance
+
+| Time | Segment | Format |
+|---|---|---|
+| 0:00–0:05 | Reconnect: Ceres's real growth numbers | Instructor-led |
+| 0:05–0:25 | Live build: CAGR and a base/optimistic/pessimistic projection | Live coding (R + Excel) |
+| 0:25–0:50 | Team activity: a supplementary monthly series | Small groups (3–4) |
+| 0:50–1:00 | Debrief: growth isn't the whole story | Instructor-led |
+
+## Detailed Run of Show
+
+### Reconnect: Ceres's Real Growth Numbers (5 min)
+
+Restate the numbers from the case (in $ thousands): revenue of \$24,652 in 2002 growing to \$42,597 by 2006E, roughly a 73% increase over four years, with growth **accelerating** in the two most recent years (year-over-year growth of 8.7%, 9.3%, 19.8%, then 21.4%), coinciding with the company's 2005 launch of the GetCeres™ program, a dealer-inventory financing initiative offering discounts and extended (120-day) payment terms to encourage retailers to stock more product.
+
+### Live Build: CAGR and a Scenario Projection (20 min)
+
+::: {.example title="Computing Ceres's historical CAGR"}
+```{r}
+#| echo: true
+rev <- c(24652, 26797, 29289, 35088, 42597)
+years <- 2002:2006
+names(rev) <- years
+
+cagr <- (rev["2006"] / rev["2002"])^(1/4) - 1
+cagr
+```
+Ceres's revenue grew at a compound annual rate of about **14.7%** over 2002–2006E. Live-build the year-over-year growth rates to show the room *why* a single CAGR number can be misleading on its own, the acceleration in the two most recent years is exactly the kind of pattern @sec-week12-03's scenario analysis is built to handle explicitly.
+:::
+
+::: {.example title="Base, optimistic, and pessimistic 2007–2008 projections"}
+```{r}
+#| echo: true
+base_2006 <- rev["2006"]
+base_growth <- as.numeric(cagr)
+optimistic_growth <- base_growth + 0.05
+pessimistic_growth <- base_growth - 0.10
+
+proj_2007 <- base_2006 * (1 + c(pessimistic_growth, base_growth, optimistic_growth))
+names(proj_2007) <- c("Pessimistic", "Base", "Optimistic")
+round(proj_2007, 0)
+
+proj_2008 <- base_2006 * (1 + c(pessimistic_growth, base_growth, optimistic_growth))^2
+names(proj_2008) <- c("Pessimistic", "Base", "Optimistic")
+round(proj_2008, 0)
+```
+Three scenarios: continued deceleration (about \$44.6M in 2007), the historical trend simply continuing (about \$48.8M), or the recent acceleration persisting (about \$51.0M), a **\$6.4 million spread** on 2007 revenue alone from one uncertain assumption, exactly @sec-week12-03's Example 12.17 technique, now applied to a real company's real numbers. Note that all three scenarios clear the case's stated breakeven point of roughly \$30 million in revenue comfortably; revenue growth is not going to be the source of any real tension in this case, which is exactly the point Part 3 will build on.
+:::
+
+### Team Activity: A Supplementary Monthly Series (25 min)
+
+Explain plainly: Ceres's own reporting is annual, far too coarse for the moving-average and seasonality tools from @sec-week12-01 and @sec-week12-02. The case itself notes that a large share of retail sales happens on just four or five weekends each spring and summer season, real seasonal structure that annual figures completely hide. Distribute a supplementary, instructor-provided monthly sell-through series (clearly **not** part of the actual case financials) so teams can practice the right tools at the right cadence:
+
+```{r}
+#| echo: true
+#| message: false
+library(tidyverse)
+library(fpp3)
+
+set.seed(2025)
+months <- seq(as.Date("2004-01-01"), as.Date("2006-12-01"), by = "month")
+n <- length(months)
+month_num <- as.integer(format(months, "%m"))
+
+#simulate a supplementary monthly sell-through series with a spring/summer peak
+seasonal_shape <- c(0.6,0.7,1.3,1.6,1.5,1.1,0.9,0.8,0.7,0.6,0.5,0.6)
+sales <- (700 + 12 * (1:n)) * seasonal_shape[month_num] + rnorm(n, 0, 40)
+
+sell_through <- tibble(month = yearmonth(months), sales = round(sales, 1)) |>
+  as_tsibble(index = month)
+
+sell_through |> model(STL(sales ~ season(window = "periodic"))) |>
+  components() |> autoplot()
+```
+Teams should: (1) identify the peak months visually (March through May), consistent with the case's own description of concentrated spring-weekend demand; (2) fit a Holt-Winters model and forecast six months forward; (3) discuss what the forecasted peak implies for *when* Ceres needs dealer inventory in place, directly relevant to the GetCeres™ program's timing.
+```{r}
+#| echo: true
+fit <- sell_through |> model(hw = ETS(sales ~ error("A") + trend("A") + season("A")))
+fit |> forecast(h = "6 months") |> autoplot(sell_through)
+```
+
+### Debrief: Growth Isn't the Whole Story (10 min)
+
+Introduce the wrinkle that sets up Part 3: alongside this revenue growth, Ceres's accounts receivable grew from about \$10.3 million (2005) to \$14.5 million (2006E), and dealer inventory (stock sitting with retailers, not yet sold to end customers) grew from about \$10 million to \$23 million over the same year. Ask the room directly: "if revenue keeps growing at any of the three rates we just projected, does that automatically mean Ceres's cash position is fine?" Let the tension sit unresolved; Part 3 is built entirely around answering it.
+
+## Recap for the Instructor
+
+| **Keyword** | **Where it was taught** |
+|---|---|
+| CAGR and scenario analysis | @sec-week12-03 |
+| Monthly forecasting tools (STL, Holt-Winters) | @sec-week12-01, @sec-week12-02 |
+| Ceres's real revenue and growth figures | This session (drawn from the case) |

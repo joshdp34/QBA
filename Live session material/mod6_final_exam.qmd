@@ -1,0 +1,121 @@
+# Final Exam: The Superstore Analysis, Part II {#sec-mod6-final}
+
+::: {.callout-important collapse="false" title="Exam window and policy"}
+**Distributed: [instructor to set, following the 12/5 session]**
+**Due: [instructor to set; suggested: during finals week]**, submitted on Canvas. See @sec-mod6-final-submission for exact submission instructions.
+
+This is a **final exam, not a team deliverable**. It is open-book and open-note, you may use your course readings, prior deliverables, and your own code from this course, but it must be **your own individual work**. Do not discuss your specific analysis, results, or write-up with classmates. If you have a clarifying question about the exam itself (not about your results), email the instructor.
+:::
+
+## Overview
+
+This exam covers the second half of the analytics decision cycle: building predictive models (Module 4), forecasting a value forward in time (Module 5), and prescribing an optimal action under real constraints (Module 6). It's built the same way the midterm was: real calculations, real interpretation, and a defensible recommendation, not lengthy hand derivations.
+
+Sections 2–3 return to the **same Sample Superstore dataset** from the midterm (@sec-mod3-midterm), so you don't need to source new data for those parts, just re-download it if you no longer have your copy. Section 6 is a **self-contained optimization scenario**; all the numbers you need are given directly in this document, no data file is required for that section.
+
+## What Your Report Must Include
+
+Your rendered Quarto report should contain the following sections, in this order.
+
+### 1. Framing (short)
+
+In 2&ndash;3 sentences, state a business decision that could draw on **all three** of this exam's tools together, a predictive model, a forecast, and an optimization, even though you'll address each with a separate dataset or scenario below. For example, a retailer might use a model to identify which products are reliably profitable, a forecast to plan next quarter's demand, and an optimization to decide how to allocate limited shelf space or staffing given that demand.
+
+### 2. Module 4, Part A: Regression Modeling
+
+Using the Superstore dataset, build a **multiple regression** predicting `Profit` per line item from `Discount` and `Category` (Furniture, Office Supplies, or Technology), following @sec-week09-02's categorical-predictor approach.
+
+- Report the fitted equation and interpret each coefficient in plain language (including which category is your reference level and why).
+- Report and interpret $R^2$ (or adjusted $R^2$).
+- Run **at least one** residual diagnostic (a residual-vs-fitted plot, or a formal test like `olsrr::ols_test_breusch_pagan()`) and state what it suggests about your model's LINE assumptions.
+
+### 3. Module 4, Part B: Classification
+
+Using the same dataset, build a **logistic regression** predicting whether a line item is profitable (`Profit > 0`) from `Discount` (and, optionally, `Quantity`).
+
+- Report the odds ratio for `Discount` and interpret it in plain business language (not just "the odds ratio is 0.85").
+- Build a confusion matrix at a threshold of your choice, and report accuracy plus **at least one** metric beyond accuracy (sensitivity, specificity, or precision).
+- Report the AUC and interpret what it says about this model's overall ability to separate profitable from unprofitable line items.
+
+### 4. Module 5, Part A: Time Series Forecasting
+
+Aggregate the Superstore data into a **monthly total sales** time series (sum `Sales` by year-month across the full dataset). Using this series:
+
+- Identify whether it shows a visible trend, seasonality, or both.
+- Fit **at least two** forecasting methods (for example, seasonal naive and one of moving average / exponential smoothing / regression-based forecasting), and forecast total sales for the next three months.
+- State which method you'd actually recommend using, and why, referencing a forecast accuracy comparison (@sec-week12-03) if you have enough history to hold out a test period, or a qualitative justification if you don't.
+
+### 5. Module 5, Part B: Scenario Analysis
+
+Using your forecast from Part A as the base case, build **base, optimistic, and pessimistic** projections for total sales over the next 12 months, following the approach from @sec-week12-03's Example 12.17 and the 12/4 live session's Ceres analysis. State the specific assumption behind each scenario (for example, a different assumed growth rate, or a different assumed persistence of a recent trend), not just an arbitrary adjustment.
+
+### 6. Module 6: Linear Optimization
+
+::: {.callout-note collapse="false" title="A craft brewery's weekly production decision"}
+A small craft brewery produces two products each week: **IPA** and **Lager**, sold by the keg. Each keg of IPA contributes **\$80** toward fixed costs; each keg of Lager contributes **\$60**. Production uses three shared resources:
+
+- **Brewing tank time**: each keg of IPA requires 3 hours, each keg of Lager requires 2 hours. **300 hours** are available this week.
+- **Fermentation capacity**: each keg of IPA requires 4 hours, each keg of Lager requires 4 hours. **480 hours** are available this week.
+- **Packaging time**: each keg of IPA requires 1 hour, each keg of Lager requires 2 hours. **200 hours** are available this week.
+
+The brewery wants to decide how many kegs of each to produce this week to maximize total contribution.
+:::
+
+- Define the decision variables, objective function, and constraints, in both words and math.
+- Solve the model (in Excel Solver or R), and report the optimal number of kegs of each product and the resulting weekly contribution.
+- Identify which resource(s) are binding and which (if any) have slack, and state how much slack.
+- **One sensitivity question:** using your Sensitivity Report (or `lpSolve`'s `compute.sens = TRUE` output), a supplier offers the brewery **40 additional hours of brewing tank time for \$700**. Should the brewery accept? Show the calculation that justifies your answer.
+
+### 7. Executive Recommendation
+
+A short paragraph (4&ndash;6 sentences), written **for a manager, not a statistician**, that ties your findings together. Address: what your regression and classification models suggest about which line items tend to be profitable, what your forecast and scenarios suggest about near-term demand, and what your optimization result suggests about which resource the brewery (or, if you prefer, the retailer from Sections 2&ndash;5) should prioritize if it wanted to expand capacity. Be explicit about uncertainty where it applies, and avoid statistical jargon.
+
+## What Is *Not* Required for This Exam
+
+- Time-series decomposition detail beyond identifying trend/seasonality (Section 4 doesn't require a full STL walkthrough)
+- Multiple linear optimization scenarios beyond the one given in Section 6
+- Regression diagnostics beyond one check in Section 2
+- An exhaustive comparison of every forecasting method from @sec-week12-01 through @sec-week12-03; two methods, compared honestly, is enough
+
+## Format and Length
+
+- Written and rendered as a **Quarto document** (`.qmd` rendered to `.pdf`).
+- Use headings matching the seven sections above.
+- Code chunks may be shown or hidden (`echo: true`/`false`) at your discretion, but your report should read cleanly even if a reader skips the code entirely.
+- A well-executed exam is typically **4&ndash;5 rendered pages**, not counting code output. Concise and clear beats long.
+
+## If You're Working in Excel
+
+You are welcome to do your calculations in Excel instead of R for Sections 2&ndash;5.
+
+1. **Do your regression and classification work in Excel** using the Data Analysis ToolPak where applicable, noting that logistic regression itself has no Excel ToolPak equivalent (@sec-week11-01); you may fit that one piece in R even if the rest of your exam is done in Excel.
+2. **Do the optimization in Section 6 with Excel Solver**, exactly as practiced on 12/5, this section is designed around Solver.
+3. **Report your results in your Quarto document as text, formulas, or embedded images of your Excel output**, showing how you got your numbers.
+4. **Submit your Excel workbook as a third file** alongside your `.qmd` and `.pdf` (see @sec-mod6-final-submission).
+
+::: {.callout-note collapse="false" title="Why the workbook matters for grading"}
+A final number alone doesn't show us how you got there. Submitting the `.xlsx` file lets us verify your work was set up correctly, the same role a visible R code chunk plays for students working in R.
+:::
+
+## Grading Rubric
+
+| Component | Points |
+|---|---|
+| Framing | 5 |
+| Module 4A: Regression modeling | 15 |
+| Module 4B: Classification | 15 |
+| Module 5A: Time series forecasting | 15 |
+| Module 5B: Scenario analysis | 15 |
+| Module 6: Linear optimization | 20 |
+| Executive recommendation | 10 |
+| Overall clarity and professionalism | 5 |
+| **Total** | **100** |
+
+## Submission Instructions {#sec-mod6-final-submission}
+
+::: {.callout-important collapse="false" title="Submit on Canvas"}
+1. Render your `.qmd` file to `.pdf`.
+2. Submit **both** your `.qmd` source file and the rendered `.pdf` file to the Final Exam assignment on Canvas. **If you worked in Excel**, also submit your `.xlsx` workbook as a third file.
+3. Name your files `lastname_firstname_final.qmd`, `lastname_firstname_final.pdf`, and (if applicable) `lastname_firstname_final.xlsx`.
+4. Late submissions follow the course late-work policy stated in the syllabus. Because this is a timed final exam rather than an open-ended deliverable, late submissions may be subject to stricter penalties than usual, check the syllabus.
+:::

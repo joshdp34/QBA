@@ -1,0 +1,191 @@
+
+
+## Recommended course structure
+
+I would organize the course around a recurring managerial workflow:
+
+> **Frame the decision → obtain appropriate data → summarize the evidence → quantify uncertainty → build a model → recommend an action → communicate the result**
+
+Because the dates are unevenly spaced, the date of each module should serve as the **culminating live session** for work completed during the preceding weeks. The two consecutive-day weekends are especially useful: the Friday module can introduce and practice methods, while Saturday can emphasize cases, integration, and decision-making.
+
+### Six-module plan
+
+| Module                                                |      Date | Theme and topics                                                                                                                                                                                                                                                       | Applied work and deliverable                                                                                                                                                                                     |
+| ----------------------------------------------------- | --------: | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **1. Turning Data into Managerial Insight**           |   **9/4** | Introduction to business analytics; framing business questions; data types and measurement; sampling and gathering data; observational versus experimental data; tables and graphs; descriptive statistics                                                             | Students analyze a manageable business dataset in Excel and R, then produce a short Quarto exploratory report containing an executive summary, tables, graphs, and key descriptive statistics.                   |
+| **2. Quantifying Risk and Uncertainty**               | **10/16** | Introduction to probability; conditional probability; random variables; probability distributions; binomial, uniform, and normal distributions; expected value; sampling distributions; standard errors; confidence intervals; introduction to hypothesis testing      | Risk and uncertainty exercises involving demand, quality, conversion, or customer behavior. Students calculate selected results in Excel and reproduce or extend the analysis in R.                              |
+| **3. Comparing Alternatives and Evaluating Evidence** | **10/17** | Hypothesis-testing workflow; practical versus statistical significance; one-sample and two-sample methods; independent and paired comparisons; comparisons of proportions; ANOVA; multiple comparisons; research design, bias, and causality                           | **Google Project Oxygen case.** Teams evaluate whether the evidence supports the claim that managers matter and identify what additional analysis or research design would strengthen the conclusion.            |
+| **4. Predictive Analytics for Business Decisions**    | **11/13** | Simple linear regression; correlation versus causation; multiple linear regression; categorical predictors; model interpretation; residual diagnostics; prediction and prediction intervals; introductory logistic regression; probabilities, odds, and classification | Students build a predictive model in R and Excel and translate the model into managerial recommendations. This is the best location for a fourth, relatively short regression or logistic-regression case.       |
+| **5. Forecasting and Planning Under Uncertainty**     |  **12/4** | Time-series structure; trend and seasonality; naïve forecasts; moving averages; exponential smoothing; regression-based forecasting; forecast accuracy; forecast intervals; scenario and sensitivity analysis                                                          | **Ceres Gardening Company case.** Students forecast growth and financing needs under alternative assumptions and prepare a recommendation concerning the proposed growth strategy.                               |
+| **6. Prescriptive Analytics and Resource Allocation** |  **12/5** | Introduction to linear optimization; decision variables; objective functions; constraints; feasible solutions; binding constraints; slack; basic sensitivity analysis; translating an optimal solution into a managerial recommendation                                | **Petro Refinery case.** Students formulate the model, solve it using Excel Solver, optionally reproduce it in R, and submit a concise recommendation explaining the optimal product mix and limiting resources. |
+
+---
+
+## How the calendar would work
+
+### Before Module 1: August 28–September 3
+
+Keep the opening week relatively light:
+
+* Install or confirm access to R, RStudio, Excel Solver, and Quarto.
+* Complete a short Excel and R readiness exercise.
+* Read an introduction to the analytics decision cycle.
+* Import a dataset, identify its observational unit and variables, and create one graph.
+
+The September 4 meeting can then focus on interpretation and managerial communication rather than troubleshooting installations.
+
+### Between September 4 and October 16
+
+This is the longest interval, so it should carry much of the statistical foundation:
+
+1. Sampling, data collection, and data quality
+2. Descriptive statistics and visualization
+3. Probability concepts
+4. Binomial, uniform, and normal distributions
+5. Sampling distributions and confidence intervals
+6. Introduction to hypothesis testing
+
+The **uniform distribution** can receive relatively limited coverage. For an executive MBA audience, its main value is as a simple model for equally likely outcomes and as an introduction to simulation. The binomial and normal distributions deserve substantially more emphasis.
+
+### October 16–17 weekend
+
+These two modules should function as one connected weekend:
+
+* **Friday:** uncertainty, confidence intervals, and hypothesis testing.
+* **Saturday:** comparisons, ANOVA, research design, and the Google case.
+
+No substantial new preparation should be expected overnight. Saturday should apply Friday’s ideas rather than introduce an entirely separate mathematical unit.
+
+### Between October 17 and November 13
+
+Use these four weeks for predictive analytics:
+
+1. Simple regression
+2. Multiple regression
+3. Diagnostics, prediction, and model limitations
+4. Logistic regression
+
+### Between November 13 and December 4
+
+Use the final three-week interval for:
+
+1. Logistic-regression application and interpretation
+2. Time-series foundations and forecasting methods
+3. Ceres preparation and forecasting scenarios
+
+December 4 then becomes the forecasting and planning case session. December 5 shifts from prediction—“what is likely to happen?”—to prescription—“what should we do?”
+
+---
+
+## Recommended optimization case: **Petro Refinery**
+
+I would select **Petro Refinery LLC** and not assign **Merton Truck Company**.
+
+Petro is explicitly structured as a simple but realistic introductory product-mix exercise. It has only two decision variables—light and heavy crude—and three resource constraints. More importantly, the handout walks students through the construction of the model and its implementation in Excel Solver. That makes it especially appropriate for students encountering linear programming for the first time. 
+
+Merton is an interesting case, but it is better suited to a second optimization lesson. In addition to finding the optimal product mix, its questions require students to interpret the value of added capacity, determine sensitivity ranges, evaluate outsourcing, consider a new product, examine overtime production, and incorporate an additional strategic product-mix constraint. Those are excellent topics, but they move well beyond an introduction to optimization. 
+
+A useful Petro assignment would ask students to:
+
+1. Define the decision variables, objective, and constraints in words.
+2. Build and solve the model in Excel Solver.
+3. Identify the optimal processing quantities.
+4. Identify binding and nonbinding constraints.
+5. Explain the managerial meaning of unused capacity.
+6. Conduct one simple what-if analysis.
+7. Write a one-page executive recommendation.
+
+R could be used to draw the feasible region or verify the Solver solution, but Excel Solver should be the primary implementation because the case itself is designed around it.
+
+---
+
+## Placement of the other attached cases
+
+### Google Project Oxygen: Module 3
+
+This case is an excellent bridge between data collection and statistical inference. It includes employee surveys, comparisons between higher- and lower-scoring managers, relationships with retention and performance, repeated measurement, and concerns about whether observed associations establish causation. 
+
+It can support questions such as:
+
+* What is the population of interest?
+* How were “high-performing” and “low-performing” managers defined?
+* Were the groups sampled or constructed?
+* What hypotheses were being investigated?
+* Which outcomes are quantitative and which are binary?
+* Would a two-sample test, ANOVA, regression, or logistic regression be appropriate?
+* Does the evidence establish that better managers cause better outcomes?
+* How should Google communicate statistical and practical significance?
+
+The case describes analyses and summarized findings but is not primarily a raw-data exercise. For hands-on R and Excel work, I would provide a small companion dataset patterned around manager scores, employee satisfaction, function, turnover, and team performance.
+
+### Ceres Gardening Company: Module 5
+
+Ceres is naturally framed around growth, financial projections, working capital, and the consequences of extending favorable inventory and payment terms. The company must assess its 2007 growth plans and prepare cash-flow projections for the bank. 
+
+The case can be used to teach:
+
+* Trend calculations and growth rates
+* Forecast assumptions
+* Base, optimistic, and pessimistic scenarios
+* The difference between revenue growth and cash-flow health
+* Break-even analysis
+* Sensitivity of financing requirements to sales and collection assumptions
+* Communication of forecasts to lenders and executives
+
+One limitation is that the case provides only a small number of annual observations. That is enough for managerial forecasting and scenario analysis but not enough for a rich formal time-series analysis. I would supplement it with monthly or quarterly sales data—either instructor-created or from another business dataset—for instruction in moving averages, exponential smoothing, forecast accuracy, and seasonality. The Ceres case can then serve as the executive decision context into which those forecasting concepts are placed.
+
+---
+
+## The four-case-study issue
+
+Excluding one of the two optimization cases leaves **three assigned cases from the four attached PDFs**:
+
+1. Google Project Oxygen
+2. Ceres Gardening Company
+3. Petro Refinery
+
+I would not include Merton merely to reach four because it duplicates the optimization topic and is notably more advanced.
+
+To retain four substantive case studies, I recommend adding a shorter case to Module 4 involving either:
+
+* customer churn and logistic regression,
+* sales or profitability prediction with multiple regression, or
+* employee attrition using both linear and logistic models.
+
+That produces a much better methodological balance:
+
+| Case                     | Principal analytics focus                                                  |
+| ------------------------ | -------------------------------------------------------------------------- |
+| Google Project Oxygen    | Sampling, measurement, inference, two-sample comparisons, ANOVA, causality |
+| Regression/logistic case | Predictive modeling                                                        |
+| Ceres Gardening Company  | Forecasting, scenarios, and planning                                       |
+| Petro Refinery           | Linear optimization                                                        |
+
+---
+
+## Integrating Excel, R, and Quarto
+
+I would avoid requiring students to perform every analysis twice. A more efficient division is:
+
+* **Excel:** initial exploration, formulas, PivotTables, straightforward statistical procedures, forecasting worksheets, scenario analysis, and Solver.
+* **R:** reproducible data preparation, higher-quality graphics, inference, regression, logistic regression, diagnostics, and forecasting.
+* **Quarto:** the common communication layer connecting the analysis to the decision.
+
+A consistent module workflow would be:
+
+1. Demonstrate the method conceptually.
+2. Show a transparent Excel implementation.
+3. Reproduce or extend it in R.
+4. Have students explain the result in Quarto.
+5. End with a managerial recommendation rather than a statistical conclusion alone.
+
+The Quarto expectations can build progressively:
+
+* **Module 1:** headings, prose, code chunks, tables, and plots
+* **Module 2:** inline calculations and interpretation of intervals
+* **Module 3:** polished comparison tables and evidence-based case argument
+* **Module 4:** model equations, coefficient tables, and diagnostic plots
+* **Module 5:** forecast graphs and scenario tables
+* **Module 6:** integration of Solver results, assumptions, and an executive recommendation
+
+The final examination after December 5 should emphasize selecting an appropriate method, interpreting R and Excel output, recognizing limitations, and making defensible business recommendations rather than lengthy hand calculations.

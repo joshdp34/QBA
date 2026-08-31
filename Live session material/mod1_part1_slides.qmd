@@ -1,0 +1,192 @@
+---
+title: "Introduction to Business Analytics"
+subtitle: "QBA 5330 — Module 1, Part 1 (September 5)"
+author: "QBA 5330"
+format:
+  revealjs:
+    theme: simple
+    slide-number: true
+    footer: "QBA 5330 | Module 1 | Part 1"
+    transition: fade
+    incremental: true
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+## Where We're Headed Today
+
+- **Part 1:** Introduction to business analytics & framing business questions
+- **Part 2:** Sampling and gathering data; observational vs. experimental data
+- **Part 3:** Tables, graphs, and descriptive statistics
+
+::: {.notes}
+Open by naming the arc of the whole three-hour session, then the whole course. Every module maps onto the same seven-step analytics decision cycle from the pre-reading.
+:::
+
+## Quick Check
+
+Show of hands:
+
+- Installed R, RStudio, Excel Solver, and Quarto?
+- Read about the analytics decision cycle?
+- Practiced importing data and identifying variable types?
+
+::: {.notes}
+Not a gotcha — tells you how much you can lean on the pre-reading vs. re-explain live.
+:::
+
+## The Analytics Decision Cycle {.smaller}
+
+> Frame the decision &rarr; obtain appropriate data &rarr; summarize the evidence &rarr; quantify uncertainty &rarr; build a model &rarr; recommend an action &rarr; communicate the result
+
+Today: **Steps 1 and 2** — plus the data vocabulary we need before anything else.
+
+## Three Kinds of Analytics
+
+- **Descriptive** — what happened?
+  - tables, graphs, summary statistics *(Module 1)*
+- **Predictive** — what is likely to happen?
+  - regression, forecasting *(Modules 4–5)*
+- **Prescriptive** — what should we do about it?
+  - optimization *(Module 6)*
+
+## What Connects Them
+
+Inferential statistics (confidence intervals, hypothesis tests — Modules 2–3) is the bridge:
+
+- lets us move from a **sample** to justified claims about a **population or process**
+- makes prediction and prescription **trustworthy**, not just plausible-looking
+
+## Your Turn
+
+Give one example from your own organization of:
+
+1. A **descriptive** analytics tool
+2. A **predictive** analytics tool
+3. A **prescriptive** analytics tool
+
+::: {.notes}
+EMBA students almost always have a live example: a monthly sales dashboard (descriptive), a churn model (predictive), a staffing or pricing tool (prescriptive). Real examples land better than manufactured ones.
+:::
+
+## A Vague Concern Is Not a Question
+
+> "Our customer satisfaction seems to be dropping."
+
+- This is a **concern**, not something anyone can act on yet.
+
+## Framing It as a Decision
+
+> "Should we change our current return policy for the upcoming quarter, given a hypothesis that a stricter policy introduced in March is driving dissatisfaction?"
+
+- Names a specific **decision**
+- Names a **timeframe**
+- Names a candidate **explanation** — tells you what data to collect
+- Implies what would count as **evidence** for or against acting
+
+## Three Framing Questions
+
+- What **decision** is on the table?
+- **Who** is making it, and what are the realistic options?
+- What would **change** if the analysis came out one way vs. another?
+
+## A Gut-Check
+
+> If your analysis wouldn't change anyone's action, it probably wasn't the right analysis to run.
+
+- Apply this to: *"Satisfaction seems to be dropping."*
+
+## Recap: Data Types
+
+- **Categorical** — places observations into named groups
+- **Quantitative** — measured on a numeric scale
+  - **Discrete** — countable values only
+  - **Continuous** — any value within a range
+
+## Classify These
+
+An EMBA cohort roster:
+
+| Column | Type? |
+|---|---|
+| `student_id` | ? |
+| `industry` | ? |
+| `years_experience` | ? |
+| `undergrad_gpa` | ? |
+| `completed_capstone` (yes/no) | ? |
+
+## Why This Matters
+
+Every summary statistic, every graph, and every model choice later in this course depends on classifying variables correctly **first**.
+
+## One More Term: The Observational Unit
+
+**What does one row of the dataset represent?**
+
+- `store_sales.csv`: one row = one store's performance in one **month** (a "store-month"), not just "a store"
+- The EMBA roster: one row = one **student**
+
+::: {.notes}
+Flag the store_sales.csv case explicitly — store_id repeats four times, so "the observational unit is a store" is a common, slightly-wrong first answer.
+:::
+
+## Quick Check
+
+A dataset of `date`, `website_visits`, `bounce_rate`, recorded once per day for a year.
+
+**What's the observational unit?**
+
+::: {.notes}
+Answer: one row = one day.
+:::
+
+## Why This Is Worth Slowing Down For
+
+"Average revenue" in `store_sales.csv` is an average **per store-month**.
+
+Not per store. Not per year.
+
+A report that's vague about this can quietly mislead a reader who assumes otherwise.
+
+## Activity: Frame a Business Question {.smaller}
+
+In groups of 3–4, pick one prompt:
+
+1. A regional bank worried about branch staffing costs
+2. A hospital system worried about patient no-shows
+3. A software company worried about free-trial-to-paid conversion
+4. A manufacturer worried about a rise in product returns
+
+**Write:** a framed decision (not just a topic) + one data type you'd need.
+
+*(5 minutes — then we'll share out)*
+
+## Framing for the Module 1 Deliverable
+
+Worth **10 of 100 points** on the actual rubric.
+
+**Weak** (a topic):
+
+> "This report analyzes store sales data. Sales are an important part of any business..."
+
+**Strong** (a decision):
+
+> "...The company must decide how to allocate next quarter's inventory and staffing budget across regions. If one region is consistently outperforming the others relative to store size, that would support shifting resources toward it..."
+
+::: {.notes}
+The weak version could describe almost any dataset. The strong version could only be describing this one. Name what makes it work: a real decision, who's making it, what would change the answer.
+:::
+
+## Your Turn: One-Sentence Framing (2 minutes)
+
+Write **one sentence** framing your own deliverable dataset as a **decision**, not a topic.
+
+*(Not collected — just a first draft, while "strong vs. weak" is still fresh.)*
+
+## Going Forward
+
+Everything in the next part assumes you've already **framed the decision**.
+
+Sampling and data collection only make sense once you know what question you're answering.

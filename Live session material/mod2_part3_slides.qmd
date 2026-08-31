@@ -1,0 +1,91 @@
+---
+title: "Hypothesis Testing and the Module 2 Deliverable"
+subtitle: "Module 2, Part 3 (October 16)"
+author: "QBA 5330"
+format:
+  revealjs:
+    theme: simple
+    slide-number: true
+    footer: "QBA 5330 | Module 2 | Part 3"
+    transition: fade
+    incremental: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+## A Different Question
+
+- Part 2 asked: *is the true national rate at least leadership's minimum bar?*
+
+- New question: *has the new storefront's performance actually changed from the old storefront's history?*
+
+- That's a **hypothesis test** question.
+
+## Testing the Conversion Rate
+
+$H_0: p = 0.12$ (historical rate) vs. $H_a: p \neq 0.12$
+
+```{r}
+#| echo: true
+p_hat <- 0.15; p0 <- 0.12; n <- 200
+
+z_stat <- (p_hat - p0) / sqrt(p0 * (1 - p0) / n)
+p_value <- 2 * (1 - pnorm(abs(z_stat)))
+c(z = z_stat, p_value = p_value)
+```
+
+At $\alpha = 0.05$: **fail to reject** $H_0$.
+
+::: {.notes}
+Reconnect to Part 2: the 95% CI (0.101, 0.199) contains 0.12, so the test and interval agree.
+:::
+
+## Testing the Order Value
+
+$H_0: \mu = 65$ (historical average) vs. $H_a: \mu \neq 65$
+
+```{r}
+#| echo: true
+x_bar <- 71.50; mu0 <- 65; s <- 42; n <- 25
+
+t_stat <- (x_bar - mu0) / (s / sqrt(n))
+p_value <- 2 * pt(-abs(t_stat), df = n - 1)
+c(t = t_stat, p_value = p_value)
+```
+
+At $\alpha = 0.05$: **fail to reject** $H_0$.
+
+## Three Lenses on One Pilot {.smaller}
+
+| Question | Tool | This pilot |
+|---|---|---|
+| Best single guess? | Point estimate | $\hat{p}=0.15$; $\bar{x}=\$71.50$ |
+| Plausible range? | Confidence interval | $(0.101,0.199)$; $(\$54.16,\$88.84)$ |
+| Clears leadership's bar? | CI vs. threshold | Conversion: barely. Order value: not clearly. |
+| Changed from history? | Hypothesis test | Fail to reject, both |
+
+## The Honest Takeaway
+
+No clean "yes, launch" or "no, don't."
+
+Good analytics **narrows the range of reasonable disagreement**. It doesn't always resolve it.
+
+## The Module 2 Deliverable
+
+- A short **risk and uncertainty exercise**, using the same three-lens approach:
+
+1. Expected value / probability
+2. Confidence interval
+3. Hypothesis test
+
+- Applied to a scenario involving **demand, quality, conversion, or customer behavior**, calculated in Excel and reproduced or extended in R.
+
+## Looking Ahead to Saturday
+
+- Today: **quantifying** uncertainty.
+
+- Tomorrow (10/17): **comparing groups** and **evaluating causal claims**, using the Google Project Oxygen case.
+
+

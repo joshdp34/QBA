@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>31&nbsp; Week 12: Regression-Based Forecasting, Accuracy, and Scenario Analysis – STA 5330 Bus Analytics for Dec Making</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-ac731d99f942368ec2047317e7e82b91.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style type="text/css">
+.sidebar .chapter-number {
+color: #FFB81c;
+}
+.center-panel.quarto-layout-panel {
+justify-content: center;
+column-gap: 1rem;
+}
+</style>
+<style>
+div.callout-example.callout {
+  border-left-color: #008000;
+}
+div.callout-example.callout-style-default .callout-header {
+  background-color: rgba(0, 128, 0, 0.13);
+}
+div.callout-example .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-example.callout-style-default .callout-icon::before, div.callout-example.callout-titled .callout-icon::before {
+  content: '📈';
+  background-image: none;
+}
+</style>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./week_12_01.html">Module 5</a></li><li class="breadcrumb-item"><a href="./week_12_03.html"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Week 12: Regression-Based Forecasting, Accuracy, and Scenario Analysis</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./"></a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Module 1</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_01_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Week 1: Getting Set Up</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_01_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Week 1: The Analytics Decision Cycle</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_01_03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Week 1: Importing Data, Identifying Variables, and Creating a Graph</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Module 2</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_02_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Week 2: Probability Concepts</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_02_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Week 2: Random Variables</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_03_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Week 3: The Binomial Distribution</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_03_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Week 3: The Uniform Distribution</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_03_03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Week 3: The Normal Distribution</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_04_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Week 4: Sampling Distributions and the Sample Mean</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_04_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Week 4: The Sampling Distribution of the Sample Proportion</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_04_03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Week 4: Bootstrap Sampling Distributions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_05_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Week 5: Confidence Intervals for a Proportion</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_05_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Week 5: Confidence Intervals for a Mean</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_05_03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Week 5: Introduction to Hypothesis Testing</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Module 3</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_06_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Week 6: One-Sample Hypothesis Tests</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_06_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Week 6: Two-Sample Tests for Independent Means</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_06_03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Week 6: Paired Comparisons</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_07_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Week 7: Analysis of Variance (ANOVA)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_07_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Week 7: Research Design, Bias, and Causality</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_07_03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Week 7: The Project Oxygen Case and a Course Recap</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Module 4</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_08_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Week 8: Correlation and the Least-Squares Line</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_08_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Week 8: Interpreting Simple Regression Output</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_09_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Week 9: Multiple Linear Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_09_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Week 9: Categorical Predictors in Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_10_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Week 10: Regression Diagnostics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_10_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Week 10: Prediction Intervals and Model Limitations</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_11_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Week 11: Introduction to Logistic Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_11_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Week 11: Interpreting and Using Logistic Regression</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Module 5</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_12_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Week 12: Time Series Structure, Trend, Seasonality, and Naive Forecasts</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_12_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Week 12: Moving Averages and Exponential Smoothing</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_12_03.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Week 12: Regression-Based Forecasting, Accuracy, and Scenario Analysis</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">Module 6</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_13_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Week 13: Introduction to Linear Optimization</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_13_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Week 13: Binding Constraints, Slack, and Sensitivity Analysis</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#why-this-matters" id="toc-why-this-matters" class="nav-link active" data-scroll-target="#why-this-matters"><span class="header-section-number">31.1</span> Why This Matters</a></li>
+  <li><a href="#regression-based-forecasting" id="toc-regression-based-forecasting" class="nav-link" data-scroll-target="#regression-based-forecasting"><span class="header-section-number">31.2</span> Regression-Based Forecasting</a></li>
+  <li><a href="#forecast-accuracy-formalized" id="toc-forecast-accuracy-formalized" class="nav-link" data-scroll-target="#forecast-accuracy-formalized"><span class="header-section-number">31.3</span> Forecast Accuracy, Formalized</a></li>
+  <li><a href="#forecast-intervals-and-the-horizon" id="toc-forecast-intervals-and-the-horizon" class="nav-link" data-scroll-target="#forecast-intervals-and-the-horizon"><span class="header-section-number">31.4</span> Forecast Intervals and the Horizon</a></li>
+  <li><a href="#scenario-and-sensitivity-analysis" id="toc-scenario-and-sensitivity-analysis" class="nav-link" data-scroll-target="#scenario-and-sensitivity-analysis"><span class="header-section-number">31.5</span> Scenario and Sensitivity Analysis</a></li>
+  <li><a href="#introducing-the-ceres-gardening-company-case" id="toc-introducing-the-ceres-gardening-company-case" class="nav-link" data-scroll-target="#introducing-the-ceres-gardening-company-case"><span class="header-section-number">31.6</span> Introducing the Ceres Gardening Company Case</a></li>
+  <li><a href="#computing-regression-based-forecasts-in-r-and-excel" id="toc-computing-regression-based-forecasts-in-r-and-excel" class="nav-link" data-scroll-target="#computing-regression-based-forecasts-in-r-and-excel"><span class="header-section-number">31.7</span> Computing Regression-Based Forecasts in R and Excel</a></li>
+  <li><a href="#recap" id="toc-recap" class="nav-link" data-scroll-target="#recap"><span class="header-section-number">31.8</span> Recap</a></li>
+  <li><a href="#check-your-understanding" id="toc-check-your-understanding" class="nav-link" data-scroll-target="#check-your-understanding"><span class="header-section-number">31.9</span> Check Your Understanding</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./week_12_01.html">Module 5</a></li><li class="breadcrumb-item"><a href="./week_12_03.html"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Week 12: Regression-Based Forecasting, Accuracy, and Scenario Analysis</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-week12-03" class="quarto-section-identifier"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Week 12: Regression-Based Forecasting, Accuracy, and Scenario Analysis</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="why-this-matters" class="level2" data-number="31.1">
+<h2 data-number="31.1" class="anchored" data-anchor-id="why-this-matters"><span class="header-section-number">31.1</span> Why This Matters</h2>
+<p><a href="week_12_02.html" class="quarto-xref"><span>Chapter 30</span></a>’s methods all forecast a series using only its own past values. But regression, the very first tool of Module 4, already knows how to predict one variable from others, and time itself, or a category like day-of-week, is just another predictor. This section closes the loop: fitting a regression where the predictors are time-based, formalizing how forecast accuracy and forecast intervals are actually judged, and using a fitted forecasting model to reason about alternative future <strong>scenarios</strong>, exactly the skill the module’s live session and the Ceres Gardening Company case will ask you to apply.</p>
+</section>
+<section id="regression-based-forecasting" class="level2" data-number="31.2">
+<h2 data-number="31.2" class="anchored" data-anchor-id="regression-based-forecasting"><span class="header-section-number">31.2</span> Regression-Based Forecasting</h2>
+<p>A <strong>time-series regression</strong> models the response as a function of time-based predictors, most commonly a trend term and seasonal indicators, using ordinary least squares, precisely the machinery from <a href="week_08_01.html" class="quarto-xref"><span>Chapter 21</span></a> and <a href="week_09_02.html" class="quarto-xref"><span>Chapter 24</span></a>. <code>fable</code>’s <code>TSLM()</code> (<strong>T</strong>ime <strong>S</strong>eries <strong>L</strong>inear <strong>M</strong>odel) fits this the same way <code>lm()</code> does.</p>
+<div class="callout callout-style-simple callout-example callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Example</span>Example 12.14: Regression on trend and day of week
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Rather than rely on <code>fable</code>’s automatically generated seasonal labels, build the day-of-week predictor directly, exactly the dummy-variable approach from <a href="week_09_02.html" class="quarto-xref"><span>Chapter 24</span></a>, with Monday as a sensible reference:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fpp3)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>coffee <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/coffee_shop_daily.csv"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tsibble</span>(<span class="at">index =</span> date) <span class="sc">|&gt;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">dow =</span> <span class="fu">factor</span>(<span class="fu">weekdays</span>(date),</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>                       <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Monday"</span>,<span class="st">"Tuesday"</span>,<span class="st">"Wednesday"</span>,<span class="st">"Thursday"</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"Friday"</span>,<span class="st">"Saturday"</span>,<span class="st">"Sunday"</span>)))</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>fit_tslm <span class="ot">&lt;-</span> coffee <span class="sc">|&gt;</span> <span class="fu">model</span>(<span class="at">tslm =</span> <span class="fu">TSLM</span>(revenue <span class="sc">~</span> <span class="fu">trend</span>() <span class="sc">+</span> dow))</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">report</span>(fit_tslm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Series: revenue 
+Model: TSLM 
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-8.18040 -2.20682 -0.06574  2.01549  8.32999 
+
+Coefficients:
+               Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   57.402115   0.714523  80.336  &lt; 2e-16 ***
+trend()        0.075943   0.004388  17.306  &lt; 2e-16 ***
+dowTuesday     0.120211   0.848216   0.142    0.887    
+dowWednesday  -3.444194   0.848250  -4.060 7.43e-05 ***
+dowThursday  -10.804752   0.848307 -12.737  &lt; 2e-16 ***
+dowFriday    -14.907618   0.848386 -17.572  &lt; 2e-16 ***
+dowSaturday  -12.824992   0.856670 -14.971  &lt; 2e-16 ***
+dowSunday     -7.228935   0.856715  -8.438 1.28e-14 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 3.058 on 172 degrees of freedom
+Multiple R-squared: 0.8397, Adjusted R-squared: 0.8331
+F-statistic: 128.7 on 7 and 172 DF, p-value: &lt; 2.22e-16</code></pre>
+</div>
+</div>
+<p>The <code>trend()</code> coefficient, about <strong>0.076</strong> per day, matches <a href="week_12_01.html" class="quarto-xref"><span>Chapter 29</span></a>’s simple regression on a day index almost exactly. Each <code>dow</code> coefficient is a dummy-variable comparison to Monday, exactly as in <a href="week_09_02.html" class="quarto-xref"><span>Chapter 24</span></a>: Wednesday runs about $3.44 lower than Monday, Friday about $14.91 lower, and so on, with Tuesday statistically indistinguishable from Monday (<span class="math inline">\(p=0.887\)</span>). The model’s adjusted <span class="math inline">\(R^2\)</span> of <strong>0.833</strong> means trend and day-of-week together explain about 83% of the variability in daily revenue, in exactly the same sense as <a href="week_09_01.html" class="quarto-xref"><span>Chapter 23</span></a>’s adjusted <span class="math inline">\(R^2\)</span>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled" title="Forecasting with an external predictor requires future values of it">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Forecasting with an external predictor requires future values of it
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p><code>trend()</code> and <code>fable</code>’s built-in <code>season()</code> can project themselves forward automatically, the model knows a trend keeps climbing and a season keeps cycling. A predictor you build yourself, like <code>dow</code>, is different: <code>forecast()</code> needs to be told its future values explicitly, via <code>new_data()</code>, since nothing about a plain factor column tells the software what comes next.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>future_dow <span class="ot">&lt;-</span> <span class="fu">new_data</span>(coffee, <span class="at">n =</span> <span class="dv">14</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">dow =</span> <span class="fu">factor</span>(<span class="fu">weekdays</span>(date),</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Monday"</span>,<span class="st">"Tuesday"</span>,<span class="st">"Wednesday"</span>,<span class="st">"Thursday"</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"Friday"</span>,<span class="st">"Saturday"</span>,<span class="st">"Sunday"</span>)))</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>fc_tslm <span class="ot">&lt;-</span> fit_tslm <span class="sc">|&gt;</span> <span class="fu">forecast</span>(<span class="at">new_data =</span> future_dow)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>This is a completely general lesson, not specific to day-of-week: any forecasting model built on external predictors (planned advertising spend, a known holiday calendar, scheduled staffing levels) needs those predictors’ <em>future</em> values supplied before it can forecast forward at all.</p>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>fc_tslm <span class="sc">|&gt;</span> <span class="fu">autoplot</span>(coffee <span class="sc">|&gt;</span> <span class="fu">filter</span>(date <span class="sc">&gt;</span> <span class="fu">as.Date</span>(<span class="st">"2024-05-30"</span>))) <span class="sc">+</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"TSLM forecast, next 14 days"</span>, <span class="at">y =</span> <span class="st">"Revenue ($)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="week_12_03_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="forecast-accuracy-formalized" class="level2" data-number="31.3">
+<h2 data-number="31.3" class="anchored" data-anchor-id="forecast-accuracy-formalized"><span class="header-section-number">31.3</span> Forecast Accuracy, Formalized</h2>
+<p><a href="week_12_02.html" class="quarto-xref"><span>Chapter 30</span></a> already used <code>accuracy()</code> without defining its columns precisely. For a forecast <span class="math inline">\(\hat{y}_t\)</span> and actual value <span class="math inline">\(y_t\)</span>, the <strong>forecast error</strong> is <span class="math inline">\(e_t = y_t - \hat{y}_t\)</span>. Three common summaries: <span class="math display">\[
+\text{MAE} = \text{mean}(|e_t|) \qquad
+\text{RMSE} = \sqrt{\text{mean}(e_t^2)} \qquad
+\text{MAPE} = \text{mean}\left(\left|\frac{e_t}{y_t}\right|\right)\times 100\%
+\]</span> MAE and RMSE are in the response’s original units (dollars, here); RMSE penalizes large errors more heavily than MAE, since squaring an error makes big misses count disproportionately. MAPE expresses error as a percentage, unit-free, which makes it useful for comparing forecast quality <em>across</em> series measured in different units or scales, but it becomes unreliable when actual values are close to zero (dividing by a tiny <span class="math inline">\(y_t\)</span> inflates the percentage wildly).</p>
+<div class="callout callout-style-simple callout-example callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Example</span>Example 12.15: Comparing every method built so far
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Using the same train/test split as <a href="week_12_02.html" class="quarto-xref"><span>Chapter 30</span></a> (train through June 14, evaluate the last 14 days):</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> coffee <span class="sc">|&gt;</span> <span class="fu">filter</span>(date <span class="sc">&lt;=</span> <span class="fu">as.Date</span>(<span class="st">"2024-06-14"</span>))</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>test_data <span class="ot">&lt;-</span> coffee <span class="sc">|&gt;</span> <span class="fu">filter</span>(date <span class="sc">&gt;</span> <span class="fu">as.Date</span>(<span class="st">"2024-06-14"</span>))</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>fit_all <span class="ot">&lt;-</span> train <span class="sc">|&gt;</span> <span class="fu">model</span>(</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">naive  =</span> <span class="fu">NAIVE</span>(revenue),</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">snaive =</span> <span class="fu">SNAIVE</span>(revenue),</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">hw     =</span> <span class="fu">ETS</span>(revenue <span class="sc">~</span> <span class="fu">error</span>(<span class="st">"A"</span>) <span class="sc">+</span> <span class="fu">trend</span>(<span class="st">"A"</span>) <span class="sc">+</span> <span class="fu">season</span>(<span class="st">"A"</span>)),</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">tslm   =</span> <span class="fu">TSLM</span>(revenue <span class="sc">~</span> <span class="fu">trend</span>() <span class="sc">+</span> dow)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>fc_all <span class="ot">&lt;-</span> fit_all <span class="sc">|&gt;</span> <span class="fu">forecast</span>(<span class="at">new_data =</span> test_data)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="fu">accuracy</span>(fc_all, coffee) <span class="sc">|&gt;</span> <span class="fu">select</span>(.model, RMSE, MAE, MAPE)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 4
+  .model  RMSE   MAE  MAPE
+  &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 hw      3.77  3.53  5.68
+2 naive  10.1   8.57 12.9 
+3 snaive  3.92  3.43  5.55
+4 tslm    3.83  3.60  5.82</code></pre>
+</div>
+</div>
+<p>Regression-based forecasting (MAPE about 5.82%) performs about as well as Holt-Winters (5.68%) and seasonal naive (5.55%), all dramatically ahead of plain naive (12.9%). No single method wins by a wide margin here, precisely because <a href="week_12_02.html" class="quarto-xref"><span>Chapter 30</span></a> already established that this series’ weekly pattern is strong and stable enough for several reasonable methods to capture it about equally well.</p>
+</div>
+</div>
+</section>
+<section id="forecast-intervals-and-the-horizon" class="level2" data-number="31.4">
+<h2 data-number="31.4" class="anchored" data-anchor-id="forecast-intervals-and-the-horizon"><span class="header-section-number">31.4</span> Forecast Intervals and the Horizon</h2>
+<p>A forecast interval should generally <strong>widen</strong> the further into the future it reaches, more time between “now” and the forecasted period means more opportunity for the unknown to diverge from the model’s assumptions.</p>
+<div class="callout callout-style-simple callout-example callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Example</span>Example 12.16: How much does the interval actually widen?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>future_dow_long <span class="ot">&lt;-</span> <span class="fu">new_data</span>(coffee, <span class="at">n =</span> <span class="dv">180</span>) <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">dow =</span> <span class="fu">factor</span>(<span class="fu">weekdays</span>(date),</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Monday"</span>,<span class="st">"Tuesday"</span>,<span class="st">"Wednesday"</span>,<span class="st">"Thursday"</span>,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"Friday"</span>,<span class="st">"Saturday"</span>,<span class="st">"Sunday"</span>)))</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>fc_long <span class="ot">&lt;-</span> fit_tslm <span class="sc">|&gt;</span> <span class="fu">forecast</span>(<span class="at">new_data =</span> future_dow_long)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>fc_long <span class="sc">|&gt;</span> <span class="fu">hilo</span>(<span class="at">level =</span> <span class="dv">95</span>) <span class="sc">|&gt;</span> <span class="fu">unpack_hilo</span>(<span class="st">`</span><span class="at">95%</span><span class="st">`</span>) <span class="sc">|&gt;</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">width =</span> <span class="st">`</span><span class="at">95%_upper</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">95%_lower</span><span class="st">`</span>) <span class="sc">|&gt;</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">row_number</span>() <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">14</span>, <span class="dv">90</span>, <span class="dv">180</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(date, width)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 2
+  date       width
+  &lt;date&gt;     &lt;dbl&gt;
+1 2024-06-29  12.3
+2 2024-07-12  12.3
+3 2024-09-26  12.6
+4 2024-12-25  13.1</code></pre>
+</div>
+</div>
+<p>The interval does widen, but only modestly over a realistic planning horizon: about $12.33 wide one day out, barely different ($12.34) two weeks out, and still only about $13.07 wide a full 180 days out, roughly 6% wider than at the start. This is honest, not disappointing: with 180 days of stable history underpinning both the trend and the seasonal pattern, the model is already quite confident about the near-to-medium future.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="A narrow-looking interval is not the same as a safe forecast">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>A narrow-looking interval is not the same as a safe forecast
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>Notice that forecasting 180 days ahead uses exactly as much <em>new</em> information as forecasting 1 day ahead, none, both simply extrapolate the same fitted pattern forward. The interval’s modest growth reflects the formula’s assumptions holding, not a guarantee that they actually will. Forecasting a horizon as long as the data history itself (180 days out, on 180 days of history) is exactly the kind of extrapolation <a href="week_08_01.html" class="quarto-xref"><span>Chapter 21</span></a> and <a href="week_10_02.html" class="quarto-xref"><span>Chapter 26</span></a> warned about: the formula will still produce a number, but nothing in the data confirms the pattern really continues that far out.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="scenario-and-sensitivity-analysis" class="level2" data-number="31.5">
+<h2 data-number="31.5" class="anchored" data-anchor-id="scenario-and-sensitivity-analysis"><span class="header-section-number">31.5</span> Scenario and Sensitivity Analysis</h2>
+<p>Every forecast so far has assumed the fitted trend and seasonal pattern simply continue. A <strong>scenario analysis</strong> asks instead: what if the underlying trend itself changes? This is exactly the judgment call a manager makes when planning under uncertainty, and it’s the central skill the Ceres Gardening Company case will ask you to apply.</p>
+<div class="callout callout-style-simple callout-example callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Example</span>Example 12.17: Base, optimistic, and pessimistic growth scenarios
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The fitted trend is about $0.076 per day. What would revenue on a specific future date (Thursday, September 26, about 90 days out) look like under three different assumptions about how that growth continues?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>coefs <span class="ot">&lt;-</span> <span class="fu">tidy</span>(fit_tslm)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>b0 <span class="ot">&lt;-</span> coefs<span class="sc">$</span>estimate[coefs<span class="sc">$</span>term <span class="sc">==</span> <span class="st">"(Intercept)"</span>]</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>base_slope <span class="ot">&lt;-</span> coefs<span class="sc">$</span>estimate[coefs<span class="sc">$</span>term <span class="sc">==</span> <span class="st">"trend()"</span>]</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>thu_offset <span class="ot">&lt;-</span> coefs<span class="sc">$</span>estimate[coefs<span class="sc">$</span>term <span class="sc">==</span> <span class="st">"dowThursday"</span>]</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>t_future <span class="ot">&lt;-</span> <span class="dv">180</span> <span class="sc">+</span> <span class="dv">90</span>  <span class="co"># 90 days past the end of the data</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>scenarios <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">scenario =</span> <span class="fu">c</span>(<span class="st">"Pessimistic (half the trend)"</span>, <span class="st">"Base case (fitted trend)"</span>, <span class="st">"Optimistic (1.5x the trend)"</span>),</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">slope_used =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">1.0</span>, <span class="fl">1.5</span>) <span class="sc">*</span> base_slope</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">forecast =</span> b0 <span class="sc">+</span> slope_used <span class="sc">*</span> t_future <span class="sc">+</span> thu_offset)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>scenarios</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  scenario                     slope_used forecast
+  &lt;chr&gt;                             &lt;dbl&gt;    &lt;dbl&gt;
+1 Pessimistic (half the trend)     0.0380     56.8
+2 Base case (fitted trend)         0.0759     67.1
+3 Optimistic (1.5x the trend)      0.114      77.4</code></pre>
+</div>
+</div>
+<p>Three genuinely different pictures of the same future Thursday emerge from one assumption: <strong>$56.85</strong> if growth slows to half its historical pace, <strong>$67.10</strong> if it simply continues, or <strong>$77.35</strong> if it accelerates by half again, a <strong>$20 range</strong> driven entirely by one uncertain input. This is exactly what “scenario analysis” means in practice: holding everything else in the model fixed (the day-of-week pattern), varying the one assumption that’s genuinely uncertain (how the trend behaves going forward), and reporting the resulting range rather than a single falsely-precise number.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Sensitivity analysis is scenario analysis applied systematically">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Sensitivity analysis is scenario analysis applied systematically
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Where a scenario analysis usually picks a small number of named cases (pessimistic, base, optimistic), a <strong>sensitivity analysis</strong> more systematically varies one input across a range (for example, plotting the 90-day forecast for every growth rate from 0% to 200% of the fitted trend) to see how sensitive the final answer is to that one assumption. If the forecast barely changes across a wide range of plausible inputs, the business decision is robust to that uncertainty; if it swings wildly, as it does here, that input deserves real scrutiny (and real hedging) before committing to a plan built on it.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="introducing-the-ceres-gardening-company-case" class="level2" data-number="31.6">
+<h2 data-number="31.6" class="anchored" data-anchor-id="introducing-the-ceres-gardening-company-case"><span class="header-section-number">31.6</span> Introducing the Ceres Gardening Company Case</h2>
+<p>Module 5 culminates in a real case: <strong>Ceres Gardening Company</strong>, a business facing a decision this module’s entire toolkit was built for. Ceres must evaluate a proposed growth strategy and prepare cash-flow projections to bring to its bank, and the case’s own numbers only come at an <strong>annual</strong> frequency, far too coarse on their own for the moving-average, exponential-smoothing, and regression-based tools this module just built. The live session supplements Ceres’s annual figures with monthly business data, so the same tools practiced on the coffee shop series can be applied at a business-realistic cadence.</p>
+<p>Two ideas from this module sit at the center of the case:</p>
+<ul>
+<li><strong>Revenue growth is not the same as cash-flow health.</strong> A growing company can still run out of cash if its growth outpaces its financing, exactly why Ceres needs projections, not just a growth rate, to bring to a lender.</li>
+<li><strong>Base, optimistic, and pessimistic scenarios</strong>, precisely Example 12.17’s approach, let Ceres (and its bank) reason about a <em>range</em> of plausible financing needs rather than a single, falsely-precise forecast.</li>
+</ul>
+</section>
+<section id="computing-regression-based-forecasts-in-r-and-excel" class="level2" data-number="31.7">
+<h2 data-number="31.7" class="anchored" data-anchor-id="computing-regression-based-forecasts-in-r-and-excel"><span class="header-section-number">31.7</span> Computing Regression-Based Forecasts in R and Excel</h2>
+<div class="callout callout-style-simple callout-example callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Example</span>Example 12.18: TSLM in R and Excel
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In R, <code>TSLM()</code> fits the model and <code>forecast(new_data = ...)</code> projects it forward, both shown above.</p>
+<p>In Excel, a time-series regression is just a regression with a period-number column and dummy columns for season, fit with the Data Analysis ToolPak’s Regression tool exactly as in <a href="week_09_02.html" class="quarto-xref"><span>Chapter 24</span></a>, then extended forward by plugging future period numbers and season dummies into the fitted equation by hand.</p>
+</div>
+</div>
+</section>
+<section id="recap" class="level2" data-number="31.8">
+<h2 data-number="31.8" class="anchored" data-anchor-id="recap"><span class="header-section-number">31.8</span> Recap</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Keyword</strong></th>
+<th><strong>Definition</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Time-series regression (TSLM)</strong></td>
+<td>Regression with time-based predictors (trend, season); fit with <code>fable::TSLM()</code>, identical in spirit to <a href="week_08_01.html" class="quarto-xref"><span>Chapter 21</span></a> and <a href="week_09_02.html" class="quarto-xref"><span>Chapter 24</span></a>.</td>
+</tr>
+<tr class="even">
+<td><strong>Forecast error</strong></td>
+<td><span class="math inline">\(e_t = y_t - \hat{y}_t\)</span>.</td>
+</tr>
+<tr class="odd">
+<td><strong>MAE</strong></td>
+<td><span class="math inline">\(\text{mean}(\lvert e_t\rvert)\)</span>; average absolute error, in the response’s original units.</td>
+</tr>
+<tr class="even">
+<td><strong>RMSE</strong></td>
+<td><span class="math inline">\(\sqrt{\text{mean}(e_t^2)}\)</span>; penalizes large errors more than MAE.</td>
+</tr>
+<tr class="odd">
+<td><strong>MAPE</strong></td>
+<td><span class="math inline">\(\text{mean}(\lvert e_t/y_t\rvert)\times100\%\)</span>; unit-free, but unreliable near <span class="math inline">\(y_t=0\)</span>.</td>
+</tr>
+<tr class="even">
+<td><strong>Forecast interval widening</strong></td>
+<td>Intervals generally widen with the forecast horizon; the amount of widening depends on how much history and how stable the pattern is.</td>
+</tr>
+<tr class="odd">
+<td><strong>Scenario analysis</strong></td>
+<td>Forecasting under a small number of named alternative assumptions (e.g., pessimistic/base/optimistic) about an uncertain input.</td>
+</tr>
+<tr class="even">
+<td><strong>Sensitivity analysis</strong></td>
+<td>Systematically varying one uncertain input across a range to see how much the resulting forecast or decision actually changes.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="check-your-understanding" class="level2" data-number="31.9">
+<h2 data-number="31.9" class="anchored" data-anchor-id="check-your-understanding"><span class="header-section-number">31.9</span> Check Your Understanding</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="Problems">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Problems
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>A company builds a regression forecasting weekly sales from a trend term and a 4-level “region” dummy variable. Explain why forecasting next week’s sales for a specific region requires more than just calling <code>forecast()</code> with an automatically-generated trend.</p></li>
+<li><p>A forecast has actual values <span class="math inline">\(y_1=50, y_2=42, y_3=61\)</span> and forecasts <span class="math inline">\(\hat{y}_1=48, \hat{y}_2=45, \hat{y}_3=58\)</span>. Compute MAE and RMSE. Which is larger, and why does that make sense given the individual errors?</p></li>
+<li><p>Explain why MAPE would be a poor choice for comparing forecast accuracy on a series that sometimes takes values very close to zero.</p></li>
+<li><p>A company assumes its fitted growth trend simply continues and forecasts $1.2 million to lenders. A colleague asks what happens if growth is only two-thirds as fast, or 25% faster. What kind of analysis answers that question, and why is it more useful to a lender than the single $1.2 million figure alone?</p></li>
+<li><p>Why is revenue growth not, by itself, evidence of good cash-flow health? What kind of company might grow quickly and still run into a cash shortfall?</p></li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solutions">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solutions
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>The region variable is an external predictor the analyst constructed, not one of <code>fable</code>’s automatically-projecting specials like <code>trend()</code> or <code>season()</code>. Software has no way to know what the “region” value will be next week on its own (it isn’t a pattern that mechanically continues the way a trend or season does), so it must be supplied explicitly via <code>new_data()</code> before a forecast can be produced.</p></li>
+<li><p>Errors: <span class="math inline">\(e_1=2, e_2=-3, e_3=3\)</span>. <span class="math inline">\(\text{MAE}=(2+3+3)/3=8/3\approx2.67\)</span>. <span class="math inline">\(\text{RMSE}=\sqrt{(4+9+9)/3}=\sqrt{22/3}\approx2.71\)</span>. RMSE is (slightly) larger, because squaring gives relatively more weight to the two larger errors (magnitude 3) relative to the smaller one (magnitude 2), while MAE weights all three equally regardless of size.</p></li>
+<li><p>MAPE divides each error by the corresponding actual value, <span class="math inline">\(y_t\)</span>. When <span class="math inline">\(y_t\)</span> is very close to zero, that division produces a huge (or undefined) percentage even for a small absolute error, distorting the average and making the metric unreliable exactly where it’s needed most.</p></li>
+<li><p>This calls for a <strong>scenario analysis</strong> (or, done more systematically across a full range of growth assumptions, a <strong>sensitivity analysis</strong>). It’s more useful to a lender than a single number because it reveals how much the projection actually depends on one uncertain assumption (the future growth rate), letting the lender see a defensible range of financing needs rather than false precision that could turn out badly wrong if growth doesn’t match the base-case assumption exactly.</p></li>
+<li><p>Revenue growth measures how much a company is <em>selling</em>; cash-flow health measures whether it actually has enough <em>cash on hand</em>, at the right times, to cover its own obligations (payroll, suppliers, debt payments). A rapidly growing company that must spend heavily upfront on inventory or receivables before collecting cash from customers (a common pattern for a fast-growing retailer or manufacturer extending customer credit) can be profitably growing on paper while still running short of actual cash, exactly the tension Ceres’s bank will want addressed with real cash-flow projections, not just a revenue growth rate.</p></li>
+</ol>
+</div>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,0 +1,68 @@
+# Instructor Guide — Part 1 (12/4, Hour 1): Choosing and Building the Right Forecast {#sec-mod5-part1-guide}
+
+::: {.callout-note collapse="false" title="How to use this guide"}
+This is a facilitation guide for the instructor, not student-facing reading. It pairs with the slide deck `mod5_part1_slides.qmd`. Students arrive having read the full forecasting toolkit: time-series structure, trend, seasonality, and naive forecasts (@sec-week12-01), moving averages and exponential smoothing (@sec-week12-02), and regression-based forecasting, accuracy, and scenario analysis (@sec-week12-03), the last of which already introduced the Ceres Gardening Company case students will work with in Parts 2 and 3. This hour is a fast, live-coding synthesis of the whole toolkit before the afternoon applies it to Ceres.
+:::
+
+## Session Objectives
+
+By the end of this period, students should be able to:
+
+1. Recall and choose among the forecasting toolkit (naive, seasonal naive, moving average, exponential smoothing, Holt-Winters, regression-based) given a described business series.
+2. Reconstruct a forecast, its accuracy comparison, and its interval, live, tying together all three reading sections.
+3. Explain, in one sentence, why Ceres's own annual reporting isn't enough on its own for some of this toolkit.
+
+## Timing at a Glance
+
+| Time | Segment | Format |
+|---|---|---|
+| 0:00–0:10 | Welcome and reconnecting to Module 4's close | Instructor-led |
+| 0:10–0:30 | Live coding: the full toolkit, back to back | Live coding (R) |
+| 0:30–0:55 | Activity: Which Method Would You Use? | Small groups (3–4) |
+| 0:55–1:00 | Debrief and bridge to Ceres | Instructor-led |
+
+## Detailed Run of Show
+
+### Welcome and Reconnecting to Module 4's Close (10 min)
+
+Recall the closing slide of Module 4 (@sec-mod4-part3-guide): "Module 4 added **build a model** to the decision cycle. Next: **forecasting**, predicting a value forward in **time**." Restate plainly: every method this morning still fits the same "build a model" step, but now the whole point is that order matters, we're predicting a series' own future from its own past (and, in the regression case, from calendar time itself).
+
+### Live Coding: The Full Toolkit, Back to Back (20 min)
+
+Rebuild the coffee shop example live, quickly, treating it as a recall exercise rather than new teaching:
+
+1. `as_tsibble()` and `autoplot()` (@sec-week12-01).
+2. `NAIVE()` and `SNAIVE()`, noting the seasonal naive forecast's tighter interval (@sec-week12-01).
+3. A 7-day moving average, and why it blurs away which day of the week is being forecast (@sec-week12-02).
+4. `ETS()` fit as Holt-Winters, comparing AICc against simpler exponential smoothing versions (@sec-week12-02).
+5. `TSLM(revenue ~ trend() + dow)`, noting the `new_data()` requirement for its external `dow` predictor (@sec-week12-03).
+6. The train/test accuracy table, all four methods landing close together once seasonality is modeled at all (@sec-week12-03).
+
+Move briskly, students have already read every step of this; the goal is fluency, not first exposure.
+
+### Activity: Which Method Would You Use? (25 min)
+
+Hand out (or project) six short scenarios. In groups, identify which forecasting tool fits best, no calculation, a diagnosis exercise exactly like @sec-mod3-part1-guide's "which test would you use?" activity.
+
+::: {.example title="Scenarios for the activity"}
+1. A retailer's daily sales show no clear trend or repeating pattern, just noise around a stable average. *(Simple exponential smoothing)*
+2. A call center's hourly call volume has a strong, stable day-of-week pattern and no real long-term trend. *(Seasonal naive, or Holt-Winters with no trend)*
+3. A subscription company's monthly revenue has both a clear upward trend and a consistent end-of-quarter spike. *(Holt-Winters, or a regression with trend and a quarter-end indicator)*
+4. A manager needs a same-day sales estimate and has no time to fit anything, just wants a quick, sensible baseline. *(Naive or seasonal naive, whichever fits the data's seasonality)*
+5. An analyst wants to know exactly how many dollars a specific calendar day (say, every Friday) differs from a Monday, in a model that also accounts for a rising trend. *(Regression-based forecasting, TSLM with trend and day-of-week dummies)*
+6. A planner wants to smooth out a noisy daily series to see the underlying trend, without needing to forecast anything yet. *(A moving average, used descriptively rather than as a forecast)*
+:::
+
+Circulate and listen for the most common error: reaching for Holt-Winters or a regression by default even when a series shows no real trend or seasonality (scenario 1), where the simplest tool is actually correct. Reinforce @sec-week12-01's point directly: complexity has to earn its keep.
+
+### Debrief and Bridge to Ceres (5 min)
+
+Debrief scenario 3 explicitly, then bridge: "This afternoon, we apply exactly this kind of judgment to a real company. Ceres Gardening Company's CEO has two things on his to-do list: a motivational speech for his sales team, and a meeting with the bank about growth and cash flow for next year. We're going to help with the second one." Note that Ceres's own financial reporting is **annual only**, five or six data points, nowhere near enough for moving averages or seasonality detection, which is exactly why Part 2 will bring in a supplementary monthly series to practice those tools at a realistic business cadence before returning to Ceres's own numbers.
+
+## Recap for the Instructor
+
+| **Keyword** | **Where it was taught** |
+|---|---|
+| Full forecasting toolkit | @sec-week12-01, @sec-week12-02, @sec-week12-03 |
+| Choosing a method | This session (diagnosis activity) |
+| The Ceres Gardening Company case | @sec-week12-03 |

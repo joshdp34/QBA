@@ -1,0 +1,66 @@
+# Instructor Guide — Part 2 (10/17, Hour 2): Working the Google Project Oxygen Case {#sec-mod3-part2-guide}
+
+::: {.callout-note collapse="false" title="How to use this guide"}
+This is a facilitation guide for the instructor, not student-facing reading. It pairs with the slide deck `mod3_part2_slides.qmd`. Students arrive having read @sec-week07-03, which already introduces Project Oxygen and walks through the causation checklist at a summary level. This hour is where students do that analysis themselves, in teams, going further than the reading by generating their own candidate confounders and their own concrete research-design improvement, not just reciting what the reading already said.
+:::
+
+## Session Objectives
+
+By the end of this period, students should be able to:
+
+1. Apply the causation checklist to a real, messy business case, not just a clean textbook scenario.
+2. Generate at least one confounding variable not already named in the assigned reading.
+3. Propose a specific, concrete research design (not a generic "run an experiment") that would strengthen the case's causal claim.
+
+## Timing at a Glance
+
+| Time | Segment | Format |
+|---|---|---|
+| 0:00–0:05 | Reconnect: the case's core question and design | Instructor-led |
+| 0:05–0:10 | Form teams and distribute the worksheet | Instructor-led |
+| 0:10–0:50 | Team working time | Small groups (4–5) |
+| 0:50–1:00 | Prepare for report-outs; transition to break | Instructor-led |
+
+## Detailed Run of Show
+
+### Reconnect: The Case's Core Question and Design (5 min)
+
+Briefly restate, without re-teaching, what students already read in @sec-week07-03: Google's people analytics team compared managers in the top and bottom quartiles of a combined survey-and-performance-review score, and compared their teams' satisfaction, retention, and performance. This is an **observational** comparison of existing managers, not an experiment with random assignment.
+
+### Form Teams and Distribute the Worksheet (5 min)
+
+Assign teams of 4&ndash;5. Every team works the same worksheet (below), rather than a jigsaw split, so that Part 3's report-outs can compare different teams' answers to the *same* prompts directly.
+
+::: {.example title="Team worksheet"}
+1. **Random assignment.** Was there random assignment in this study? What would a randomized version of this study look like in practice?
+
+2. **Confounders.** The reading already named team quality/resources and reverse causation as candidate confounders. Generate **at least one additional confounder** your team can think of that could make "better" managers look like they cause better outcomes, even if their behavior isn't the true cause.
+
+3. **Bias.** Consider how "high-scoring" and "low-scoring" managers were defined (a combination of upward-feedback survey scores and performance reviews). What kind of bias, if any, could this measurement approach introduce?
+
+4. **Statistical vs. practical significance.** The case describes the differences between high- and low-scoring managers as reliable, but sometimes described as small. If you were on Google's team, what additional information would you want before deciding the effect was large enough to justify a company-wide training rollout?
+
+5. **A stronger design.** Propose one **specific, concrete** research design, naming who would be randomly assigned to what, that would strengthen the causal claim that manager behavior (not confounding factors) drives better team outcomes. "Do an experiment" is not specific enough; say what the treatment and control groups would actually be.
+
+6. **Team verdict.** In one or two sentences: does your team think the evidence supports the claim that "managers matter"? What's the strongest reason for your position?
+:::
+
+### Team Working Time (40 min)
+
+Circulate throughout. Common places teams get stuck, and how to nudge them:
+
+- **On confounders:** if a team is stuck, ask "what else might cause someone to become a highly-rated manager in the first place, besides being a good manager?" (tenure, department, prior high performance as an individual contributor, self-selection into management).
+- **On bias:** push teams to be specific about *which* type of bias from @sec-week07-02 might apply (e.g., response bias if employees are reluctant to rate a manager who controls their raises poorly; survivorship-bias-adjacent reasoning if managers who alienate their teams already left the company and aren't in the data).
+- **On the stronger design:** if a team proposes something vague, ask them to fill in specifics: "Which managers get the intervention? What's the intervention? What do you measure afterward, and on whom?"
+
+### Prepare for Report-Outs; Transition to Break (10 min)
+
+Ask each team to choose a spokesperson and be ready to share their answer to **one** worksheet item (assign different items to different teams if you have more teams than worksheet items, so Part 3 doesn't repeat the same point six times). Send students to break.
+
+## Recap for the Instructor
+
+| **Keyword** | **Where it was taught** |
+|---|---|
+| Project Oxygen's research design | @sec-week07-03 |
+| Confounding, bias, causation checklist | @sec-week07-02 |
+| Statistical vs. practical significance | @sec-week07-03 |

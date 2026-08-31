@@ -1,0 +1,71 @@
+# Instructor Guide — Part 3 (12/5, Hour 3): Executive Recommendation and Course Wrap-Up {#sec-mod6-part3-guide}
+
+::: {.callout-note collapse="false" title="How to use this guide"}
+This is a facilitation guide for the instructor, not student-facing reading. It pairs with the slide deck `mod6_part3_slides.qmd`. This is the **final live session hour of the course**. It closes out the Petro Refinery case with the executive-recommendation step the course outline calls for, has teams practice building their own what-if analysis (rather than only evaluating ones handed to them), and closes with a recap of the full six-module arc through the analytics decision cycle.
+:::
+
+## Session Objectives
+
+By the end of this period, students should be able to:
+
+1. Design and evaluate their own what-if capacity or price scenario for Petro, not just interpret one already given.
+2. Translate a solved LP, its binding constraints, and its sensitivity analysis into a concise, plain-language executive recommendation.
+3. Locate every module of the course within the analytics decision cycle, start to finish.
+
+## Timing at a Glance
+
+| Time | Segment | Format |
+|---|---|---|
+| 0:00–0:05 | Reconnect: from technical answer to business recommendation | Instructor-led |
+| 0:05–0:40 | Team worksheet: design your own what-if, then recommend | Small groups (3–4) |
+| 0:40–0:50 | Report-outs | Whole-class discussion |
+| 0:50–1:00 | Course wrap-up: the full decision cycle, six modules | Instructor-led |
+
+## Detailed Run of Show
+
+### Reconnect: From Technical Answer to Business Recommendation (5 min)
+
+Restate the course outline's own framing for this case's applied work: define the decision variables, objective, and constraints in words; build and solve in Solver; identify the optimal quantities; identify binding and non-binding constraints; explain the managerial meaning of unused capacity; conduct one what-if analysis; and write a one-page executive recommendation. Parts 1 and 2 covered everything through evaluating *given* what-if scenarios. This hour asks teams to design their own, then write the recommendation.
+
+### Team Worksheet: Design Your Own What-If, Then Recommend (35 min)
+
+::: {.example title="Team worksheet"}
+1. **Design one what-if scenario of your own** for Petro, a specific proposed change to a resource's availability (not one already covered in Part 2) or to a product's contribution margin (light or heavy crude). State it as a specific, concrete number, not "more capacity would help."
+2. **Evaluate it** using the Sensitivity Report from Part 2: is your proposed change within the relevant shadow price's (or objective coefficient's) allowable range? What is its dollar value or effect on the optimal mix?
+3. **Explain the managerial meaning of Petro's unused distillation capacity** (1,200 hours, 40% of what's available) in one or two sentences, written for someone who has never seen an LP output.
+4. **Write a one-page (for this worksheet, one-paragraph) executive recommendation** addressed to Petro's management: given the current optimal mix (300,000 barrels light crude, 600,000 barrels heavy crude, \$10.5 million weekly contribution), which resource(s) would you prioritize expanding if the opportunity arose, and why, referencing your own what-if scenario from Question 1?
+:::
+
+Circulate. Common places teams get stuck:
+
+- **On Question 1:** if a team proposes something too vague ("get more conversion capacity"), push for a specific number, exactly the same standard the course outline sets for this assignment ("do an experiment" was never specific enough in Module 3; the same discipline applies here).
+- **On Question 3:** watch for a team framing unused distillation capacity as simply "wasted" or "a mistake." Redirect: unused capacity in a genuinely non-binding resource is not evidence of poor planning, it may simply reflect that distillation was never the bottleneck for this particular product mix, and building excess distillation capacity beyond what conversion and blending can already support would not have added any value.
+- **On Question 4:** push teams to be explicit about *which* constraint (conversion or blending) they'd prioritize and why, referencing the actual shadow prices ($3.125/hour vs. \$1.25/hour), not just "whichever is cheaper to expand."
+
+### Report-Outs (10 min)
+
+Cold-call two or three teams for their Question 1 scenario and Question 4 recommendation. Note any recurring choice of which resource teams prioritize, conversion's higher shadow price makes it the generally more valuable target, but a team could reasonably argue for blending if their own what-if scenario made a cheaper blending expansion more attractive in practice.
+
+### Course Wrap-Up: The Full Decision Cycle, Six Modules (10 min)
+
+Close the course by walking the room through the full analytics decision cycle from @sec-week01-02, now that every step has actually been used:
+
+| Step | Where it lived |
+|---|---|
+| Frame the decision | Module 1, and the framing section of every deliverable since |
+| Obtain appropriate data | Module 1 (sampling, observational vs. experimental data) |
+| Summarize the evidence | Module 1 (tables, graphs, descriptive statistics) |
+| Quantify uncertainty | Modules 2–3 (probability, distributions, confidence intervals, hypothesis tests, comparisons, ANOVA) |
+| Build a model | Modules 4–5 (regression, logistic regression, forecasting) |
+| Recommend an action | Module 6 (optimization, exactly what this hour just practiced) |
+| Communicate the result | Every deliverable's executive summary or recommendation, all course long |
+
+Note explicitly that Module 6 is where **recommend an action** stopped being a qualitative judgment call and became a literal, computable answer, the throughline connecting a first Week 1 reading to a final Module 6 case. Close with the course outline's own framing for what comes next: the final exam emphasizes selecting the right method, interpreting R and Excel output, recognizing a method's limitations, and making a defensible business recommendation, not lengthy hand calculations, exactly the skill this entire course, and this closing case, was built to practice.
+
+## Recap for the Instructor
+
+| **Keyword** | **Where it was taught** |
+|---|---|
+| Designing and evaluating a what-if scenario | This session (worksheet) |
+| The full analytics decision cycle | @sec-week01-02, applied across all six modules |
+| Course conclusion and final exam framing | This session (closing) |

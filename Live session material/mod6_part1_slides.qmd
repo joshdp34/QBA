@@ -1,0 +1,103 @@
+---
+title: "Building Petro Refinery's Model"
+subtitle: "Module 6, Part 1 (December 5)"
+author: "QBA 5330"
+format:
+  revealjs:
+    theme: simple
+    slide-number: true
+    footer: "QBA 5330 | Module 6 | Part 1"
+    transition: fade
+    incremental: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+## Where We're Headed Today
+
+- **Part 1:** Building Petro Refinery's model
+- **Part 2:** The value of an extra hour — sensitivity analysis
+- **Part 3:** Executive recommendation and course wrap-up
+
+::: {.notes}
+Same shape as yesterday's furniture example: two decision variables, a linear objective, a few resource constraints. Different business.
+:::
+
+## Petro Refinery LLC
+
+A crude oil refinery deciding how much **light** and **heavy** crude to process each week.
+
+- $X_1$ = barrels of light crude (thousands)
+- $X_2$ = barrels of heavy crude (thousands)
+
+## The Model
+
+$$
+\text{Maximize } 10X_1 + 12.5X_2
+$$
+
+$$
+\begin{align*}
+\text{Distillation:} \quad & 2X_1 + 2X_2 \leq 3{,}000 \\
+\text{Conversion:} \quad & 2X_1 + 3X_2 \leq 2{,}400 \\
+\text{Blending:} \quad & 3X_1 + 2.5X_2 \leq 2{,}400
+\end{align*}
+$$
+
+## Why Not Just Make Heavy Crude?
+
+- Heavy crude's margin is higher (\$12.5 vs. \$10)
+- But heavy crude also uses **more** conversion and blending per barrel
+
+- **The optimal mix is a genuine trade-off, not a ranking.**
+
+## Live Build: Excel Solver
+
+1. Decision variable cells + objective cell
+2. One usage cell per constraint
+3. Solver: Set Objective (Max), By Changing Cells, Subject to Constraints
+4. Simplex LP, Assume Non-Negative
+5. **Solve**
+
+## The Answer
+
+**300,000 barrels of light crude. 600,000 barrels of heavy crude.**
+
+**\$10,500,000 per week in contribution.**
+
+## Verifying in R
+
+```{r}
+#| echo: true
+library(lpSolve)
+obj <- c(10, 12.5)
+mat <- matrix(c(2,2, 2,3, 3,2.5), nrow = 3, byrow = TRUE)
+rhs <- c(3000, 2400, 2400)
+sol <- lp("max", obj, mat, c("<=","<=","<="), rhs)
+sol$solution
+sol$objval
+```
+
+## Binding or Not?
+
+```{r}
+#| echo: true
+used <- mat %*% sol$solution
+data.frame(resource = c("Distillation","Conversion","Blending"),
+           available = rhs, used = as.numeric(used), slack = rhs - as.numeric(used))
+```
+
+- Conversion & blending: **fully used**
+- Distillation: **1,200 hours of slack** (only 60% used)
+
+## Before the Break
+
+**Would buying more distillation capacity increase Petro's profit?**
+
+::: {.notes}
+No — it's non-binding. Let this land before Part 2 formalizes exactly why with shadow prices.
+:::
+
+**Next: putting a precise dollar value on every resource.**

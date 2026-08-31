@@ -1,0 +1,184 @@
+---
+title: "Tables, Graphs, and Descriptive Statistics"
+subtitle: "QBA 5330 — Module 1, Part 3 (September 4)"
+author: "QBA 5330"
+format:
+  revealjs:
+    theme: simple
+    slide-number: true
+    footer: "QBA 5330 | Module 1 | Part 3"
+    transition: fade
+    incremental: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+## 
+
+We know how to frame a decision, and where trustworthy data comes from.
+
+**Now:** how do we actually look at it?
+
+## Matching the Graph to the Variable
+
+- **Categorical** variable &rarr; frequency table &rarr; **bar chart**
+- **Quantitative** variable &rarr; binned counts &rarr; **histogram**
+
+## Bar Chart: `region` (Categorical)
+
+```{r}
+#| echo: true
+#| message: false
+library(tidyverse)
+sales <- read_csv("store_sales.csv")
+
+sales |>
+  count(region) |>
+  ggplot(aes(x = region, y = n)) +
+  geom_col() +
+  labs(title = "Store-months by region", x = "Region", y = "Count")
+```
+
+## Histogram: `revenue` (Quantitative)
+
+```{r}
+#| echo: true
+ggplot(sales, aes(x = revenue)) +
+  geom_histogram(bins = 8) +
+  labs(title = "Distribution of monthly revenue", x = "Revenue ($)", y = "Count")
+```
+
+## A Common Mix-Up
+
+Building a bar chart of a **quantitative** variable's raw values (one bar per row) instead of a histogram.
+
+::: {.notes}
+Show this mistake deliberately, then show the corrected histogram, so the failure mode is memorable rather than abstract.
+:::
+
+## A Richer Table: Grouped Summary
+
+```{r}
+#| echo: true
+sales |>
+  group_by(region) |>
+  summarize(mean_revenue = mean(revenue), n = n())
+```
+
+**Not just how many — how they *performed*.**
+
+::: {.notes}
+The rubric explicitly accepts a table of summary statistics broken out by group as an alternative to a plain frequency table — and it's usually more decision-relevant.
+:::
+
+## Center and Spread
+
+- **Mean** — arithmetic average; sensitive to extreme values
+- **Median** — middle value when sorted; resistant to extreme values
+- **Standard deviation** — typical distance from the mean
+
+```{r}
+#| echo: true
+sales |>
+  summarize(
+    mean_revenue = mean(revenue),
+    median_revenue = median(revenue),
+    sd_revenue = sd(revenue)
+  )
+```
+
+## When the Mean Misleads
+
+Add one hypothetical flagship store with unusually high revenue...
+
+- **Mean** shifts noticeably
+- **Median** barely moves
+
+> Means are pulled toward extreme values; medians are not.
+
+::: {.notes}
+Preview, without going deep: this same center-and-spread idea returns in Module 2 as the foundation for confidence intervals — "spread" here is the intuitive ancestor of "standard error" later.
+:::
+
+## A Mistake Worth Making on Purpose
+
+```{r}
+#| echo: true
+#| eval: false
+mean(sales$region)
+```
+
+**"Average region" isn't a real quantity.**
+
+::: {.notes}
+Run this live and let it visibly fail or return NA with a warning. This is the rubric's own instruction — "do not report a mean for a categorical variable" — made concrete.
+:::
+
+## A Statistic That Actually Fits
+
+```{r}
+#| echo: true
+sales |>
+  count(region) |>
+  mutate(proportion = n / sum(n))
+```
+
+*"West stores account for about a third of all store-months."*
+
+**Never a mean, for a categorical variable. A proportion or a mode instead.**
+
+## Executive Summary: Strong vs. Weak
+
+Worth **20 of 100 points** — the single largest line item.
+
+**Weak** (restates a number):
+
+> "Average revenue was \$65,000."
+
+**Strong** (interprets it, tied to a decision):
+
+> "Midwest stores generated noticeably less revenue per month than South or West stores, even after accounting for smaller store size, worth investigating before allocating next quarter's inventory evenly across regions."
+
+::: {.notes}
+The weak version could describe almost any numeric column. The strong version connects a specific pattern in this data to a specific decision — the same framing skill from Part 1, now applied to results instead of a starting question.
+:::
+
+## Your Turn: One Sentence (2 minutes)
+
+Using the grouped table from earlier, write **one sentence** that could open your own executive summary.
+
+**Model it on the strong example — not the weak one.**
+
+## Your Turn: Putting It All Together
+
+Using `store_sales.csv`, individually:
+
+1. **One table** — frequency table or grouped summary
+2. **One graph** — a histogram of `units_sold`
+3. **Two statistics, matched to type** — mean *and* median of `units_sold` (quantitative), *and* a proportion for one region (categorical)
+4. **One sentence** — in the style of the strong executive summary
+
+::: {.notes}
+A compressed, ungraded dry run of the entire deliverable structure. The goal is to surface software friction and writing friction — slipping back into "weak" summary language under time pressure — while help is still in the room.
+:::
+
+## The Module 1 Deliverable
+
+A short Quarto exploratory report, containing:
+
+- **Framing** (Part 1)
+- **Data description** — observational unit + at least 4 variables classified (Part 1)
+- **Executive summary**
+- At least one **table**
+- At least one **graph**
+- At least two **descriptive statistics**, correctly matched to variable type
+
+## You Already Practiced All of It
+
+- `store_sales.csv`, or a dataset of your own from your workplace (instructor approval required)
+- Every skill above: practiced today, across all three parts
+
+**Due before the next module.**
+

@@ -1,0 +1,101 @@
+---
+title: "Choosing and Building the Right Forecast"
+subtitle: "Module 5, Part 1 (December 4)"
+author: "QBA 5330"
+format:
+  revealjs:
+    theme: simple
+    slide-number: true
+    footer: "QBA 5330 | Module 5 | Part 1"
+    transition: fade
+    incremental: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+## Where We're Headed Today
+
+- **Part 1:** Choosing and building the right forecast
+- **Part 2:** Forecasting Ceres's growth
+- **Part 3:** Growth vs. cash flow — preparing for the bank
+
+::: {.notes}
+Module 4 ended on: "build a model" is now part of the decision cycle; next is forecasting, predicting a value forward in time. Today is that "next."
+:::
+
+## Recall: The Full Toolkit
+
+- Naive / seasonal naive
+- Moving averages
+- Exponential smoothing (SES, Holt's, Holt-Winters)
+- Regression-based forecasting (TSLM)
+
+- *(All already in your reading — today applies it, fast.)*
+
+## Live Coding: Back to Back
+
+```{r}
+#| echo: true
+#| message: false
+library(tidyverse)
+library(fpp3)
+
+coffee <- read_csv("data/coffee_shop_daily.csv") |> as_tsibble(index = date)
+coffee |> autoplot(revenue)
+```
+
+## Naive vs. Seasonal Naive
+
+```{r}
+#| echo: true
+coffee |> model(naive = NAIVE(revenue), snaive = SNAIVE(revenue)) |>
+  forecast(h = "1 day") |> hilo(level = 95)
+```
+
+## Holt-Winters
+
+```{r}
+#| echo: true
+coffee |> model(hw = ETS(revenue ~ error("A") + trend("A") + season("A"))) |>
+  report()
+```
+
+## Activity: Which Method Would You Use?
+
+**No calculation — just diagnosis.**
+
+1. Daily sales: no trend, no pattern, just noise
+2. Hourly call volume: strong day-of-week pattern, no trend
+3. Monthly revenue: rising trend **and** an end-of-quarter spike
+4. Need a same-day estimate, no time to fit anything
+5. Want to know exactly how many dollars Friday differs from Monday, accounting for a trend
+6. Want to smooth a noisy series to see the trend — not forecasting yet
+
+::: {.notes}
+Watch for teams reaching for Holt-Winters or regression by default even in scenario 1, where there's no real trend or seasonality, the simplest tool (SES) is correct there. Complexity has to earn its keep.
+:::
+
+## Debrief
+
+- Scenario 3: what would you actually fit?
+
+::: {.notes}
+Regression-based forecasting (TSLM) with trend() plus a quarter-end indicator, or Holt-Winters, is the right answer; walk through why.
+:::
+
+## Later: A Real Company
+
+- Ceres Gardening Company's CEO has two things on his to-do list:
+  - A motivational speech for the sales team
+  - A meeting with the **bank** about growth and cash flow
+
+- **We're helping with the second one.**
+
+## Before the Break
+
+- Ceres's own financial reporting is **annual only** — 5–6 data points
+- Nowhere near enough for moving averages or seasonality
+
+- **Next: a supplementary monthly series, then back to Ceres's real numbers.**

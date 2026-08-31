@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>4&nbsp; Week 2: Probability Concepts – STA 5330 Bus Analytics for Dec Making</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-ac731d99f942368ec2047317e7e82b91.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style type="text/css">
+.sidebar .chapter-number {
+color: #FFB81c;
+}
+.center-panel.quarto-layout-panel {
+justify-content: center;
+column-gap: 1rem;
+}
+</style>
+<style>
+div.callout-example.callout {
+  border-left-color: #008000;
+}
+div.callout-example.callout-style-default .callout-header {
+  background-color: rgba(0, 128, 0, 0.13);
+}
+div.callout-example .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-example.callout-style-default .callout-icon::before, div.callout-example.callout-titled .callout-icon::before {
+  content: '📈';
+  background-image: none;
+}
+</style>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./week_02_01.html">Module 2</a></li><li class="breadcrumb-item"><a href="./week_02_01.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Week 2: Probability Concepts</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./"></a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Module 1</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_01_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Week 1: Getting Set Up</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_01_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Week 1: The Analytics Decision Cycle</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_01_03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Week 1: Importing Data, Identifying Variables, and Creating a Graph</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Module 2</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_02_01.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Week 2: Probability Concepts</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_02_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Week 2: Random Variables</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_03_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Week 3: The Binomial Distribution</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_03_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Week 3: The Uniform Distribution</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_03_03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Week 3: The Normal Distribution</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_04_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Week 4: Sampling Distributions and the Sample Mean</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_04_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Week 4: The Sampling Distribution of the Sample Proportion</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_04_03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Week 4: Bootstrap Sampling Distributions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_05_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Week 5: Confidence Intervals for a Proportion</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_05_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Week 5: Confidence Intervals for a Mean</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_05_03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Week 5: Introduction to Hypothesis Testing</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Module 3</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_06_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Week 6: One-Sample Hypothesis Tests</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_06_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Week 6: Two-Sample Tests for Independent Means</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_06_03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Week 6: Paired Comparisons</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_07_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Week 7: Analysis of Variance (ANOVA)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_07_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Week 7: Research Design, Bias, and Causality</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_07_03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Week 7: The Project Oxygen Case and a Course Recap</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Module 4</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_08_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Week 8: Correlation and the Least-Squares Line</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_08_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Week 8: Interpreting Simple Regression Output</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_09_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Week 9: Multiple Linear Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_09_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Week 9: Categorical Predictors in Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_10_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Week 10: Regression Diagnostics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_10_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Week 10: Prediction Intervals and Model Limitations</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_11_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Week 11: Introduction to Logistic Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_11_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Week 11: Interpreting and Using Logistic Regression</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Module 5</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_12_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Week 12: Time Series Structure, Trend, Seasonality, and Naive Forecasts</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_12_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Week 12: Moving Averages and Exponential Smoothing</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_12_03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Week 12: Regression-Based Forecasting, Accuracy, and Scenario Analysis</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">Module 6</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_13_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Week 13: Introduction to Linear Optimization</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week_13_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Week 13: Binding Constraints, Slack, and Sensitivity Analysis</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#why-this-matters" id="toc-why-this-matters" class="nav-link active" data-scroll-target="#why-this-matters"><span class="header-section-number">4.1</span> Why This Matters</a></li>
+  <li><a href="#basic-probability-rules" id="toc-basic-probability-rules" class="nav-link" data-scroll-target="#basic-probability-rules"><span class="header-section-number">4.2</span> Basic Probability Rules</a>
+  <ul class="collapse">
+  <li><a href="#experiments-outcomes-and-sample-spaces" id="toc-experiments-outcomes-and-sample-spaces" class="nav-link" data-scroll-target="#experiments-outcomes-and-sample-spaces">Experiments, Outcomes, and Sample Spaces</a></li>
+  <li><a href="#events-and-the-classical-definition-of-probability" id="toc-events-and-the-classical-definition-of-probability" class="nav-link" data-scroll-target="#events-and-the-classical-definition-of-probability">Events and the Classical Definition of Probability</a></li>
+  <li><a href="#the-complement-rule" id="toc-the-complement-rule" class="nav-link" data-scroll-target="#the-complement-rule">The Complement Rule</a></li>
+  <li><a href="#the-addition-rule-unions" id="toc-the-addition-rule-unions" class="nav-link" data-scroll-target="#the-addition-rule-unions">The Addition Rule (Unions)</a></li>
+  <li><a href="#mutually-exclusive-events" id="toc-mutually-exclusive-events" class="nav-link" data-scroll-target="#mutually-exclusive-events">Mutually Exclusive Events</a></li>
+  <li><a href="#probability-from-contingency-tables" id="toc-probability-from-contingency-tables" class="nav-link" data-scroll-target="#probability-from-contingency-tables">Probability from Contingency Tables</a></li>
+  <li><a href="#computing-probabilities-in-r-and-excel" id="toc-computing-probabilities-in-r-and-excel" class="nav-link" data-scroll-target="#computing-probabilities-in-r-and-excel">Computing Probabilities in R and Excel</a></li>
+  </ul></li>
+  <li><a href="#conditional-probability-and-independence" id="toc-conditional-probability-and-independence" class="nav-link" data-scroll-target="#conditional-probability-and-independence"><span class="header-section-number">4.3</span> Conditional Probability and Independence</a>
+  <ul class="collapse">
+  <li><a href="#conditional-probability" id="toc-conditional-probability" class="nav-link" data-scroll-target="#conditional-probability">Conditional Probability</a></li>
+  <li><a href="#independent-vs.-dependent-events" id="toc-independent-vs.-dependent-events" class="nav-link" data-scroll-target="#independent-vs.-dependent-events">Independent vs.&nbsp;Dependent Events</a></li>
+  </ul></li>
+  <li><a href="#bayes-rule" id="toc-bayes-rule" class="nav-link" data-scroll-target="#bayes-rule"><span class="header-section-number">4.4</span> Bayes’ Rule</a></li>
+  <li><a href="#recap" id="toc-recap" class="nav-link" data-scroll-target="#recap"><span class="header-section-number">4.5</span> Recap</a></li>
+  <li><a href="#check-your-understanding" id="toc-check-your-understanding" class="nav-link" data-scroll-target="#check-your-understanding"><span class="header-section-number">4.6</span> Check Your Understanding</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./week_02_01.html">Module 2</a></li><li class="breadcrumb-item"><a href="./week_02_01.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Week 2: Probability Concepts</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-week02-01" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Week 2: Probability Concepts</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="why-this-matters" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="why-this-matters"><span class="header-section-number">4.1</span> Why This Matters</h2>
+<p>Module 1 was about <strong>describing</strong> what a dataset shows. Starting this module, we shift toward <strong>quantifying uncertainty</strong>, the fourth step of the analytics decision cycle from <a href="week_01_02.html" class="quarto-xref"><span>Chapter 2</span></a>. Before we can build a confidence interval, run a hypothesis test, or interpret a forecast interval (all coming in the next several weeks), we need a shared vocabulary for talking about chance itself. That vocabulary is <strong>probability</strong>.</p>
+<p>A <strong>probability</strong> is a number between 0 and 1 that measures how likely an event is. A probability of 0 means the event never happens; a probability of 1 means it’s certain; everything in between describes a degree of likelihood.</p>
+<p>When a marketing manager says “there’s roughly a 20% chance this campaign hits its target,” or a plant manager says “about 3% of units coming off this line are defective,” they are making probability statements, usually without realizing they’re doing statistics.</p>
+</section>
+<section id="basic-probability-rules" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="basic-probability-rules"><span class="header-section-number">4.2</span> Basic Probability Rules</h2>
+<section id="experiments-outcomes-and-sample-spaces" class="level3">
+<h3 class="anchored" data-anchor-id="experiments-outcomes-and-sample-spaces">Experiments, Outcomes, and Sample Spaces</h3>
+<p>Probability starts with an <strong>experiment</strong>: a repeatable situation whose result isn’t known in advance. Rolling a die, whether a sales call converts, and whether a manufactured unit passes inspection are all experiments in this sense. Each trial produces an <strong>outcome</strong>, and the set of every possible outcome is the <strong>sample space</strong>, usually written <span class="math inline">\(S\)</span>.</p>
+<div class="callout callout-style-simple callout-example callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Example</span>Example 2.1: A simple sample space
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A quality inspector checks a single unit coming off a production line. The outcome is either <strong>pass</strong> or <strong>fail</strong>, so the sample space is <span class="math display">\[
+S = \{\text{pass}, \text{fail}\}
+\]</span> If instead the inspector rolled a six-sided die to decide which of six production lines to audit next, the sample space would be <span class="math inline">\(S=\{1,2,3,4,5,6\}\)</span>.</p>
+</div>
+</div>
+<p>A sample space can be small and finite (pass/fail) or effectively infinite (the exact weight of a shipped package, measured to any precision). Identifying <span class="math inline">\(S\)</span> matters because every probability we compute is relative to it.</p>
+</section>
+<section id="events-and-the-classical-definition-of-probability" class="level3">
+<h3 class="anchored" data-anchor-id="events-and-the-classical-definition-of-probability">Events and the Classical Definition of Probability</h3>
+<p>An <strong>event</strong> is any subset of the sample space—a single outcome, or several grouped together. When every outcome in <span class="math inline">\(S\)</span> is equally likely, the probability of an event <span class="math inline">\(A\)</span> is</p>
+<p><span class="math display">\[
+P(A) = \frac{\text{number of outcomes in } A}{\text{number of outcomes in } S}
+\]</span></p>
+<div class="callout callout-style-simple callout-example callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Example</span>Example 2.2: Law of Large Numbers with a die
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Suppose a training simulator rolls a fair die to assign trainees to one of six workstations, and we want to confirm workstation 6 really does get selected about <span class="math inline">\(1/6 \approx 16.7\%\)</span> of the time. We simulate 300 rolls in R and track the running proportion of sixes as more rolls accumulate:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2025</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>rolls <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">size =</span> <span class="dv">300</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>running_prop_six <span class="ot">&lt;-</span> <span class="fu">cumsum</span>(rolls <span class="sc">==</span> <span class="dv">6</span>) <span class="sc">/</span> <span class="fu">seq_along</span>(rolls)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">tibble</span>(<span class="at">roll =</span> <span class="fu">seq_along</span>(rolls), <span class="at">prop =</span> running_prop_six), <span class="fu">aes</span>(<span class="at">x =</span> roll, <span class="at">y =</span> prop)) <span class="sc">+</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"#2c7fb8"</span>) <span class="sc">+</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">6</span>, <span class="at">linetype =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Running proportion of sixes rolled"</span>, <span class="at">x =</span> <span class="st">"Roll number"</span>, <span class="at">y =</span> <span class="st">"Proportion of sixes"</span>) <span class="sc">+</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="fl">0.5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="week_02_01_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Early on, the running proportion swings around. As more rolls accumulate, it settles near the theoretical value of <span class="math inline">\(1/6\)</span>. This is the <strong>Law of Large Numbers</strong>: as the number of trials grows, the observed proportion of an outcome converges to its true probability. It’s also why a business shouldn’t judge a process from a handful of observations—three failed sales calls in a row doesn’t mean your close rate has actually changed.</p>
+</div>
+</div>
+</section>
+<section id="the-complement-rule" class="level3">
+<h3 class="anchored" data-anchor-id="the-complement-rule">The Complement Rule</h3>
+<p>The <strong>complement</strong> of event <span class="math inline">\(A\)</span>, written <span class="math inline">\(A^c\)</span>, is everything in <span class="math inline">\(S\)</span> that is <em>not</em> in <span class="math inline">\(A\)</span>. Since <span class="math inline">\(A\)</span> either happens or it doesn’t, <span class="math display">\[
+P(A^c) = 1 - P(A)
+\]</span></p>
+<p>This rule is the fastest route to “at least one” problems, which come up constantly in business (at least one customer complains, at least one part in a shipment is defective, at least one lead converts).</p>
+<div class="callout callout-style-simple callout-example callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Example</span>Example 2.3: At least one sale
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A sales rep has a 40% chance of closing any individual call, and calls are independent of one another. Across 4 calls this afternoon, what is the probability of <strong>at least one</strong> sale?</p>
+<p>Let <span class="math inline">\(A\)</span> = “at least one sale.” Its complement, <span class="math inline">\(A^c\)</span>, is “no sales in 4 calls.” Suppose the probability that no sales in 4 calls is known to be 0.1296, that is, <span class="math display">\[
+P(A^c)  = 0.1296
+\]</span> Then, the probability of at leas one sale is <span class="math display">\[
+P(A) = 1 - 0.1296 = 0.8704
+\]</span> Four calls gives the rep better than 87% odds of closing at least one sale.</p>
+</div>
+</div>
+</section>
+<section id="the-addition-rule-unions" class="level3">
+<h3 class="anchored" data-anchor-id="the-addition-rule-unions">The Addition Rule (Unions)</h3>
+<p>The <strong>union</strong> of events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, written <span class="math inline">\(A \cup B\)</span>, contains outcomes in <span class="math inline">\(A\)</span> <em>or</em> <span class="math inline">\(B\)</span> (or both). The <strong>intersection</strong>, <span class="math inline">\(A \cap B\)</span>, contains outcomes in <em>both</em>. The general addition rule is <span class="math display">\[
+P(A \cup B) = P(A) + P(B) - P(A \cap B)
+\]</span> We subtract the intersection because it would otherwise be counted twice, once in <span class="math inline">\(P(A)\)</span> and once in <span class="math inline">\(P(B)\)</span>.</p>
+<div class="callout callout-style-simple callout-example callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Example</span>Example 2.4: Customer channel opt-in
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A retailer surveys 200 customers about how they’d like to receive promotions:</p>
+<ul>
+<li>120 opt in to <strong>email</strong>.</li>
+<li>90 opt in to <strong>SMS</strong>.</li>
+<li>60 opt in to <strong>both</strong>.</li>
+</ul>
+<p>Let <span class="math inline">\(E\)</span> = “opts into email” and <span class="math inline">\(M\)</span> = “opts into SMS.” Then <span class="math display">\[
+P(E)=120/200=0.60
+\]</span> <span class="math display">\[
+P(M)=90/200=0.45
+\]</span> and <span class="math display">\[
+P(E \cap M) = 60/200 = 0.30
+\]</span> The share of customers reachable through <em>either</em> channel is <span class="math display">\[
+P(E \cup M) = 0.60 + 0.45 - 0.30 = 0.75
+\]</span> So 75% of surveyed customers can be reached by email, SMS, or both, useful directly for planning campaign reach.</p>
+</div>
+</div>
+</section>
+<section id="mutually-exclusive-events" class="level3">
+<h3 class="anchored" data-anchor-id="mutually-exclusive-events">Mutually Exclusive Events</h3>
+<p>If <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> share no outcomes, they’re <strong>mutually exclusive</strong> (or disjoint), <span class="math inline">\(P(A \cap B) = 0\)</span>, and the addition rule simplifies to <span class="math inline">\(P(A \cup B) = P(A) + P(B)\)</span>.</p>
+<div class="callout callout-style-simple callout-example callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Example</span>Example 2.5: Warranty claim reasons
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A manufacturer’s warranty claims are logged with exactly one reason code. Historically, 8% of claims are coded <strong>manufacturing defect</strong> and 5% are coded <strong>shipping damage</strong>; no claim ever receives both codes, since each claim is assigned a single cause. The probability a randomly selected claim is <em>either</em> a defect or shipping-damage claim is <span class="math display">\[
+P(\text{defect} \cup \text{damage}) = 0.08 + 0.05 = 0.13
+\]</span></p>
+</div>
+</div>
+</section>
+<section id="probability-from-contingency-tables" class="level3">
+<h3 class="anchored" data-anchor-id="probability-from-contingency-tables">Probability from Contingency Tables</h3>
+<p>A <strong>contingency table</strong> cross-tabulates two categorical variables by count. Dividing each cell by the table’s total gives an estimated probability—this is the Law of Large Numbers again, applied to real data instead of a simulation.</p>
+<div class="callout callout-style-simple callout-example callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Example</span>Example 2.6: A fraud-detection screen
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>An e-commerce company’s automated system flags transactions it suspects are fraudulent. Out of 10,000 transactions last month:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>Flagged</th>
+<th>Not flagged</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Actually fraudulent</td>
+<td>180</td>
+<td>20</td>
+<td>200</td>
+</tr>
+<tr class="even">
+<td>Not fraudulent</td>
+<td>980</td>
+<td>8,820</td>
+<td>9,800</td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td>1,160</td>
+<td>8,840</td>
+<td>10,000</td>
+</tr>
+</tbody>
+</table>
+<p>Dividing each count by 10,000 gives estimated probabilities. For instance, the probability a transaction is actually fraudulent is <span class="math display">\[
+P(\text{fraud}) = \frac{200}{10000} = 0.02
+\]</span> and the probability a transaction is both fraudulent <em>and</em> flagged is <span class="math display">\[
+P(\text{fraud} \cap \text{flagged}) = \frac{180}{10000} = 0.018
+\]</span> Using the addition rule, the probability a transaction is fraudulent, flagged, or both is <span class="math display">\[
+P(\text{fraud} \cup \text{flagged}) = \frac{200}{10000} + \frac{1160}{10000} - \frac{180}{10000} = \frac{1180}{10000} = 0.118
+\]</span> We’ll return to this same table in the next section to ask a sharper question: <em>given that a transaction was flagged, how likely is it to actually be fraud?</em></p>
+</div>
+</div>
+</section>
+<section id="computing-probabilities-in-r-and-excel" class="level3">
+<h3 class="anchored" data-anchor-id="computing-probabilities-in-r-and-excel">Computing Probabilities in R and Excel</h3>
+<div class="callout callout-style-simple callout-example callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Example</span>Example 2.7: Contingency table probabilities in R and Excel
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In R, if your data is one row per transaction with logical columns <code>fraud</code> and <code>flagged</code>, these probabilities are just proportions of logical vectors:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(fraud)                  <span class="co"># P(fraud)</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(fraud <span class="sc">&amp;</span> flagged)        <span class="co"># P(fraud and flagged)</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(fraud <span class="sc">|</span> flagged)        <span class="co"># P(fraud or flagged)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>In Excel, the equivalent uses <code>COUNTIFS()</code> divided by the total row count:</p>
+<pre><code>=COUNTIFS(fraud_range, TRUE, flagged_range, TRUE) / COUNTA(id_range)   ' P(fraud and flagged)</code></pre>
+<p>Either way, the underlying idea is identical to Example 2.6: count the outcomes that satisfy the event, and divide by the total.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="conditional-probability-and-independence" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="conditional-probability-and-independence"><span class="header-section-number">4.3</span> Conditional Probability and Independence</h2>
+<section id="conditional-probability" class="level3">
+<h3 class="anchored" data-anchor-id="conditional-probability">Conditional Probability</h3>
+<p>Often we want the probability of an event <strong>given that</strong> another has already occurred. If <span class="math inline">\(P(A) &gt; 0\)</span>, the <strong>conditional probability</strong> of <span class="math inline">\(B\)</span> given <span class="math inline">\(A\)</span> is <span class="math display">\[
+P(B \mid A) = \frac{P(A \cap B)}{P(A)}
+\]</span> Conditioning on <span class="math inline">\(A\)</span> shrinks the sample space down to just the outcomes where <span class="math inline">\(A\)</span> happened, and asks what fraction of those also satisfy <span class="math inline">\(B\)</span>.</p>
+<div class="callout callout-style-simple callout-example callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Example</span>Example 2.8: How trustworthy is a fraud flag?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Return to the fraud-detection table from Example 2.6. The company’s fraud analysts don’t really care about <span class="math inline">\(P(\text{fraud})\)</span> in isolation—they want to know: <em>given a transaction was flagged, what’s the chance it’s actually fraud?</em> <span class="math display">\[
+\begin{align*}
+P(\text{fraud} \mid \text{flagged}) &amp;= \frac{P(\text{fraud} \cap \text{flagged})}{P(\text{flagged})}\\
+&amp;= \frac{180/10000}{1160/10000}\\
+&amp;= \frac{180}{1160}\\
+&amp;\approx 0.155
+\end{align*}
+\]</span> So only about 15.5% of flagged transactions are actually fraudulent, the other 84.5% are false alarms that a human analyst still has to review. This is a completely general lesson, not specific to fraud: <strong>when the thing you’re looking for is rare, most flags will be false positives, even with a reasonably good detection system.</strong> The same logic applies to churn-risk flags, defect-detection sensors, and screening tests of any kind.</p>
+</div>
+</div>
+<p>Rearranging the conditional probability formula gives the <strong>multiplication rule</strong>, useful for finding the probability that two events both happen: <span class="math display">\[
+P(A \cap B) = P(A)\,P(B \mid A) = P(B)\,P(A \mid B)
+\]</span></p>
+</section>
+<section id="independent-vs.-dependent-events" class="level3">
+<h3 class="anchored" data-anchor-id="independent-vs.-dependent-events">Independent vs.&nbsp;Dependent Events</h3>
+<p>Events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are <strong>independent</strong> if knowing <span class="math inline">\(A\)</span> occurred doesn’t change the probability of <span class="math inline">\(B\)</span>: <span class="math display">\[
+P(B \mid A) = P(B)
+\]</span> When events are independent, the multiplication rule simplifies to <span class="math inline">\(P(A \cap B) = P(A)\,P(B)\)</span>. If conditioning <em>does</em> change the probability, the events are <strong>dependent</strong>.</p>
+<div class="callout callout-style-simple callout-example callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Example</span>Example 2.9: Independent vs. dependent draws
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Independent case.</strong> A call center randomly routes each incoming call to one of several agents, independent of any previous call. If Agent Lee handles 20% of calls, knowing that Agent Lee handled the last call tells you nothing about who handles the next one.</p>
+<p><strong>Dependent case.</strong> A batch of 10 components contains 4 that are defective. Two components are pulled at random, <strong>without replacement</strong>, for inspection. Let <span class="math inline">\(D_1\)</span> = “first component is defective” and <span class="math inline">\(D_2\)</span> = “second component is defective.” <span class="math display">\[
+P(D_1) = 4/10 = 0.40
+\]</span> If the first component drawn was defective, only 3 defectives remain among 9 components: <span class="math display">\[
+P(D_2 \mid D_1) = 3/9 \approx 0.333
+\]</span> Because <span class="math inline">\(P(D_2 \mid D_1) \ne P(D_2)\)</span>, the draws are <strong>dependent</strong>—removing one component changes the composition of what’s left. Had the components been replaced after inspection (or had the batch been much larger relative to the sample), the draws would be approximately independent.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Mutually exclusive is not the same as independent">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Mutually exclusive is not the same as independent
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>These two ideas are easy to mix up, but they’re nearly opposite. If <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are mutually exclusive, <span class="math inline">\(P(A \cap B) = 0\)</span>. If <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are independent, <span class="math inline">\(P(A \cap B) = P(A)P(B)\)</span>, which is only zero if <span class="math inline">\(P(A)=0\)</span> or <span class="math inline">\(P(B)=0\)</span>. So two events with positive probability <strong>cannot</strong> be both mutually exclusive and independent: if <span class="math inline">\(A\)</span> happening rules out <span class="math inline">\(B\)</span> entirely, that’s about as dependent as two events can be.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="bayes-rule" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="bayes-rule"><span class="header-section-number">4.4</span> Bayes’ Rule</h2>
+<p>Example 2.8 worked because we had a full contingency table to count from. Often, though, you don’t have the table—you only know how well a detection system performs (its <strong>sensitivity</strong> and <strong>specificity</strong>) and how common the thing you’re looking for is (its <strong>prevalence</strong>), and you need to work out <span class="math inline">\(P(A \mid B)\)</span> from <span class="math inline">\(P(B \mid A)\)</span>. <strong>Bayes’ Rule</strong> is the formula that does this. Starting from the conditional probability formula and the multiplication rule, for events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> with <span class="math inline">\(P(B) &gt; 0\)</span>: <span class="math display">\[
+\begin{align*}
+P(A \mid B) &amp;= \frac{P(B \mid A)\,P(A)}{P(B)}\\\\
+&amp;= \frac{P(B \mid A)\,P(A)}{P(B \mid A)\,P(A) + P(B \mid A^c)\,P(A^c)}
+\end{align*}
+\]</span></p>
+<p>In a detection or screening context, it’s standard to name the pieces:</p>
+<ul>
+<li><span class="math inline">\(P(A)\)</span> is the <strong>prevalence</strong>—how common the condition is before you see any evidence.</li>
+<li><span class="math inline">\(P(B \mid A)\)</span> is the <strong>sensitivity</strong>—the probability the system correctly flags a true case.</li>
+<li><span class="math inline">\(P(B \mid A^c)\)</span> is the <strong>false-positive rate</strong>—<span class="math inline">\(1\)</span> minus the <strong>specificity</strong>, the probability a non-case gets incorrectly flagged.</li>
+<li><span class="math inline">\(P(A \mid B)\)</span> is what you actually want to know—given a flag, how likely is it a true case? This is called the <strong>positive predictive value</strong>.</li>
+</ul>
+<div class="callout callout-style-simple callout-example callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Example</span>Example 2.10: A defect-detection camera
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A manufacturer installs an automated vision system to flag defective units on the line before they ship. Historically, 2% of units are actually defective (the prevalence). The vendor reports the system correctly flags 90% of true defects (sensitivity) and correctly clears 96% of good units (specificity, so its false-positive rate is 4%).</p>
+<p>If a unit gets flagged, what’s the probability it’s actually defective? Let <span class="math inline">\(D\)</span> = “unit is defective” and <span class="math inline">\(F\)</span> = “unit is flagged.” We’re given <span class="math display">\[
+\begin{align*}
+P(D) &amp;= 0.02,\\P(F \mid D) &amp;= 0.90,\\ P(F \mid D^c) &amp;= 1 - 0.96 = 0.04
+\end{align*}
+\]</span> Applying Bayes’ Rule: <span class="math display">\[
+\begin{align*}
+P(D \mid F) &amp;= \frac{P(F \mid D)\,P(D)}{P(F \mid D)\,P(D) + P(F \mid D^c)\,P(D^c)}\\
+&amp;= \frac{(0.90)(0.02)}{(0.90)(0.02) + (0.04)(0.98)}\\
+&amp;= \frac{0.018}{0.018 + 0.0392}\\
+&amp;\approx 0.315
+\end{align*}
+\]</span> Even with a fairly accurate 90%/96% system, only about <strong>31.5%</strong> of flagged units are actually defective, the rest are false alarms sent for unnecessary rework. This is the same pattern we saw with the fraud flag in Example 2.8: when the condition being screened for is rare, false positives from the much larger pool of “good” cases can outnumber the true positives, even when the detection system itself is fairly accurate.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Why this matters for evaluating any detection system">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Why this matters for evaluating any detection system
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>Whenever someone proposes a system to flag rare business events (fraud, defects, churn risk, safety incidents) ask three questions before trusting a “flagged” result: How rare is the event (prevalence)? How good is the system at catching true cases (sensitivity)? How good is it at leaving good cases alone (specificity)? Bayes’ Rule shows that the answer to “how much should I trust a flag?” depends on all three, not on accuracy alone.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="recap" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="recap"><span class="header-section-number">4.5</span> Recap</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Keyword</strong></th>
+<th><strong>Definition</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Probability</strong></td>
+<td>A number between 0 and 1 measuring how likely an event is.</td>
+</tr>
+<tr class="even">
+<td><strong>Sample space</strong></td>
+<td>The set of all possible outcomes of an experiment.</td>
+</tr>
+<tr class="odd">
+<td><strong>Event</strong></td>
+<td>A subset of the sample space.</td>
+</tr>
+<tr class="even">
+<td><strong>Complement rule</strong></td>
+<td><span class="math inline">\(P(A^c) = 1 - P(A)\)</span>; useful for “at least one” problems.</td>
+</tr>
+<tr class="odd">
+<td><strong>Addition rule</strong></td>
+<td><span class="math inline">\(P(A \cup B) = P(A) + P(B) - P(A \cap B)\)</span>.</td>
+</tr>
+<tr class="even">
+<td><strong>Mutually exclusive events</strong></td>
+<td>Events with no outcomes in common; <span class="math inline">\(P(A \cap B) = 0\)</span>.</td>
+</tr>
+<tr class="odd">
+<td><strong>Conditional probability</strong></td>
+<td><span class="math inline">\(P(B \mid A) = P(A \cap B)/P(A)\)</span>, the chance of <span class="math inline">\(B\)</span> given <span class="math inline">\(A\)</span> has occurred.</td>
+</tr>
+<tr class="even">
+<td><strong>Independent events</strong></td>
+<td><span class="math inline">\(P(B \mid A) = P(B)\)</span>; knowing <span class="math inline">\(A\)</span> doesn’t change the probability of <span class="math inline">\(B\)</span>.</td>
+</tr>
+<tr class="odd">
+<td><strong>Bayes’ Rule</strong></td>
+<td><span class="math inline">\(P(A \mid B) = \dfrac{P(B \mid A)P(A)}{P(B \mid A)P(A) + P(B \mid A^c)P(A^c)}\)</span>; updates a prior probability using new evidence.</td>
+</tr>
+<tr class="even">
+<td><strong>Sensitivity / specificity</strong></td>
+<td>Sensitivity is <span class="math inline">\(P(\text{flag} \mid \text{true case})\)</span>; specificity is <span class="math inline">\(P(\text{no flag} \mid \text{not a case})\)</span>.</td>
+</tr>
+<tr class="odd">
+<td><strong>Positive predictive value</strong></td>
+<td><span class="math inline">\(P(\text{true case} \mid \text{flag})\)</span>; depends on prevalence as well as sensitivity and specificity.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="check-your-understanding" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="check-your-understanding"><span class="header-section-number">4.6</span> Check Your Understanding</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="Problems">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Problems
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>A call center’s data shows 55% of callers ask about billing, 30% ask about technical support, and 12% ask about both. What is the probability a randomly selected caller asks about billing, technical support, or both?</p></li>
+<li><p>A logistics company reports that 6% of shipments arrive late. If three shipments are sent to different customers this week (assume independence), what is the probability that <strong>at least one</strong> arrives late?</p></li>
+<li><p>Using the fraud-detection table from Example 2.6, compute <span class="math inline">\(P(\text{not flagged} \mid \text{not fraudulent})\)</span>. In plain language, what does this number represent, and why might a fraud team care about it as much as the number from Example 2.8?</p></li>
+<li><p>A hiring manager notes that of the last 50 candidates, 20 had a relevant certification and 15 were ultimately hired. Of those hired, 9 had the certification. Are “having the certification” and “being hired” independent events? Show your work.</p></li>
+<li><p>A bank’s automated system flags transactions for possible money laundering. Only 0.5% of transactions are actually suspicious (prevalence). The system has 85% sensitivity and 98% specificity. If a transaction is flagged, what is the probability it’s actually suspicious? Use Bayes’ Rule, and briefly explain what this number implies for how the bank should staff its manual review team.</p></li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solutions">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solutions
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>Let <span class="math inline">\(B\)</span> = billing, <span class="math inline">\(T\)</span> = technical support. <span class="math inline">\(P(B \cup T) = 0.55 + 0.30 - 0.12 = 0.73\)</span>.</p></li>
+<li><p>Let <span class="math inline">\(A\)</span> = “at least one late shipment.” <span class="math inline">\(P(A^c) = (0.94)^3 \approx 0.8306\)</span>, so <span class="math inline">\(P(A) = 1 - 0.8306 \approx 0.1694\)</span>, about a 17% chance at least one of the three arrives late.</p></li>
+<li><p><span class="math inline">\(P(\text{not flagged} \mid \text{not fraudulent}) = \dfrac{8820/10000}{9800/10000} = \dfrac{8820}{9800} \approx 0.900\)</span>. This is the probability a legitimate transaction is correctly left alone—roughly 90% of the time. A fraud team cares about this alongside the number from Example 2.8 because a system could catch fraud well (high value in Example 2.8) while still annoying a large number of legitimate customers with false flags; both numbers together describe the full cost of the screening system, not just its accuracy on fraud cases.</p></li>
+<li><p><span class="math inline">\(P(\text{certification}) = 20/50 = 0.40\)</span>. <span class="math inline">\(P(\text{certification} \mid \text{hired}) = 9/15 = 0.60\)</span>. Since <span class="math inline">\(0.60 \ne 0.40\)</span>, having the certification and being hired are <strong>not independent</strong>—candidates with the certification were hired at a noticeably higher rate than candidates overall.</p></li>
+<li><p>Let <span class="math inline">\(S\)</span> = “transaction is suspicious” and <span class="math inline">\(F\)</span> = “transaction is flagged.” We’re given <span class="math inline">\(P(S) = 0.005\)</span>, <span class="math inline">\(P(F \mid S) = 0.85\)</span>, and <span class="math inline">\(P(F \mid S^c) = 1 - 0.98 = 0.02\)</span>. <span class="math display">\[
+P(S \mid F) = \frac{(0.85)(0.005)}{(0.85)(0.005) + (0.02)(0.995)} = \frac{0.00425}{0.00425 + 0.0199} \approx 0.176
+\]</span> Only about 17.6% of flagged transactions are actually suspicious. This means roughly 5 out of every 6 flagged transactions are false alarms—the bank needs enough manual reviewers to work through a review queue that’s mostly false positives, and shouldn’t treat “flagged” as equivalent to “confirmed suspicious” when deciding how aggressively to act on a single flag.</p></li>
+</ol>
+</div>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

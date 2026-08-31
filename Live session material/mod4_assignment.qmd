@@ -1,0 +1,116 @@
+# Module 4 Deliverable: Predictive Model and Recommendation {#sec-mod4-assignment}
+
+::: {.callout-important collapse="false" title="Due date"}
+**Due: [insert date — instructor to set; suggested: shortly after 11/13, before Module 5 on 12/4]**, submitted on Canvas. See @sec-mod4-assignment-submission for exact submission instructions.
+:::
+
+## Overview
+
+Your fourth deliverable applies the fifth step of the analytics decision cycle, **build a model**, to a real prediction problem. Across Weeks 8 through 11 and our November 13 live session, you built and diagnosed simple and multiple regression models, worked with categorical predictors, and learned logistic regression for binary outcomes. This exercise asks you to build **one** predictive model end to end: fit it, diagnose it, interpret it, and translate it into a specific managerial recommendation, calculated in R and Excel.
+
+This is a **model-building exercise**, not a comparison of several different models against each other. Pick one model type that genuinely fits your outcome variable (linear regression for a continuous outcome, logistic regression for a binary one) and build it well, rather than fitting several models superficially.
+
+## Choosing Your Data
+
+You have two options.
+
+1. **Extend the advertising analysis** from @sec-week08-01 through @sec-week09-02 (`data/advertising.csv`), in a way that goes beyond what was done live in class. Choose **one** of the following two paths:
+
+   - **Linear regression path.** Split the 200 markets into a training set and a holdout set (for example, the first 160 rows to train, the remaining 40 to evaluate), fit a multiple regression on the training set only, and evaluate its prediction accuracy on the holdout set it never saw, directly applying the training-vs-test idea from @sec-week10-02. Report whether your model's holdout performance looks consistent with its training performance, or whether it shows signs of overfitting.
+   - **Logistic regression path.** Create a new binary variable flagging whether a market is "high-performing" (for example, `sales` above the sample median, or above a threshold you choose and justify), and build a logistic regression predicting that flag from advertising spend.
+
+2. **Use a predictive modeling scenario from your own workplace**, involving any outcome you can predict from one or more other variables in data you have access to, provided it includes (a) at least 20 observations, and (b) a response variable that is clearly either continuous (for linear regression) or binary (for logistic regression). **Workplace scenarios must be approved by the instructor before you begin.** Email a short description (the decision, the outcome you're predicting, your predictors, and your data source) at least one week before the due date.
+
+## What Your Report Must Include
+
+Your rendered Quarto report should contain the following sections, in this order.
+
+### 1. Framing (short)
+
+In 2–3 sentences, state the business decision your model could inform, following the framing questions from @sec-week01-02: What decision is on the table? Who would make it? What would change depending on the answer?
+
+### 2. Model Setup
+
+State, in plain language:
+
+- What one row in your data represents (the observational unit).
+- Your response variable, and whether it's continuous or binary.
+- Your predictor(s), and their variable types (quantitative or categorical).
+- Which model type you're building (linear or logistic regression) and **why** it fits your outcome.
+
+### 3. Building the Model
+
+Fit your model and report the fitted equation (coefficients for a linear model; the log-odds equation for a logistic model). If you're using two or more predictors, briefly justify why each one belongs in the model.
+
+### 4. Diagnostics
+
+::: {.callout-note collapse="false" title="This section depends on your model type"}
+**If you built a linear regression**, check the LINE assumptions using at least one residual plot and at least one formal test from @sec-week10-01 (for example, `ols_plot_resid_fit()` and `ols_test_breusch_pagan()`), and check for influential points using Cook's distance (`ols_plot_cooksd_bar()`). State what you found and whether your model's inference can be trusted as a result.
+
+**If you built a logistic regression**, report a confusion matrix at a threshold of your choice from @sec-week11-02, along with at least one classification metric beyond accuracy (sensitivity, specificity, or precision), and the AUC.
+:::
+
+### 5. Interpretation and Prediction
+
+Interpret your model's key result(s) in plain business language:
+
+- For a linear model: what each slope means in the original units, your $R^2$ (or adjusted $R^2$, if you used more than one predictor), and, if you used the holdout-evaluation path, how your training and holdout performance compared.
+- For a logistic model: the odds ratio for at least one predictor, translated into plain language (not just "the odds ratio is 0.85"), and your classification metrics from Section 4.
+
+Then make **one specific prediction**: pick a plausible new observation and report your model's predicted value (with a prediction interval, if linear) or predicted probability (if logistic).
+
+### 6. Managerial Recommendation
+
+A short paragraph (4–6 sentences), written **for a manager, not a statistician**, that ties your model's results back to the decision you framed in Section 1. Be explicit about the model's limitations (its $R^2$ or classification accuracy isn't perfect; it's an association, not necessarily a guarantee of causation, per @sec-week08-02) and avoid statistical jargon.
+
+::: {.callout-tip collapse="true" title="What separates a strong recommendation from a weak one"}
+A weak recommendation reports a coefficient and stops ("The odds ratio for tenure is 0.92."). A strong recommendation translates that into a decision ("Customers past their first year churn at meaningfully lower rates, so retention spending is best concentrated on the first 12 months, where the model shows the steepest drop in predicted churn risk.").
+:::
+
+## What Is *Not* Required for This Assignment
+
+- Time-series forecasting (Module 5)
+- Linear optimization or Excel Solver (Module 6)
+- Fitting and comparing multiple different model types against each other; one well-built, well-diagnosed model is the goal
+- An exhaustive search across every possible predictor in your dataset
+
+## Format and Length
+
+- Written and rendered as a **Quarto document** (`.qmd` rendered to `.pdf`).
+- Use headings matching the six sections above.
+- Code chunks may be shown or hidden (`echo: true`/`false`) at your discretion, but your report should read cleanly even if a reader skips the code entirely.
+- A well-executed report is typically **2–3 rendered pages**, not counting code output. Concise and clear beats long.
+
+## If You're Working in Excel
+
+You are welcome to do your calculations in Excel instead of R.
+
+1. **Fit your model in Excel**, using the Data Analysis ToolPak's Regression tool (for a linear model) or the by-hand formulas from your reading. **If you're building a logistic regression**, be aware that Excel has no built-in tool for it (@sec-week11-01); you may fit the logistic model in R even if the rest of your analysis is done in Excel, and should say so in your report.
+2. **Report your results in your Quarto document as text, formulas, or embedded images of your Excel output**, showing how you got your numbers, not just the final answer.
+3. **Submit your Excel workbook as a third file** alongside your `.qmd` and `.pdf` (see @sec-mod4-assignment-submission).
+
+::: {.callout-note collapse="false" title="Why the workbook matters for grading"}
+A final coefficient alone doesn't show us how you got there. Submitting the `.xlsx` file lets us verify your model was set up correctly, the same role a visible R code chunk plays for students working in R.
+:::
+
+## Grading Rubric
+
+| Component | Points |
+|---|---|
+| Framing (clear, specific decision) | 5 |
+| Model setup (observational unit, variables, and model-type choice correctly identified and justified) | 10 |
+| Building the model (correctly fit, equation reported) | 15 |
+| Diagnostics (appropriate checks run and correctly interpreted for your model type) | 20 |
+| Interpretation and prediction (coefficients/odds ratios translated to plain language, correct fit statistics, a specific prediction) | 25 |
+| Managerial recommendation (clear, plain-language, honest about limitations) | 20 |
+| Overall clarity and professionalism (renders cleanly, organized, appropriate for a managerial audience) | 5 |
+| **Total** | **100** |
+
+## Submission Instructions {#sec-mod4-assignment-submission}
+
+::: {.callout-important collapse="false" title="Submit on Canvas"}
+1. Render your `.qmd` file to `.pdf`.
+2. Submit **both** your `.qmd` source file and the rendered `.pdf` file to the Module 4 Predictive Model assignment on Canvas. **If you worked in Excel**, also submit your `.xlsx` workbook as a third file.
+3. Name your files `lastname_firstname_module4.qmd`, `lastname_firstname_module4.pdf`, and (if applicable) `lastname_firstname_module4.xlsx`.
+4. Late submissions follow the course late-work policy stated in the syllabus.
+:::
