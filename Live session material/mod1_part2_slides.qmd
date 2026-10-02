@@ -1,6 +1,6 @@
 ---
 title: "Sampling and Observational vs. Experimental Data"
-subtitle: "QBA 5330 — Module 1, Part 2 (September 4)"
+subtitle: "QBA 5330 — Module 1, Part 2 (September 5)"
 author: "QBA 5330"
 format:
   revealjs:

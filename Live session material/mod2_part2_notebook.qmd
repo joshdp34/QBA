@@ -1,0 +1,192 @@
+---
+title: "Module 2, Part 2: Confidence Intervals for Proportions and Means"
+subtitle: "Guided notebook: review the reading, then fill in the blanks together"
+author: "Your name here"
+format:
+  html:
+    theme: cosmo
+    toc: true
+    embed-resources: true
+execute:
+  echo: true
+  warning: false
+  message: false
+  error: true
+---
+
+::: {.callout-important title="Reminder: how this notebook works"}
+- Replace each `___` in code with the missing R code, then run the chunk. Type your interpretation where you see `_____` in a sentence.
+- Run chunks **in order from the top**. Later chunks use objects created by earlier ones.
+- Render any time. Unfilled blanks show red error text but do not stop the render.
+- **Exception:** an error in R code written *inside a sentence* (inline code) does stop the render. Fix or remove it, then render again.
+:::
+
+## Setup and Recap from Part 1
+
+Run this chunk. It loads the pilot data and recreates every number we computed in Part 1, so you don't have to.
+
+```{r}
+library(tidyverse)
+
+base_url <- "https://raw.githubusercontent.com/joshdp34/QBA/master/data/"
+pilot_conversions <- read_csv(paste0(base_url, "retailer_pilot_conversions.csv"))
+pilot_orders      <- read_csv(paste0(base_url, "retailer_pilot_orders.csv"))
+
+# Conversion rate: point estimate and standard error
+n_conv <- nrow(pilot_conversions)
+p_hat  <- mean(pilot_conversions$converted)
+se_p   <- sqrt(p_hat * (1 - p_hat) / n_conv)
+
+# Order value: point estimate and standard error
+n_ord <- nrow(pilot_orders)
+x_bar <- mean(pilot_orders$order_value)
+s     <- sd(pilot_orders$order_value)
+se_x  <- s / sqrt(n_ord)
+
+tibble(metric = c("Conversion rate", "Average order value"),
+       estimate = c(p_hat, x_bar),
+       standard_error = c(se_p, se_x))
+```
+
+We left Part 1 with a point estimate and a standard error for each metric, but no *range* leadership can rely on. That is what a confidence interval gives us.
+
+## 1. The Confidence Interval Recipe (review)
+
+**Key ideas from the reading** (Week 5 reading):
+
+$$
+\text{estimate} \;\pm\; \text{critical value} \times \text{standard error}
+$$
+
+- For a **proportion**, the critical value is a **z** value, found with `qnorm()`.
+- For a **mean**, we use a **t** value with $n-1$ degrees of freedom, found with `qt()`, because the true standard deviation is unknown and estimated by $s$.
+- The **confidence level** (95%, 90%, 99%) controls the critical value. More confidence means a larger critical value and a wider interval.
+
+::: {.callout-note title="What '95% confident' does and does not mean"}
+The method behind a 95% interval captures the true value in about 95% of repeated pilots. Once we compute **one** specific interval, the true value is either inside it or not. So we say "we are 95% confident the true rate is between..." and we do **not** say "there is a 95% probability the true rate is in this interval."
+:::
+
+## 2. Confidence Interval for the Conversion Rate
+
+We store the confidence level in an object called `level`. That way, changing the level later means changing **one number**. The formula `1 - (1 - level) / 2` turns a level like 0.95 into the quantile 0.975 that `qnorm()` needs.
+
+Fill in the four blanks to build the 95% interval.
+
+```{r}
+level  <- ___                                   # confidence level
+z_star <- qnorm(1 - (1 - ___) / 2)             # critical value for the chosen level
+margin <- z_star * ___                          # margin of error
+ci_p   <- c(lower = p_hat - ___, upper = p_hat + ___)
+ci_p
+```
+
+::: {.callout-tip collapse="true" title="Hint"}
+The margin of error is the critical value times the standard error. The interval is the estimate minus the margin, and the estimate plus the margin.
+:::
+
+R also has a built-in function that computes a proportion interval. Run it and compare:
+
+```{r}
+prop.test(x = sum(pilot_conversions$converted), n = n_conv, correct = FALSE)$conf.int
+```
+
+The numbers are close but not identical, because `prop.test()` uses a slightly different (Wilson) method. For this course, **use the by-hand interval above** as your answer.
+
+**Interpretation, using inline code.** Replace each placeholder with R code that pulls the endpoint from `ci_p` (multiply by 100 and round to 1 decimal):
+
+> We are 95% confident that the true national conversion rate is between `r "____"`% and `r "____"`%.
+
+### What if we want more confidence?
+
+Rebuild the interval at a **99%** confidence level. Only the first line changes.
+
+```{r}
+level_99  <- ___
+z_star_99 <- qnorm(1 - (1 - level_99) / 2)
+margin_99 <- z_star_99 * se_p
+ci_p_99   <- c(lower = p_hat - margin_99, upper = p_hat + margin_99)
+ci_p_99
+```
+
+The 99% interval is _____ than the 95% interval. To be more confident that we have captured the true rate, we have to _____.
+
+## 3. Confidence Interval for the Average Order Value
+
+Because we are estimating a **mean** with $s$, we use the **t** distribution with $n - 1$ degrees of freedom. Fill in the four blanks.
+
+```{r}
+level    <- 0.95
+df       <- ___                                    # degrees of freedom
+t_star   <- qt(1 - (1 - level) / 2, df = ___)             # t critical value
+margin_x <- ___ * se_x                                # margin of error
+ci_x     <- c(lower = x_bar - ___, upper = x_bar + margin_x)
+ci_x
+```
+
+R's `t.test()` computes the same interval directly. This time the match is exact:
+
+```{r}
+t.test(pilot_orders$order_value)$conf.int
+```
+
+**Interpretation, using inline code.** Dollar signs are written `\$` in Quarto sentences.
+
+> We are 95% confident that the true national average order value is between \$`r "____"` and \$`r "____"`.
+
+::: {.callout-tip collapse="true" title="Hint"}
+Same pattern as before: `format(round(ci_x["lower"], 2), nsmall = 2)` keeps two decimals on a dollar amount.
+:::
+
+## 4. Does the Pilot Clear Leadership's Bar?
+
+Leadership will pursue the national launch only if they can be reasonably confident that:
+
+- the true national **conversion rate is at least 10%**, and
+- the true national **average order value is at least \$60**.
+
+The key question is whether the **lower end** of each interval clears the bar. Fill in the two thresholds.
+
+```{r}
+ci_p["lower"] > ___     # conversion bar
+ci_x["lower"] > ___       # order value bar
+```
+
+Run this chunk (no changes needed) to *see* both intervals against leadership's bar (the red dashed line):
+
+```{r}
+tibble(metric   = c("Conversion rate", "Average order value ($)"),
+       estimate = c(p_hat, x_bar),
+       lower    = c(ci_p["lower"], ci_x["lower"]),
+       upper    = c(ci_p["upper"], ci_x["upper"]),
+       bar      = c(0.10, 60)) |>
+  ggplot(aes(x = metric, y = estimate)) +
+  geom_point(size = 3) +
+  geom_errorbar(aes(ymin = lower, ymax = upper), width = 0.15) +
+  geom_hline(aes(yintercept = bar), linetype = "dashed", color = "red") +
+  facet_wrap(~ metric, scales = "free") +
+  labs(title = "95% confidence intervals vs. leadership's minimum bar",
+       x = NULL, y = NULL) +
+  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
+```
+
+**Interpretation.** Circle or type the right words in each blank:
+
+- **Conversion rate:** the lower bound of the interval is `r "____"`%, which _____ the 10% bar, but only just. Leadership should ask how comfortable they are with "just barely."
+- **Order value:** the lower bound is \$`r "____"`, which _____ the \$60 bar. The pilot data _____ a true average order value below \$60, even though the point estimate of \$71.50 looks comfortably above it.
+
+::: {.callout-note title="Why the interval matters"}
+A report that only said "average order value was \$71.50, comfortably above \$60" would have hidden real cause for caution. Reporting the interval is what exposes it.
+:::
+
+## Recap
+
+| Task | Tool in R |
+|---|---|
+| z critical value for a chosen `level` | `qnorm(1 - (1 - level) / 2)` |
+| t critical value for a chosen `level` | `qt(1 - (1 - level) / 2, df = n - 1)` |
+| Margin of error | critical value `*` standard error |
+| Interval | `estimate - margin`, `estimate + margin` |
+| Built-in check for a mean | `t.test(x)$conf.int` |
+| Change the confidence level | change **one number**: `level` |
+
+Intervals give a *range* of plausible values. But leadership also asked yes/no questions, such as "has the new storefront actually changed performance from the old one?" That is what a **hypothesis test** answers. See you in Part 3.

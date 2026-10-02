@@ -197,7 +197,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Tables, Graphs, and Descriptive Statistics</h1>
-  <p class="subtitle">QBA 5330 — Module 1, Part 3 (September 4)</p>
+  <p class="subtitle">QBA 5330 — Module 1, Part 3 (September 5)</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -260,6 +260,36 @@ QBA 5330
           display:block!important;
       }</style></aside>
 </section>
+<section id="a-richer-table-grouped-summary" class="slide level2">
+<h2>A Richer Table: Grouped Summary</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a>sales <span class="sc">|&gt;</span></span>
+<span id="cb3-2"><a href=""></a>  <span class="fu">group_by</span>(region) <span class="sc">|&gt;</span></span>
+<span id="cb3-3"><a href=""></a>  <span class="fu">summarize</span>(<span class="at">mean_revenue =</span> <span class="fu">mean</span>(revenue), <span class="at">n =</span> <span class="fu">n</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  region  mean_revenue     n
+  &lt;chr&gt;          &lt;dbl&gt; &lt;int&gt;
+1 Midwest       50516.     8
+2 South         72578.     8
+3 West          61378.     8</code></pre>
+</div>
+</div>
+<p><strong>Not just how many — how they <em>performed</em>.</strong></p>
+<aside class="notes">
+<p>The rubric explicitly accepts a table of summary statistics broken out by group as an alternative to a plain frequency table — and it’s usually more decision-relevant.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="center-and-spread" class="slide level2">
 <h2>Center and Spread</h2>
 <ul>
@@ -268,12 +298,12 @@ QBA 5330
 <li class="fragment"><strong>Standard deviation</strong> — typical distance from the mean</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a>sales <span class="sc">|&gt;</span></span>
-<span id="cb3-2"><a href=""></a>  <span class="fu">summarize</span>(</span>
-<span id="cb3-3"><a href=""></a>    <span class="at">mean_revenue =</span> <span class="fu">mean</span>(revenue),</span>
-<span id="cb3-4"><a href=""></a>    <span class="at">median_revenue =</span> <span class="fu">median</span>(revenue),</span>
-<span id="cb3-5"><a href=""></a>    <span class="at">sd_revenue =</span> <span class="fu">sd</span>(revenue)</span>
-<span id="cb3-6"><a href=""></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a>sales <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href=""></a>  <span class="fu">summarize</span>(</span>
+<span id="cb5-3"><a href=""></a>    <span class="at">mean_revenue =</span> <span class="fu">mean</span>(revenue),</span>
+<span id="cb5-4"><a href=""></a>    <span class="at">median_revenue =</span> <span class="fu">median</span>(revenue),</span>
+<span id="cb5-5"><a href=""></a>    <span class="at">sd_revenue =</span> <span class="fu">sd</span>(revenue)</span>
+<span id="cb5-6"><a href=""></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 3
   mean_revenue median_revenue sd_revenue
@@ -306,14 +336,115 @@ QBA 5330
           display:block!important;
       }</style></aside>
 </section>
-<section id="your-turn" class="slide level2">
-<h2>Your Turn</h2>
-<p>Using <code>store_sales.csv</code>:</p>
+<section id="a-mistake-worth-making-on-purpose" class="slide level2">
+<h2>A Mistake Worth Making on Purpose</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a><span class="fu">mean</span>(sales<span class="sc">$</span>region)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>“Average region” isn’t a real quantity.</strong></p>
+<aside class="notes">
+<p>Run this live and let it visibly fail or return NA with a warning. This is the rubric’s own instruction — “do not report a mean for a categorical variable” — made concrete.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-statistic-that-actually-fits" class="slide level2">
+<h2>A Statistic That Actually Fits</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a>sales <span class="sc">|&gt;</span></span>
+<span id="cb8-2"><a href=""></a>  <span class="fu">count</span>(region) <span class="sc">|&gt;</span></span>
+<span id="cb8-3"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">proportion =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  region      n proportion
+  &lt;chr&gt;   &lt;int&gt;      &lt;dbl&gt;
+1 Midwest     8      0.333
+2 South       8      0.333
+3 West        8      0.333</code></pre>
+</div>
+</div>
+<p><em>“West stores account for about a third of all store-months.”</em></p>
+<p><strong>Never a mean, for a categorical variable. A proportion or a mode instead.</strong></p>
+</section>
+<section id="executive-summary-strong-vs.-weak" class="slide level2">
+<h2>Executive Summary: Strong vs.&nbsp;Weak</h2>
+<p>Worth <strong>20 of 100 points</strong> — the single largest line item.</p>
+<p><strong>Weak</strong> (restates a number):</p>
+<blockquote>
+<p>“Average revenue was $65,000.”</p>
+</blockquote>
+<p><strong>Strong</strong> (interprets it, tied to a decision):</p>
+<blockquote>
+<p>“Midwest stores generated noticeably less revenue per month than South or West stores, even after accounting for smaller store size, worth investigating before allocating next quarter’s inventory evenly across regions.”</p>
+</blockquote>
+<aside class="notes">
+<p>The weak version could describe almost any numeric column. The strong version connects a specific pattern in this data to a specific decision — the same framing skill from Part 1, now applied to results instead of a starting question.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="your-turn-one-sentence-2-minutes" class="slide level2">
+<h2>Your Turn: One Sentence (2 minutes)</h2>
+<p>Using the grouped table from earlier, write <strong>one sentence</strong> that could open your own executive summary.</p>
+<p><strong>Model it on the strong example — not the weak one.</strong></p>
+</section>
+<section id="your-turn-putting-it-all-together" class="slide level2">
+<h2>Your Turn: Putting It All Together</h2>
+<p>Using <code>store_sales.csv</code>, individually:</p>
 <ol type="1">
-<li class="fragment">Build a frequency table for <code>region</code></li>
-<li class="fragment">Build a histogram of <code>units_sold</code></li>
-<li class="fragment">Compute the mean and median of <code>units_sold</code> — are they close together?</li>
+<li class="fragment"><strong>One table</strong> — frequency table or grouped summary</li>
+<li class="fragment"><strong>One graph</strong> — a histogram of <code>units_sold</code></li>
+<li class="fragment"><strong>Two statistics, matched to type</strong> — mean <em>and</em> median of <code>units_sold</code> (quantitative), <em>and</em> a proportion for one region (categorical)</li>
+<li class="fragment"><strong>One sentence</strong> — in the style of the strong executive summary</li>
 </ol>
+<aside class="notes">
+<p>A compressed, ungraded dry run of the entire deliverable structure. The goal is to surface software friction and writing friction — slipping back into “weak” summary language under time pressure — while help is still in the room.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-module-1-deliverable" class="slide level2">
+<h2>The Module 1 Deliverable</h2>
+<p>A short Quarto exploratory report, containing:</p>
+<ul>
+<li class="fragment"><strong>Framing</strong> (Part 1)</li>
+<li class="fragment"><strong>Data description</strong> — observational unit + at least 4 variables classified (Part 1)</li>
+<li class="fragment"><strong>Executive summary</strong></li>
+<li class="fragment">At least one <strong>table</strong></li>
+<li class="fragment">At least one <strong>graph</strong></li>
+<li class="fragment">At least two <strong>descriptive statistics</strong>, correctly matched to variable type</li>
+</ul>
+</section>
+<section id="you-already-practiced-all-of-it" class="slide level2">
+<h2>You Already Practiced All of It</h2>
+<ul>
+<li class="fragment"><code>store_sales.csv</code>, or a dataset of your own from your workplace (instructor approval required)</li>
+<li class="fragment">Every skill above: practiced today, across all three parts</li>
+</ul>
 
 </section>
     </div>

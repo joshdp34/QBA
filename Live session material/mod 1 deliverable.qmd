@@ -1,0 +1,81 @@
+---
+title: "Module 1 Deliverable"
+author: "Joshua Patrick"
+format: html
+---
+
+## Setup
+
+```{r}
+library(tidyverse)
+dat <- read_csv("data/store_sales.csv")
+```
+
+## 1. Framing
+
+Which regional manager should we promote based on revenue per square foot?
+
+## 2. Data Description
+
+The data consists of four months of performance across six retail stores. There are 24 observations and 6 variables. 
+
+The variables are listed below.
+
+| Column | Description | Variable Type |
+|------------------------|------------------------|------------------------|
+| `store_id` | Unique identifier for the store | Categorical |
+| `region` | Region the store is located in (West, South, Midwest) | Categorical |
+| `month` | Month of the observation (Jan–Apr) | Categorical |
+| `sq_ft` | Store size, in square feet | Quantitative, continuous |
+| `units_sold` | Number of units sold that month | Quantitative, discrete |
+| `revenue` | Revenue that month, in dollars | Quantitative, discrete |
+
+## 3. Table
+
+```{r}
+table(dat$region)
+```
+
+
+```{r}
+dat |> 
+  group_by(region) |> 
+  summarize(avg_rev = mean(revenue))
+```
+
+```{r}
+dat |> 
+  group_by(region) |> 
+  summarize(avg_sq_ft = mean(sq_ft))
+```
+
+## 4. Graphs
+
+```{r}
+dat |> 
+  ggplot()+
+  aes(x = region, y = revenue)+
+  geom_point()
+```
+
+```{r}
+dat |> 
+  ggplot()+
+  aes(x = region, y = sq_ft)+
+  geom_point()
+```
+
+## 5. Descriptive Statistics
+
+```{r}
+median(dat$revenue)
+sd(dat$revenue)
+```
+
+```{r}
+dat |> 
+  group_by(region) |> 
+  summarize(md_rev = median(revenue))
+```
+
+## 6 Executive Summary

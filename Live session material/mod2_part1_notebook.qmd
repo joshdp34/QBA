@@ -1,0 +1,206 @@
+---
+title: "Module 2, Part 1: Quantifying Risk and Standard Error"
+subtitle: "Guided notebook: review the reading, then fill in the blanks together"
+author: "Your name here"
+format:
+  html:
+    theme: cosmo
+    toc: true
+    embed-resources: true
+execute:
+  echo: true
+  warning: false
+  message: false
+  error: true
+---
+
+::: {.callout-important title="How to use this notebook"}
+We will work through this file **together**. The reading review is already written for you. Wherever you see a blank, you fill it in as we go.
+
+- **Blanks in code** look like `___`. Replace each `___` with the missing piece of R code, then click the green **Run** arrow at the top right of that code chunk (or press `Ctrl+Shift+Enter` / `Cmd+Shift+Enter` with your cursor inside the chunk).
+- **Blanks in sentences** look like `_____`. Type your interpretation in plain English.
+- **Render any time** with the **Render** button (or `Ctrl+Shift+K` / `Cmd+Shift+K`). Anything not filled in yet will show red error text in the output. That is expected, and it does **not** stop the document from rendering.
+- **Run the setup chunk first**, every time you open the file. Later chunks use objects it creates.
+- If you see `object 'something' not found`, you either skipped an earlier chunk or have a typo in a name. If you see `unexpected input`, a `___` blank is still in the code.
+- **One exception:** R code written *inside a sentence* (the "inline code" you will meet in Section 3) **does** stop the render if it has an error. If Render stops and mentions a line number, look for inline code on that line, fix it (usually an object that has not been created yet), and render again.
+:::
+
+## Setup
+
+Run this chunk first. It loads the tidyverse and reads the retailer's pilot data directly from GitHub, so there is nothing to download.
+
+```{r}
+library(tidyverse)
+
+base_url <- "https://raw.githubusercontent.com/joshdp34/QBA/master/data/"
+
+pilot_conversions <- read_csv(paste0(base_url, "retailer_pilot_conversions.csv"))
+pilot_orders      <- read_csv(paste0(base_url, "retailer_pilot_orders.csv"))
+```
+
+::: {.callout-note collapse="true" title="First time using the tidyverse on this computer?"}
+Run `install.packages("tidyverse")` once in the Console (not in this file), wait for it to finish, then run the setup chunk again.
+:::
+
+## The Business Decision
+
+A retailer piloted a new online storefront in a sample of markets. Leadership must decide whether to **launch it nationally**. Everything in today's three sessions is about one question: *how much can we trust what the pilot is telling us?*
+
+The pilot produced two datasets:
+
+| Dataset | One row is... | Columns |
+|---|---|---|
+| `pilot_conversions` | one pilot-market visitor | `visitor_id`, `converted` (1 = became a customer, 0 = did not) |
+| `pilot_orders` | one pilot order | `order_id`, `order_value` (dollars) |
+
+**Your turn:** look at the structure of both datasets.
+
+```{r}
+glimpse(pilot_conversions)
+glimpse(___)
+```
+
+How many visitors are in the conversion pilot? How many orders in the order pilot? Write them here:
+
+- Visitors: _____
+- Orders: _____
+
+## 1. Expected Value and Risk (review)
+
+**Key ideas from the reading** (Week 2 and Week 3 readings):
+
+- The **expected value** of a random variable is its long-run average. It is *not* a guarantee for any single outcome.
+- The **standard deviation** measures typical spread around that average. A decision can have a positive expected value and still carry real risk.
+- If a quantity follows a **normal distribution**, `pnorm(q, mean, sd)` gives $P(X \le q)$. For "greater than," use `1 - pnorm(q, mean, sd)`.
+
+Leadership models the national launch's incremental profit as a random variable with an **expected value of \$2.6 million** and a **standard deviation of \$1.8 million**. The launch costs **\$2.0 million** up front. (All numbers below are in millions of dollars.)
+
+```{r}
+expected_profit <- 2.6   # expected incremental profit, $ millions
+sd_profit       <- 1.8   # standard deviation of profit, $ millions
+launch_cost     <- 2.0   # up-front launch cost, $ millions
+
+# Expected profit above the launch cost
+expected_profit - launch_cost
+```
+
+Expected value says the launch is worth \$0.6 million. But is it a **safe** bet? A loss happens when profit comes in *below* the launch cost:
+
+```{r}
+# P(profit < launch cost) = P(the launch loses money)
+pnorm(launch_cost, mean = expected_profit, sd = sd_profit)
+```
+
+**Your turn:** what is the probability the launch earns **more than \$3.5 million**? Fill in the two blanks.
+
+```{r}
+1 - pnorm(___, mean = expected_profit, sd = ___)
+```
+
+**Interpretation.** Fill in the blanks:
+
+There is about a _____% chance that the launch loses money, even though the expected profit is \$_____ million above the launch cost. A positive expected value is not a guarantee, because the _____ is large relative to that margin.
+
+## 2. Sampling Distributions and Standard Error (review)
+
+**Key ideas from the reading** (Week 4 reading):
+
+- A sample mean or sample proportion is a **statistic**. If the pilot were repeated, the statistic would come out a little different each time.
+- The **sampling distribution** describes how much it would vary. Its standard deviation is called the **standard error (SE)**.
+
+$$
+\text{SE}_{\hat{p}} = \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} \qquad\qquad \text{SE}_{\bar{x}} = \frac{s}{\sqrt{n}}
+$$
+
+Let's *see* a sampling distribution. Pretend the true conversion rate is exactly 15%, and repeat the 200-visitor pilot **5,000 times**. `rbinom()` simulates the number of converting visitors in each pretend pilot, and dividing by 200 turns each count into a conversion rate.
+
+```{r}
+set.seed(2025)   # makes the random numbers repeatable
+sim_phats <- rbinom(5000, size = 200, prob = 0.15) / 200
+```
+
+```{r}
+ggplot(tibble(p_hat = sim_phats), aes(x = p_hat)) +
+  geom_histogram(bins = 25, fill = "steelblue", color = "white") +
+  labs(title = "5,000 pretend pilots of 200 visitors each",
+       x = "Conversion rate in the pilot", y = "Number of pilots")
+```
+
+Each bar counts how many of the 5,000 pretend pilots produced that conversion rate. The pilots do not all agree, and *that spread is the uncertainty*.
+
+**Your turn:** compute the spread of the simulated rates, and compare it to the SE formula.
+
+```{r}
+sd(___)            # spread of the 5,000 simulated conversion rates
+sqrt(0.15 * 0.85 / 200)      # the standard error formula
+```
+
+**Interpretation.** Fill in the blanks:
+
+The standard deviation of the 5,000 simulated conversion rates is about _____, almost exactly the formula's SE of _____. The standard error is the standard deviation of the _____.
+
+**Your turn:** what if the pilot had 800 visitors instead of 200? Change the sample size in both places.
+
+```{r}
+set.seed(2025)
+sim_phats_big <- rbinom(5000, size = ___, prob = 0.15) / ___
+sd(sim_phats_big)
+```
+
+Quadrupling the pilot size made the standard error about _____ as large. A bigger pilot does not eliminate uncertainty. It _____.
+
+## 3. Applying It to the Real Pilot
+
+Now we compute the standard errors from the retailer's actual pilot data. First, the **conversion rate**. Fill in the three blanks.
+
+```{r}
+n_conv <- ___(pilot_conversions)                  # number of rows = number of visitors
+p_hat  <- ___(pilot_conversions$converted)        # the mean of a 0/1 column is a proportion
+se_p   <- sqrt(p_hat * (1 - p_hat) / ___)       # standard error of a proportion
+
+round(c(n = n_conv, p_hat = p_hat, se = se_p), 4)
+```
+
+::: {.callout-tip collapse="true" title="Hint"}
+`nrow()` counts rows. `mean()` of a column of 0s and 1s is the fraction of 1s. The last blank is the sample size you just computed.
+:::
+
+Next, the **order value**. Fill in the three blanks.
+
+```{r}
+n_ord <- nrow(pilot_orders)
+x_bar <- ___(pilot_orders$order_value)       # average order value
+s     <- ___(pilot_orders$order_value)         # standard deviation of order values
+se_x  <- ___                      # standard error of a mean
+
+round(c(n = n_ord, x_bar = x_bar, s = s, se = se_x), 4)
+```
+
+### A new Quarto skill: inline code
+
+Quarto can drop R results directly into your sentences, so your write-up always matches your code. The pattern is: a backtick, the letter `r`, a space, your R code, and a closing backtick. It looks like this when you type it: `r knitr::inline_expr("nrow(pilot_conversions)")`. The sentence below is computed live using exactly that pattern:
+
+> The conversion pilot included `r nrow(pilot_conversions)` visitors, and `r sum(pilot_conversions$converted)` of them converted.
+
+**Your turn:** complete this paragraph the same way. Replace the placeholder text (`"____"`) inside each pair of backticks with R code that uses the objects you just created (`p_hat`, `se_p`, `x_bar`, `se_x`).
+
+> The pilot's conversion rate was `r "____"`%, with a standard error of `r "____"` percentage points. The average order value was \$`r "____"`, with a standard error of \$`r "____"`.
+
+::: {.callout-tip collapse="true" title="Hint"}
+To show a rate as a percentage, multiply by 100 first, then `round()`. To keep dollar amounts looking like \$71.50 (not \$71.5), wrap the rounded value in `format(..., nsmall = 2)`.
+:::
+
+**Interpretation.** Fill in the blanks:
+
+If we repeated the pilot, the conversion rate would typically bounce around by about _____ percentage points, and the average order value by about \$_____, just from random sampling. What we do **not** have yet is a defensible *range* to bring to leadership. That is Part 2.
+
+## Recap
+
+| Idea | Tool in R |
+|---|---|
+| Probability a normal quantity falls below a value | `pnorm(q, mean, sd)` |
+| Probability it falls *above* a value | `1 - pnorm(q, mean, sd)` |
+| Simulate many repeated pilots | `rbinom(reps, size, prob) / size` |
+| Standard error of a proportion | `sqrt(p_hat * (1 - p_hat) / n)` |
+| Standard error of a mean | `sd(x) / sqrt(n)` |
+| Put R results inside a sentence | `r knitr::inline_expr("round(x, 2)")` |

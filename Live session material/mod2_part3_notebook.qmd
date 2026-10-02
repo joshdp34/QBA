@@ -1,0 +1,199 @@
+---
+title: "Module 2, Part 3: Hypothesis Tests and Your Deliverable"
+subtitle: "Guided notebook: review the reading, then fill in the blanks together"
+author: "Your name here"
+format:
+  html:
+    theme: cosmo
+    toc: true
+    embed-resources: true
+execute:
+  echo: true
+  warning: false
+  message: false
+  error: true
+---
+
+::: {.callout-important title="Reminder: how this notebook works"}
+- Replace each `___` in code with the missing R code, then run the chunk. Type your interpretation where you see `_____` in a sentence.
+- Run chunks **in order from the top**. Later chunks use objects created by earlier ones.
+- Render any time. Unfilled blanks show red error text but do not stop the render.
+- **Exception:** an error in R code written *inside a sentence* (inline code) does stop the render. Fix or remove it, then render again.
+:::
+
+## Setup and Recap from Parts 1 and 2
+
+Run this chunk. It loads the data and recreates the numbers and intervals from the first two parts.
+
+```{r}
+library(tidyverse)
+
+base_url <- "https://raw.githubusercontent.com/joshdp34/QBA/master/data/"
+pilot_conversions <- read_csv(paste0(base_url, "retailer_pilot_conversions.csv"))
+pilot_orders      <- read_csv(paste0(base_url, "retailer_pilot_orders.csv"))
+
+# Conversion rate
+n_conv <- nrow(pilot_conversions)
+x_conv <- sum(pilot_conversions$converted)
+p_hat  <- mean(pilot_conversions$converted)
+se_p   <- sqrt(p_hat * (1 - p_hat) / n_conv)
+
+# Order value
+n_ord <- nrow(pilot_orders)
+x_bar <- mean(pilot_orders$order_value)
+s     <- sd(pilot_orders$order_value)
+se_x  <- s / sqrt(n_ord)
+
+# 95% intervals from Part 2
+ci_p <- c(lower = p_hat - qnorm(0.975) * se_p, upper = p_hat + qnorm(0.975) * se_p)
+ci_x <- c(lower = x_bar - qt(0.975, n_ord - 1) * se_x, upper = x_bar + qt(0.975, n_ord - 1) * se_x)
+
+round(ci_p, 3)
+round(ci_x, 2)
+```
+
+## 1. A Different Question (review)
+
+**Key ideas from the reading** (Weeks 5 and 6 readings):
+
+- A **confidence interval** answers: *what range of values is the truth plausibly in?*
+- A **hypothesis test** answers: *has the truth changed from a known benchmark?*
+
+Every test follows the same five steps:
+
+1. State $H_0$ (nothing has changed) and $H_a$ (something has).
+2. Compute a **test statistic**: how many standard errors the pilot is from the benchmark.
+3. Find the **p-value**: how likely a result at least this extreme would be if $H_0$ were true.
+4. Compare the p-value to the significance level $\alpha$ (usually 0.05). If p-value $< \alpha$, **reject** $H_0$. Otherwise, **fail to reject** $H_0$.
+5. Say it in plain business language.
+
+::: {.callout-note title="'Fail to reject' is not 'accept'"}
+Failing to reject $H_0$ means the pilot did not provide *statistically detectable* evidence of a change. It does not prove that nothing changed. A larger pilot might detect a smaller difference.
+:::
+
+## 2. Test 1: Has the Conversion Rate Changed?
+
+The **old** storefront historically converted **12%** of visitors. The pilot converted 15%.
+
+$$
+H_0: p = 0.12 \qquad H_a: p \neq 0.12
+$$
+
+Fill in the blanks to compute the test statistic and p-value by hand.
+
+```{r}
+p0     <- ___                                  # the historical conversion rate
+se_0   <- sqrt(p0 * (1 - p0) / n_conv)              # standard error UNDER H0
+z_stat <- (p_hat - ___) / ___
+p_value <- 2 * (1 - pnorm(abs(___)))         # two-sided p-value
+c(z = z_stat, p_value = p_value)
+```
+
+::: {.callout-tip collapse="true" title="Why does the standard error use p0 instead of p_hat?"}
+A hypothesis test asks "if $H_0$ were true, how surprising is the pilot?" So the standard error is computed *assuming $H_0$ is true*, using the benchmark $p_0$. A confidence interval has no benchmark, so it uses $\hat{p}$ instead.
+:::
+
+Check your work with R's built-in test. The `X-squared` value equals $z^2$, and the p-value should match yours:
+
+```{r}
+prop.test(x = x_conv, n = n_conv, p = 0.12, correct = FALSE)
+```
+
+Now make the decision:
+
+```{r}
+alpha <- 0.05
+p_value < alpha
+```
+
+**Interpretation.** Fill in the blanks (the first two use inline code):
+
+> The test statistic is $z$ = `r "____"` and the p-value is `r "____"`. Because the p-value is _____ than $\alpha = 0.05$, we _____ $H_0$. The pilot does not provide statistically detectable evidence that the new storefront's conversion rate differs from the old storefront's 12%.
+
+**Connect it to Part 2:** the 95% confidence interval for the conversion rate was about (0.101, 0.199). The value 0.12 is _____ that interval, which _____ with the test's conclusion. A confidence interval and a two-sided test at matching levels always tell the same story.
+
+## 3. Test 2: Has the Average Order Value Changed?
+
+The old storefront's historical average order value was **\$65**. The pilot averaged \$71.50.
+
+$$
+H_0: \mu = 65 \qquad H_a: \mu \neq 65
+$$
+
+For a mean with raw data, R's `t.test()` does the whole test. Fill in the benchmark:
+
+```{r}
+order_test <- t.test(pilot_orders$order_value, mu = ___)
+order_test
+```
+
+You can pull individual results out of the saved test. Fill in the blank:
+
+```{r}
+order_test$statistic     # the t statistic
+order_test$___   # the p-value
+```
+
+Now confirm the t statistic **by hand**. It is the same recipe: (estimate minus benchmark) divided by the standard error.
+
+```{r}
+mu0    <- 65
+t_stat <- (x_bar - ___) / ___
+p_val  <- 2 * (1 - pt(abs(t_stat), df = ___))
+c(t = t_stat, p_value = p_val)
+```
+
+**Interpretation.** Fill in the blanks:
+
+> The test statistic is $t$ = `r "____"` with a p-value of `r "____"`. Because the p-value is _____ than $\alpha = 0.05$, we _____ $H_0$. The pilot's average order value (\$71.50) is not statistically distinguishable from the old storefront's \$65. The value 65 is _____ the 95% interval (\$54.16, \$88.84) from Part 2.
+
+### What if we change $\alpha$?
+
+The significance level is a choice, and it controls how often we raise a false alarm (a Type I error). Check the conversion test at two other levels. Fill in the blanks.
+
+```{r}
+p_value < ___
+p_value < ___
+```
+
+At $\alpha = 0.20$, we would _____ $H_0$ for the conversion test. But that means accepting a _____% chance of a false alarm when nothing has really changed. At $\alpha = 0.01$ we would _____.
+
+## 4. Three Lenses on One Pilot
+
+Complete the last column. Use short, plain-language phrases.
+
+| Question | Tool | Answer for this pilot |
+|---|---|---|
+| What is our best single guess? | Point estimate | Conversion _____; average order value _____ |
+| What range is the truth plausibly in? | Confidence interval | Conversion _____; order value _____ |
+| Does the truth clear leadership's minimum bar? | CI vs. threshold | Conversion _____; order value _____ |
+| Has performance changed from the old storefront? | Hypothesis test | _____ |
+
+::: {.callout-tip title="The honest takeaway"}
+None of these tools hands leadership a clean "yes, launch" or "no, don't." The pilot has not been shown to perform *differently* from the old storefront, and order value in particular cannot be confidently said to clear the \$60 bar. That is a realistic outcome, not a disappointing one: good analytics **narrows the range of reasonable disagreement**. A larger pilot might settle the question either way.
+:::
+
+## 5. You Are Ready for the Deliverable
+
+Across all three parts you have now done every calculation the Module 2 deliverable asks for. Here is the map:
+
+| Deliverable section | Where you practiced it |
+|---|---|
+| 1. Framing | Module 1 skills, plus the business decision at the top of Part 1 |
+| 2. Probability and expected value | Part 1, Section 1 (`pnorm()` for the probability of a loss) |
+| 3. Confidence interval | Part 2 (change `level` to the level the assignment asks for) |
+| 4. Hypothesis test | Part 3, Sections 2 and 3 (use the $\alpha$ that matches your interval's level) |
+| 5. Recommendation | Part 3, Section 4 (the honest takeaway, in your own words) |
+
+Open **`mod2_deliverable_template.qmd`**. Its structure matches the assignment, with a reminder at each step of which part of these notebooks to look back at.
+
+## Recap
+
+| Task | Tool in R |
+|---|---|
+| Test statistic for a proportion | `(p_hat - p0) / sqrt(p0 * (1 - p0) / n)` |
+| Two-sided p-value from a z statistic | `2 * (1 - pnorm(abs(z)))` |
+| Whole test for a proportion | `prop.test(x, n, p = p0, correct = FALSE)` |
+| Whole test for a mean | `t.test(x, mu = mu0)` |
+| Pull the p-value out of a saved test | `result$p.value` |
+| Decision | reject $H_0$ if `p_value < alpha` |

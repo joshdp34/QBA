@@ -1,0 +1,85 @@
+---
+title: "Module 1, Part 2: Practice Examples"
+subtitle: "Sampling, and observational vs. experimental data"
+author: "QBA 5330"
+format:
+  html:
+    theme: cosmo
+    toc: true
+    embed-resources: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+
+
+## Example 2A: Convenience Sample vs. Random Sample
+
+```{r}
+library(tidyverse)
+ads <- read_csv("data/advertising.csv")
+```
+
+**Your turn:** compute the mean of `sales` four different ways, and compare them.
+
+1. The mean of just the **first 10 rows** (a stand-in for a "convenience sample," whoever's easiest to grab).
+
+```{r}
+# your code here
+
+```
+
+2. The mean of a **random sample of 10 rows**. Set a seed first so your result is reproducible, then use `slice_sample()`.
+
+```{r}
+set.seed(42)
+# your code here
+
+```
+
+3. Run the random sample **again**, with a different seed.
+
+```{r}
+set.seed(99)
+# your code here
+
+```
+
+4. The mean of the **full dataset** (all 200 rows).
+
+```{r}
+# your code here
+
+```
+
+**Your turn:** in 2–3 sentences, which of these four numbers would you actually trust for a real business decision, and why? Is the "random sample" estimate obviously better than the "convenience sample" estimate here, or closer than you'd expect? What does that tell you about the difference between random sampling error and bias?
+
+*Write your reflection here.*
+
+## Example 2B: Observational or Experimental, Then Compute It Anyway
+
+```{r}
+ab <- read_csv("data/ab_marketing.csv")
+glimpse(ab)
+```
+
+**Your turn:** in a sentence or two, is this dataset observational or experimental? What would you need to know about how it was collected to be sure, rather than just guessing from the column names?
+
+*Write your answer here.*
+
+Now compute the click rate for each variant.
+
+```{r}
+# your code here: group by variant, compute the mean of clicked
+
+```
+
+**Your turn:** `clicked` is coded 0/1, and you just took its mean to get a proportion. Earlier in this session, you saw that `mean()` doesn't work on a categorical variable like `region`. Explain, in your own words, why `mean(clicked)` is a legitimate calculation here but `mean(region)` wouldn't be, even though both `clicked` and `region` are arguably categorical.
+
+*Write your answer here.*
+
+## Going Forward
+
+We now know where trustworthy data comes from, and what to watch for when it isn't a full census. Next: turning it into something we can actually look at, tables, graphs, and summary numbers, exactly what your deliverable needs.

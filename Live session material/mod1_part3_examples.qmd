@@ -1,0 +1,110 @@
+---
+title: "Module 1, Part 3: Practice Examples"
+subtitle: "Tables, graphs, descriptive statistics, and the executive summary"
+author: "QBA 5330"
+format:
+  html:
+    theme: cosmo
+    toc: true
+    embed-resources: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+
+
+## Example 3A: New Dataset, Same Skills
+
+```{r}
+library(tidyverse)
+ns <- read_csv("data/nutrition_survey.csv")
+glimpse(ns)
+```
+
+**Your turn:** build each of the following.
+
+**1. A frequency table for `region`.**
+```{r}
+# your code here
+
+```
+
+**2. A grouped summary table: mean `servings_per_day` by `region`.**
+```{r}
+# your code here
+
+```
+
+**3. A histogram of `household_income`.**
+```{r}
+# your code here
+
+```
+
+**4. Two descriptive statistics, correctly matched to variable type**: the mean *and* median of `household_income` (quantitative), and the proportion of respondents in one region of your choice (categorical).
+```{r}
+# your code here
+
+```
+
+## Example 3B: Executive Summary Sprint (5 minutes)
+
+Using your own output from 3A, write one polished executive-summary paragraph (3–6 sentences), modeled on the strong-vs-weak example from earlier in this session: interpret your numbers, don't just restate them, and tie them to a plausible business decision.
+
+*Write your executive summary here.*
+
+**Pairs:** swap with a neighbor. Check their paragraph against two questions only: does it interpret rather than restate a number, and does it tie to a decision?
+
+## Example 3C: Group Debug Sprint, Fix the Broken Report
+
+The code and sentence below are meant to describe `data/training_program_anova.csv`, but they contain **three errors**. Find and fix all three.
+
+```{r}
+#| eval: false
+library(tidyverse)
+train <- read_csv("data/training_program_anova.csv")
+
+ggplot(train, aes(x = row_number(), y = score)) +
+  geom_col()
+
+mean(train$program)
+```
+
+> "The average score was calculated."
+
+**Your turn:** first, load the data so you can actually test your fixes.
+```{r}
+train <- read_csv("data/training_program_anova.csv")
+glimpse(train)
+```
+
+**Error 1**, a graph problem: what's wrong with the plot above, and what should it be instead? Write the corrected code.
+```{r}
+# your corrected code here
+
+```
+
+**Error 2**, a statistic problem: what's wrong with `mean(train$program)`, and what should be computed instead? Write the corrected code.
+```{r}
+# your corrected code here
+
+```
+
+**Error 3**, a writing problem: rewrite the executive-summary sentence so it actually interprets a result rather than just stating that a calculation happened. Use real numbers from your fixes above.
+
+*Write your corrected sentence here.*
+
+## The Module 1 Deliverable
+
+A short Quarto exploratory report, containing:
+
+- **Framing** (Part 1)
+- **Data description**, observational unit + at least 4 variables classified (Part 1)
+- **Executive summary**
+- At least one **table**
+- At least one **graph**
+- At least two **descriptive statistics**, correctly matched to variable type
+
+You just practiced every one of these, across all three parts of today's session, on real data. `store_sales.csv`, or a dataset of your own from your workplace (instructor approval required), due before the next module.

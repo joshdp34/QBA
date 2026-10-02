@@ -1,0 +1,105 @@
+---
+title: "Module 1, Part 1: Practice Examples"
+subtitle: "Framing, data types, and the observational unit"
+author: "QBA 5330"
+format:
+  html:
+    theme: cosmo
+    toc: true
+    embed-resources: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+## Example 1A: Cold Dataset Data Description
+
+Explore a dataset you haven't seen in class, and write up its structure exactly as you would for Section 2 of your deliverable.
+
+```{r}
+library(tidyverse)
+df <- read_csv("data/student_stress_survey.csv")
+glimpse(df)
+```
+
+**Your turn:**
+
+1.  In one sentence, state the **observational unit**: what does one row of this dataset represent?
+
+The observational unit is a student.
+
+2.  Classify each variable below as categorical or quantitative (and if quantitative, discrete or continuous). At least one of these has a defensible case for more than one answer, be ready to explain your reasoning, not just your answer.
+
+| Variable       | Type?       |
+|----------------|-------------|
+| `major`        | Categorical |
+| `study_hours`  |  Quantitative, Continuous           |
+| `stress_level` |             |
+
+## Example 1B: Framing Practice on New Data
+
+```{r}
+ns <- read_csv("data/nutrition_survey.csv")
+glimpse(ns)
+```
+
+**Your turn:** write two versions of a framing statement for this dataset, using the three framing questions from earlier (what decision is on the table? who's making it? what would change the answer?).
+
+> **Weak** (a topic, not a decision): *Write one here.*
+
+> **Strong** (a decision): *Write one here.*
+
+**Pairs:** trade with a neighbor. Check their "strong" version against this test: does it name a real decision, who's making it, and what would change the answer? If any of the three is missing, send it back.
+
+## Example 1C: Group Sprint, Four Datasets, Four Reports
+
+Your group will be assigned **one** of the four datasets below. In 10 minutes, produce a rendered report containing: a title, a 2-sentence framing statement, one observational-unit sentence, and a variable-classification table (built from `glimpse()`).
+
+::: panel-tabset
+## `advertising.csv`
+
+```{r}
+ad <- read_csv("data/advertising.csv")
+glimpse(ad)
+```
+
+## `ab_marketing.csv`
+
+```{r}
+ab <- read_csv("data/ab_marketing.csv")
+glimpse(ab)
+```
+
+## `retail_sales.csv`
+
+```{r}
+rs <- read_csv("data/retail_sales.csv")
+glimpse(rs)
+```
+:::
+
+**Your turn:** for your assigned dataset, write your framing statement, observational unit, and variable table below.
+
+**Framing:**
+
+*Write your framing statement here.*
+
+**Observational unit:**
+
+*Write your observational unit statement here.*
+
+**Variable table:**
+
+| Variable | Type? |
+|----------|-------|
+|          |       |
+|          |       |
+
+::: {.callout-tip collapse="true" title="A check worth running before you commit to a dataset like this for your own deliverable"}
+Count how many variables you were actually able to classify. The deliverable asks for at least four. Not every dataset supports that, some of the four above only have two columns. If yours doesn't, that's worth knowing *now*, not while writing your graded report.
+:::
+
+## Going Forward
+
+Everything in Part 2 assumes you've already framed a decision and can name a dataset's observational unit. Keep this file, you'll build directly on these skills again in Part 3.

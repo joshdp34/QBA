@@ -1,0 +1,146 @@
+---
+title: "Module 2 Deliverable: Risk and Uncertainty Exercise"
+author: "Your name here"
+format:
+  html:
+    theme: cosmo
+    toc: true
+    embed-resources: true
+  # If your instructor wants a PDF and you have LaTeX installed, delete the
+  # html block above and use this instead:
+  # pdf:
+  #   toc: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+::: {.callout-important title="How to use this template (delete this box before you submit)"}
+1. **Save a copy** of this file as `lastname_firstname_module2.qmd`.
+2. **Pick your option.** *Option 1* (the retailer pilot) is ready to go: the data loads in the setup chunk below. *Option 2* (your own workplace scenario, approved by the instructor in advance) means you replace the setup chunk with your own data.
+3. **Work top to bottom.** Each section tells you what to write, gives you a code chunk to complete, and points to the notebook where you practiced that step.
+4. **Render often** (the **Render** button). Unlike our in-class notebooks, errors here *will* stop the render, so you will notice and fix them.
+5. **Submit** your `.qmd` and your rendered `.html` (or `.pdf`) on Canvas. If you worked in Excel, also submit your `.xlsx` workbook.
+6. **Delete** every instruction box (like this one) and the checklist at the bottom before you submit.
+:::
+
+## Setup
+
+```{r}
+library(tidyverse)
+
+base_url <- "https://raw.githubusercontent.com/joshdp34/QBA/master/data/"
+pilot_conversions <- read_csv(paste0(base_url, "retailer_pilot_conversions.csv"))
+pilot_orders      <- read_csv(paste0(base_url, "retailer_pilot_orders.csv"))
+
+# Confidence level for Sections 3 and 4.
+# Option 1 requires 90%. (Option 2: use 95%, or another level you can justify.)
+level <- 0.90
+alpha <- 1 - level
+```
+
+## 1. Framing
+
+::: {.callout-note title="What to write"}
+In **2 to 3 sentences**, state the business decision your analysis informs and what is uncertain about it. Answer the three framing questions from Week 1: *What decision is on the table? Who makes it? What would change depending on the answer?*
+:::
+
+*[Replace this line with your 2 to 3 sentence framing.]*
+
+## 2. Probability and Expected Value Analysis
+
+::: {.callout-note title="What to write"}
+Using the launch inputs below, compute (a) the expected profit above the launch cost and (b) the **probability the launch results in a loss**, assuming incremental profit is approximately normal. Then state the result in plain business language, not just as a number.
+
+*Look back at:* Part 1 notebook, Section 1 (`pnorm()`).
+:::
+
+```{r}
+# Launch inputs, in $ millions
+launch_cost     <- 2.0
+expected_profit <- 2.6
+sd_profit       <- 1.8
+
+# (a) Expected profit above the launch cost:
+
+
+# (b) Probability the launch loses money (profit below the launch cost):
+
+```
+
+*[Replace this line with 1 to 2 sentences interpreting your results. Use inline code so your numbers always match your code.]*
+
+## 3. Confidence Interval
+
+::: {.callout-note title="What to write"}
+Choose **one** pilot metric: the **conversion rate** or the **average order value**. Build a confidence interval at the level stored in `level` above, and interpret it correctly. Say "we are ___% confident that the true value is between ___ and ___." Do **not** say there is a ___% *probability* the true value is in your interval.
+
+*Look back at:* Part 2 notebook, Section 2 (conversion rate, uses `qnorm()`) or Section 3 (order value, uses `qt()`).
+:::
+
+**I chose:** *[conversion rate / average order value]*
+
+```{r}
+# Keep the code for the metric you chose and delete the other block.
+
+# --- Conversion rate ---
+# n, the sample proportion, and its standard error (Part 1, Section 3)
+# z critical value for `level` (Part 2, Section 2)
+# margin of error, then the interval
+
+
+# --- Average order value ---
+# n, the sample mean, sample sd, and standard error (Part 1, Section 3)
+# t critical value for `level` and n - 1 degrees of freedom (Part 2, Section 3)
+# margin of error, then the interval
+
+```
+
+*[Replace this line with your interpretation of the interval, using inline code for the endpoints.]*
+
+## 4. Hypothesis Test
+
+::: {.callout-note title="What to write"}
+Test your metric against a meaningful benchmark. The old storefront's historical numbers are good defaults: **12%** conversion rate and **\$65** average order value (you may use another benchmark if you can justify it). State $H_0$ and $H_a$, report your test statistic and p-value, and state your conclusion at the significance level `alpha` above. Then **connect it back to your interval**: does the benchmark fall inside or outside your interval, and does that match your test's conclusion?
+
+*Look back at:* Part 3 notebook, Section 2 (proportion) or Section 3 (mean).
+:::
+
+$H_0$: *[state the null hypothesis]*
+
+$H_a$: *[state the alternative hypothesis]*
+
+```{r}
+# Test statistic and p-value for the metric you chose (Part 3).
+# Then compare the p-value to alpha.
+
+```
+
+*[Replace this line with your conclusion in plain English, and your comparison of the benchmark to your interval.]*
+
+## 5. Recommendation
+
+::: {.callout-note title="What to write"}
+In **3 to 5 sentences**, written **for a manager, not a statistician**, tie Sections 2 to 4 together into a recommendation. Be explicit about the uncertainty. Avoid jargon.
+
+A good recommendation covers: (1) what the pilot shows, (2) what it **cannot** rule out, and (3) what you recommend (launch, run a larger pilot, or hold) and why.
+:::
+
+::: {.callout-tip collapse="true" title="Strong vs. weak recommendations"}
+**Weak** (reports a number and stops): "The pilot conversion rate was 15%."
+
+**Strong** (says what the evidence does and does not support): "We can't yet rule out that the true conversion rate is as low as 10%, right at leadership's minimum bar, so I'd recommend a larger pilot before committing to a national rollout."
+:::
+
+*[Replace this line with your recommendation.]*
+
+::: {.callout-warning title="Checklist: confirm each item, then delete this box"}
+- [ ] Section 1: 2 to 3 sentences naming a real decision
+- [ ] Section 2: correct expected value and probability of a loss, interpreted in plain language
+- [ ] Section 3: interval built at the right level and interpreted correctly, with no "probability" wording
+- [ ] Section 4: hypotheses stated, p-value reported, conclusion connected back to the interval
+- [ ] Section 5: plain-language recommendation that is honest about uncertainty
+- [ ] The document renders with no errors, headings match the five sections, and all instruction boxes are deleted
+- [ ] File names are `lastname_firstname_module2.qmd` and `.html` (or `.pdf`), plus `.xlsx` if you used Excel
+:::

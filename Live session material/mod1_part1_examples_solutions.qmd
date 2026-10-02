@@ -1,0 +1,134 @@
+---
+title: "Module 1, Part 1: Practice Example Solutions"
+subtitle: "Instructor answer key: framing, data types, and the observational unit"
+author: "QBA 5330"
+format:
+  html:
+    theme: cosmo
+    toc: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+::: {.callout-note}
+This is an **instructor answer key** for the three Part 1 practice examples (1A, 1B, 1C), not a student handout. Every number and table below comes from actually running the code against the real files in `data/`.
+:::
+
+## Example 1A: Cold Dataset Data Description
+
+```{r}
+library(tidyverse)
+df <- read_csv("data/student_stress_survey.csv")
+glimpse(df)
+```
+
+**Observational unit:** one row represents one surveyed student, recorded with their academic major, average weekly study hours, and a self-reported stress level.
+
+**Variable classification:**
+
+| Variable | Type |
+|---|---|
+| `major` | Categorical |
+| `study_hours` | Quantitative, continuous (a fractional number of hours) |
+| `stress_level` | Quantitative, discrete, but arguable |
+
+::: {.callout-tip title="Why stress_level is worth discussing, not just answering"}
+`stress_level` is stored as a number (1 through 5), which makes "quantitative, discrete" a defensible answer. But it's also a self-reported rating scale, not a count of anything, so treating it as an **ordinal categorical** variable (ordered categories, not a true numeric scale where a difference of "1" means the same thing at every point) is equally defensible. This is exactly the kind of judgment call students will need to make, and justify in one sentence, when they classify variables in their own deliverable.
+:::
+
+## Example 1B: Framing Practice on New Data
+
+```{r}
+ns <- read_csv("data/nutrition_survey.csv")
+glimpse(ns)
+```
+
+> **Weak:** "This report looks at survey data on income, region, and diet."
+
+> **Strong:** "This survey collected household income, region, and average daily fruit-and-vegetable servings from 200 households. A snack company must decide which regions to prioritize in a healthy-eating marketing campaign for next quarter. If certain regions show meaningfully higher produce consumption relative to income, that would support concentrating campaign spend there rather than nationally."
+
+**What to check for when a pair critiques each other's strong version:** does it name a real decision (where to spend marketing budget), who's making it (the company), and what would change the answer (a regional gap in consumption)? A strong framing sentence that's missing any one of these three should be sent back for revision.
+
+## Example 1C: Group Sprint, Four Datasets, Four Reports
+
+Full worked solutions for all four datasets, so this key covers whichever one a given group was assigned.
+
+### `advertising.csv`
+
+```{r}
+ad <- read_csv("data/advertising.csv")
+glimpse(ad)
+```
+
+**Framing:** "This dataset reports how much 200 markets spent on TV, radio, and online advertising, along with their resulting sales. A company deciding how to allocate next year's advertising budget across channels needs to know which channels are associated with the largest gains in sales."
+
+**Observational unit:** one row is one market's advertising spend and sales over a fixed period.
+
+| Variable | Type |
+|---|---|
+| `tv` | Quantitative, continuous |
+| `radio` | Quantitative, continuous |
+| `online` | Quantitative, continuous |
+| `sales` | Quantitative, continuous |
+
+::: {.callout-tip title="A useful surprise for groups with this dataset"}
+Every variable here is quantitative, there's no categorical variable at all. That's a fine, real thing to notice: not every dataset has one, and the deliverable's requirement to classify "at least four variables" doesn't require a mix of types, just four variables correctly classified, which this dataset supports easily.
+:::
+
+### `ab_marketing.csv`
+
+```{r}
+ab <- read_csv("data/ab_marketing.csv")
+glimpse(ab)
+```
+
+**Framing:** "This dataset records which of two webpage variants, A or B, each of 400 visitors saw, and whether they clicked. The company must decide which variant to roll out permanently. If one variant produces a meaningfully higher click rate, that would justify retiring the other."
+
+**Observational unit:** one row is one website visitor exposed to one page variant.
+
+| Variable | Type |
+|---|---|
+| `variant` | Categorical (2 levels: A, B) |
+| `clicked` | Quantitative, discrete (coded 0/1), or categorical (binary), depending on how it's used |
+
+### `retail_sales.csv`
+
+```{r}
+rs <- read_csv("data/retail_sales.csv")
+glimpse(rs)
+```
+
+**Framing:** "This dataset tracks total monthly sales for a retailer over 18 months. Leadership must decide whether recent sales growth is a real trend worth planning around, or normal month-to-month variation."
+
+**Observational unit:** one row is one calendar month's total sales.
+
+| Variable | Type |
+|---|---|
+| `month` | Categorical (or a time index), a label for which month, not a measured quantity |
+| `sales_k` | Quantitative, continuous |
+
+::: {.callout-important title="A real limitation worth flagging to the room"}
+This dataset only has **two** columns. The deliverable asks for at least four variables classified, so a group building their actual deliverable around a dataset shaped like this one would need to either find more variables (e.g., a version of the data broken out by region or product line) or pick a different dataset entirely. This is exactly the kind of check students should make *before* committing to a dataset for their own report, not after.
+:::
+
+### `vaccine_opinion_by_age.csv`
+
+```{r}
+va <- read_csv("data/vaccine_opinion_by_age.csv")
+glimpse(va)
+```
+
+**Framing:** "This dataset records the age group and stated opinion (support, oppose, or neutral) of 600 survey respondents. A public health communications team must decide which age groups to prioritize in a targeted awareness campaign."
+
+**Observational unit:** one row is one survey respondent.
+
+| Variable | Type |
+|---|---|
+| `age_group` | Categorical (ordered: 18-29, 30-44, 45-64, 65+) |
+| `opinion` | Categorical (Support, Oppose, Neutral) |
+
+::: {.callout-important title="The same two-column limitation, again"}
+Like `retail_sales.csv`, this dataset only has two columns, both categorical. Same lesson: check the variable count and mix *before* committing to a dataset, not while writing the report.
+:::

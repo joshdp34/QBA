@@ -1,6 +1,6 @@
 ---
 title: "Tables, Graphs, and Descriptive Statistics"
-subtitle: "QBA 5330 — Module 1, Part 3 (September 4)"
+subtitle: "QBA 5330 — Module 1, Part 3 (September 5)"
 author: "QBA 5330"
 format:
   revealjs:
@@ -180,5 +180,5 @@ A short Quarto exploratory report, containing:
 - `store_sales.csv`, or a dataset of your own from your workplace (instructor approval required)
 - Every skill above: practiced today, across all three parts
 
-**Due before the next module.**
+
 

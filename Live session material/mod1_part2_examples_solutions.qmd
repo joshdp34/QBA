@@ -1,0 +1,74 @@
+---
+title: "Module 1, Part 2: Practice Example Solutions"
+subtitle: "Instructor answer key: sampling and observational vs. experimental data"
+author: "QBA 5330"
+format:
+  html:
+    theme: cosmo
+    toc: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+::: {.callout-note}
+This is an **instructor answer key** for the two Part 2 practice examples (2A, 2B), not a student handout. Every number below comes from actually running the code against the real files in `data/`.
+:::
+
+## Example 2A: Convenience Sample vs. Random Sample
+
+```{r}
+library(tidyverse)
+ads <- read_csv("data/advertising.csv")
+
+mean(head(ads$sales, 10))              # "convenience sample": first 10 rows
+```
+
+```{r}
+set.seed(42)
+mean(slice_sample(ads, n = 10)$sales)  # a random sample of 10, draw 1
+```
+
+```{r}
+set.seed(99)
+mean(slice_sample(ads, n = 10)$sales)  # a random sample of 10, draw 2
+```
+
+```{r}
+mean(ads$sales)                        # the full 200-row dataset
+```
+
+**The full picture:**
+
+| Sample | Mean sales |
+|---|---|
+| First 10 rows (convenience) | 22.28 |
+| Random sample of 10 (seed 42) | 21.79 |
+| Random sample of 10 (seed 99) | 20.75 |
+| Full dataset (n = 200) | 18.73 |
+
+::: {.callout-tip title="The reflection this example is actually testing"}
+All three 10-row estimates land above the true full-data mean, including both random samples, not just the convenience one. That's not a contradiction of what Part 2 taught; it's the point. With only $n=10$, **ordinary sampling variability** is large enough that any small sample, random or not, can miss by a real margin. The genuine difference between the convenience sample and the random samples isn't visible in any single draw like this one, it's that a random sample's error is unbiased and would **average out to zero** over many repeated random draws, while a convenience sample's error (if the first 10 rows aren't representative of the full 200) would **not** shrink no matter how many times the same convenience method were repeated. A one-sample comparison like this can't prove that distinction on its own; it can only illustrate why n matters and why "some sample was used" isn't automatically reassuring.
+:::
+
+A student's 2–3 sentence reflection should land on: *"With such a small sample, I wouldn't fully trust any of these individual estimates for a real decision, I'd want either a much larger random sample or, ideally, the full dataset if it's available, since \$18.73 (the true average) is meaningfully lower than every one of the 10-row estimates above."*
+
+## Example 2B: Observational or Experimental, Then Compute It Anyway
+
+```{r}
+ab <- read_csv("data/ab_marketing.csv")
+glimpse(ab)
+```
+
+**Is this observational or experimental?** The variable name `variant` (A vs. B) strongly suggests this is a genuine **A/B test**, an experiment in which visitors were randomly assigned to see one page or the other. That makes it experimental, *if* the assignment really was random, which is worth stating as an assumption rather than a certainty: the data alone (just two columns, `variant` and `clicked`) can't prove random assignment happened; that has to be confirmed from how the experiment was actually run, not inferred from the column names alone.
+
+```{r}
+ab |> group_by(variant) |> summarize(click_rate = mean(clicked), n = n())
+```
+
+Variant A: about **8.2%** click rate ($n=195$). Variant B: about **14.1%** click rate ($n=205$), a real-looking gap worth a formal two-sample proportion test later in the course (@sec-week06-02), but purely descriptively, B is outperforming A here.
+
+::: {.callout-important title="Why mean(clicked) is a legitimate proportion, but mean(region) never would be"}
+`clicked` is coded as **0 or 1**, so its arithmetic mean is mathematically identical to the proportion of visitors who clicked (the sum of 1s divided by $n$). This trick works *specifically because* the categories were given a meaningful 0/1 numeric coding, not because "categorical variables can be averaged" in general. `region` in the Part 3 example has no such coding (`"West"` isn't secretly a number), which is exactly why `mean(region)` fails and `mean(clicked)` doesn't. The rule isn't "never call `mean()` on a categorical column"; it's "only if that column's numbers actually mean something to average."
+:::
