@@ -1,0 +1,218 @@
+---
+title: "Module 3, Part 3: Project Oxygen, Causation, and Your Midterm"
+subtitle: "Guided notebook: review the reading, then fill in the blanks together"
+author: "Your name here"
+format:
+  html:
+    theme: cosmo
+    toc: true
+    embed-resources: true
+execute:
+  echo: true
+  warning: false
+  message: false
+  error: true
+---
+
+::: {.callout-important title="Reminder: how this notebook works"}
+- Replace each `___` in code with the missing R code, then run the chunk. Type your answer where you see `_____` in a sentence.
+- Run chunks **in order from the top**. Later chunks use objects created by earlier ones.
+- Render any time. Unfilled blanks show red error text but do not stop the render.
+- **Exception:** an error in R code written *inside a sentence* (inline code) does stop the render. Fix or remove it, then render again.
+- In Section 4 you write your **team's** answers to the worksheet. Sentences are fine; there is no wrong place to type.
+:::
+
+## Setup
+
+```{r}
+library(tidyverse)
+
+base_url <- "https://raw.githubusercontent.com/joshdp34/QBA/master/data/"
+
+manager_teams <- read_csv(paste0(base_url, "manager_teams.csv")) |>
+  mutate(manager_group = factor(manager_group,
+                                levels = c("Top quartile", "Bottom quartile")))
+
+glimpse(manager_teams)
+```
+
+::: {.callout-warning title="About this data"}
+Google's Project Oxygen did **not** release row-level data. The dataset above is **simulated** to have the same *structure* as the case: managers in the top or bottom quartile of manager scores, and an engagement score (0 to 100) for each manager's team. It is for practicing the reasoning, not a recreation of Google's results.
+:::
+
+| Column | Meaning |
+|---|---|
+| `manager_id` | Identifier for the manager |
+| `manager_group` | Top quartile or Bottom quartile on the manager score |
+| `team_experience` | Whether the manager's team is mostly Experienced or Newer employees |
+| `engagement` | The team's average engagement score (0 to 100) |
+
+## 1. The Case and the Comparison (review)
+
+**Key ideas from the reading** (Week 7 reading): Google's people analytics team asked whether **managers matter**. They compared teams led by top-quartile and bottom-quartile managers on satisfaction, retention, and performance. That is a two-group comparison, which is exactly the toolkit from Parts 1 and 2.
+
+First, summarize the two groups. Fill in the blank.
+
+```{r}
+manager_teams |>
+  group_by(manager_group) |>
+  summarise(n = n(),
+            mean_engagement = ___(engagement),
+            sd_engagement   = sd(engagement))
+```
+
+Which tool applies? The groups are two separate sets of managers, so it is a _____ test. Run it. Because we set `Top quartile` as the first level, the difference is "Top minus Bottom".
+
+```{r}
+oxy_test <- t.test(___ ~ manager_group, data = manager_teams)
+oxy_test
+```
+
+**Interpretation, using inline code.** `oxy_test$estimate` holds the two group means (Top first) and `oxy_test$conf.int` the interval for the difference:
+
+> Teams under top-quartile managers averaged `r "____"` and teams under bottom-quartile managers averaged `r "____"`. The 95% confidence interval for the difference runs from `r "____"` to `r "____"` points.
+
+Fill in the blanks:
+
+The p-value is far _____ 0.05, so we _____ $H_0$: the gap is statistically significant. The gap is about 6 points on a 0 to 100 scale, and the spread within each group (the standard deviation) is about 8 points, so the gap is roughly _____ standard deviations. That is a _____ difference, not a trivial one.
+
+But the reading's warning applies: a significant difference between groups does **not** by itself tell us that managers *cause* the difference.
+
+## 2. The Causation Checklist (review)
+
+**Key ideas from the reading** (Week 7 reading). Before claiming a causal effect, ask four questions:
+
+1. Was there **random assignment**?
+2. Is there a plausible **confounder**: something that affects both who ends up in a group *and* the outcome?
+3. Could **bias** explain the pattern instead of a real effect?
+4. Is the effect **statistically significant, and practically significant**?
+
+In Project Oxygen, nobody was randomly assigned to be a top or bottom manager. The comparison is _____, so confounding is the main worry.
+
+## 3. A Confounder You Can See in the Data
+
+Suppose better-rated managers tend to be given **more experienced teams**. Experienced teams might be more engaged no matter who manages them. That would make top managers look better than they are.
+
+Check it. What fraction of each group's teams are Experienced? Fill in the blank.
+
+```{r}
+manager_teams |>
+  group_by(manager_group) |>
+  summarise(pct_experienced = mean(team_experience == "___"))
+```
+
+About _____ of top-quartile managers lead experienced teams, versus about _____ of bottom-quartile managers. The two groups are **not** comparable to begin with.
+
+Now compare the managers **within** each type of team, so that experience is held roughly constant. Run the first chunk as is, then fill in the blanks in the second.
+
+```{r}
+manager_teams |>
+  group_by(team_experience, manager_group) |>
+  summarise(n = n(), mean_engagement = mean(engagement), .groups = "drop")
+```
+
+```{r}
+exp_test   <- t.test(engagement ~ manager_group,
+                     data = filter(manager_teams, team_experience == "Experienced"))
+newer_test <- t.test(engagement ~ manager_group,
+                     data = filter(manager_teams, team_experience == "___"))
+
+gap <- function(test) unname(test$estimate[1] - test$estimate[2])   # Top minus Bottom
+
+round(c(overall     = gap(oxy_test),
+        experienced = gap(___),
+        newer       = gap(newer_test)), 2)
+```
+
+```{r}
+round(c(experienced = exp_test$p.value, newer = newer_test$p.value), 4)
+```
+
+**Interpretation.** Fill in the blanks:
+
+The overall gap was about _____ points, but *within* each type of team it shrinks to about _____ points. Team experience therefore accounts for roughly _____ of the raw gap. A gap of that size remains in both groups, and both p-values are below 0.05, so there is still _____ that top-quartile managers' teams are more engaged.
+
+::: {.callout-tip title="The honest conclusion"}
+We could only adjust for the one confounder we happened to measure. **Unmeasured** confounders (the manager's own tenure, the department, whether the team was already high-performing) could shrink the gap further. The remaining gap is *consistent with* managers mattering, but it is still an observational comparison, so it does not *prove* it. Only random assignment of the "treatment" can do that.
+:::
+
+## 4. Team Worksheet: Evaluate the Evidence
+
+Work with your team. Write your team's answer to each item. One or two sentences is plenty. (The group-level numbers above are from simulated data, but your reasoning here is about the real case.)
+
+**1. Random assignment.** Was there random assignment in Project Oxygen? What would a randomized version look like?
+
+> Our answer: _____
+
+**2. Confounders.** Name at least **one confounder not already in the reading** (the reading names team quality/resources and reverse causation).
+
+> Our answer: _____
+
+**3. Bias.** Top and bottom managers were defined by upward-feedback surveys plus performance reviews. What kind of bias could that introduce?
+
+> Our answer: _____
+
+**4. Statistical vs. practical significance.** The differences are described as reliable but sometimes small. What more would you want to know before a company-wide training rollout?
+
+> Our answer: _____
+
+**5. A stronger design.** Propose a *specific* design that would strengthen the causal claim. Say who is randomly assigned to what.
+
+> Our answer: _____
+
+**6. Team verdict.** Does your team think the evidence supports "managers matter"? What is the strongest reason for your position?
+
+> Our answer: _____
+
+## 5. Class Synthesis
+
+After the report-outs, we will fill in the class's consolidated position:
+
+- **Strongest confounders, named by several teams:** _____
+- **Most concrete stronger design:** _____
+- **Class verdict:** _____
+
+## 6. Module 3 in One Table, and Your Midterm
+
+Complete the "R function" column from memory (look back at Parts 1 and 2 if you need to).
+
+| Question | Tool | R function | What to report |
+|---|---|---|---|
+| One group vs. a known benchmark | One-sample t-test | _____ | $t$, p-value, interval |
+| Two separate groups | Welch two-sample t-test | _____ | $t$, p-value, interval for the difference |
+| Same units measured twice | Paired t-test | _____ | $t$, p-value, interval for the mean difference |
+| Three or more groups | One-way ANOVA | _____ | $F$, both df, p-value |
+| Which groups differ | Tukey's HSD | _____ | adjusted p-values and intervals |
+
+You now have every tool the **midterm** needs. Here is where each piece of the midterm was practiced:
+
+| Midterm section | Practiced in |
+|---|---|
+| Setup: reading data from GitHub, renaming columns, dates | Part 1, Setup |
+| Observational unit; looking at the data | Part 1, "Business Setting" |
+| 3A: one-sample test | Part 1, Section 2 |
+| 3B: two-sample comparison, Welch vs. pooled, interval for the difference | Part 1, Section 3 |
+| 3C: paired comparison (build the pairs, then test) | Part 2, Section 2 |
+| 3D: ANOVA and Tukey's HSD | Part 2, Sections 3 and 4 |
+| 3E: evaluating causality | Part 3, Sections 2 to 4 |
+| Executive recommendation | Modules 1 and 2 (honest about uncertainty, plain language) |
+
+Open **`mod3_midterm_template.qmd`**. Its structure matches the midterm, with a reminder at each step of which part of these notebooks to look back at. The midterm uses a **different** dataset (the Sample Superstore data), but the setup code and every test work the same way. Your job is to swap in the right column names.
+
+::: {.callout-tip title="Three habits that will earn points on the midterm"}
+1. **Say which tool you chose and why** (one sentence). Naming the design is half the answer.
+2. **Report the size of a difference, not just the p-value**, and give the interval.
+3. **Be honest about limits**: unequal spreads, observational data, a confounder you cannot measure.
+:::
+
+## Recap
+
+| Idea | Takeaway |
+|---|---|
+| Compare groups | Match the tool to the design: one-sample, two-sample, paired, or ANOVA |
+| A significant difference | Does not by itself prove causation |
+| Confounding | Something that affects both group membership and the outcome; compare *within* similar units to see its effect |
+| Observational comparison | Can be suggestive, but only random assignment can establish cause |
+| Practical significance | Look at the size of the effect in real units, not just the p-value |
+
+Next up is Module 4: from *comparing groups* to *modeling relationships* with regression.

@@ -1,0 +1,227 @@
+---
+title: "Module 3, Part 1: Choosing the Right Comparison Tool"
+subtitle: "Guided notebook: review the reading, then fill in the blanks together"
+author: "Your name here"
+format:
+  html:
+    theme: cosmo
+    toc: true
+    embed-resources: true
+execute:
+  echo: true
+  warning: false
+  message: false
+  error: true
+---
+
+::: {.callout-important title="How to use this notebook"}
+We will work through this file **together**, the same way we did in Module 2. The reading review is written for you. Wherever you see a blank, you fill it in as we go.
+
+- **Blanks in code** look like `___`. Replace each `___` with the missing piece of R code, then click the green **Run** arrow at the top right of that chunk (or press `Ctrl+Shift+Enter` / `Cmd+Shift+Enter` with your cursor inside the chunk).
+- **Blanks in sentences** look like `_____`. Type your answer in plain English.
+- **Render any time** with the **Render** button (`Ctrl+Shift+K` / `Cmd+Shift+K`). Anything not filled in yet shows red error text. That is expected and does **not** stop the document from rendering.
+- **Run the setup chunk first**, every time you open the file. Later chunks use objects it creates.
+- If you see `object 'something' not found`, you skipped an earlier chunk or have a typo. If you see `unexpected input`, a `___` blank is still in the code.
+- **One exception:** R code written *inside a sentence* (inline code) **does** stop the render if it has an error. If Render stops and mentions a line number, look for inline code on that line, fix it, and render again.
+:::
+
+## Setup
+
+Run this chunk first. It loads the tidyverse and reads the **Minimart** data directly from GitHub.
+
+```{r}
+library(tidyverse)
+
+base_url <- "https://raw.githubusercontent.com/joshdp34/QBA/master/data/"
+
+minimart <- read_csv(paste0(base_url, "minimart_lines.csv")) |>
+  rename_with(~ str_replace_all(.x, "[ -]", "_")) |>   # "Sub-Category" becomes "Sub_Category"
+  mutate(Order_Date = mdy(Order_Date),                 # turn the text date into a real date
+         Year = year(Order_Date))                      # pull out the year
+```
+
+::: {.callout-note collapse="true" title="What did those two extra steps do?"}
+Column names with spaces or hyphens (like `Order Date` or `Sub-Category`) are awkward in R, because you have to wrap them in backticks every time. `rename_with()` swaps every space or hyphen for an underscore once, up front, so you can just write `Sub_Category`. The `mdy()` function reads a date written month/day/year, and `year()` pulls out the year. You will use this exact setup again in your midterm.
+:::
+
+## The Business Setting
+
+**Minimart** is a (fictional) regional retailer. Its analytics team has the company's line-item sales records for 2022 through 2025, and over the next three sessions we will use them to answer the kinds of comparison questions a manager actually asks. Module 3 is about one idea: **when we compare groups, which tool is the right one, and what can the answer tell us?**
+
+| Column | Meaning |
+|---|---|
+| `Order_ID` | Identifier for the order (one order can have several line items) |
+| `Order_Date`, `Year` | When the order was placed |
+| `Segment` | Customer segment: Consumer, Corporate, or Home Office |
+| `Region`, `State` | Where the order shipped |
+| `Category`, `Sub_Category` | Product grouping |
+| `Sales` | Revenue for the line item, in dollars |
+| `Quantity` | Units on the line item |
+| `Discount` | Discount rate applied (0 to 1) |
+| `Profit` | Profit (or loss) on the line item, in dollars |
+
+**Your turn:** look at the structure of the data.
+
+```{r}
+glimpse(___)
+```
+
+```{r}
+nrow(minimart)                     # number of rows
+n_distinct(minimart$___)  # number of different orders
+```
+
+One row of `minimart` is one _____ on an order. There are _____ rows but only _____ different orders, because many orders contain more than one line item.
+
+## 1. Which Test Would You Use? (review)
+
+**Key ideas from the reading** (Week 6 and Week 7 readings). Four questions get you to the right tool:
+
+1. Am I comparing **one group to a known benchmark**? That is a **one-sample** test.
+2. Am I comparing **two separate groups** of different units? That is a **two-sample independent** test (use Welch's version by default).
+3. Is it the **same units measured twice** (before and after, year 1 and year 2)? That is a **paired** test.
+4. Am I comparing the means of **three or more groups**? That is **ANOVA**, followed by **Tukey's HSD** to find which pairs differ.
+
+**Your turn:** name the tool for each scenario. Do not compute anything, just diagnose.
+
+| # | Scenario | Which tool? |
+|---|---|---|
+| 1 | A company wants to know if its average customer satisfaction score differs from the industry benchmark of 7.5. | _____ |
+| 2 | A retailer compares average order value for customers acquired through email versus social media (two separate groups of customers). | _____ |
+| 3 | A manufacturer measures the same 10 machines' output before and after a maintenance upgrade. | _____ |
+| 4 | A company compares average daily sales across five different store layouts. | _____ |
+| 5 | An HR team measures the same 12 employees' engagement scores before and after a new onboarding program. | _____ |
+| 6 | A pharmaceutical company compares cholesterol reduction across four different drug dosages. | _____ |
+
+The most common mistake is in scenarios 3 and 5. Because the same units are measured twice, the data are paired. Treating them as _____ throws away the pairing and can hide a real effect. We will see exactly how in Part 2.
+
+## 2. One-Sample Test: Is Discounting Within Policy?
+
+Minimart's pricing policy assumes the company discounts, on average, **12%** of the list price on a line item. Is actual discounting different from that?
+
+$$
+H_0: \mu = 0.12 \qquad H_a: \mu \neq 0.12
+$$
+
+The test statistic measures how many standard errors the sample mean is from the benchmark:
+
+$$
+t = \frac{\bar{x} - \mu_0}{s / \sqrt{n}}
+$$
+
+Fill in the blanks to compute it **by hand**.
+
+```{r}
+x_bar <- ___(minimart$Discount)          # sample mean discount
+s     <- ___(minimart$Discount)            # sample standard deviation
+n     <- nrow(minimart)                       # sample size
+mu_0  <- ___                             # the benchmark from company policy
+
+t_stat  <- (x_bar - mu_0) / (s / sqrt(___))
+p_value <- 2 * pt(-abs(t_stat), df = ___)   # two-sided p-value
+
+round(c(x_bar = x_bar, t_stat = t_stat, p_value = p_value), 4)
+```
+
+R's `t.test()` does the whole test in one line. Check that it agrees with your by-hand numbers:
+
+```{r}
+t.test(minimart$Discount, mu = ___)
+```
+
+::: {.callout-tip collapse="true" title="How to read a t.test() printout"}
+`t` is the test statistic, `df` is the degrees of freedom, and `p-value` is the two-sided p-value. The **95 percent confidence interval** is a range of plausible values for the true mean. The last line gives the **sample mean** (`mean of x`).
+:::
+
+**Interpretation, using inline code.** Replace each placeholder with R code (`round(x_bar * 100, 1)` shows the mean as a percentage; `format(p_value, digits = 2, scientific = FALSE)` prints a small p-value with two significant digits and no scientific notation):
+
+> The average discount was `r "____"`%, compared with the policy's 12%. The test statistic is $t$ = `r "____"` and the p-value is `r "____"`.
+
+Now the decision. Fill in the blanks:
+
+The p-value is _____ than $\alpha = 0.05$, so we _____ $H_0$. There is statistically detectable evidence that Minimart's true average discount is _____ than the 12% in the policy.
+
+Get the confidence interval and check it against the benchmark:
+
+```{r}
+ci_disc <- t.test(minimart$Discount, mu = 0.12)$___
+ci_disc
+```
+
+The benchmark of 0.12 is _____ this interval, which agrees with rejecting $H_0$.
+
+::: {.callout-note title="Statistically significant is not the same as important"}
+The average discount is about one percentage point below the policy. With over 2,000 line items, even a gap that small is statistically detectable. Whether it matters is a **business** question (does a one-point gap cost real money?), not a statistical one. We will come back to this idea in Part 2.
+:::
+
+## 3. Two-Sample Test: Do Consumer and Corporate Customers Spend Differently?
+
+Minimart wants to know whether the average sales amount per line item differs between **Consumer** and **Corporate** customers. These are two separate groups of customers, so this is a **two-sample independent** test.
+
+$$
+H_0: \mu_{\text{Consumer}} = \mu_{\text{Corporate}} \qquad H_a: \mu_{\text{Consumer}} \neq \mu_{\text{Corporate}}
+$$
+
+First, look at the two groups. Fill in the blanks.
+
+```{r}
+two_seg <- minimart |>
+  filter(Segment %in% c("Consumer", "Corporate"))
+
+two_seg |>
+  group_by(Segment) |>
+  summarise(n = n(),
+            mean_sales = ___(Sales),
+            sd_sales   = ___(Sales))
+```
+
+Now the test. The formula `Sales ~ Segment` reads "Sales **by** Segment". By default `t.test()` runs **Welch's** version, which does not assume equal variances.
+
+```{r}
+welch <- t.test(Sales ~ Segment, data = ___)
+welch
+```
+
+**Check it by hand.** Welch's standard error for a difference uses each group's own variance:
+
+```{r}
+g <- two_seg |>
+  group_by(Segment) |>
+  summarise(n = n(), m = mean(Sales), s = sd(Sales))
+
+se_diff   <- sqrt(sum(g$s^2 / g$n))
+t_by_hand <- (g$m[1] - g$m[2]) / ___
+round(c(se_diff = se_diff, t_by_hand = t_by_hand), 3)
+```
+
+The reading says to default to Welch unless you have a strong reason to assume equal variances. To see what the pooled version would give, add `var.equal = TRUE`. Fill in the blank:
+
+```{r}
+t.test(Sales ~ Segment, data = two_seg, ___)
+```
+
+The two versions give nearly the same answer here, because the two groups' standard deviations are fairly _____. Welch is the safer default because it _____.
+
+**Interpretation, using inline code.** `welch$estimate` holds the two group means (Consumer first) and `welch$conf.int` holds the interval for the **difference** (Consumer minus Corporate):
+
+> Consumer line items averaged \$`r "____"` and Corporate line items averaged \$`r "____"`. The 95% confidence interval for the difference (Consumer minus Corporate) runs from `r "____"` to `r "____"` dollars.
+
+Fill in the blanks:
+
+The p-value is about _____, which is _____ than 0.05, so we _____ $H_0$. The confidence interval _____ 0, which agrees with that conclusion. The sample shows Consumer line items averaging about \$27 more, but that gap is _____, so we cannot say the true averages differ.
+
+::: {.callout-tip title="Reading a difference interval"}
+If a confidence interval for a **difference** contains 0, then "no difference" is a plausible value, and a two-sided test at the matching level will fail to reject. If the interval is entirely above or entirely below 0, the test will reject.
+:::
+
+## Recap
+
+| Question | Tool | R code |
+|---|---|---|
+| One group vs. a known benchmark | One-sample t-test | `t.test(x, mu = mu_0)` |
+| Two separate groups | Welch two-sample t-test | `t.test(y ~ group, data = d)` |
+| Same units measured twice | Paired t-test | `t.test(after, before, paired = TRUE)` (Part 2) |
+| Three or more groups | ANOVA, then Tukey's HSD | `aov()` and `TukeyHSD()` (Part 2) |
+| Pull a piece out of a saved test | | `result$p.value`, `result$conf.int`, `result$estimate` |
+
+In Part 2 we handle the other two tools: **paired** comparisons and **ANOVA with Tukey's HSD**.

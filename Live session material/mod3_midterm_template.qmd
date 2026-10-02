@@ -1,0 +1,227 @@
+---
+title: "Midterm Take-Home Exam: The Superstore Analysis"
+author: "Your name here"
+format:
+  html:
+    theme: cosmo
+    toc: true
+    embed-resources: true
+  # If your instructor wants a PDF and you have LaTeX installed, delete the
+  # html block above and use this instead:
+  # pdf:
+  #   toc: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+::: {.callout-important title="How to use this template (delete this box before you submit)"}
+1. **Save a copy** of this file as `lastname_firstname_midterm.qmd`.
+2. **This exam is individual work.** The template gives you structure and pointers to the notebooks, not answers. Do not discuss your results with classmates.
+3. **Work top to bottom.** Each section has a "what to do" box, a skeleton code chunk with comments, and a pointer to the Module 3 notebook where you practiced that step.
+4. **Render often** (the **Render** button). Errors in this file *will* stop the render, so you will notice and fix them as you go.
+5. **Column names:** the setup chunk replaces spaces and hyphens with underscores, so `Sub-Category` becomes `Sub_Category` and `Order Date` becomes `Order_Date`. The exam text uses the original names.
+6. **Submit** your `.qmd` and your rendered `.html` (or `.pdf`) on Canvas. If you worked in Excel, also submit your `.xlsx` workbook.
+7. **Delete** every instruction box (like this one) and the checklist at the bottom before you submit.
+:::
+
+## Setup
+
+```{r}
+library(tidyverse)
+
+base_url <- "https://raw.githubusercontent.com/joshdp34/QBA/master/data/"
+
+superstore <- read_csv(paste0(base_url, "superstore.csv")) |>
+  rename_with(~ str_replace_all(.x, "[ -]", "_")) |>   # "Sub-Category" becomes "Sub_Category"
+  mutate(Order_Date = mdy(Order_Date),                 # turn the text date into a real date
+         Year = year(Order_Date))                      # pull out the year
+```
+
+## 1. Framing
+
+::: {.callout-note title="What to do"}
+In **2 to 3 sentences**, state a business decision this analysis could inform (for example, regional strategy, discounting practices, or customer-segment focus). Answer: *What decision is on the table? Who makes it? What would change depending on the answer?*
+:::
+
+*[Replace this line with your 2 to 3 sentence framing.]*
+
+## 2. Module 1: Exploring the Data
+
+::: {.callout-note title="What to do"}
+- State the **observational unit** (what does one row represent?).
+- Classify **at least four variables** as categorical or quantitative (and, for quantitative ones, discrete or continuous).
+- Include **one table** (for example, a frequency table of `Region` or `Category`).
+- Include **one graph**, chosen to fit the variable type(s).
+- Report **at least two descriptive statistics**, matched to the variable type.
+
+*Look back at:* Module 1 materials, and Part 1 of the Module 3 notebooks (`glimpse()`, `nrow()`, `n_distinct()`).
+:::
+
+**Observational unit:** *[one row represents ...]*
+
+| Variable | Categorical or quantitative? | If quantitative: discrete or continuous? |
+|---|---|---|
+| *[variable 1]* | | |
+| *[variable 2]* | | |
+| *[variable 3]* | | |
+| *[variable 4]* | | |
+
+```{r}
+# One table (e.g., a frequency table):
+
+
+# One graph:
+
+
+# At least two descriptive statistics:
+
+```
+
+*[Replace this line with a sentence or two describing what the table, graph, and statistics show.]*
+
+## 3. Module 2: Quantifying Uncertainty for a Single Estimate
+
+::: {.callout-note title="What to do"}
+- **Probability:** compute the sample proportion of line items that are profitable (`Profit > 0`), and interpret it in plain language.
+- **Confidence interval:** build a 95% confidence interval for the true mean `Profit` per line item, and interpret it correctly (*"we are 95% confident..."*, not *"there is a 95% probability..."*).
+
+*Look back at:* Module 2 Parts 1 and 2 notebooks (`mean()` of a true/false condition; `t.test()$conf.int` or the by-hand t interval).
+:::
+
+```{r}
+# Proportion of profitable line items:
+
+
+# 95% confidence interval for mean Profit:
+
+```
+
+*[Replace this line with your interpretation of the proportion and the interval. Use inline code for the numbers.]*
+
+## 4. Module 3, Part A: One-Sample Hypothesis Test
+
+::: {.callout-note title="What to do"}
+Company policy assumes an average discount rate of **15%**. Test whether the true mean `Discount` differs from 0.15. State $H_0$ and $H_a$, report the test statistic and p-value, and state your conclusion at $\alpha = 0.05$.
+
+*Look back at:* Module 3 Part 1, Section 2.
+:::
+
+$H_0$: *[state the null hypothesis]*
+
+$H_a$: *[state the alternative hypothesis]*
+
+```{r}
+# One-sample t-test for Discount:
+
+```
+
+*[Replace this line with your conclusion in plain English. Remember to say whether a gap this size is practically important, not only whether it is statistically significant.]*
+
+## 5. Module 3, Part B: Two-Sample Independent Comparison
+
+::: {.callout-note title="What to do"}
+Compare mean `Profit` per line item between the **Consumer** and **Corporate** segments, treating them as two independent groups. State your hypotheses, **choose and justify pooled vs. Welch's test**, report your conclusion, and give a confidence interval for the difference in means.
+
+*Look back at:* Module 3 Part 1, Section 3.
+:::
+
+$H_0$: *[state the null hypothesis]*
+
+$H_a$: *[state the alternative hypothesis]*
+
+```{r}
+# Keep only the two segments, then run the test:
+
+```
+
+**Pooled or Welch, and why:** *[one or two sentences]*
+
+*[Replace this line with your conclusion and the interval for the difference, in plain English.]*
+
+## 6. Module 3, Part C: Paired Comparison
+
+::: {.callout-note title="What to do"}
+Identify the **two most recent full calendar years** in your data (use `Order_Date` or the `Year` column). For each `Sub_Category`, compute the mean `Profit` in the earlier year and in the later year (one pair of values per sub-category). Treat each sub-category as one paired unit and run a paired t-test on the year-over-year difference. Report your conclusion and a confidence interval for the mean difference.
+
+*Look back at:* Module 3 Part 2, Section 2 (the state-totals example uses exactly these steps: `filter()`, `group_by()`, `summarise()`, `pivot_wider()`, `t.test(..., paired = TRUE)`).
+:::
+
+```{r}
+# Step 1: which years are in the data? Which two are the most recent FULL years?
+
+
+# Step 2: one row per Sub_Category and Year, with the mean Profit
+
+
+# Step 3: put the two years side by side (one row per Sub_Category)
+
+
+# Step 4: paired t-test on the two columns
+
+```
+
+*[Replace this line with your conclusion and the interval for the mean difference, in plain English.]*
+
+## 7. Module 3, Part D: ANOVA and Tukey's HSD
+
+::: {.callout-note title="What to do"}
+Compare mean `Profit` per line item across the four **Regions**. Run a one-way ANOVA and report the F-statistic, both degrees of freedom, and the p-value. **If** the result is significant, run Tukey's HSD to identify which specific pairs of regions differ.
+
+*Look back at:* Module 3 Part 2, Sections 3 and 4. Also check the group standard deviations, as we did there, and mention in your write-up if the spreads are very different.
+:::
+
+```{r}
+# Group summaries (n, mean, sd) by Region:
+
+
+# One-way ANOVA:
+
+
+# Tukey's HSD (only if the ANOVA is significant):
+
+```
+
+*[Replace this line with your ANOVA conclusion and, if applicable, which pairs differ.]*
+
+## 8. Module 3, Part E: Evaluating Causality
+
+::: {.callout-note title="What to do"}
+Using your ANOVA result and the causation checklist, evaluate whether this data supports the claim that **Region causes different profit levels**. Explicitly address:
+
+- Is this comparison **observational or experimental**?
+- Identify **at least one plausible confounder** specific to this dataset (think about what else differs across regions besides the region itself).
+- State whether you think the evidence supports a causal interpretation, and why.
+
+*Look back at:* Module 3 Part 3, Sections 2 and 3. A short data check (like the "percent experienced" table there) can make a confounder argument much stronger.
+:::
+
+```{r}
+# Optional: a quick check that supports your confounder argument
+
+```
+
+*[Replace this line with your causal evaluation.]*
+
+## 9. Executive Recommendation
+
+::: {.callout-note title="What to do"}
+In **4 to 6 sentences**, written **for a manager, not a statistician**, tie your findings together into a recommendation for the decision you framed in Section 1. Be explicit about the uncertainty in your findings and avoid statistical jargon.
+:::
+
+*[Replace this line with your recommendation.]*
+
+::: {.callout-warning title="Checklist: confirm each item, then delete this box"}
+- [ ] Section 1: 2 to 3 sentences naming a real decision
+- [ ] Section 2: observational unit, four variables classified, one table, one graph, two descriptive statistics
+- [ ] Section 3: proportion profitable and a correctly interpreted 95% interval
+- [ ] Section 4: hypotheses, test statistic, p-value, and a conclusion at $\alpha = 0.05$
+- [ ] Section 5: hypotheses, pooled-vs-Welch choice justified, conclusion, and an interval for the difference
+- [ ] Section 6: the two most recent *full* years used, one pair per sub-category, paired test, and an interval
+- [ ] Section 7: F, both degrees of freedom, p-value, and Tukey's HSD if the ANOVA was significant
+- [ ] Section 8: observational vs. experimental, at least one specific confounder, and a verdict
+- [ ] Section 9: 4 to 6 plain-language sentences that are honest about uncertainty
+- [ ] The document renders with no errors, headings match the nine sections, and all instruction boxes are deleted
+- [ ] File names are `lastname_firstname_midterm.qmd` and `.html` (or `.pdf`), plus `.xlsx` if you used Excel
+:::

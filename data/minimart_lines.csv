@@ -1,0 +1,2043 @@
+Order ID,Order Date,Segment,Region,State,Category,Sub-Category,Sales,Quantity,Discount,Profit
+MM-2022-00001,7/9/2022,Home Office,South,Kentucky,Office Supplies,Binders,49.82,2,0,11.45
+MM-2022-00001,7/9/2022,Home Office,South,Kentucky,Office Supplies,Paper,92.79,6,0,36.95
+MM-2022-00002,5/26/2022,Consumer,East,Ohio,Technology,Accessories,179.54,5,0.4,6.27
+MM-2022-00002,5/26/2022,Consumer,East,Ohio,Furniture,Chairs,511.63,2,0,50.4
+MM-2022-00002,5/26/2022,Consumer,East,Ohio,Office Supplies,Paper,41.12,2,0,13.46
+MM-2022-00003,5/23/2022,Home Office,South,Kentucky,Technology,Accessories,82.9,2,0.2,9.69
+MM-2022-00004,8/27/2022,Home Office,South,Kentucky,Office Supplies,Paper,13.11,1,0.2,4.96
+MM-2022-00004,8/27/2022,Home Office,South,Kentucky,Office Supplies,Binders,134.91,4,0.1,23.96
+MM-2022-00005,11/20/2022,Corporate,East,Pennsylvania,Technology,Accessories,113.73,2,0,34.74
+MM-2022-00006,6/9/2022,Home Office,East,New York,Furniture,Tables,3028.86,3,0.15,196.35
+MM-2022-00007,4/8/2022,Corporate,East,Ohio,Technology,Phones,342.47,1,0,74.75
+MM-2022-00007,4/8/2022,Corporate,East,Ohio,Furniture,Chairs,370.86,1,0,16.21
+MM-2022-00008,8/17/2022,Consumer,Central,Illinois,Office Supplies,Binders,124.49,2,0.2,15.85
+MM-2022-00008,8/17/2022,Consumer,Central,Illinois,Office Supplies,Paper,78.89,5,0.15,23.68
+MM-2022-00009,9/17/2022,Consumer,West,Washington,Office Supplies,Paper,27.74,1,0.2,6.95
+MM-2022-00009,9/17/2022,Consumer,West,Washington,Furniture,Chairs,963.74,2,0,55.51
+MM-2022-00010,2/4/2022,Consumer,West,California,Technology,Accessories,465.62,5,0,111.35
+MM-2022-00010,2/4/2022,Consumer,West,California,Office Supplies,Storage,426.28,3,0,101.32
+MM-2022-00010,2/4/2022,Consumer,West,California,Office Supplies,Binders,269.89,4,0,58.34
+MM-2022-00011,7/20/2022,Home Office,South,Florida,Office Supplies,Binders,42.75,1,0,16.12
+MM-2022-00012,9/10/2022,Consumer,West,Washington,Technology,Copiers,3226.67,4,0,974.03
+MM-2022-00013,1/5/2022,Corporate,South,Georgia,Furniture,Chairs,722.92,3,0,126.85
+MM-2022-00013,1/5/2022,Corporate,South,Georgia,Technology,Copiers,1874.09,3,0.15,736.94
+MM-2022-00013,1/5/2022,Corporate,South,Georgia,Technology,Accessories,55.15,1,0,19.43
+MM-2022-00014,2/2/2022,Home Office,South,Florida,Office Supplies,Paper,100.32,3,0,26.75
+MM-2022-00015,10/16/2022,Consumer,Central,Texas,Office Supplies,Paper,28.32,2,0.4,6.26
+MM-2022-00016,7/27/2022,Home Office,East,Pennsylvania,Technology,Accessories,139.23,4,0.15,47.61
+MM-2022-00016,7/27/2022,Home Office,East,Pennsylvania,Office Supplies,Paper,95.87,4,0.2,25.12
+MM-2022-00017,8/11/2022,Corporate,East,Pennsylvania,Office Supplies,Binders,277.99,5,0,71.61
+MM-2022-00017,8/11/2022,Corporate,East,Pennsylvania,Office Supplies,Binders,114.33,3,0,20.42
+MM-2022-00018,8/25/2022,Consumer,West,Colorado,Technology,Phones,270.47,1,0.15,34.75
+MM-2022-00019,11/9/2022,Consumer,East,Ohio,Office Supplies,Binders,45.75,2,0.2,2.77
+MM-2022-00020,2/5/2022,Corporate,South,Kentucky,Office Supplies,Labels,44.91,4,0.15,10.35
+MM-2022-00020,2/5/2022,Corporate,South,Kentucky,Office Supplies,Paper,12.11,1,0.15,2.38
+MM-2022-00021,10/2/2022,Consumer,West,Colorado,Office Supplies,Binders,36.81,1,0.2,6.9
+MM-2022-00022,11/10/2022,Corporate,West,California,Technology,Accessories,243.51,5,0.2,59.74
+MM-2022-00022,11/10/2022,Corporate,West,California,Technology,Phones,894.61,3,0.4,1.95
+MM-2022-00023,6/12/2022,Home Office,South,Kentucky,Technology,Accessories,115.22,4,0,30.46
+MM-2022-00023,6/12/2022,Home Office,South,Kentucky,Office Supplies,Binders,21.95,1,0.2,3.22
+MM-2022-00024,11/12/2022,Home Office,West,Washington,Office Supplies,Storage,154.57,2,0,25.46
+MM-2022-00025,2/3/2022,Consumer,East,New York,Furniture,Bookcases,1811.75,4,0,242.11
+MM-2022-00026,8/23/2022,Consumer,South,Georgia,Office Supplies,Binders,43.18,1,0,23.47
+MM-2022-00027,11/21/2022,Consumer,East,New York,Technology,Phones,388.48,1,0,57.57
+MM-2022-00027,11/21/2022,Consumer,East,New York,Technology,Copiers,944.02,1,0.1,278.49
+MM-2022-00027,11/21/2022,Consumer,East,New York,Technology,Phones,1487.93,4,0.3,191.35
+MM-2022-00028,7/9/2022,Consumer,West,California,Furniture,Bookcases,246.9,1,0.15,-15.85
+MM-2022-00028,7/9/2022,Consumer,West,California,Furniture,Tables,1032.86,2,0.1,25.63
+MM-2022-00029,5/18/2022,Consumer,Central,Illinois,Office Supplies,Storage,439.97,3,0,68.2
+MM-2022-00030,7/1/2022,Corporate,Central,Texas,Technology,Accessories,215.6,3,0,57.41
+MM-2022-00030,7/1/2022,Corporate,Central,Texas,Furniture,Tables,447.66,1,0,48.63
+MM-2022-00031,6/3/2022,Corporate,East,Pennsylvania,Technology,Phones,943.65,3,0,193.5
+MM-2022-00031,6/3/2022,Corporate,East,Pennsylvania,Furniture,Bookcases,427.68,2,0.15,44.74
+MM-2022-00032,1/20/2022,Corporate,South,Florida,Technology,Copiers,788.87,1,0.1,179.37
+MM-2022-00033,9/13/2022,Corporate,East,New York,Office Supplies,Paper,126.49,4,0.15,23.92
+MM-2022-00034,9/16/2022,Consumer,South,Georgia,Office Supplies,Binders,82.88,4,0,18.18
+MM-2022-00034,9/16/2022,Consumer,South,Georgia,Furniture,Tables,846.19,2,0.15,6.55
+MM-2022-00035,8/20/2022,Consumer,West,Colorado,Furniture,Bookcases,976.3,4,0.1,210.65
+MM-2022-00036,7/13/2022,Consumer,West,Colorado,Furniture,Tables,1077.78,2,0,-42.86
+MM-2022-00036,7/13/2022,Consumer,West,Colorado,Office Supplies,Paper,84.31,4,0.15,11
+MM-2022-00036,7/13/2022,Consumer,West,Colorado,Technology,Accessories,50.07,1,0.15,1.92
+MM-2022-00037,11/22/2022,Home Office,South,Florida,Technology,Accessories,50.45,1,0,11.54
+MM-2022-00038,6/14/2022,Consumer,West,Colorado,Office Supplies,Labels,39.46,4,0.2,11.91
+MM-2022-00039,6/16/2022,Consumer,South,Florida,Technology,Phones,1497.14,3,0,379.36
+MM-2022-00040,12/14/2022,Consumer,East,New York,Furniture,Bookcases,568.05,3,0.3,43.36
+MM-2022-00041,9/23/2022,Corporate,East,Ohio,Office Supplies,Paper,118.08,6,0,29.22
+MM-2022-00041,9/23/2022,Corporate,East,Ohio,Office Supplies,Storage,102,2,0.15,16.76
+MM-2022-00042,5/12/2022,Corporate,East,Pennsylvania,Office Supplies,Binders,67.82,2,0.3,12
+MM-2022-00042,5/12/2022,Corporate,East,Pennsylvania,Furniture,Chairs,470.78,3,0.3,6.72
+MM-2022-00043,11/23/2022,Consumer,West,Colorado,Office Supplies,Paper,39.48,2,0.3,8.72
+MM-2022-00044,11/6/2022,Home Office,East,New York,Technology,Accessories,125.56,2,0.2,17.85
+MM-2022-00045,5/19/2022,Consumer,West,California,Technology,Accessories,110.32,2,0,30.02
+MM-2022-00045,5/19/2022,Consumer,West,California,Office Supplies,Paper,43.33,2,0.3,13.46
+MM-2022-00046,6/6/2022,Corporate,South,Kentucky,Office Supplies,Labels,12.31,1,0,5.52
+MM-2022-00046,6/6/2022,Corporate,South,Kentucky,Office Supplies,Paper,88.64,5,0,26.79
+MM-2022-00047,11/10/2022,Corporate,East,New York,Technology,Copiers,1563.2,2,0,464.05
+MM-2022-00048,11/20/2022,Consumer,Central,Michigan,Technology,Phones,1428.29,5,0,246.09
+MM-2022-00049,2/17/2022,Consumer,West,California,Furniture,Bookcases,2726.62,3,0,252.49
+MM-2022-00049,2/17/2022,Consumer,West,California,Technology,Phones,514.2,2,0.4,-22.91
+MM-2022-00049,2/17/2022,Consumer,West,California,Furniture,Tables,4972.57,5,0,117.24
+MM-2022-00050,7/17/2022,Consumer,South,Kentucky,Office Supplies,Binders,119.65,4,0,33.91
+MM-2022-00050,7/17/2022,Consumer,South,Kentucky,Office Supplies,Paper,40.2,2,0,13.88
+MM-2022-00051,2/7/2022,Corporate,West,Colorado,Office Supplies,Binders,69.04,2,0.2,8.31
+MM-2022-00051,2/7/2022,Corporate,West,Colorado,Office Supplies,Binders,75.06,3,0.15,15.67
+MM-2022-00052,6/22/2022,Home Office,East,Pennsylvania,Office Supplies,Paper,30.49,1,0,5.36
+MM-2022-00053,9/1/2022,Consumer,Central,Texas,Office Supplies,Paper,29.65,2,0.4,1.59
+MM-2022-00054,5/26/2022,Corporate,South,Kentucky,Technology,Accessories,83.25,3,0.15,13.63
+MM-2022-00054,5/26/2022,Corporate,South,Kentucky,Office Supplies,Paper,87.52,5,0,33.41
+MM-2022-00054,5/26/2022,Corporate,South,Kentucky,Technology,Accessories,87.98,2,0.15,18.92
+MM-2022-00055,6/2/2022,Consumer,West,Washington,Office Supplies,Paper,37.19,2,0.3,13.03
+MM-2022-00055,6/2/2022,Consumer,West,Washington,Office Supplies,Storage,54.71,1,0.2,-3.58
+MM-2022-00056,3/21/2022,Corporate,West,Washington,Technology,Accessories,40.51,1,0,6.39
+MM-2022-00057,3/23/2022,Corporate,South,Georgia,Office Supplies,Paper,63.24,4,0.2,5.72
+MM-2022-00058,10/7/2022,Home Office,Central,Texas,Furniture,Tables,1752.34,4,0.2,-259.77
+MM-2022-00058,10/7/2022,Home Office,Central,Texas,Office Supplies,Storage,186.95,3,0.2,-2.29
+MM-2022-00059,11/8/2022,Corporate,West,Colorado,Office Supplies,Paper,25.48,1,0,12.75
+MM-2022-00059,11/8/2022,Corporate,West,Colorado,Office Supplies,Binders,135.29,4,0,36.82
+MM-2022-00060,12/18/2022,Corporate,South,Georgia,Technology,Phones,282.88,2,0.4,-24.07
+MM-2022-00060,12/18/2022,Corporate,South,Georgia,Furniture,Bookcases,519.81,3,0.2,12.98
+MM-2022-00061,9/4/2022,Home Office,West,Colorado,Furniture,Chairs,231.78,2,0.2,1.71
+MM-2022-00062,3/18/2022,Consumer,South,Florida,Office Supplies,Storage,137.86,2,0,27.35
+MM-2022-00063,10/14/2022,Corporate,South,Kentucky,Office Supplies,Binders,70.59,2,0.1,13.19
+MM-2022-00063,10/14/2022,Corporate,South,Kentucky,Office Supplies,Binders,23.55,1,0,4.02
+MM-2022-00064,12/26/2022,Consumer,West,Washington,Office Supplies,Binders,94.01,3,0.2,7.14
+MM-2022-00065,5/19/2022,Consumer,East,Pennsylvania,Furniture,Bookcases,291.39,1,0,6.41
+MM-2022-00066,4/3/2022,Consumer,South,Georgia,Office Supplies,Paper,14.7,1,0.2,2.12
+MM-2022-00066,4/3/2022,Consumer,South,Georgia,Office Supplies,Binders,72.05,3,0.15,6.53
+MM-2022-00066,4/3/2022,Consumer,South,Georgia,Technology,Phones,699.68,3,0,216.77
+MM-2022-00067,3/6/2022,Consumer,East,Pennsylvania,Technology,Phones,408.98,1,0,71.28
+MM-2022-00068,11/8/2022,Consumer,South,Kentucky,Office Supplies,Paper,83.95,4,0,29.25
+MM-2022-00068,11/8/2022,Consumer,South,Kentucky,Technology,Accessories,223.94,6,0.1,78.31
+MM-2022-00069,6/14/2022,Consumer,South,Kentucky,Technology,Accessories,31.05,1,0.15,10
+MM-2022-00070,4/7/2022,Home Office,East,New York,Office Supplies,Binders,99.55,3,0.15,14.35
+MM-2022-00071,8/17/2022,Consumer,Central,Michigan,Furniture,Bookcases,382.05,3,0.15,31.93
+MM-2022-00072,11/14/2022,Home Office,East,New York,Furniture,Chairs,746.88,2,0.2,32.55
+MM-2022-00072,11/14/2022,Home Office,East,New York,Furniture,Tables,1251.03,2,0,-127.17
+MM-2022-00073,12/9/2022,Consumer,East,Pennsylvania,Office Supplies,Labels,38.41,2,0,12.71
+MM-2022-00073,12/9/2022,Consumer,East,Pennsylvania,Technology,Accessories,263.08,5,0,70.84
+MM-2022-00073,12/9/2022,Consumer,East,Pennsylvania,Office Supplies,Paper,123.38,4,0,49.55
+MM-2022-00074,5/22/2022,Consumer,West,Colorado,Office Supplies,Labels,13.03,1,0.15,3.23
+MM-2022-00074,5/22/2022,Consumer,West,Colorado,Office Supplies,Binders,67.45,2,0,14.44
+MM-2022-00074,5/22/2022,Consumer,West,Colorado,Office Supplies,Paper,39.24,2,0.3,7.75
+MM-2022-00075,5/10/2022,Consumer,West,Washington,Technology,Phones,1276.86,3,0,300.99
+MM-2022-00076,10/26/2022,Consumer,South,Kentucky,Office Supplies,Storage,101.82,2,0.15,4.58
+MM-2022-00077,8/28/2022,Consumer,Central,Texas,Furniture,Tables,1296.67,2,0,-31.29
+MM-2022-00078,12/25/2022,Corporate,West,Washington,Office Supplies,Binders,73.53,2,0,11.63
+MM-2022-00079,8/2/2022,Corporate,West,Washington,Technology,Copiers,3583.39,4,0,1198.33
+MM-2022-00080,11/12/2022,Consumer,Central,Texas,Office Supplies,Paper,174.79,6,0,63.35
+MM-2022-00081,11/19/2022,Home Office,West,Washington,Office Supplies,Paper,33.37,1,0,12.08
+MM-2022-00081,11/19/2022,Home Office,West,Washington,Office Supplies,Labels,59.1,4,0.2,16.07
+MM-2022-00082,3/1/2022,Consumer,East,New York,Office Supplies,Binders,300.8,4,0,87.58
+MM-2022-00083,9/11/2022,Consumer,West,California,Office Supplies,Storage,296.67,3,0.1,20.46
+MM-2022-00083,9/11/2022,Consumer,West,California,Office Supplies,Labels,37.75,3,0.3,7.83
+MM-2022-00083,9/11/2022,Consumer,West,California,Technology,Accessories,80.99,1,0,13.59
+MM-2022-00084,2/20/2022,Home Office,South,Kentucky,Office Supplies,Labels,22.6,3,0.3,7.85
+MM-2022-00084,2/20/2022,Home Office,South,Kentucky,Furniture,Bookcases,479.69,3,0,64.86
+MM-2022-00085,11/11/2022,Consumer,East,New York,Office Supplies,Binders,42.9,1,0.15,10.29
+MM-2022-00085,11/11/2022,Consumer,East,New York,Office Supplies,Binders,51.07,1,0,16.68
+MM-2022-00086,1/6/2022,Corporate,West,California,Office Supplies,Paper,113.1,5,0.1,42.68
+MM-2022-00086,1/6/2022,Corporate,West,California,Office Supplies,Storage,250.56,3,0.2,-8.12
+MM-2022-00086,1/6/2022,Corporate,West,California,Furniture,Bookcases,912.45,2,0.15,79.95
+MM-2022-00087,10/26/2022,Consumer,West,Washington,Office Supplies,Binders,211.47,3,0,35.49
+MM-2022-00088,6/27/2022,Consumer,West,California,Office Supplies,Binders,95.94,2,0.3,12.33
+MM-2022-00089,6/19/2022,Corporate,Central,Texas,Furniture,Chairs,334.43,1,0,45.62
+MM-2022-00089,6/19/2022,Corporate,Central,Texas,Technology,Accessories,45.4,1,0.15,0.47
+MM-2022-00089,6/19/2022,Corporate,Central,Texas,Furniture,Chairs,159.54,1,0.4,-15.68
+MM-2022-00090,10/3/2022,Corporate,West,Colorado,Furniture,Chairs,319.76,1,0,61.35
+MM-2022-00091,10/10/2022,Consumer,South,Florida,Furniture,Bookcases,992.35,4,0,83.85
+MM-2022-00092,2/2/2022,Corporate,East,Pennsylvania,Office Supplies,Paper,49.47,3,0.15,15.91
+MM-2022-00093,12/26/2022,Corporate,East,New York,Technology,Copiers,4140.3,4,0,1499.5
+MM-2022-00093,12/26/2022,Corporate,East,New York,Office Supplies,Storage,112.58,1,0.15,15.42
+MM-2022-00094,12/5/2022,Corporate,West,Washington,Technology,Accessories,62.41,1,0,8.82
+MM-2022-00094,12/5/2022,Corporate,West,Washington,Furniture,Tables,2040.81,4,0.15,-52.35
+MM-2022-00094,12/5/2022,Corporate,West,Washington,Office Supplies,Paper,47.4,2,0,18.84
+MM-2022-00095,11/12/2022,Consumer,East,New York,Technology,Copiers,2921.73,2,0,808.01
+MM-2022-00095,11/12/2022,Consumer,East,New York,Technology,Phones,2602.58,6,0.3,419.17
+MM-2022-00096,11/24/2022,Consumer,South,Florida,Furniture,Bookcases,462.34,2,0.2,57.41
+MM-2022-00096,11/24/2022,Consumer,South,Florida,Office Supplies,Paper,120.61,6,0,42.65
+MM-2022-00097,10/27/2022,Corporate,Central,Illinois,Office Supplies,Labels,72.61,5,0.3,11.4
+MM-2022-00097,10/27/2022,Corporate,Central,Illinois,Furniture,Chairs,1358.39,4,0.2,-42.33
+MM-2022-00098,9/9/2022,Consumer,South,Kentucky,Technology,Phones,529.09,2,0.15,42.81
+MM-2022-00098,9/9/2022,Consumer,South,Kentucky,Technology,Accessories,28.02,1,0.2,7.98
+MM-2022-00099,7/26/2022,Home Office,East,Pennsylvania,Technology,Copiers,2116.8,3,0.4,367.11
+MM-2022-00099,7/26/2022,Home Office,East,Pennsylvania,Technology,Copiers,2960.34,4,0.3,628.77
+MM-2022-00100,8/27/2022,Corporate,South,Kentucky,Office Supplies,Binders,20.1,1,0.2,3.11
+MM-2022-00101,8/18/2022,Corporate,East,Pennsylvania,Office Supplies,Binders,36.62,1,0.1,12.42
+MM-2022-00102,12/9/2022,Consumer,West,Colorado,Office Supplies,Binders,222.14,6,0,25.82
+MM-2022-00103,1/18/2022,Consumer,South,Kentucky,Technology,Copiers,826.16,2,0,93.85
+MM-2022-00104,12/11/2022,Home Office,West,Washington,Furniture,Chairs,425.52,2,0.2,13.2
+MM-2022-00105,7/5/2022,Consumer,East,Pennsylvania,Furniture,Chairs,369.79,2,0.3,31.99
+MM-2022-00106,1/15/2022,Corporate,East,Pennsylvania,Technology,Accessories,116.82,3,0,34.76
+MM-2022-00107,7/19/2022,Corporate,Central,Texas,Office Supplies,Storage,94.11,1,0.15,-15.62
+MM-2022-00107,7/19/2022,Corporate,Central,Texas,Office Supplies,Paper,111.11,5,0.15,46.99
+MM-2022-00108,8/28/2022,Home Office,Central,Illinois,Office Supplies,Storage,459.93,6,0.3,-14.45
+MM-2022-00108,8/28/2022,Home Office,Central,Illinois,Technology,Accessories,110.3,2,0.3,23.29
+MM-2022-00109,6/9/2022,Consumer,West,Washington,Furniture,Bookcases,913.92,2,0,58.91
+MM-2022-00110,3/23/2022,Consumer,West,Washington,Furniture,Tables,441.94,1,0.2,-39.76
+MM-2022-00111,4/11/2022,Corporate,East,Pennsylvania,Office Supplies,Paper,60.22,2,0.1,12.17
+MM-2022-00112,9/4/2022,Corporate,Central,Illinois,Office Supplies,Paper,141.7,4,0.2,35.15
+MM-2022-00113,1/9/2022,Corporate,West,Colorado,Technology,Accessories,289.63,5,0.1,33.41
+MM-2022-00113,1/9/2022,Corporate,West,Colorado,Technology,Accessories,37.13,1,0.2,7.21
+MM-2022-00114,9/17/2022,Consumer,Central,Illinois,Technology,Phones,1663.53,5,0.15,293.3
+MM-2022-00115,9/11/2022,Consumer,Central,Illinois,Office Supplies,Binders,158.71,3,0,41.12
+MM-2022-00116,7/10/2022,Home Office,South,Florida,Office Supplies,Labels,66.18,5,0.15,19.54
+MM-2022-00117,10/10/2022,Corporate,West,California,Technology,Accessories,99.73,2,0.1,5.2
+MM-2022-00118,4/27/2022,Corporate,Central,Illinois,Office Supplies,Binders,43.6,1,0,13.74
+MM-2022-00119,5/21/2022,Corporate,East,Ohio,Furniture,Bookcases,236.08,1,0,34.81
+MM-2022-00120,12/9/2022,Consumer,Central,Texas,Office Supplies,Storage,75.45,1,0,9.03
+MM-2022-00121,6/27/2022,Home Office,South,Kentucky,Office Supplies,Binders,28.02,1,0.2,8.73
+MM-2022-00121,6/27/2022,Home Office,South,Kentucky,Technology,Accessories,103.87,4,0.1,20.37
+MM-2022-00122,9/26/2022,Consumer,West,California,Technology,Phones,1527.98,4,0,385.19
+MM-2022-00122,9/26/2022,Consumer,West,California,Office Supplies,Binders,182.86,3,0.2,30.4
+MM-2022-00123,12/21/2022,Consumer,Central,Texas,Technology,Accessories,182.25,3,0,63.01
+MM-2022-00124,12/10/2022,Corporate,Central,Michigan,Technology,Copiers,1806.35,4,0.2,343.46
+MM-2022-00124,12/10/2022,Corporate,Central,Michigan,Office Supplies,Paper,14.82,1,0.2,3.47
+MM-2022-00125,9/3/2022,Home Office,West,California,Furniture,Chairs,191.73,1,0.2,21.14
+MM-2022-00125,9/3/2022,Home Office,West,California,Furniture,Bookcases,191.64,1,0.3,-25.9
+MM-2022-00126,9/3/2022,Consumer,West,Colorado,Furniture,Chairs,652.14,2,0.1,19.79
+MM-2022-00126,9/3/2022,Consumer,West,Colorado,Office Supplies,Paper,19.73,1,0.2,6.31
+MM-2022-00127,8/1/2022,Home Office,East,Ohio,Office Supplies,Storage,217.22,4,0.1,-10.57
+MM-2022-00127,8/1/2022,Home Office,East,Ohio,Technology,Phones,1270.95,4,0.15,27.84
+MM-2022-00128,8/2/2022,Corporate,South,Georgia,Technology,Accessories,35.19,1,0.1,7.29
+MM-2022-00129,6/25/2022,Consumer,East,Pennsylvania,Technology,Accessories,107.43,2,0,19.87
+MM-2022-00130,12/6/2022,Corporate,West,Washington,Office Supplies,Paper,34.06,1,0,12.3
+MM-2022-00130,12/6/2022,Corporate,West,Washington,Office Supplies,Binders,104.13,2,0.1,33.81
+MM-2022-00131,6/4/2022,Consumer,West,Washington,Office Supplies,Paper,36.28,1,0,10.63
+MM-2022-00132,6/6/2022,Corporate,East,Pennsylvania,Office Supplies,Binders,91.94,2,0,28.62
+MM-2022-00132,6/6/2022,Corporate,East,Pennsylvania,Office Supplies,Binders,177.31,4,0.2,26.55
+MM-2022-00132,6/6/2022,Corporate,East,Pennsylvania,Office Supplies,Binders,154.15,4,0.1,25.27
+MM-2022-00133,1/9/2022,Corporate,East,Ohio,Office Supplies,Binders,105.78,4,0,24.26
+MM-2022-00133,1/9/2022,Corporate,East,Ohio,Office Supplies,Binders,109.28,3,0,20.64
+MM-2022-00133,1/9/2022,Corporate,East,Ohio,Office Supplies,Paper,22.67,1,0.2,5.5
+MM-2022-00134,3/13/2022,Home Office,South,Georgia,Furniture,Chairs,1048.16,6,0,74.86
+MM-2022-00134,3/13/2022,Home Office,South,Georgia,Office Supplies,Binders,53.1,2,0.15,4.7
+MM-2022-00135,4/19/2022,Home Office,South,Florida,Technology,Phones,403.03,1,0.3,38.22
+MM-2022-00135,4/19/2022,Home Office,South,Florida,Furniture,Bookcases,266.13,1,0,45.76
+MM-2022-00136,3/16/2022,Consumer,West,Washington,Office Supplies,Paper,72.24,2,0,24.01
+MM-2022-00136,3/16/2022,Consumer,West,Washington,Technology,Accessories,433.34,6,0,160.74
+MM-2022-00136,3/16/2022,Consumer,West,Washington,Technology,Copiers,3059.09,2,0,1454.23
+MM-2022-00137,6/11/2022,Consumer,South,Florida,Office Supplies,Storage,84.84,1,0.2,-4.41
+MM-2022-00138,7/16/2022,Consumer,West,Colorado,Technology,Copiers,3804.08,3,0,851.88
+MM-2022-00138,7/16/2022,Consumer,West,Colorado,Furniture,Tables,384.5,1,0,-8.75
+MM-2022-00139,4/16/2022,Corporate,East,New York,Furniture,Chairs,709.24,4,0.4,-113.26
+MM-2022-00140,4/16/2022,Corporate,West,Washington,Furniture,Bookcases,790.67,3,0.15,80.55
+MM-2022-00141,9/21/2022,Corporate,West,Colorado,Office Supplies,Labels,16.82,2,0.4,2.34
+MM-2022-00142,10/17/2022,Home Office,Central,Michigan,Office Supplies,Binders,32.89,1,0.1,4.42
+MM-2022-00143,5/27/2022,Consumer,South,Georgia,Furniture,Chairs,362.07,2,0,12.69
+MM-2022-00144,9/23/2022,Consumer,Central,Texas,Furniture,Bookcases,772.87,2,0,160.49
+MM-2022-00145,11/1/2022,Home Office,East,Ohio,Furniture,Tables,1353.1,3,0.15,-130.46
+MM-2022-00146,1/11/2022,Corporate,East,New York,Furniture,Tables,2560.92,4,0,37.33
+MM-2022-00147,4/7/2022,Consumer,West,Colorado,Technology,Accessories,98.34,3,0.4,7.15
+MM-2022-00148,7/27/2022,Corporate,Central,Texas,Furniture,Chairs,627.88,2,0.2,47.7
+MM-2022-00148,7/27/2022,Corporate,Central,Texas,Office Supplies,Paper,50.92,2,0.2,14.69
+MM-2022-00149,11/27/2022,Home Office,West,Washington,Office Supplies,Binders,52.17,2,0.2,0.97
+MM-2022-00149,11/27/2022,Home Office,West,Washington,Office Supplies,Storage,103.28,1,0.15,8.09
+MM-2022-00150,4/20/2022,Consumer,Central,Texas,Furniture,Tables,965.75,2,0,80.94
+MM-2022-00150,4/20/2022,Consumer,Central,Texas,Technology,Accessories,105.35,2,0,26.4
+MM-2022-00151,5/7/2022,Home Office,East,Ohio,Furniture,Chairs,435.67,2,0.15,-23.98
+MM-2022-00152,10/9/2022,Corporate,South,Kentucky,Furniture,Bookcases,187.39,1,0,22.85
+MM-2022-00152,10/9/2022,Corporate,South,Kentucky,Furniture,Chairs,424.13,3,0.4,-109.62
+MM-2022-00153,10/28/2022,Consumer,Central,Illinois,Office Supplies,Binders,142.18,2,0,34.8
+MM-2022-00154,9/28/2022,Consumer,East,Ohio,Technology,Copiers,1753.73,2,0,537.41
+MM-2022-00155,8/12/2022,Corporate,East,Ohio,Office Supplies,Binders,32.5,1,0.1,11.14
+MM-2022-00156,1/20/2022,Consumer,Central,Michigan,Office Supplies,Paper,101.11,5,0,39.1
+MM-2022-00156,1/20/2022,Consumer,Central,Michigan,Technology,Phones,206.37,1,0.1,24.1
+MM-2022-00157,2/22/2022,Consumer,South,Georgia,Office Supplies,Storage,278.24,4,0,50.07
+MM-2022-00157,2/22/2022,Consumer,South,Georgia,Office Supplies,Binders,26.33,1,0.1,6.55
+MM-2022-00157,2/22/2022,Consumer,South,Georgia,Office Supplies,Storage,164.08,2,0,24.16
+MM-2022-00158,3/8/2022,Home Office,Central,Michigan,Office Supplies,Binders,59.29,3,0.3,7.44
+MM-2022-00159,9/22/2022,Corporate,East,Ohio,Office Supplies,Paper,55.53,2,0,12.36
+MM-2022-00160,2/14/2022,Consumer,South,Florida,Technology,Phones,872.83,4,0.15,118.92
+MM-2022-00161,2/25/2022,Consumer,West,Washington,Office Supplies,Paper,88.95,3,0,42.93
+MM-2022-00162,6/13/2022,Consumer,West,California,Technology,Phones,565.07,1,0,225.03
+MM-2022-00163,10/7/2022,Home Office,Central,Michigan,Technology,Phones,181.14,1,0.15,32.54
+MM-2022-00164,12/1/2022,Corporate,South,Georgia,Office Supplies,Binders,34.81,1,0.15,11.95
+MM-2022-00164,12/1/2022,Corporate,South,Georgia,Technology,Copiers,1061.57,2,0.2,294.16
+MM-2022-00165,11/20/2022,Consumer,Central,Michigan,Technology,Phones,1052.04,5,0.2,203.28
+MM-2022-00166,9/21/2022,Home Office,South,Kentucky,Office Supplies,Paper,15.92,1,0,5.22
+MM-2022-00167,6/20/2022,Consumer,Central,Michigan,Office Supplies,Storage,61.92,1,0.15,3.54
+MM-2022-00167,6/20/2022,Consumer,Central,Michigan,Technology,Phones,245.35,1,0,89.7
+MM-2022-00168,3/4/2022,Consumer,Central,Michigan,Office Supplies,Binders,32.65,1,0.2,1.83
+MM-2022-00169,9/1/2022,Consumer,Central,Michigan,Office Supplies,Labels,15.8,1,0.2,5.39
+MM-2022-00169,9/1/2022,Consumer,Central,Michigan,Office Supplies,Labels,73.09,4,0,29.34
+MM-2022-00170,11/21/2022,Consumer,Central,Texas,Furniture,Chairs,1616.98,6,0.2,74.81
+MM-2022-00170,11/21/2022,Consumer,Central,Texas,Technology,Accessories,162.34,4,0,49.9
+MM-2022-00170,11/21/2022,Consumer,Central,Texas,Furniture,Chairs,842.67,4,0.3,44.18
+MM-2022-00171,7/25/2022,Corporate,West,California,Technology,Accessories,240.72,4,0.15,50.11
+MM-2022-00172,6/23/2022,Corporate,Central,Texas,Office Supplies,Binders,36.23,1,0.15,6.17
+MM-2022-00173,10/17/2022,Corporate,Central,Michigan,Office Supplies,Paper,14.46,1,0.4,0.54
+MM-2022-00173,10/17/2022,Corporate,Central,Michigan,Office Supplies,Labels,8.46,1,0.3,2.66
+MM-2022-00173,10/17/2022,Corporate,Central,Michigan,Technology,Accessories,28.62,1,0.3,1.69
+MM-2022-00174,5/5/2022,Consumer,Central,Texas,Furniture,Bookcases,427.66,1,0,65.05
+MM-2022-00174,5/5/2022,Consumer,Central,Texas,Office Supplies,Binders,113.13,3,0.15,13.95
+MM-2022-00175,12/8/2022,Corporate,Central,Texas,Furniture,Chairs,217.32,1,0.2,16.62
+MM-2022-00175,12/8/2022,Corporate,Central,Texas,Office Supplies,Paper,112.8,6,0.3,23.96
+MM-2022-00176,2/15/2022,Home Office,East,Ohio,Office Supplies,Paper,34.02,2,0,10.68
+MM-2022-00176,2/15/2022,Home Office,East,Ohio,Office Supplies,Labels,18.85,1,0,8.09
+MM-2022-00177,5/14/2022,Consumer,West,California,Technology,Accessories,137.36,2,0.1,27.32
+MM-2022-00178,3/15/2022,Consumer,Central,Texas,Office Supplies,Paper,73.98,4,0.3,15.8
+MM-2022-00178,3/15/2022,Consumer,Central,Texas,Technology,Phones,752.2,2,0.15,63.88
+MM-2022-00179,11/20/2022,Consumer,Central,Michigan,Office Supplies,Labels,9.37,1,0.1,3.72
+MM-2022-00180,5/24/2022,Consumer,East,Ohio,Furniture,Chairs,188.59,1,0.3,-29.44
+MM-2022-00181,6/18/2022,Consumer,West,Washington,Technology,Copiers,3836.15,5,0,1123.4
+MM-2022-00181,6/18/2022,Consumer,West,Washington,Furniture,Bookcases,235.05,1,0.2,20.72
+MM-2022-00182,4/13/2022,Home Office,South,Georgia,Office Supplies,Paper,15.6,1,0.2,2.92
+MM-2022-00182,4/13/2022,Home Office,South,Georgia,Furniture,Bookcases,326.66,3,0.2,-7.54
+MM-2022-00183,1/12/2022,Consumer,West,Colorado,Office Supplies,Binders,57.64,2,0.1,5.57
+MM-2022-00184,9/8/2022,Corporate,South,Florida,Office Supplies,Binders,59.71,2,0,18.79
+MM-2022-00185,3/19/2022,Consumer,West,California,Office Supplies,Paper,87.79,2,0,31.21
+MM-2022-00185,3/19/2022,Consumer,West,California,Technology,Accessories,90.17,1,0,14.9
+MM-2022-00186,2/15/2022,Corporate,East,Pennsylvania,Technology,Phones,1242.55,3,0,232.7
+MM-2022-00187,10/9/2022,Consumer,Central,Illinois,Office Supplies,Binders,46.88,1,0.15,3.89
+MM-2022-00187,10/9/2022,Consumer,Central,Illinois,Office Supplies,Binders,71.37,2,0.2,9.78
+MM-2022-00188,5/7/2022,Corporate,South,Georgia,Furniture,Bookcases,511.86,4,0.1,28.36
+MM-2022-00189,4/14/2022,Home Office,West,Washington,Office Supplies,Labels,11.61,1,0,5.46
+MM-2022-00189,4/14/2022,Home Office,West,Washington,Office Supplies,Binders,40.68,1,0.2,8.19
+MM-2022-00190,12/6/2022,Corporate,East,Ohio,Technology,Phones,626.48,2,0,144.81
+MM-2022-00190,12/6/2022,Corporate,East,Ohio,Office Supplies,Paper,40.49,3,0.3,7.66
+MM-2022-00191,1/18/2022,Consumer,Central,Illinois,Office Supplies,Binders,76.93,3,0.3,11.13
+MM-2022-00192,9/10/2022,Consumer,West,California,Office Supplies,Binders,35.39,1,0.15,3.74
+MM-2022-00192,9/10/2022,Consumer,West,California,Furniture,Tables,1561.11,2,0,63.86
+MM-2022-00193,11/3/2022,Consumer,Central,Illinois,Office Supplies,Binders,91.94,3,0.1,26.1
+MM-2022-00193,11/3/2022,Consumer,Central,Illinois,Technology,Accessories,67.36,2,0.3,3.19
+MM-2022-00193,11/3/2022,Consumer,Central,Illinois,Technology,Phones,595,2,0.15,62.5
+MM-2022-00194,5/14/2022,Consumer,Central,Michigan,Technology,Phones,200.5,1,0.2,40.81
+MM-2022-00195,12/23/2022,Home Office,Central,Illinois,Furniture,Bookcases,1506.74,5,0,369.27
+MM-2022-00196,1/16/2022,Consumer,West,Colorado,Office Supplies,Storage,165.19,2,0.1,25.06
+MM-2022-00197,5/10/2022,Consumer,East,Ohio,Office Supplies,Storage,80.78,1,0,26.98
+MM-2022-00197,5/10/2022,Consumer,East,Ohio,Office Supplies,Binders,157.2,4,0,49.22
+MM-2022-00197,5/10/2022,Consumer,East,Ohio,Furniture,Bookcases,185.9,1,0.2,14.45
+MM-2022-00198,8/7/2022,Consumer,West,Washington,Office Supplies,Binders,287.65,4,0,67.76
+MM-2022-00198,8/7/2022,Consumer,West,Washington,Furniture,Bookcases,200.92,1,0.3,19.53
+MM-2022-00198,8/7/2022,Consumer,West,Washington,Office Supplies,Storage,643.67,5,0,103.12
+MM-2022-00199,6/11/2022,Consumer,East,New York,Furniture,Chairs,647.51,1,0,21.57
+MM-2022-00199,6/11/2022,Consumer,East,New York,Office Supplies,Labels,75.51,4,0.2,29.59
+MM-2022-00199,6/11/2022,Consumer,East,New York,Office Supplies,Storage,322.12,5,0.15,-15.31
+MM-2022-00200,7/20/2022,Corporate,Central,Illinois,Furniture,Tables,1610.15,3,0,-238.15
+MM-2022-00201,10/7/2022,Corporate,West,California,Office Supplies,Paper,89.89,3,0.1,30.16
+MM-2022-00202,5/11/2022,Corporate,South,Georgia,Office Supplies,Binders,28.42,1,0,6.12
+MM-2022-00202,5/11/2022,Corporate,South,Georgia,Technology,Accessories,160.04,3,0,84.9
+MM-2022-00203,12/3/2022,Corporate,East,Pennsylvania,Office Supplies,Paper,55.11,2,0,22
+MM-2022-00204,6/10/2022,Corporate,West,Washington,Office Supplies,Binders,144.95,3,0.1,11.28
+MM-2022-00204,6/10/2022,Corporate,West,Washington,Furniture,Bookcases,628.16,3,0.2,34.51
+MM-2022-00204,6/10/2022,Corporate,West,Washington,Office Supplies,Paper,25.54,1,0,6.3
+MM-2022-00205,6/16/2022,Home Office,East,New York,Technology,Accessories,70.91,1,0,28.68
+MM-2022-00205,6/16/2022,Home Office,East,New York,Office Supplies,Storage,155.27,3,0.4,-18.16
+MM-2022-00205,6/16/2022,Home Office,East,New York,Technology,Accessories,107.52,2,0,21.18
+MM-2022-00206,5/11/2022,Consumer,South,Georgia,Office Supplies,Binders,33.25,1,0,8.62
+MM-2022-00206,5/11/2022,Consumer,South,Georgia,Office Supplies,Binders,139.1,5,0,37.29
+MM-2022-00207,5/4/2022,Consumer,Central,Illinois,Technology,Accessories,137.09,2,0.2,20.35
+MM-2022-00208,5/17/2022,Consumer,Central,Texas,Furniture,Chairs,609.19,2,0.15,2.45
+MM-2022-00209,4/17/2022,Consumer,Central,Texas,Office Supplies,Paper,33.85,1,0,14.46
+MM-2022-00209,4/17/2022,Consumer,Central,Texas,Office Supplies,Storage,235.23,2,0,18.81
+MM-2022-00209,4/17/2022,Consumer,Central,Texas,Furniture,Bookcases,437.37,2,0.1,64.2
+MM-2022-00210,4/9/2022,Consumer,West,California,Technology,Phones,319.15,1,0,66.48
+MM-2022-00211,5/4/2022,Home Office,South,Georgia,Furniture,Tables,1249.48,5,0.4,-248.92
+MM-2022-00212,8/24/2022,Consumer,Central,Michigan,Office Supplies,Binders,15.81,1,0.4,2.3
+MM-2022-00212,8/24/2022,Consumer,Central,Michigan,Technology,Accessories,76.08,2,0,20.1
+MM-2022-00212,8/24/2022,Consumer,Central,Michigan,Office Supplies,Paper,73.11,4,0,32.15
+MM-2022-00213,9/25/2022,Consumer,West,Washington,Office Supplies,Paper,107.88,3,0,27.29
+MM-2022-00213,9/25/2022,Consumer,West,Washington,Office Supplies,Storage,193.69,2,0,37.07
+MM-2022-00214,2/19/2022,Corporate,Central,Michigan,Furniture,Chairs,307.21,1,0,29.78
+MM-2022-00214,2/19/2022,Corporate,Central,Michigan,Office Supplies,Paper,18.05,1,0.3,4.65
+MM-2022-00215,8/15/2022,Home Office,South,Kentucky,Technology,Accessories,86.63,3,0.1,24.17
+MM-2022-00216,5/13/2022,Consumer,Central,Texas,Office Supplies,Paper,68.58,6,0.4,6.9
+MM-2022-00217,6/3/2022,Corporate,East,Pennsylvania,Office Supplies,Paper,108.29,3,0,48.69
+MM-2022-00218,3/13/2022,Corporate,South,Kentucky,Office Supplies,Storage,128.84,3,0.2,-2.87
+MM-2022-00218,3/13/2022,Corporate,South,Kentucky,Office Supplies,Labels,7.93,1,0,2.77
+MM-2022-00218,3/13/2022,Corporate,South,Kentucky,Office Supplies,Storage,167.84,3,0,33.9
+MM-2022-00219,12/28/2022,Consumer,East,Pennsylvania,Technology,Copiers,3721.82,5,0.2,987.83
+MM-2022-00219,12/28/2022,Consumer,East,Pennsylvania,Technology,Phones,350.27,1,0,82.27
+MM-2022-00219,12/28/2022,Consumer,East,Pennsylvania,Office Supplies,Labels,30.19,2,0.1,9.63
+MM-2022-00220,12/17/2022,Consumer,Central,Michigan,Office Supplies,Paper,9.47,1,0.3,1.97
+MM-2022-00221,6/1/2022,Consumer,West,Colorado,Furniture,Chairs,1493.59,5,0,10.01
+MM-2022-00222,3/3/2022,Consumer,West,California,Office Supplies,Paper,78.45,3,0,23.65
+MM-2022-00223,8/18/2022,Consumer,South,Kentucky,Office Supplies,Paper,90.15,4,0,35.94
+MM-2022-00224,10/16/2022,Consumer,East,Pennsylvania,Furniture,Tables,1327.06,3,0.2,-75.06
+MM-2022-00224,10/16/2022,Consumer,East,Pennsylvania,Office Supplies,Binders,34.41,1,0.15,2.12
+MM-2022-00225,9/20/2022,Consumer,Central,Illinois,Furniture,Bookcases,483.43,3,0.2,-0
+MM-2022-00226,5/22/2022,Consumer,Central,Michigan,Technology,Accessories,101.82,3,0.3,28.68
+MM-2022-00227,11/22/2022,Corporate,South,Kentucky,Office Supplies,Binders,38.3,3,0.3,5.97
+MM-2022-00228,9/24/2022,Consumer,South,Florida,Technology,Accessories,140.05,2,0,28.92
+MM-2022-00228,9/24/2022,Consumer,South,Florida,Technology,Accessories,185.85,3,0,46.6
+MM-2022-00229,9/8/2022,Consumer,West,California,Office Supplies,Binders,239.31,5,0,54.31
+MM-2022-00229,9/8/2022,Consumer,West,California,Technology,Accessories,307.07,3,0.1,94.07
+MM-2022-00229,9/8/2022,Consumer,West,California,Technology,Accessories,57.93,1,0,14.82
+MM-2022-00230,2/26/2022,Consumer,West,Washington,Office Supplies,Paper,158.52,6,0.2,33.67
+MM-2022-00230,2/26/2022,Consumer,West,Washington,Technology,Copiers,2834.65,2,0,921.31
+MM-2022-00231,10/4/2022,Corporate,South,Florida,Technology,Copiers,4431.21,5,0,1112.24
+MM-2022-00232,8/4/2022,Home Office,East,New York,Office Supplies,Binders,34.5,1,0.2,4.72
+MM-2022-00233,11/16/2022,Consumer,South,Georgia,Office Supplies,Storage,296.44,4,0.2,15.01
+MM-2022-00234,11/12/2022,Home Office,West,Washington,Office Supplies,Labels,47.31,3,0.2,16.06
+MM-2022-00235,7/23/2022,Consumer,Central,Texas,Technology,Phones,671.02,4,0.4,-54.42
+MM-2022-00236,10/1/2022,Home Office,Central,Illinois,Office Supplies,Labels,37.89,3,0.3,6.12
+MM-2022-00236,10/1/2022,Home Office,Central,Illinois,Furniture,Chairs,326.5,1,0,50.52
+MM-2022-00236,10/1/2022,Home Office,Central,Illinois,Furniture,Bookcases,648.15,3,0,82.1
+MM-2022-00237,9/26/2022,Consumer,East,New York,Office Supplies,Binders,242.38,5,0.2,26.43
+MM-2022-00238,4/10/2022,Home Office,West,Washington,Technology,Accessories,134.2,2,0,39.83
+MM-2022-00239,1/10/2022,Consumer,West,Washington,Office Supplies,Binders,85.87,2,0,12.16
+MM-2022-00240,3/22/2022,Corporate,Central,Texas,Office Supplies,Storage,424,4,0,44.31
+MM-2022-00241,10/1/2022,Consumer,South,Georgia,Technology,Accessories,35.29,1,0.1,5.19
+MM-2022-00242,10/6/2022,Home Office,East,New York,Office Supplies,Storage,489.81,4,0,55.99
+MM-2022-00243,5/21/2022,Consumer,West,Colorado,Office Supplies,Paper,51.09,3,0.2,19.28
+MM-2022-00244,3/20/2022,Home Office,East,Ohio,Office Supplies,Paper,74.61,3,0,20.39
+MM-2022-00245,2/20/2022,Corporate,Central,Illinois,Office Supplies,Labels,17.58,1,0.15,4.15
+MM-2022-00245,2/20/2022,Corporate,Central,Illinois,Office Supplies,Labels,35,2,0.1,15.59
+MM-2022-00246,9/3/2022,Consumer,Central,Michigan,Technology,Phones,825.51,3,0.2,-15.37
+MM-2022-00247,4/13/2022,Home Office,South,Kentucky,Office Supplies,Paper,24.74,2,0,8.63
+MM-2022-00247,4/13/2022,Home Office,South,Kentucky,Office Supplies,Binders,81.33,3,0,16.82
+MM-2022-00248,12/7/2022,Consumer,West,California,Furniture,Bookcases,858.39,2,0,165.51
+MM-2022-00248,12/7/2022,Consumer,West,California,Furniture,Tables,518.76,1,0,61.82
+MM-2022-00248,12/7/2022,Consumer,West,California,Office Supplies,Binders,70.44,1,0,30.37
+MM-2022-00249,4/17/2022,Consumer,West,Colorado,Office Supplies,Paper,95.16,4,0,25.18
+MM-2022-00249,4/17/2022,Consumer,West,Colorado,Office Supplies,Binders,129.3,5,0,41.25
+MM-2022-00250,3/4/2022,Home Office,East,Ohio,Office Supplies,Binders,140.34,3,0.1,18.52
+MM-2022-00251,12/2/2022,Consumer,South,Georgia,Technology,Accessories,91.68,3,0,20.4
+MM-2022-00252,9/14/2022,Home Office,Central,Texas,Office Supplies,Labels,33.24,3,0.2,8.63
+MM-2022-00252,9/14/2022,Home Office,Central,Texas,Office Supplies,Binders,114.47,3,0.3,4.1
+MM-2022-00252,9/14/2022,Home Office,Central,Texas,Furniture,Bookcases,179.56,1,0.15,13.68
+MM-2022-00253,7/5/2022,Home Office,East,Pennsylvania,Office Supplies,Paper,26.95,1,0.3,2.58
+MM-2022-00253,7/5/2022,Home Office,East,Pennsylvania,Furniture,Chairs,1761.27,5,0,130.77
+MM-2022-00253,7/5/2022,Home Office,East,Pennsylvania,Technology,Accessories,243.09,5,0.2,51.6
+MM-2022-00254,3/8/2022,Home Office,South,Georgia,Furniture,Chairs,769.92,3,0.15,143.95
+MM-2022-00255,12/18/2022,Home Office,East,Pennsylvania,Furniture,Bookcases,261.76,1,0,23.63
+MM-2022-00255,12/18/2022,Home Office,East,Pennsylvania,Technology,Copiers,755.63,1,0,293.66
+MM-2022-00255,12/18/2022,Home Office,East,Pennsylvania,Office Supplies,Storage,162.81,2,0,-4.43
+MM-2022-00256,7/3/2022,Home Office,South,Kentucky,Office Supplies,Binders,25.38,1,0.15,4.84
+MM-2022-00257,5/18/2022,Home Office,South,Georgia,Technology,Accessories,307.42,5,0,124.78
+MM-2022-00257,5/18/2022,Home Office,South,Georgia,Furniture,Chairs,980.95,4,0,232.21
+MM-2022-00258,11/17/2022,Consumer,South,Georgia,Office Supplies,Paper,20.21,1,0,9.78
+MM-2022-00259,4/1/2022,Consumer,East,Pennsylvania,Technology,Copiers,1702,2,0.2,390.05
+MM-2022-00259,4/1/2022,Consumer,East,Pennsylvania,Office Supplies,Binders,79.16,3,0,27.27
+MM-2022-00260,12/15/2022,Home Office,Central,Michigan,Technology,Copiers,2072.61,5,0.3,343.59
+MM-2022-00260,12/15/2022,Home Office,Central,Michigan,Office Supplies,Binders,50.28,2,0,14.28
+MM-2022-00260,12/15/2022,Home Office,Central,Michigan,Office Supplies,Binders,94.18,3,0.15,20.88
+MM-2022-00261,8/21/2022,Corporate,East,Ohio,Furniture,Chairs,1069.69,4,0,229.91
+MM-2022-00262,11/11/2022,Corporate,South,Florida,Technology,Copiers,2114.12,2,0.1,747.24
+MM-2022-00263,8/5/2022,Consumer,South,Florida,Office Supplies,Binders,97.92,2,0.1,22.64
+MM-2022-00264,1/10/2022,Home Office,South,Florida,Technology,Phones,303.28,1,0.3,38.58
+MM-2022-00265,1/20/2022,Corporate,East,Pennsylvania,Office Supplies,Binders,33.01,1,0,6.98
+MM-2022-00265,1/20/2022,Corporate,East,Pennsylvania,Office Supplies,Binders,100.42,3,0.1,29.27
+MM-2023-00266,5/2/2023,Consumer,Central,Michigan,Technology,Phones,464.9,2,0.2,69.37
+MM-2023-00266,5/2/2023,Consumer,Central,Michigan,Office Supplies,Labels,32.45,4,0.1,10.84
+MM-2023-00267,8/5/2023,Consumer,West,Washington,Technology,Accessories,138.48,2,0,23.77
+MM-2023-00267,8/5/2023,Consumer,West,Washington,Furniture,Bookcases,1089.26,3,0,180.92
+MM-2023-00268,11/5/2023,Consumer,East,New York,Office Supplies,Labels,131.46,5,0,65.21
+MM-2023-00268,11/5/2023,Consumer,East,New York,Office Supplies,Paper,16.4,1,0.3,3.09
+MM-2023-00269,1/25/2023,Home Office,South,Georgia,Technology,Phones,631.9,2,0,123.54
+MM-2023-00269,1/25/2023,Home Office,South,Georgia,Technology,Phones,1228.09,5,0,318.71
+MM-2023-00270,6/3/2023,Consumer,West,California,Office Supplies,Labels,100.95,3,0,39.81
+MM-2023-00271,6/25/2023,Consumer,East,Pennsylvania,Office Supplies,Storage,192.03,2,0.15,14.54
+MM-2023-00271,6/25/2023,Consumer,East,Pennsylvania,Technology,Phones,442.59,1,0.1,42.8
+MM-2023-00272,6/6/2023,Consumer,South,Georgia,Office Supplies,Binders,79.94,5,0.2,0.31
+MM-2023-00272,6/6/2023,Consumer,South,Georgia,Technology,Phones,766.06,4,0,213.78
+MM-2023-00273,9/12/2023,Home Office,East,Ohio,Office Supplies,Binders,66.58,2,0.15,8.8
+MM-2023-00273,9/12/2023,Home Office,East,Ohio,Office Supplies,Binders,134.5,4,0.15,12.09
+MM-2023-00273,9/12/2023,Home Office,East,Ohio,Technology,Phones,596.44,3,0.1,194.2
+MM-2023-00274,1/8/2023,Consumer,Central,Michigan,Technology,Phones,456.22,2,0,71.48
+MM-2023-00274,1/8/2023,Consumer,Central,Michigan,Furniture,Chairs,849.94,4,0,134.95
+MM-2023-00275,7/23/2023,Consumer,South,Georgia,Office Supplies,Binders,144.93,4,0.15,8.18
+MM-2023-00275,7/23/2023,Consumer,South,Georgia,Technology,Accessories,167.29,3,0,39.62
+MM-2023-00276,8/27/2023,Home Office,Central,Illinois,Office Supplies,Storage,374.88,3,0,74.65
+MM-2023-00276,8/27/2023,Home Office,Central,Illinois,Office Supplies,Labels,30.49,2,0.3,4.47
+MM-2023-00277,5/22/2023,Corporate,Central,Texas,Furniture,Chairs,641.5,3,0.2,27.39
+MM-2023-00278,4/1/2023,Consumer,South,Kentucky,Office Supplies,Labels,41.92,5,0.2,9.44
+MM-2023-00278,4/1/2023,Consumer,South,Kentucky,Technology,Phones,689.16,4,0.2,79.77
+MM-2023-00278,4/1/2023,Consumer,South,Kentucky,Office Supplies,Labels,38.67,3,0,15.56
+MM-2023-00279,11/6/2023,Corporate,Central,Texas,Technology,Accessories,174.35,4,0.3,27.62
+MM-2023-00279,11/6/2023,Corporate,Central,Texas,Office Supplies,Binders,51.63,1,0.2,10.48
+MM-2023-00279,11/6/2023,Corporate,Central,Texas,Office Supplies,Paper,21.75,1,0.1,3.41
+MM-2023-00280,12/16/2023,Corporate,South,Florida,Office Supplies,Binders,94.39,2,0.1,14.74
+MM-2023-00280,12/16/2023,Corporate,South,Florida,Office Supplies,Binders,129.54,2,0,34.67
+MM-2023-00281,1/7/2023,Home Office,Central,Texas,Technology,Accessories,144.89,4,0,52.46
+MM-2023-00282,3/14/2023,Consumer,Central,Illinois,Office Supplies,Paper,95.12,4,0.2,28.69
+MM-2023-00282,3/14/2023,Consumer,Central,Illinois,Office Supplies,Binders,112.89,4,0.3,14.72
+MM-2023-00283,12/16/2023,Corporate,South,Georgia,Office Supplies,Binders,163.54,6,0.15,29.11
+MM-2023-00283,12/16/2023,Corporate,South,Georgia,Technology,Copiers,640.73,1,0,282.13
+MM-2023-00284,6/6/2023,Consumer,East,Pennsylvania,Office Supplies,Storage,122.87,1,0.2,15.94
+MM-2023-00284,6/6/2023,Consumer,East,Pennsylvania,Office Supplies,Paper,109.33,4,0,35.73
+MM-2023-00285,1/18/2023,Corporate,East,Pennsylvania,Office Supplies,Labels,16.78,1,0,6.9
+MM-2023-00285,1/18/2023,Corporate,East,Pennsylvania,Technology,Phones,1606.86,4,0.15,189.72
+MM-2023-00286,4/27/2023,Corporate,Central,Texas,Office Supplies,Paper,24.84,1,0,10.7
+MM-2023-00287,6/6/2023,Consumer,South,Florida,Office Supplies,Paper,82.33,3,0.15,21.64
+MM-2023-00288,6/13/2023,Corporate,East,Pennsylvania,Office Supplies,Storage,252.35,3,0,43.5
+MM-2023-00288,6/13/2023,Corporate,East,Pennsylvania,Office Supplies,Labels,66.5,3,0,32.64
+MM-2023-00289,7/14/2023,Consumer,Central,Michigan,Office Supplies,Paper,43.96,2,0,15.65
+MM-2023-00290,6/23/2023,Corporate,West,California,Technology,Accessories,223.91,4,0,32.01
+MM-2023-00291,9/10/2023,Consumer,East,Ohio,Office Supplies,Binders,51.03,1,0,6.17
+MM-2023-00291,9/10/2023,Consumer,East,Ohio,Technology,Copiers,1573.22,2,0,525.36
+MM-2023-00292,12/11/2023,Home Office,West,Washington,Furniture,Bookcases,337.83,1,0,91.05
+MM-2023-00293,9/10/2023,Corporate,South,Kentucky,Office Supplies,Paper,52.06,3,0.1,11.58
+MM-2023-00293,9/10/2023,Corporate,South,Kentucky,Technology,Copiers,943.4,1,0,282.92
+MM-2023-00294,6/5/2023,Corporate,West,Colorado,Technology,Accessories,47.84,1,0,7.68
+MM-2023-00294,6/5/2023,Corporate,West,Colorado,Technology,Accessories,106.09,2,0.3,12.35
+MM-2023-00295,10/13/2023,Corporate,South,Georgia,Office Supplies,Paper,16.5,1,0,7.1
+MM-2023-00295,10/13/2023,Corporate,South,Georgia,Furniture,Tables,756.1,2,0.15,63.54
+MM-2023-00296,9/7/2023,Corporate,East,New York,Office Supplies,Paper,139.03,5,0.3,17.4
+MM-2023-00296,9/7/2023,Corporate,East,New York,Furniture,Chairs,332.43,1,0,43.59
+MM-2023-00296,9/7/2023,Corporate,East,New York,Technology,Phones,1043.28,2,0.15,35.27
+MM-2023-00297,12/4/2023,Corporate,South,Florida,Technology,Phones,392.76,1,0.2,3.24
+MM-2023-00298,6/12/2023,Consumer,East,Ohio,Office Supplies,Binders,65.69,2,0.3,4.17
+MM-2023-00298,6/12/2023,Consumer,East,Ohio,Office Supplies,Paper,103.49,4,0,40.09
+MM-2023-00299,9/28/2023,Consumer,East,Pennsylvania,Furniture,Tables,1297.92,2,0.15,-115.95
+MM-2023-00300,7/6/2023,Home Office,East,New York,Furniture,Bookcases,949.48,4,0.4,-150.07
+MM-2023-00301,5/5/2023,Home Office,Central,Michigan,Office Supplies,Labels,33.21,3,0,17.26
+MM-2023-00302,8/27/2023,Corporate,East,Pennsylvania,Furniture,Bookcases,639.22,4,0.3,84.74
+MM-2023-00302,8/27/2023,Corporate,East,Pennsylvania,Office Supplies,Paper,68.59,3,0.2,21.36
+MM-2023-00303,9/14/2023,Corporate,South,Kentucky,Office Supplies,Storage,295.55,5,0,35.8
+MM-2023-00303,9/14/2023,Corporate,South,Kentucky,Office Supplies,Labels,40.16,3,0,17.01
+MM-2023-00304,3/23/2023,Corporate,Central,Michigan,Office Supplies,Paper,22.05,1,0.1,2.31
+MM-2023-00305,1/1/2023,Corporate,West,California,Technology,Accessories,129.61,2,0.2,33.04
+MM-2023-00305,1/1/2023,Corporate,West,California,Furniture,Bookcases,2384.58,6,0.2,15.84
+MM-2023-00306,6/12/2023,Consumer,South,Georgia,Office Supplies,Binders,151.48,4,0,53.59
+MM-2023-00307,7/16/2023,Consumer,East,New York,Furniture,Chairs,648.97,2,0,51.27
+MM-2023-00307,7/16/2023,Consumer,East,New York,Office Supplies,Binders,167.15,3,0,41.4
+MM-2023-00308,7/20/2023,Consumer,East,New York,Office Supplies,Labels,100.11,4,0,37.66
+MM-2023-00309,5/19/2023,Corporate,West,Colorado,Furniture,Bookcases,548.2,3,0.2,57.63
+MM-2023-00310,9/22/2023,Consumer,South,Georgia,Furniture,Tables,857.38,2,0.15,-25.47
+MM-2023-00310,9/22/2023,Consumer,South,Georgia,Office Supplies,Paper,58.3,4,0.4,6.54
+MM-2023-00311,6/28/2023,Corporate,Central,Texas,Office Supplies,Storage,288.24,5,0.4,-41.15
+MM-2023-00311,6/28/2023,Corporate,Central,Texas,Office Supplies,Storage,427.35,5,0.15,64.35
+MM-2023-00312,8/6/2023,Consumer,East,New York,Furniture,Chairs,2602.63,5,0,248.93
+MM-2023-00313,5/4/2023,Corporate,South,Kentucky,Office Supplies,Storage,59.67,1,0.1,4.64
+MM-2023-00313,5/4/2023,Corporate,South,Kentucky,Technology,Accessories,39.9,1,0.15,9.82
+MM-2023-00314,8/23/2023,Consumer,South,Georgia,Furniture,Tables,226.22,1,0.3,-46.32
+MM-2023-00315,1/6/2023,Corporate,East,Ohio,Office Supplies,Storage,102.97,1,0,18.93
+MM-2023-00315,1/6/2023,Corporate,East,Ohio,Office Supplies,Binders,54.01,2,0.1,2.62
+MM-2023-00316,9/19/2023,Consumer,East,New York,Office Supplies,Binders,113.17,3,0,11.98
+MM-2023-00316,9/19/2023,Consumer,East,New York,Office Supplies,Labels,51.12,3,0.15,18.13
+MM-2023-00316,9/19/2023,Consumer,East,New York,Furniture,Tables,839.85,2,0,-63.68
+MM-2023-00317,9/15/2023,Consumer,Central,Michigan,Technology,Accessories,93.47,2,0.2,18.3
+MM-2023-00317,9/15/2023,Consumer,Central,Michigan,Office Supplies,Storage,109.59,2,0,29.76
+MM-2023-00317,9/15/2023,Consumer,Central,Michigan,Office Supplies,Binders,23.69,1,0.2,5.75
+MM-2023-00318,9/4/2023,Corporate,Central,Texas,Office Supplies,Storage,230.08,3,0.15,39.36
+MM-2023-00319,3/25/2023,Consumer,East,New York,Office Supplies,Binders,171.32,4,0.2,32.69
+MM-2023-00320,4/20/2023,Consumer,South,Kentucky,Technology,Copiers,1304.06,2,0.2,223.73
+MM-2023-00321,10/2/2023,Corporate,Central,Texas,Office Supplies,Storage,98.45,1,0.3,3.2
+MM-2023-00322,9/1/2023,Consumer,Central,Illinois,Office Supplies,Binders,84.94,2,0,25.44
+MM-2023-00323,5/28/2023,Consumer,South,Florida,Furniture,Bookcases,1026.6,3,0,335.43
+MM-2023-00324,12/20/2023,Consumer,South,Georgia,Office Supplies,Binders,15.97,1,0.4,1.9
+MM-2023-00325,9/9/2023,Consumer,South,Kentucky,Office Supplies,Paper,33.02,2,0.2,8.54
+MM-2023-00326,2/20/2023,Corporate,East,Pennsylvania,Office Supplies,Binders,237.31,6,0.1,37.82
+MM-2023-00326,2/20/2023,Corporate,East,Pennsylvania,Technology,Accessories,164.96,3,0,47.28
+MM-2023-00326,2/20/2023,Corporate,East,Pennsylvania,Technology,Copiers,1966.21,2,0,532.05
+MM-2023-00327,1/20/2023,Corporate,East,Ohio,Technology,Accessories,221.52,4,0,55.79
+MM-2023-00328,6/13/2023,Consumer,East,Ohio,Office Supplies,Binders,80.74,3,0.2,2.98
+MM-2023-00328,6/13/2023,Consumer,East,Ohio,Furniture,Chairs,148.85,1,0.2,2.02
+MM-2023-00329,9/23/2023,Consumer,East,Ohio,Office Supplies,Storage,236.06,3,0,54.95
+MM-2023-00329,9/23/2023,Consumer,East,Ohio,Technology,Accessories,189.3,3,0,62.81
+MM-2023-00329,9/23/2023,Consumer,East,Ohio,Office Supplies,Binders,53.36,2,0.15,7.72
+MM-2023-00330,3/12/2023,Consumer,South,Florida,Office Supplies,Binders,62.6,2,0.2,4.81
+MM-2023-00331,9/11/2023,Consumer,West,Colorado,Furniture,Tables,804.23,2,0.3,-213.54
+MM-2023-00331,9/11/2023,Consumer,West,Colorado,Office Supplies,Binders,35.52,1,0.3,5.84
+MM-2023-00332,12/5/2023,Consumer,South,Georgia,Office Supplies,Paper,74.61,4,0.3,12.39
+MM-2023-00333,5/5/2023,Home Office,West,Colorado,Furniture,Bookcases,226.69,1,0.2,-2.28
+MM-2023-00334,12/20/2023,Corporate,East,Pennsylvania,Office Supplies,Labels,69.8,4,0.1,24.62
+MM-2023-00334,12/20/2023,Corporate,East,Pennsylvania,Technology,Phones,1762,5,0,375.96
+MM-2023-00335,10/14/2023,Corporate,Central,Texas,Office Supplies,Binders,84.85,3,0.2,10.49
+MM-2023-00335,10/14/2023,Corporate,Central,Texas,Furniture,Bookcases,342.08,1,0,4.99
+MM-2023-00336,5/22/2023,Consumer,East,Pennsylvania,Furniture,Bookcases,192.44,1,0.15,17.71
+MM-2023-00337,9/26/2023,Consumer,Central,Texas,Office Supplies,Paper,28.37,1,0,8.86
+MM-2023-00337,9/26/2023,Consumer,Central,Texas,Office Supplies,Paper,106.25,3,0,36.35
+MM-2023-00338,5/19/2023,Corporate,East,Pennsylvania,Furniture,Bookcases,452.72,2,0,33.17
+MM-2023-00339,2/8/2023,Home Office,West,California,Office Supplies,Labels,29.39,2,0.2,14.45
+MM-2023-00340,8/26/2023,Home Office,Central,Illinois,Technology,Accessories,248.21,5,0.15,53.32
+MM-2023-00341,9/13/2023,Consumer,South,Georgia,Technology,Phones,587.5,3,0,67.9
+MM-2023-00342,7/24/2023,Consumer,Central,Michigan,Furniture,Chairs,142.47,1,0.15,25.15
+MM-2023-00343,12/6/2023,Corporate,South,Georgia,Office Supplies,Binders,38.02,2,0.2,6.48
+MM-2023-00344,11/2/2023,Corporate,South,Florida,Technology,Accessories,287.09,4,0,28.8
+MM-2023-00344,11/2/2023,Corporate,South,Florida,Technology,Phones,1805.82,4,0,208.32
+MM-2023-00344,11/2/2023,Corporate,South,Florida,Office Supplies,Storage,289.93,3,0,51.34
+MM-2023-00345,5/28/2023,Home Office,South,Florida,Office Supplies,Paper,26.31,1,0,12.58
+MM-2023-00345,5/28/2023,Home Office,South,Florida,Technology,Phones,295.53,1,0.3,1.63
+MM-2023-00346,3/20/2023,Consumer,West,Washington,Technology,Phones,620.67,2,0,178.98
+MM-2023-00347,4/6/2023,Corporate,West,Colorado,Office Supplies,Binders,88.13,3,0.1,7.28
+MM-2023-00348,10/15/2023,Consumer,Central,Texas,Furniture,Tables,1272.89,3,0,-28.45
+MM-2023-00348,10/15/2023,Consumer,Central,Texas,Office Supplies,Storage,355.14,3,0,21.5
+MM-2023-00349,10/8/2023,Corporate,East,Pennsylvania,Office Supplies,Storage,203.24,2,0,24.96
+MM-2023-00349,10/8/2023,Corporate,East,Pennsylvania,Office Supplies,Paper,25.86,1,0,6.37
+MM-2023-00350,1/16/2023,Consumer,Central,Illinois,Technology,Accessories,39.61,1,0.3,4.36
+MM-2023-00351,2/17/2023,Consumer,Central,Texas,Furniture,Bookcases,1134.8,4,0,203.27
+MM-2023-00351,2/17/2023,Consumer,Central,Texas,Office Supplies,Binders,25.29,1,0.3,2.14
+MM-2023-00351,2/17/2023,Consumer,Central,Texas,Office Supplies,Storage,540.02,6,0.15,24.06
+MM-2023-00352,5/12/2023,Corporate,South,Kentucky,Office Supplies,Storage,298.05,5,0.15,-26.05
+MM-2023-00352,5/12/2023,Corporate,South,Kentucky,Office Supplies,Paper,48.06,2,0,14.31
+MM-2023-00353,7/16/2023,Home Office,Central,Illinois,Office Supplies,Binders,103.8,2,0,17.58
+MM-2023-00353,7/16/2023,Home Office,Central,Illinois,Technology,Phones,1355.22,5,0.2,18.93
+MM-2023-00353,7/16/2023,Home Office,Central,Illinois,Technology,Phones,1662.87,5,0.3,62.83
+MM-2023-00354,5/9/2023,Home Office,South,Florida,Office Supplies,Paper,96.69,3,0.1,34.52
+MM-2023-00355,7/28/2023,Corporate,East,Pennsylvania,Office Supplies,Storage,277.34,3,0,72.96
+MM-2023-00356,9/5/2023,Corporate,Central,Illinois,Office Supplies,Storage,264.25,3,0,35.31
+MM-2023-00357,10/18/2023,Consumer,South,Florida,Office Supplies,Binders,91.54,4,0.3,5.93
+MM-2023-00357,10/18/2023,Consumer,South,Florida,Office Supplies,Storage,133.91,1,0,2.82
+MM-2023-00358,2/16/2023,Corporate,East,New York,Technology,Copiers,1818.45,1,0,345.51
+MM-2023-00359,6/17/2023,Consumer,East,New York,Technology,Accessories,159.88,3,0.3,34.58
+MM-2023-00360,7/10/2023,Consumer,East,New York,Furniture,Tables,907.76,3,0.4,-174.6
+MM-2023-00360,7/10/2023,Consumer,East,New York,Technology,Copiers,2849.72,2,0,1187.99
+MM-2023-00361,5/6/2023,Home Office,West,California,Office Supplies,Binders,94.6,2,0.15,10.6
+MM-2023-00361,5/6/2023,Home Office,West,California,Office Supplies,Storage,672.13,5,0,139.98
+MM-2023-00361,5/6/2023,Home Office,West,California,Technology,Accessories,240.97,4,0.2,61.13
+MM-2023-00362,2/7/2023,Consumer,West,Colorado,Office Supplies,Paper,40,2,0,17.11
+MM-2023-00363,12/3/2023,Corporate,South,Florida,Office Supplies,Labels,47.57,3,0.2,7.31
+MM-2023-00363,12/3/2023,Corporate,South,Florida,Furniture,Bookcases,1506.49,6,0.1,181.59
+MM-2023-00364,8/27/2023,Home Office,South,Georgia,Technology,Phones,563.56,2,0,141.07
+MM-2023-00364,8/27/2023,Home Office,South,Georgia,Technology,Phones,231.18,1,0.15,46.91
+MM-2023-00364,8/27/2023,Home Office,South,Georgia,Furniture,Chairs,1889.61,6,0,234.48
+MM-2023-00365,12/20/2023,Consumer,East,New York,Office Supplies,Paper,72.25,2,0,22.43
+MM-2023-00365,12/20/2023,Consumer,East,New York,Technology,Accessories,465.03,5,0,109.35
+MM-2023-00365,12/20/2023,Consumer,East,New York,Office Supplies,Labels,37.96,2,0,19.51
+MM-2023-00366,4/11/2023,Consumer,East,Pennsylvania,Office Supplies,Binders,212.66,4,0,68.7
+MM-2023-00366,4/11/2023,Consumer,East,Pennsylvania,Office Supplies,Storage,167.34,2,0,10.02
+MM-2023-00367,5/9/2023,Consumer,East,Pennsylvania,Office Supplies,Paper,17.44,1,0.2,5.49
+MM-2023-00367,5/9/2023,Consumer,East,Pennsylvania,Office Supplies,Labels,18.24,1,0,6.73
+MM-2023-00368,10/22/2023,Consumer,West,Washington,Office Supplies,Binders,133.75,3,0,33.85
+MM-2023-00369,7/3/2023,Consumer,West,Colorado,Office Supplies,Binders,31.84,1,0,8.98
+MM-2023-00370,5/16/2023,Home Office,West,Washington,Office Supplies,Binders,120.79,3,0,4.01
+MM-2023-00371,5/16/2023,Consumer,East,Pennsylvania,Office Supplies,Paper,22.17,1,0.2,7.79
+MM-2023-00371,5/16/2023,Consumer,East,Pennsylvania,Furniture,Chairs,349.59,1,0.15,18.72
+MM-2023-00371,5/16/2023,Consumer,East,Pennsylvania,Technology,Phones,320.53,1,0,73.32
+MM-2023-00372,11/10/2023,Consumer,South,Kentucky,Technology,Accessories,189.04,5,0,37.73
+MM-2023-00373,8/2/2023,Corporate,East,Ohio,Office Supplies,Binders,96.98,4,0.3,5.53
+MM-2023-00374,4/5/2023,Consumer,West,Colorado,Technology,Accessories,212.6,3,0,51.58
+MM-2023-00375,3/18/2023,Corporate,West,California,Office Supplies,Binders,54.31,1,0,16.02
+MM-2023-00376,6/2/2023,Consumer,West,Colorado,Furniture,Bookcases,362.71,3,0.3,-93.59
+MM-2023-00376,6/2/2023,Consumer,West,Colorado,Office Supplies,Paper,19.62,1,0.2,6.09
+MM-2023-00377,5/3/2023,Consumer,West,Washington,Office Supplies,Labels,53.43,3,0,14.09
+MM-2023-00378,11/23/2023,Consumer,Central,Illinois,Technology,Accessories,221.35,4,0.15,31.73
+MM-2023-00379,10/16/2023,Consumer,West,Washington,Office Supplies,Storage,85.86,1,0.3,3.7
+MM-2023-00380,12/14/2023,Corporate,West,California,Furniture,Chairs,1393.78,5,0.2,-28.35
+MM-2023-00381,10/4/2023,Consumer,West,Colorado,Office Supplies,Binders,145.93,4,0,32.86
+MM-2023-00382,1/3/2023,Consumer,West,Colorado,Technology,Copiers,1046.53,1,0,405.56
+MM-2023-00383,7/26/2023,Corporate,South,Georgia,Office Supplies,Binders,81.08,4,0.2,11.87
+MM-2023-00384,12/19/2023,Consumer,East,New York,Office Supplies,Labels,22.82,1,0.15,3.88
+MM-2023-00385,1/26/2023,Consumer,Central,Illinois,Office Supplies,Paper,49.95,2,0,18.25
+MM-2023-00386,9/7/2023,Corporate,South,Kentucky,Office Supplies,Storage,132.93,2,0,23.12
+MM-2023-00386,9/7/2023,Corporate,South,Kentucky,Office Supplies,Binders,48.84,2,0.1,18.22
+MM-2023-00387,4/25/2023,Consumer,South,Florida,Office Supplies,Paper,82.39,3,0.3,21.35
+MM-2023-00388,2/1/2023,Home Office,East,Ohio,Office Supplies,Binders,29.22,1,0,7.49
+MM-2023-00388,2/1/2023,Home Office,East,Ohio,Office Supplies,Storage,453.92,6,0.1,38.26
+MM-2023-00388,2/1/2023,Home Office,East,Ohio,Technology,Accessories,55.61,1,0,5.96
+MM-2023-00389,12/4/2023,Consumer,Central,Texas,Technology,Phones,210.47,1,0.3,-8.93
+MM-2023-00390,9/18/2023,Corporate,East,New York,Office Supplies,Binders,77.42,2,0,13.59
+MM-2023-00390,9/18/2023,Corporate,East,New York,Furniture,Tables,1257.53,2,0.15,-117.61
+MM-2023-00390,9/18/2023,Corporate,East,New York,Furniture,Chairs,1223.58,3,0,199.67
+MM-2023-00391,6/15/2023,Home Office,West,California,Office Supplies,Labels,92.65,4,0,50.61
+MM-2023-00392,2/25/2023,Home Office,East,Pennsylvania,Technology,Copiers,2203.77,2,0,695.81
+MM-2023-00393,9/26/2023,Corporate,West,California,Technology,Phones,1325.79,3,0.2,125.91
+MM-2023-00393,9/26/2023,Corporate,West,California,Office Supplies,Storage,233.38,2,0,25.8
+MM-2023-00394,6/23/2023,Consumer,Central,Michigan,Technology,Phones,180.28,1,0.3,32.28
+MM-2023-00395,8/16/2023,Consumer,East,New York,Office Supplies,Paper,48.93,2,0.2,21.14
+MM-2023-00396,6/13/2023,Consumer,South,Florida,Office Supplies,Binders,18.44,1,0.4,1.67
+MM-2023-00397,3/27/2023,Consumer,South,Florida,Office Supplies,Binders,120.73,3,0.15,3.31
+MM-2023-00397,3/27/2023,Consumer,South,Florida,Furniture,Chairs,378.61,1,0,81.08
+MM-2023-00398,10/19/2023,Consumer,East,Pennsylvania,Office Supplies,Labels,39.87,2,0.1,10.38
+MM-2023-00399,7/11/2023,Home Office,South,Kentucky,Technology,Phones,712.88,3,0,192.44
+MM-2023-00400,3/6/2023,Consumer,Central,Michigan,Office Supplies,Binders,120.8,5,0.1,11.05
+MM-2023-00401,6/12/2023,Consumer,South,Florida,Office Supplies,Labels,183.72,6,0,93.96
+MM-2023-00402,8/26/2023,Consumer,West,California,Technology,Phones,1417.86,3,0.2,169.68
+MM-2023-00402,8/26/2023,Consumer,West,California,Furniture,Bookcases,517.85,1,0,60.55
+MM-2023-00403,7/7/2023,Corporate,East,New York,Office Supplies,Paper,108.57,3,0.2,26.57
+MM-2023-00403,7/7/2023,Corporate,East,New York,Office Supplies,Storage,563.92,4,0,99.93
+MM-2023-00404,1/7/2023,Consumer,Central,Illinois,Furniture,Chairs,2345.87,5,0,258.19
+MM-2023-00404,1/7/2023,Consumer,Central,Illinois,Technology,Phones,631.85,2,0.2,84.61
+MM-2023-00405,11/15/2023,Home Office,East,New York,Office Supplies,Paper,42.1,2,0.15,15.61
+MM-2023-00406,12/27/2023,Home Office,Central,Michigan,Furniture,Chairs,219.53,1,0.1,27.39
+MM-2023-00407,5/18/2023,Consumer,South,Kentucky,Office Supplies,Binders,33.37,2,0.2,5.84
+MM-2023-00407,5/18/2023,Consumer,South,Kentucky,Furniture,Tables,337.98,1,0,6.65
+MM-2023-00407,5/18/2023,Consumer,South,Kentucky,Office Supplies,Paper,15.02,1,0,4.91
+MM-2023-00408,11/28/2023,Consumer,West,Colorado,Office Supplies,Binders,68.69,2,0,10.41
+MM-2023-00408,11/28/2023,Consumer,West,Colorado,Office Supplies,Labels,27.3,2,0.15,9.14
+MM-2023-00409,10/17/2023,Consumer,South,Kentucky,Furniture,Chairs,669.34,3,0.15,26.17
+MM-2023-00409,10/17/2023,Consumer,South,Kentucky,Office Supplies,Labels,42.09,5,0.3,12.21
+MM-2023-00409,10/17/2023,Consumer,South,Kentucky,Office Supplies,Storage,172.83,3,0,17.77
+MM-2023-00410,3/25/2023,Consumer,West,Colorado,Office Supplies,Binders,189.54,5,0,40.97
+MM-2023-00411,4/15/2023,Home Office,South,Georgia,Office Supplies,Storage,273.44,4,0,47.31
+MM-2023-00411,4/15/2023,Home Office,South,Georgia,Technology,Phones,889.29,5,0.3,170.88
+MM-2023-00412,1/15/2023,Consumer,South,Georgia,Technology,Phones,384.12,2,0.15,112.9
+MM-2023-00413,5/7/2023,Consumer,Central,Illinois,Technology,Accessories,177.71,3,0.4,20.08
+MM-2023-00413,5/7/2023,Consumer,Central,Illinois,Office Supplies,Binders,114.02,2,0.1,30.23
+MM-2023-00414,10/26/2023,Corporate,South,Florida,Office Supplies,Labels,22.39,2,0.3,7.33
+MM-2023-00415,10/1/2023,Corporate,East,Ohio,Technology,Accessories,158.11,4,0.2,31.43
+MM-2023-00416,1/12/2023,Consumer,Central,Michigan,Office Supplies,Storage,51.92,1,0.15,2.38
+MM-2023-00417,7/1/2023,Consumer,East,Ohio,Furniture,Tables,952.07,2,0,-47.54
+MM-2023-00417,7/1/2023,Consumer,East,Ohio,Office Supplies,Paper,38.94,2,0,15.2
+MM-2023-00418,12/26/2023,Corporate,Central,Illinois,Office Supplies,Binders,41.22,1,0,14.59
+MM-2023-00419,7/17/2023,Consumer,East,Pennsylvania,Office Supplies,Paper,163.22,5,0.1,71.82
+MM-2023-00420,5/16/2023,Consumer,West,Colorado,Technology,Accessories,45.77,1,0.1,5.37
+MM-2023-00421,3/23/2023,Corporate,West,Colorado,Furniture,Bookcases,589.9,3,0,64.26
+MM-2023-00421,3/23/2023,Corporate,West,Colorado,Office Supplies,Paper,56.01,3,0,18.2
+MM-2023-00421,3/23/2023,Corporate,West,Colorado,Office Supplies,Paper,53.53,2,0.1,17.21
+MM-2023-00422,8/21/2023,Consumer,East,Pennsylvania,Office Supplies,Binders,44.31,2,0.3,5.46
+MM-2023-00422,8/21/2023,Consumer,East,Pennsylvania,Office Supplies,Storage,165.8,2,0,32.54
+MM-2023-00423,5/10/2023,Consumer,Central,Michigan,Office Supplies,Paper,29.89,2,0.3,11.1
+MM-2023-00423,5/10/2023,Consumer,Central,Michigan,Office Supplies,Storage,62.35,1,0.2,7.74
+MM-2023-00423,5/10/2023,Consumer,Central,Michigan,Furniture,Bookcases,289.1,2,0.3,-32
+MM-2023-00424,11/16/2023,Consumer,East,Ohio,Furniture,Bookcases,307.85,1,0,83.85
+MM-2023-00424,11/16/2023,Consumer,East,Ohio,Office Supplies,Storage,70.27,1,0,7.72
+MM-2023-00425,6/18/2023,Consumer,South,Kentucky,Technology,Accessories,76.7,2,0,17.23
+MM-2023-00426,6/11/2023,Consumer,Central,Texas,Office Supplies,Paper,141.79,5,0,60.11
+MM-2023-00427,3/24/2023,Consumer,West,Washington,Office Supplies,Binders,88.26,3,0.15,11.09
+MM-2023-00427,3/24/2023,Consumer,West,Washington,Office Supplies,Storage,238.79,3,0,36.41
+MM-2023-00428,2/5/2023,Corporate,West,Colorado,Furniture,Tables,727.52,1,0.15,1.83
+MM-2023-00428,2/5/2023,Corporate,West,Colorado,Technology,Phones,1191.05,3,0.15,231.07
+MM-2023-00429,11/21/2023,Consumer,East,Ohio,Office Supplies,Storage,163.95,2,0,33.01
+MM-2023-00429,11/21/2023,Consumer,East,Ohio,Technology,Phones,1771.26,6,0,387.3
+MM-2023-00430,10/26/2023,Consumer,Central,Illinois,Furniture,Bookcases,943.2,3,0,120.48
+MM-2023-00431,9/15/2023,Consumer,East,New York,Furniture,Chairs,1636.02,5,0.3,160.63
+MM-2023-00432,9/16/2023,Consumer,South,Georgia,Office Supplies,Binders,34.06,1,0.1,13.1
+MM-2023-00433,1/13/2023,Corporate,West,California,Office Supplies,Binders,299.59,4,0,120.52
+MM-2023-00434,10/27/2023,Corporate,West,Colorado,Furniture,Chairs,672.03,3,0,20.36
+MM-2023-00434,10/27/2023,Corporate,West,Colorado,Office Supplies,Paper,22.06,1,0,8.54
+MM-2023-00435,2/9/2023,Corporate,East,Ohio,Technology,Phones,782.09,3,0.2,140.87
+MM-2023-00436,10/16/2023,Consumer,West,California,Furniture,Tables,1902.67,2,0,-93.26
+MM-2023-00436,10/16/2023,Consumer,West,California,Office Supplies,Binders,272.55,3,0,96.09
+MM-2023-00437,5/18/2023,Corporate,East,Ohio,Office Supplies,Binders,45.84,1,0,11.04
+MM-2023-00437,5/18/2023,Corporate,East,Ohio,Office Supplies,Paper,19.26,2,0.4,0.4
+MM-2023-00438,10/25/2023,Corporate,Central,Texas,Office Supplies,Storage,192.69,2,0.1,23.64
+MM-2023-00439,10/26/2023,Consumer,Central,Michigan,Office Supplies,Storage,95.11,2,0.3,-4.02
+MM-2023-00440,1/23/2023,Consumer,Central,Illinois,Office Supplies,Storage,61.03,1,0,10.47
+MM-2023-00441,7/26/2023,Corporate,South,Georgia,Office Supplies,Labels,26.03,4,0.3,4.23
+MM-2023-00441,7/26/2023,Corporate,South,Georgia,Office Supplies,Binders,122.4,3,0,31.57
+MM-2023-00442,12/1/2023,Consumer,East,Pennsylvania,Furniture,Chairs,276.32,1,0,41.44
+MM-2023-00442,12/1/2023,Consumer,East,Pennsylvania,Office Supplies,Binders,114.46,2,0,31.28
+MM-2023-00443,2/2/2023,Corporate,Central,Michigan,Office Supplies,Storage,345.48,5,0.2,-25.14
+MM-2023-00444,6/3/2023,Consumer,Central,Texas,Technology,Phones,974.06,3,0.1,123.64
+MM-2023-00444,6/3/2023,Consumer,Central,Texas,Technology,Phones,1006.08,4,0.2,20.46
+MM-2023-00445,6/18/2023,Consumer,Central,Illinois,Technology,Copiers,794.23,1,0.2,264.45
+MM-2023-00446,6/9/2023,Consumer,East,New York,Office Supplies,Labels,30.99,3,0.2,5.91
+MM-2023-00447,3/15/2023,Corporate,West,Colorado,Office Supplies,Labels,14.39,1,0,6.84
+MM-2023-00448,6/9/2023,Home Office,West,California,Office Supplies,Paper,27.95,1,0.15,6.47
+MM-2023-00449,11/27/2023,Consumer,East,New York,Technology,Phones,436.28,1,0,114.04
+MM-2023-00449,11/27/2023,Consumer,East,New York,Office Supplies,Binders,133.37,2,0,28.95
+MM-2023-00450,12/2/2023,Consumer,West,California,Technology,Copiers,3161.65,2,0,952.97
+MM-2023-00451,11/13/2023,Consumer,South,Kentucky,Furniture,Tables,284.07,1,0.3,-6.56
+MM-2023-00451,11/13/2023,Consumer,South,Kentucky,Office Supplies,Binders,22.66,1,0,4.72
+MM-2023-00452,6/17/2023,Home Office,Central,Michigan,Office Supplies,Paper,49.22,3,0.3,6.36
+MM-2023-00453,11/8/2023,Consumer,South,Florida,Office Supplies,Storage,206.45,2,0,39.09
+MM-2023-00454,6/19/2023,Consumer,South,Florida,Office Supplies,Paper,12.75,1,0.2,3.11
+MM-2023-00455,5/8/2023,Home Office,West,Washington,Technology,Phones,770.13,2,0.1,115.45
+MM-2023-00456,10/2/2023,Home Office,West,Washington,Office Supplies,Labels,25.19,2,0,12.21
+MM-2023-00457,7/5/2023,Corporate,Central,Texas,Office Supplies,Paper,71.02,4,0.3,14.96
+MM-2023-00458,3/1/2023,Consumer,East,New York,Office Supplies,Paper,39.28,1,0.1,15.21
+MM-2023-00459,10/7/2023,Corporate,West,Washington,Technology,Accessories,286.7,4,0,43.27
+MM-2023-00460,6/12/2023,Home Office,West,Washington,Technology,Copiers,2127.1,3,0.1,721.36
+MM-2023-00461,1/27/2023,Corporate,East,Pennsylvania,Office Supplies,Paper,110.86,4,0.15,19.12
+MM-2023-00462,5/9/2023,Consumer,Central,Michigan,Furniture,Bookcases,292.37,1,0,37.19
+MM-2023-00462,5/9/2023,Consumer,Central,Michigan,Furniture,Tables,212.43,1,0.3,-17.49
+MM-2023-00463,10/2/2023,Consumer,Central,Texas,Office Supplies,Storage,89.92,1,0.2,17.49
+MM-2023-00464,4/20/2023,Corporate,South,Kentucky,Technology,Accessories,36.17,1,0,10.29
+MM-2023-00465,6/3/2023,Corporate,South,Georgia,Furniture,Chairs,487.95,2,0.2,-62.56
+MM-2023-00466,4/10/2023,Home Office,East,Ohio,Office Supplies,Paper,23.36,1,0.15,8.06
+MM-2023-00467,3/4/2023,Corporate,Central,Texas,Office Supplies,Binders,83.28,2,0.15,20.1
+MM-2023-00467,3/4/2023,Corporate,Central,Texas,Office Supplies,Paper,67.14,3,0.3,15.99
+MM-2023-00467,3/4/2023,Corporate,Central,Texas,Technology,Accessories,98.52,5,0.4,-2.49
+MM-2023-00468,4/27/2023,Corporate,East,Pennsylvania,Office Supplies,Paper,65.06,2,0,17.32
+MM-2023-00468,4/27/2023,Corporate,East,Pennsylvania,Office Supplies,Labels,60.18,5,0.15,5.5
+MM-2023-00469,4/22/2023,Corporate,South,Georgia,Office Supplies,Binders,131.53,4,0,1.1
+MM-2023-00469,4/22/2023,Corporate,South,Georgia,Office Supplies,Binders,45.62,2,0.1,9.23
+MM-2023-00469,4/22/2023,Corporate,South,Georgia,Furniture,Tables,402.11,1,0,35.17
+MM-2023-00470,12/4/2023,Corporate,South,Kentucky,Technology,Phones,580.54,3,0.15,79.73
+MM-2023-00470,12/4/2023,Corporate,South,Kentucky,Office Supplies,Binders,44.37,2,0,7.45
+MM-2023-00471,9/17/2023,Home Office,Central,Texas,Technology,Accessories,95.02,2,0.1,23.56
+MM-2023-00471,9/17/2023,Home Office,Central,Texas,Furniture,Bookcases,385.1,1,0,66.9
+MM-2023-00472,12/8/2023,Home Office,West,Washington,Office Supplies,Binders,87.45,2,0,17.28
+MM-2023-00472,12/8/2023,Home Office,West,Washington,Office Supplies,Paper,84.2,4,0.2,28.65
+MM-2023-00473,3/3/2023,Consumer,West,California,Office Supplies,Storage,584.32,4,0,106.35
+MM-2023-00474,3/21/2023,Corporate,East,New York,Furniture,Bookcases,360.28,3,0.2,-64.96
+MM-2023-00474,3/21/2023,Corporate,East,New York,Furniture,Bookcases,306.44,1,0.1,12
+MM-2023-00475,9/18/2023,Corporate,West,California,Office Supplies,Paper,75.01,2,0,23.53
+MM-2023-00476,7/12/2023,Corporate,South,Georgia,Technology,Accessories,120.47,4,0.3,14.8
+MM-2023-00476,7/12/2023,Corporate,South,Georgia,Office Supplies,Paper,39.5,2,0,14.83
+MM-2023-00477,9/11/2023,Home Office,West,Colorado,Technology,Copiers,1661.08,2,0,535.12
+MM-2023-00478,11/17/2023,Home Office,East,New York,Office Supplies,Binders,147.62,3,0.1,32.94
+MM-2023-00479,11/9/2023,Corporate,South,Florida,Office Supplies,Binders,61.09,2,0.2,9.53
+MM-2023-00479,11/9/2023,Corporate,South,Florida,Office Supplies,Paper,63.23,3,0,26.01
+MM-2023-00480,2/24/2023,Home Office,South,Kentucky,Furniture,Bookcases,392.93,2,0,61.71
+MM-2023-00480,2/24/2023,Home Office,South,Kentucky,Furniture,Chairs,849.89,3,0.15,43.15
+MM-2023-00481,1/28/2023,Consumer,East,Ohio,Technology,Phones,414.02,2,0,111.33
+MM-2023-00482,8/27/2023,Corporate,East,Pennsylvania,Furniture,Chairs,1360.94,4,0,26.06
+MM-2023-00482,8/27/2023,Corporate,East,Pennsylvania,Office Supplies,Storage,283.06,3,0,65.22
+MM-2023-00483,10/9/2023,Consumer,Central,Texas,Office Supplies,Binders,83.9,2,0,21.13
+MM-2023-00484,4/6/2023,Corporate,South,Georgia,Office Supplies,Labels,34,6,0.2,10.8
+MM-2023-00485,12/26/2023,Consumer,East,New York,Office Supplies,Binders,51.85,1,0,7.3
+MM-2023-00485,12/26/2023,Consumer,East,New York,Office Supplies,Binders,237.72,5,0.1,58.26
+MM-2023-00485,12/26/2023,Consumer,East,New York,Technology,Accessories,77.2,1,0.2,13.97
+MM-2023-00486,5/14/2023,Consumer,South,Kentucky,Furniture,Bookcases,758.77,5,0,119.32
+MM-2023-00487,6/22/2023,Corporate,West,California,Furniture,Bookcases,594.46,2,0,69.53
+MM-2023-00488,8/5/2023,Home Office,Central,Michigan,Office Supplies,Storage,244.35,3,0.15,5.52
+MM-2023-00489,7/17/2023,Corporate,East,Ohio,Office Supplies,Binders,80.75,2,0,23.25
+MM-2023-00490,3/22/2023,Home Office,West,California,Office Supplies,Paper,138.31,4,0,58.24
+MM-2023-00491,1/12/2023,Home Office,Central,Illinois,Technology,Accessories,104.58,2,0.15,23.7
+MM-2023-00491,1/12/2023,Home Office,Central,Illinois,Office Supplies,Paper,118.73,4,0.15,32.42
+MM-2023-00492,9/18/2023,Consumer,West,California,Technology,Accessories,126.46,2,0.4,3.74
+MM-2023-00493,7/5/2023,Corporate,West,Washington,Technology,Phones,745.13,3,0.4,-43.27
+MM-2023-00494,6/11/2023,Consumer,Central,Illinois,Office Supplies,Binders,130.52,3,0.15,38.37
+MM-2023-00495,4/3/2023,Home Office,East,New York,Furniture,Bookcases,497.66,2,0.2,-59.91
+MM-2023-00495,4/3/2023,Home Office,East,New York,Technology,Accessories,101.4,2,0.15,19.49
+MM-2023-00495,4/3/2023,Home Office,East,New York,Office Supplies,Labels,102.5,5,0.15,29.28
+MM-2023-00496,7/22/2023,Corporate,West,California,Office Supplies,Storage,214.54,2,0.2,17.66
+MM-2023-00496,7/22/2023,Corporate,West,California,Furniture,Chairs,1916.68,6,0.15,99.59
+MM-2023-00497,7/5/2023,Consumer,West,California,Office Supplies,Binders,91.74,1,0,14.68
+MM-2023-00498,3/9/2023,Home Office,South,Kentucky,Furniture,Chairs,1015.36,5,0,-25.93
+MM-2023-00499,12/28/2023,Consumer,South,Georgia,Technology,Phones,434.89,2,0.15,71.67
+MM-2023-00499,12/28/2023,Consumer,South,Georgia,Office Supplies,Binders,74.44,3,0.2,14.38
+MM-2023-00499,12/28/2023,Consumer,South,Georgia,Office Supplies,Labels,31.31,3,0,15.79
+MM-2023-00500,10/21/2023,Consumer,South,Florida,Office Supplies,Storage,138.9,2,0.2,5.95
+MM-2023-00501,9/4/2023,Consumer,South,Georgia,Office Supplies,Labels,29.54,3,0,11.75
+MM-2023-00502,1/4/2023,Corporate,Central,Michigan,Furniture,Tables,889.76,3,0.15,-10.55
+MM-2023-00503,10/9/2023,Corporate,Central,Michigan,Office Supplies,Binders,53.42,2,0.15,7.93
+MM-2023-00504,11/5/2023,Consumer,South,Kentucky,Office Supplies,Paper,31.82,2,0.15,11.91
+MM-2023-00504,11/5/2023,Consumer,South,Kentucky,Technology,Phones,1494.1,5,0,226.57
+MM-2023-00505,1/8/2023,Corporate,Central,Michigan,Office Supplies,Binders,59.28,2,0.15,-3.48
+MM-2023-00506,8/28/2023,Consumer,East,Ohio,Office Supplies,Binders,247.89,5,0,105.82
+MM-2023-00507,11/26/2023,Home Office,West,California,Office Supplies,Paper,37.79,1,0.15,10.78
+MM-2023-00508,1/14/2023,Consumer,Central,Texas,Office Supplies,Labels,75.51,4,0,17.74
+MM-2023-00509,10/2/2023,Consumer,West,California,Office Supplies,Binders,122.1,2,0,27.19
+MM-2023-00510,10/4/2023,Consumer,South,Georgia,Technology,Accessories,148.87,2,0,34.18
+MM-2023-00510,10/4/2023,Consumer,South,Georgia,Office Supplies,Labels,29.8,3,0.2,6.44
+MM-2023-00511,9/8/2023,Consumer,South,Georgia,Office Supplies,Binders,94.9,3,0,22.61
+MM-2023-00511,9/8/2023,Consumer,South,Georgia,Technology,Accessories,169.34,4,0,44.88
+MM-2023-00512,5/26/2023,Corporate,South,Kentucky,Technology,Accessories,176.26,5,0.15,30.26
+MM-2023-00513,10/4/2023,Consumer,West,Colorado,Office Supplies,Paper,41.24,2,0,11.36
+MM-2023-00513,10/4/2023,Consumer,West,Colorado,Office Supplies,Paper,123.75,6,0.2,11.9
+MM-2023-00513,10/4/2023,Consumer,West,Colorado,Office Supplies,Binders,104.17,2,0,18.72
+MM-2023-00514,12/5/2023,Consumer,South,Florida,Office Supplies,Labels,50.4,3,0,19.1
+MM-2023-00514,12/5/2023,Consumer,South,Florida,Office Supplies,Paper,152.57,6,0,61.98
+MM-2023-00515,12/28/2023,Consumer,East,Pennsylvania,Office Supplies,Paper,118.63,4,0,35.91
+MM-2023-00516,6/18/2023,Corporate,West,California,Furniture,Tables,1325.3,3,0.2,-82.33
+MM-2023-00517,6/3/2023,Consumer,South,Florida,Furniture,Bookcases,433.57,2,0,85.49
+MM-2023-00517,6/3/2023,Consumer,South,Florida,Technology,Copiers,1092.41,1,0.15,152.05
+MM-2023-00518,12/14/2023,Consumer,South,Florida,Office Supplies,Paper,58.8,2,0.1,13.4
+MM-2023-00519,3/15/2023,Home Office,East,Ohio,Office Supplies,Paper,15.82,1,0.15,5.9
+MM-2023-00519,3/15/2023,Home Office,East,Ohio,Technology,Copiers,1040.77,1,0,406.27
+MM-2023-00520,8/17/2023,Home Office,South,Georgia,Office Supplies,Paper,88.54,4,0,32.43
+MM-2023-00521,8/25/2023,Consumer,Central,Michigan,Office Supplies,Paper,91.11,3,0,37.49
+MM-2023-00521,8/25/2023,Consumer,Central,Michigan,Office Supplies,Paper,62.06,4,0.15,21.39
+MM-2023-00522,11/18/2023,Corporate,South,Florida,Office Supplies,Paper,26.2,1,0,8.24
+MM-2023-00523,9/20/2023,Corporate,West,Colorado,Office Supplies,Paper,87.06,4,0.1,28.52
+MM-2023-00524,7/20/2023,Consumer,Central,Texas,Office Supplies,Paper,37.77,2,0,16.78
+MM-2023-00524,7/20/2023,Consumer,Central,Texas,Office Supplies,Labels,28.6,3,0.3,5.34
+MM-2023-00524,7/20/2023,Consumer,Central,Texas,Office Supplies,Binders,197.64,6,0,43.81
+MM-2023-00525,3/15/2023,Consumer,West,California,Office Supplies,Paper,38.88,1,0,16.49
+MM-2023-00526,6/17/2023,Corporate,South,Kentucky,Technology,Phones,487.86,3,0.2,79.94
+MM-2023-00526,6/17/2023,Corporate,South,Kentucky,Office Supplies,Labels,47.95,4,0.1,9.76
+MM-2023-00527,4/1/2023,Consumer,Central,Texas,Furniture,Chairs,696.74,3,0,136.5
+MM-2023-00528,1/28/2023,Consumer,West,California,Office Supplies,Paper,82.58,2,0,27.35
+MM-2023-00529,2/19/2023,Home Office,East,Ohio,Office Supplies,Binders,153.48,5,0,22.59
+MM-2023-00530,3/23/2023,Corporate,East,Ohio,Office Supplies,Paper,116.45,5,0.1,36.21
+MM-2023-00531,9/5/2023,Corporate,Central,Michigan,Office Supplies,Binders,37.16,1,0,7.74
+MM-2023-00531,9/5/2023,Corporate,Central,Michigan,Office Supplies,Binders,35.15,1,0.2,1.01
+MM-2023-00532,2/8/2023,Corporate,South,Kentucky,Office Supplies,Labels,48.35,5,0.15,19.8
+MM-2023-00533,9/9/2023,Consumer,West,Colorado,Office Supplies,Paper,74.54,4,0,23.22
+MM-2023-00534,9/18/2023,Home Office,Central,Texas,Office Supplies,Labels,36.64,3,0.15,12.35
+MM-2023-00535,10/3/2023,Consumer,South,Kentucky,Technology,Accessories,86.05,3,0.2,8.67
+MM-2023-00536,11/16/2023,Home Office,East,New York,Furniture,Chairs,1619.24,5,0.1,-100.47
+MM-2023-00537,6/23/2023,Corporate,East,Pennsylvania,Office Supplies,Binders,38.92,1,0,9.23
+MM-2023-00538,6/6/2023,Corporate,Central,Illinois,Technology,Accessories,60.3,2,0.4,13.68
+MM-2023-00539,8/28/2023,Consumer,West,Washington,Furniture,Bookcases,707.22,2,0,125.39
+MM-2023-00540,12/8/2023,Consumer,West,California,Technology,Phones,847.49,3,0.3,113.73
+MM-2023-00540,12/8/2023,Consumer,West,California,Office Supplies,Storage,285.31,2,0.1,47.09
+MM-2023-00541,12/22/2023,Consumer,Central,Texas,Technology,Phones,1020.36,4,0.15,121.48
+MM-2023-00541,12/22/2023,Consumer,Central,Texas,Office Supplies,Storage,156.26,2,0.2,-2.75
+MM-2023-00541,12/22/2023,Consumer,Central,Texas,Technology,Accessories,157.12,4,0,47.08
+MM-2023-00542,10/21/2023,Consumer,Central,Michigan,Furniture,Tables,1194.01,3,0.1,-112.32
+MM-2023-00542,10/21/2023,Consumer,Central,Michigan,Office Supplies,Paper,63.27,5,0.2,10.64
+MM-2023-00543,3/25/2023,Consumer,East,Ohio,Office Supplies,Binders,146.4,4,0,39.1
+MM-2023-00544,9/20/2023,Consumer,West,Washington,Office Supplies,Paper,25.88,1,0,12.62
+MM-2023-00545,7/9/2023,Consumer,West,Washington,Technology,Accessories,58.2,1,0,20.63
+MM-2023-00545,7/9/2023,Consumer,West,Washington,Furniture,Bookcases,661.52,2,0,128.12
+MM-2023-00546,10/8/2023,Home Office,East,New York,Office Supplies,Binders,121.13,2,0.15,5.24
+MM-2023-00546,10/8/2023,Home Office,East,New York,Office Supplies,Paper,65.65,2,0,27.33
+MM-2023-00546,10/8/2023,Home Office,East,New York,Furniture,Chairs,1103.13,2,0.1,122.45
+MM-2023-00547,3/6/2023,Consumer,Central,Illinois,Technology,Accessories,152.24,2,0,44.5
+MM-2023-00548,9/15/2023,Consumer,South,Florida,Office Supplies,Binders,102.82,2,0,18.87
+MM-2023-00549,9/8/2023,Consumer,East,Ohio,Office Supplies,Paper,48.01,2,0.3,4.51
+MM-2023-00550,5/27/2023,Home Office,South,Georgia,Office Supplies,Labels,46.08,4,0,17.33
+MM-2023-00550,5/27/2023,Home Office,South,Georgia,Office Supplies,Binders,30.32,2,0.2,5.1
+MM-2023-00551,10/14/2023,Corporate,East,Pennsylvania,Office Supplies,Binders,163.86,3,0.1,37.77
+MM-2023-00552,11/22/2023,Corporate,South,Florida,Technology,Copiers,1741.5,2,0.2,361.98
+MM-2023-00552,11/22/2023,Corporate,South,Florida,Furniture,Chairs,682.61,2,0,192.4
+MM-2023-00553,6/3/2023,Consumer,West,California,Office Supplies,Paper,32.79,1,0.15,7.95
+MM-2023-00554,3/23/2023,Corporate,West,Colorado,Office Supplies,Storage,217.11,3,0.1,29.88
+MM-2023-00554,3/23/2023,Corporate,West,Colorado,Furniture,Bookcases,680.49,2,0,107.69
+MM-2023-00555,4/10/2023,Consumer,West,Colorado,Office Supplies,Binders,43.11,1,0.15,8.93
+MM-2023-00555,4/10/2023,Consumer,West,Colorado,Office Supplies,Binders,155.88,4,0,52.76
+MM-2023-00556,10/13/2023,Home Office,East,Ohio,Furniture,Chairs,442.56,2,0,91.61
+MM-2023-00557,8/16/2023,Home Office,East,New York,Technology,Copiers,3179.87,2,0,974.53
+MM-2023-00557,8/16/2023,Home Office,East,New York,Office Supplies,Storage,257.63,2,0.15,57.31
+MM-2023-00557,8/16/2023,Home Office,East,New York,Office Supplies,Binders,315.63,4,0.1,55.56
+MM-2023-00558,11/15/2023,Corporate,East,Pennsylvania,Office Supplies,Paper,149.41,5,0.3,46.56
+MM-2023-00558,11/15/2023,Corporate,East,Pennsylvania,Furniture,Chairs,816.99,3,0,140.96
+MM-2023-00558,11/15/2023,Corporate,East,Pennsylvania,Office Supplies,Storage,150.69,2,0,34.86
+MM-2023-00559,7/6/2023,Consumer,West,California,Technology,Phones,380.71,1,0,105.89
+MM-2023-00560,12/24/2023,Corporate,West,California,Technology,Accessories,840.83,6,0,185.73
+MM-2023-00561,5/23/2023,Consumer,South,Kentucky,Office Supplies,Binders,18.69,1,0.4,-1.53
+MM-2023-00562,12/11/2023,Corporate,East,New York,Furniture,Chairs,271.2,1,0.15,26.96
+MM-2023-00562,12/11/2023,Corporate,East,New York,Office Supplies,Paper,332.91,6,0.1,73.82
+MM-2023-00562,12/11/2023,Corporate,East,New York,Office Supplies,Storage,145.32,2,0.4,-9.13
+MM-2023-00563,4/2/2023,Consumer,East,Pennsylvania,Office Supplies,Storage,210.49,3,0.3,-9.87
+MM-2023-00564,3/18/2023,Consumer,South,Florida,Furniture,Tables,3137.91,6,0,-249.27
+MM-2023-00565,2/5/2023,Corporate,West,Washington,Office Supplies,Labels,21.61,1,0,9.74
+MM-2023-00566,5/20/2023,Consumer,Central,Illinois,Furniture,Chairs,1332.17,4,0,76.88
+MM-2023-00567,8/15/2023,Consumer,East,Pennsylvania,Office Supplies,Paper,126.14,4,0,39.37
+MM-2023-00568,11/3/2023,Consumer,East,Pennsylvania,Furniture,Tables,1146.11,3,0.15,46.19
+MM-2023-00568,11/3/2023,Consumer,East,Pennsylvania,Office Supplies,Binders,102.08,4,0.3,10.15
+MM-2023-00568,11/3/2023,Consumer,East,Pennsylvania,Office Supplies,Paper,54.43,2,0,26.33
+MM-2023-00569,1/19/2023,Corporate,West,California,Technology,Phones,1783.91,3,0.2,272.06
+MM-2023-00569,1/19/2023,Corporate,West,California,Technology,Accessories,102.45,1,0,27.55
+MM-2023-00570,2/4/2023,Corporate,East,Ohio,Office Supplies,Paper,36.05,2,0.4,8.89
+MM-2023-00571,9/13/2023,Home Office,West,Washington,Technology,Phones,733.06,2,0,272.96
+MM-2023-00572,6/28/2023,Consumer,East,New York,Office Supplies,Binders,158.79,4,0.15,18.5
+MM-2023-00573,9/24/2023,Consumer,West,Washington,Office Supplies,Paper,30.16,1,0,9.95
+MM-2023-00574,3/18/2023,Consumer,West,Washington,Office Supplies,Paper,64.74,2,0.15,18.29
+MM-2023-00574,3/18/2023,Consumer,West,Washington,Office Supplies,Storage,191.13,2,0.2,9.49
+MM-2023-00575,5/21/2023,Corporate,West,Washington,Office Supplies,Labels,18,1,0,8.05
+MM-2023-00576,3/13/2023,Corporate,West,California,Furniture,Bookcases,833.31,3,0,75.13
+MM-2023-00577,5/19/2023,Corporate,Central,Illinois,Furniture,Chairs,772.88,2,0,36.78
+MM-2023-00578,6/2/2023,Consumer,South,Georgia,Office Supplies,Binders,56.21,2,0,17.33
+MM-2023-00579,3/25/2023,Consumer,South,Kentucky,Technology,Accessories,55.58,2,0,12.79
+MM-2023-00579,3/25/2023,Consumer,South,Kentucky,Office Supplies,Binders,68.35,2,0.15,21.14
+MM-2023-00579,3/25/2023,Consumer,South,Kentucky,Office Supplies,Paper,28.35,2,0.1,8
+MM-2024-00580,6/21/2024,Corporate,South,Florida,Office Supplies,Paper,72.05,3,0.15,17.55
+MM-2024-00581,7/23/2024,Corporate,South,Florida,Office Supplies,Paper,177.52,6,0.2,41.37
+MM-2024-00582,10/26/2024,Corporate,South,Kentucky,Office Supplies,Labels,21.08,2,0.2,6.56
+MM-2024-00582,10/26/2024,Corporate,South,Kentucky,Office Supplies,Storage,161.69,2,0,29.72
+MM-2024-00583,1/1/2024,Consumer,Central,Michigan,Technology,Phones,282.99,1,0.2,19.11
+MM-2024-00583,1/1/2024,Consumer,Central,Michigan,Office Supplies,Storage,220.04,5,0.4,-14.48
+MM-2024-00584,9/26/2024,Consumer,South,Georgia,Office Supplies,Storage,70.88,1,0.1,9.98
+MM-2024-00584,9/26/2024,Consumer,South,Georgia,Technology,Phones,209.88,1,0.1,34.46
+MM-2024-00585,8/10/2024,Corporate,East,Pennsylvania,Furniture,Chairs,626.24,2,0.15,16.9
+MM-2024-00586,9/15/2024,Corporate,Central,Michigan,Furniture,Bookcases,683.45,3,0.2,-27.77
+MM-2024-00587,11/22/2024,Consumer,South,Florida,Office Supplies,Binders,53.86,1,0,3.56
+MM-2024-00588,9/9/2024,Home Office,Central,Texas,Technology,Copiers,1751.24,2,0,583.76
+MM-2024-00589,10/13/2024,Consumer,Central,Michigan,Technology,Phones,914.42,3,0,240.48
+MM-2024-00590,4/14/2024,Corporate,West,Colorado,Office Supplies,Paper,54.42,2,0,19.05
+MM-2024-00591,11/15/2024,Consumer,East,Pennsylvania,Technology,Phones,736.85,2,0,245.75
+MM-2024-00592,6/8/2024,Consumer,South,Kentucky,Office Supplies,Paper,81.79,4,0,36.95
+MM-2024-00592,6/8/2024,Consumer,South,Kentucky,Technology,Copiers,1164.67,2,0,497.94
+MM-2024-00593,11/26/2024,Consumer,West,Washington,Office Supplies,Binders,142.55,3,0.2,7.11
+MM-2024-00594,8/22/2024,Consumer,West,California,Technology,Phones,1861.11,5,0.4,-22
+MM-2024-00594,8/22/2024,Consumer,West,California,Office Supplies,Binders,282.69,4,0,59.97
+MM-2024-00595,10/4/2024,Consumer,Central,Texas,Office Supplies,Storage,76.35,1,0.3,-3.68
+MM-2024-00596,8/22/2024,Corporate,West,Colorado,Office Supplies,Binders,98.23,3,0.3,3.99
+MM-2024-00597,11/6/2024,Consumer,South,Florida,Technology,Accessories,213.66,3,0,43.27
+MM-2024-00597,11/6/2024,Consumer,South,Florida,Technology,Phones,1848.8,6,0.15,104.66
+MM-2024-00597,11/6/2024,Consumer,South,Florida,Technology,Phones,727.18,2,0,152.39
+MM-2024-00598,12/9/2024,Consumer,South,Florida,Office Supplies,Paper,42.8,2,0,11.69
+MM-2024-00599,11/11/2024,Corporate,West,Washington,Office Supplies,Binders,104.47,2,0.15,32.22
+MM-2024-00599,11/11/2024,Corporate,West,Washington,Furniture,Tables,1165.65,2,0,60.29
+MM-2024-00600,4/14/2024,Consumer,East,Ohio,Furniture,Bookcases,568.33,3,0,107.92
+MM-2024-00601,9/7/2024,Corporate,Central,Texas,Technology,Accessories,51.46,1,0.2,5.8
+MM-2024-00601,9/7/2024,Corporate,Central,Texas,Technology,Phones,783.56,2,0.2,114.93
+MM-2024-00602,8/1/2024,Consumer,East,New York,Office Supplies,Binders,129.43,3,0.15,17.95
+MM-2024-00603,2/17/2024,Corporate,South,Florida,Office Supplies,Binders,205.29,4,0,42.35
+MM-2024-00603,2/17/2024,Corporate,South,Florida,Office Supplies,Labels,116.88,5,0,48.46
+MM-2024-00604,6/6/2024,Consumer,South,Florida,Office Supplies,Paper,21.89,1,0.4,1.2
+MM-2024-00605,3/25/2024,Corporate,West,California,Office Supplies,Paper,209.64,6,0.1,79.08
+MM-2024-00606,9/28/2024,Corporate,East,New York,Office Supplies,Paper,78.35,3,0.1,21.19
+MM-2024-00607,2/27/2024,Corporate,East,New York,Office Supplies,Binders,111.52,3,0,28.08
+MM-2024-00608,9/18/2024,Corporate,East,Ohio,Technology,Phones,529.36,2,0,119.61
+MM-2024-00609,10/9/2024,Consumer,South,Kentucky,Technology,Phones,1278.93,6,0,364.51
+MM-2024-00609,10/9/2024,Consumer,South,Kentucky,Office Supplies,Labels,12.69,2,0.15,4.95
+MM-2024-00609,10/9/2024,Consumer,South,Kentucky,Office Supplies,Binders,28.78,1,0,4.28
+MM-2024-00610,1/14/2024,Corporate,South,Georgia,Office Supplies,Labels,82.18,6,0.1,37.83
+MM-2024-00610,1/14/2024,Corporate,South,Georgia,Office Supplies,Binders,33.94,1,0,8.91
+MM-2024-00611,11/12/2024,Corporate,South,Georgia,Office Supplies,Binders,122.89,2,0,28.67
+MM-2024-00611,11/12/2024,Corporate,South,Georgia,Technology,Accessories,127.13,3,0,47.85
+MM-2024-00612,5/7/2024,Corporate,West,Colorado,Office Supplies,Storage,94.47,1,0,11.08
+MM-2024-00612,5/7/2024,Corporate,West,Colorado,Office Supplies,Storage,260.47,3,0,18.52
+MM-2024-00612,5/7/2024,Corporate,West,Colorado,Office Supplies,Binders,97.56,3,0,37.9
+MM-2024-00613,8/27/2024,Consumer,Central,Texas,Technology,Copiers,2823.65,3,0,1158.2
+MM-2024-00613,8/27/2024,Consumer,Central,Texas,Technology,Phones,2277.43,6,0.2,55.33
+MM-2024-00614,11/20/2024,Home Office,East,New York,Technology,Accessories,218.74,3,0.2,29.26
+MM-2024-00614,11/20/2024,Home Office,East,New York,Furniture,Tables,2608.21,4,0,-175
+MM-2024-00615,12/15/2024,Home Office,West,Washington,Office Supplies,Paper,176.92,5,0,60
+MM-2024-00616,10/3/2024,Consumer,East,New York,Technology,Copiers,3822.02,4,0.15,909.57
+MM-2024-00617,11/10/2024,Home Office,South,Georgia,Office Supplies,Paper,54.64,3,0,21.62
+MM-2024-00617,11/10/2024,Home Office,South,Georgia,Furniture,Bookcases,410.52,2,0,44.07
+MM-2024-00617,11/10/2024,Home Office,South,Georgia,Office Supplies,Paper,19.47,1,0.15,4.54
+MM-2024-00618,12/1/2024,Home Office,South,Georgia,Office Supplies,Paper,45.82,3,0.2,5.98
+MM-2024-00618,12/1/2024,Home Office,South,Georgia,Office Supplies,Storage,335.24,5,0,39.07
+MM-2024-00619,5/26/2024,Consumer,Central,Illinois,Furniture,Chairs,1049.87,3,0.15,-9
+MM-2024-00619,5/26/2024,Consumer,Central,Illinois,Office Supplies,Paper,123.31,4,0.1,37
+MM-2024-00619,5/26/2024,Consumer,Central,Illinois,Office Supplies,Binders,30.86,1,0.4,-0.4
+MM-2024-00620,5/17/2024,Consumer,West,Colorado,Furniture,Bookcases,479.29,2,0.15,-18.45
+MM-2024-00621,8/28/2024,Consumer,East,Pennsylvania,Office Supplies,Binders,79.29,2,0,8.8
+MM-2024-00622,12/6/2024,Consumer,Central,Michigan,Office Supplies,Binders,216.39,6,0.2,36.2
+MM-2024-00623,9/2/2024,Corporate,South,Kentucky,Office Supplies,Binders,24.2,1,0,8.9
+MM-2024-00624,5/14/2024,Consumer,South,Georgia,Technology,Copiers,2443.37,3,0.1,584.91
+MM-2024-00624,5/14/2024,Consumer,South,Georgia,Office Supplies,Paper,33.69,2,0.2,7.01
+MM-2024-00624,5/14/2024,Consumer,South,Georgia,Furniture,Tables,424.13,1,0,-27.31
+MM-2024-00625,3/21/2024,Corporate,South,Florida,Technology,Copiers,1167.41,1,0.2,359.12
+MM-2024-00626,3/21/2024,Consumer,South,Kentucky,Office Supplies,Paper,36.06,2,0.15,10.93
+MM-2024-00627,3/5/2024,Corporate,West,California,Office Supplies,Storage,299.47,3,0.1,37.03
+MM-2024-00628,1/3/2024,Corporate,Central,Michigan,Office Supplies,Paper,35.65,2,0,15.4
+MM-2024-00629,1/9/2024,Consumer,East,Ohio,Office Supplies,Paper,23.3,1,0,8.12
+MM-2024-00629,1/9/2024,Consumer,East,Ohio,Office Supplies,Paper,29.22,1,0.1,8.64
+MM-2024-00629,1/9/2024,Consumer,East,Ohio,Office Supplies,Binders,99.66,2,0,22.64
+MM-2024-00630,12/3/2024,Consumer,Central,Illinois,Office Supplies,Binders,155.67,3,0.2,5.33
+MM-2024-00630,12/3/2024,Consumer,Central,Illinois,Office Supplies,Binders,76.59,2,0.1,22.13
+MM-2024-00630,12/3/2024,Consumer,Central,Illinois,Office Supplies,Binders,192.49,3,0,55.71
+MM-2024-00631,6/9/2024,Consumer,Central,Illinois,Office Supplies,Binders,43.91,1,0,9.38
+MM-2024-00632,12/1/2024,Corporate,Central,Michigan,Office Supplies,Labels,21.97,2,0.3,8.58
+MM-2024-00633,7/17/2024,Consumer,South,Georgia,Furniture,Tables,1020.01,2,0,-21.04
+MM-2024-00634,7/9/2024,Corporate,Central,Illinois,Office Supplies,Binders,98.1,3,0.4,5.22
+MM-2024-00634,7/9/2024,Corporate,Central,Illinois,Furniture,Chairs,1299.1,3,0.1,147.27
+MM-2024-00634,7/9/2024,Corporate,Central,Illinois,Technology,Copiers,1893.14,2,0.2,325.65
+MM-2024-00635,8/24/2024,Corporate,Central,Michigan,Technology,Phones,489.3,2,0,26.61
+MM-2024-00635,8/24/2024,Corporate,Central,Michigan,Furniture,Tables,1033.37,2,0,125.95
+MM-2024-00636,12/11/2024,Consumer,West,Washington,Technology,Accessories,138.99,2,0.15,48.84
+MM-2024-00636,12/11/2024,Consumer,West,Washington,Office Supplies,Labels,38.89,2,0,16.84
+MM-2024-00637,4/5/2024,Corporate,West,Colorado,Office Supplies,Binders,18.45,1,0.4,4.1
+MM-2024-00638,10/11/2024,Corporate,Central,Texas,Technology,Phones,1013.55,3,0.3,98.28
+MM-2024-00639,9/12/2024,Corporate,West,Colorado,Office Supplies,Binders,186.74,6,0,45.83
+MM-2024-00639,9/12/2024,Corporate,West,Colorado,Office Supplies,Binders,30.86,1,0.2,5.29
+MM-2024-00640,11/27/2024,Consumer,East,New York,Office Supplies,Storage,128.66,1,0.2,13.37
+MM-2024-00640,11/27/2024,Consumer,East,New York,Office Supplies,Binders,167.54,4,0,44.55
+MM-2024-00641,2/14/2024,Consumer,East,Ohio,Office Supplies,Binders,97.52,2,0,20.72
+MM-2024-00642,5/11/2024,Home Office,East,Pennsylvania,Technology,Phones,654.15,2,0,131.11
+MM-2024-00643,9/27/2024,Consumer,East,Ohio,Technology,Accessories,69.8,2,0.3,0.92
+MM-2024-00644,7/20/2024,Corporate,Central,Texas,Office Supplies,Paper,27.13,1,0.2,9.97
+MM-2024-00645,9/13/2024,Home Office,South,Florida,Office Supplies,Binders,145.78,4,0.1,-9.96
+MM-2024-00645,9/13/2024,Home Office,South,Florida,Office Supplies,Labels,59.48,3,0,16.24
+MM-2024-00645,9/13/2024,Home Office,South,Florida,Office Supplies,Paper,57.33,2,0.1,23.22
+MM-2024-00646,9/1/2024,Consumer,Central,Illinois,Office Supplies,Paper,196.96,5,0.1,50.76
+MM-2024-00646,9/1/2024,Consumer,Central,Illinois,Office Supplies,Paper,55.08,2,0.1,26.71
+MM-2024-00646,9/1/2024,Consumer,Central,Illinois,Office Supplies,Binders,89.93,2,0.1,20.36
+MM-2024-00647,10/24/2024,Home Office,South,Florida,Office Supplies,Binders,179.79,4,0,38.57
+MM-2024-00647,10/24/2024,Home Office,South,Florida,Technology,Copiers,3286.97,4,0,926.47
+MM-2024-00647,10/24/2024,Home Office,South,Florida,Technology,Phones,702.77,2,0,111.22
+MM-2024-00648,7/8/2024,Consumer,East,New York,Office Supplies,Binders,320.24,6,0.15,48.65
+MM-2024-00648,7/8/2024,Consumer,East,New York,Office Supplies,Storage,337.31,4,0.15,-6.81
+MM-2024-00649,9/27/2024,Corporate,West,Colorado,Office Supplies,Binders,93.9,3,0.15,5.01
+MM-2024-00649,9/27/2024,Corporate,West,Colorado,Office Supplies,Labels,75.19,3,0,25.91
+MM-2024-00649,9/27/2024,Corporate,West,Colorado,Office Supplies,Binders,87.96,2,0,21.94
+MM-2024-00650,3/10/2024,Consumer,East,Pennsylvania,Office Supplies,Paper,93.18,4,0,28.34
+MM-2024-00651,1/5/2024,Corporate,West,Washington,Office Supplies,Labels,84.74,4,0,34.92
+MM-2024-00652,3/2/2024,Corporate,East,New York,Office Supplies,Binders,104.78,2,0.1,25.29
+MM-2024-00652,3/2/2024,Corporate,East,New York,Furniture,Tables,945.57,2,0.3,-161.14
+MM-2024-00653,9/6/2024,Corporate,Central,Texas,Technology,Phones,462.26,2,0.4,-34.7
+MM-2024-00653,9/6/2024,Corporate,Central,Texas,Office Supplies,Binders,195.41,4,0,61.56
+MM-2024-00654,6/4/2024,Corporate,East,Pennsylvania,Office Supplies,Paper,31.81,1,0,15.92
+MM-2024-00655,9/26/2024,Consumer,South,Florida,Furniture,Tables,1469.38,2,0,172.75
+MM-2024-00655,9/26/2024,Consumer,South,Florida,Office Supplies,Storage,103.09,1,0,27.54
+MM-2024-00655,9/26/2024,Consumer,South,Florida,Furniture,Tables,548.87,1,0.2,-40.9
+MM-2024-00656,8/5/2024,Consumer,Central,Texas,Furniture,Bookcases,214.57,1,0.3,-35.76
+MM-2024-00657,4/27/2024,Corporate,Central,Illinois,Technology,Copiers,1105.5,1,0.2,234.88
+MM-2024-00658,10/21/2024,Consumer,East,New York,Office Supplies,Storage,351.87,3,0,81.56
+MM-2024-00659,4/25/2024,Corporate,West,Washington,Furniture,Bookcases,3060.39,6,0,1024.98
+MM-2024-00659,4/25/2024,Corporate,West,Washington,Office Supplies,Paper,43.52,1,0.2,13.96
+MM-2024-00660,3/26/2024,Corporate,South,Florida,Office Supplies,Binders,230.71,5,0.15,16.08
+MM-2024-00661,10/19/2024,Consumer,West,Colorado,Office Supplies,Paper,81.37,3,0,25.09
+MM-2024-00662,11/25/2024,Corporate,Central,Illinois,Furniture,Chairs,1312.49,3,0.2,-19.18
+MM-2024-00662,11/25/2024,Corporate,Central,Illinois,Office Supplies,Labels,63.66,4,0.15,21.51
+MM-2024-00663,2/13/2024,Consumer,West,Washington,Technology,Copiers,3287.66,3,0,1238.51
+MM-2024-00663,2/13/2024,Consumer,West,Washington,Technology,Phones,374.39,1,0.3,38.81
+MM-2024-00664,11/1/2024,Consumer,South,Florida,Furniture,Tables,1265.16,3,0.3,-219.9
+MM-2024-00665,6/12/2024,Home Office,Central,Texas,Office Supplies,Storage,311.71,3,0.2,34.74
+MM-2024-00665,6/12/2024,Home Office,Central,Texas,Technology,Accessories,197.21,6,0.4,27.29
+MM-2024-00665,6/12/2024,Home Office,Central,Texas,Technology,Phones,752.59,4,0.3,47.98
+MM-2024-00666,5/15/2024,Consumer,West,Washington,Office Supplies,Storage,73.39,1,0.15,0.94
+MM-2024-00667,2/25/2024,Consumer,West,Colorado,Office Supplies,Storage,217,2,0,17.57
+MM-2024-00667,2/25/2024,Consumer,West,Colorado,Furniture,Bookcases,312.4,2,0.4,-50.02
+MM-2024-00668,11/12/2024,Consumer,West,Colorado,Furniture,Tables,698.87,2,0.3,-116.46
+MM-2024-00668,11/12/2024,Consumer,West,Colorado,Technology,Accessories,298.98,4,0,55.31
+MM-2024-00668,11/12/2024,Consumer,West,Colorado,Furniture,Tables,2165.61,4,0,-400.95
+MM-2024-00669,1/8/2024,Consumer,East,Ohio,Office Supplies,Paper,164.21,6,0,67.74
+MM-2024-00670,10/5/2024,Corporate,South,Kentucky,Office Supplies,Storage,197.67,3,0.2,25.78
+MM-2024-00671,12/26/2024,Consumer,South,Kentucky,Technology,Copiers,544.09,1,0.2,122.93
+MM-2024-00672,10/17/2024,Consumer,Central,Michigan,Office Supplies,Storage,174.66,4,0.4,-8.89
+MM-2024-00673,11/8/2024,Consumer,West,Colorado,Furniture,Chairs,591,3,0.1,57.02
+MM-2024-00673,11/8/2024,Consumer,West,Colorado,Technology,Accessories,64.16,1,0,22.69
+MM-2024-00673,11/8/2024,Consumer,West,Colorado,Technology,Copiers,3719.31,6,0,1412.52
+MM-2024-00674,4/7/2024,Consumer,West,Washington,Furniture,Bookcases,1021.92,3,0.2,-97.5
+MM-2024-00675,5/26/2024,Home Office,West,California,Technology,Phones,1257.38,2,0.2,254.69
+MM-2024-00675,5/26/2024,Home Office,West,California,Office Supplies,Binders,175.83,2,0,37.88
+MM-2024-00676,3/13/2024,Consumer,West,Colorado,Office Supplies,Storage,98.8,1,0.15,-3.17
+MM-2024-00677,3/17/2024,Corporate,Central,Michigan,Technology,Phones,707.93,3,0.2,-58.89
+MM-2024-00678,2/23/2024,Consumer,Central,Texas,Technology,Phones,664.71,3,0.3,-42.55
+MM-2024-00678,2/23/2024,Consumer,Central,Texas,Furniture,Chairs,269.61,1,0.2,-4.69
+MM-2024-00679,6/16/2024,Corporate,East,Ohio,Office Supplies,Labels,64.9,4,0,22.9
+MM-2024-00679,6/16/2024,Corporate,East,Ohio,Office Supplies,Labels,11.32,1,0,4.46
+MM-2024-00679,6/16/2024,Corporate,East,Ohio,Office Supplies,Paper,69.74,2,0.2,16.9
+MM-2024-00680,1/5/2024,Home Office,East,Pennsylvania,Office Supplies,Paper,51.51,3,0.3,3.18
+MM-2024-00680,1/5/2024,Home Office,East,Pennsylvania,Technology,Accessories,255.83,5,0,61.35
+MM-2024-00680,1/5/2024,Home Office,East,Pennsylvania,Technology,Accessories,53.43,1,0,14.37
+MM-2024-00681,2/20/2024,Consumer,South,Georgia,Technology,Phones,510.91,2,0,125.77
+MM-2024-00681,2/20/2024,Consumer,South,Georgia,Office Supplies,Binders,70.3,2,0,18.17
+MM-2024-00681,2/20/2024,Consumer,South,Georgia,Technology,Copiers,1399.92,2,0.1,384.23
+MM-2024-00682,1/16/2024,Consumer,South,Kentucky,Office Supplies,Binders,45.36,1,0,9.79
+MM-2024-00683,9/1/2024,Home Office,South,Kentucky,Office Supplies,Binders,73.44,3,0.1,15.6
+MM-2024-00684,8/25/2024,Consumer,Central,Michigan,Office Supplies,Paper,16.15,1,0.2,5.1
+MM-2024-00685,5/9/2024,Consumer,East,New York,Technology,Phones,551.84,1,0,113.68
+MM-2024-00686,5/18/2024,Home Office,West,Colorado,Furniture,Chairs,1219.71,3,0,216.92
+MM-2024-00687,6/7/2024,Corporate,East,New York,Office Supplies,Labels,40.72,2,0.15,7.38
+MM-2024-00688,9/15/2024,Corporate,West,Colorado,Office Supplies,Binders,83.24,2,0.15,27.89
+MM-2024-00688,9/15/2024,Corporate,West,Colorado,Office Supplies,Storage,262.94,3,0,57.5
+MM-2024-00688,9/15/2024,Corporate,West,Colorado,Office Supplies,Paper,34.8,2,0,13.14
+MM-2024-00689,5/24/2024,Consumer,East,Ohio,Technology,Phones,255.05,1,0.2,25.1
+MM-2024-00689,5/24/2024,Consumer,East,Ohio,Technology,Accessories,115.16,3,0,34.5
+MM-2024-00689,5/24/2024,Consumer,East,Ohio,Technology,Accessories,31.28,1,0.2,2.23
+MM-2024-00690,2/12/2024,Home Office,Central,Illinois,Office Supplies,Binders,177.51,3,0,27.05
+MM-2024-00690,2/12/2024,Home Office,Central,Illinois,Office Supplies,Binders,70.78,2,0.1,14.52
+MM-2024-00690,2/12/2024,Home Office,Central,Illinois,Office Supplies,Binders,34.66,1,0.2,1.64
+MM-2024-00691,8/1/2024,Consumer,East,Ohio,Furniture,Bookcases,656.85,3,0,113.81
+MM-2024-00692,9/26/2024,Consumer,Central,Illinois,Office Supplies,Labels,14.73,1,0.2,4.08
+MM-2024-00693,10/17/2024,Corporate,East,New York,Office Supplies,Paper,141.53,3,0,35.05
+MM-2024-00694,3/24/2024,Consumer,West,California,Technology,Accessories,196.89,3,0,25.47
+MM-2024-00695,4/8/2024,Consumer,South,Florida,Technology,Phones,766.18,2,0,176.06
+MM-2024-00695,4/8/2024,Consumer,South,Florida,Technology,Accessories,446.04,5,0,144.22
+MM-2024-00696,6/20/2024,Corporate,East,Pennsylvania,Office Supplies,Storage,203.45,2,0.15,7.95
+MM-2024-00696,6/20/2024,Corporate,East,Pennsylvania,Office Supplies,Storage,178.79,2,0.2,15.84
+MM-2024-00697,12/28/2024,Consumer,Central,Michigan,Office Supplies,Binders,62.02,2,0,18.23
+MM-2024-00697,12/28/2024,Consumer,Central,Michigan,Technology,Accessories,63.71,2,0.3,1.87
+MM-2024-00698,9/20/2024,Corporate,Central,Illinois,Office Supplies,Labels,81.97,5,0.2,29.42
+MM-2024-00698,9/20/2024,Corporate,Central,Illinois,Office Supplies,Binders,31.96,1,0.4,-1.96
+MM-2024-00699,3/4/2024,Consumer,West,Colorado,Office Supplies,Paper,210.45,6,0.15,32.01
+MM-2024-00700,2/21/2024,Consumer,West,Washington,Furniture,Tables,1267.91,3,0.2,-124.12
+MM-2024-00701,6/25/2024,Consumer,West,Washington,Office Supplies,Storage,165.57,2,0.2,28.54
+MM-2024-00702,10/18/2024,Consumer,West,California,Office Supplies,Binders,132.53,2,0,25.29
+MM-2024-00703,4/19/2024,Consumer,Central,Texas,Office Supplies,Paper,38.02,1,0,13.25
+MM-2024-00703,4/19/2024,Consumer,Central,Texas,Technology,Accessories,256.72,4,0,88.37
+MM-2024-00704,6/17/2024,Consumer,West,California,Office Supplies,Paper,80.39,2,0,36.97
+MM-2024-00705,6/25/2024,Consumer,East,Pennsylvania,Office Supplies,Paper,154.55,4,0,57.18
+MM-2024-00706,12/28/2024,Corporate,West,Colorado,Furniture,Bookcases,592.2,3,0,64.91
+MM-2024-00707,11/28/2024,Consumer,East,Pennsylvania,Technology,Phones,1131.6,4,0,273.14
+MM-2024-00707,11/28/2024,Consumer,East,Pennsylvania,Technology,Accessories,88.1,2,0.15,24.9
+MM-2024-00707,11/28/2024,Consumer,East,Pennsylvania,Office Supplies,Binders,59.62,1,0,19.3
+MM-2024-00708,9/7/2024,Home Office,West,California,Furniture,Bookcases,2230.14,6,0,363.56
+MM-2024-00708,9/7/2024,Home Office,West,California,Furniture,Tables,455.13,1,0.2,-119.11
+MM-2024-00709,9/20/2024,Consumer,South,Kentucky,Technology,Phones,258.58,1,0.2,18.52
+MM-2024-00710,3/21/2024,Consumer,East,New York,Office Supplies,Labels,18.61,1,0.1,3.87
+MM-2024-00710,3/21/2024,Consumer,East,New York,Office Supplies,Storage,118.85,1,0,12.15
+MM-2024-00711,1/3/2024,Consumer,Central,Texas,Office Supplies,Storage,256.29,2,0.1,28.16
+MM-2024-00711,1/3/2024,Consumer,Central,Texas,Office Supplies,Binders,228.07,5,0.2,21.53
+MM-2024-00711,1/3/2024,Consumer,Central,Texas,Office Supplies,Paper,18.31,1,0.2,3.29
+MM-2024-00712,10/16/2024,Consumer,East,Pennsylvania,Technology,Accessories,165.07,3,0.4,9.9
+MM-2024-00713,10/22/2024,Consumer,Central,Illinois,Office Supplies,Binders,196.75,3,0.2,14.3
+MM-2024-00713,10/22/2024,Consumer,Central,Illinois,Technology,Phones,805.59,2,0,104.81
+MM-2024-00714,3/15/2024,Consumer,South,Florida,Office Supplies,Paper,62.63,3,0.4,16.26
+MM-2024-00714,3/15/2024,Consumer,South,Florida,Office Supplies,Binders,142.48,3,0,23.71
+MM-2024-00714,3/15/2024,Consumer,South,Florida,Office Supplies,Storage,342.09,3,0,69.78
+MM-2024-00715,9/8/2024,Consumer,East,Pennsylvania,Technology,Accessories,415.83,6,0,50.26
+MM-2024-00716,11/21/2024,Corporate,West,California,Office Supplies,Storage,161.9,1,0,20.29
+MM-2024-00716,11/21/2024,Corporate,West,California,Office Supplies,Binders,244.13,3,0.15,17
+MM-2024-00717,11/12/2024,Corporate,Central,Michigan,Office Supplies,Storage,52.12,1,0,11.56
+MM-2024-00718,5/11/2024,Corporate,West,Washington,Office Supplies,Paper,179.36,4,0.1,70.02
+MM-2024-00719,8/20/2024,Corporate,East,Pennsylvania,Technology,Accessories,310.37,6,0.15,34.42
+MM-2024-00720,4/27/2024,Consumer,South,Georgia,Office Supplies,Binders,44.07,2,0,12.59
+MM-2024-00721,5/22/2024,Home Office,Central,Texas,Furniture,Tables,597.03,2,0.2,-16.07
+MM-2024-00722,2/9/2024,Consumer,Central,Michigan,Office Supplies,Paper,26.12,1,0.2,7.73
+MM-2024-00723,4/21/2024,Corporate,West,Washington,Office Supplies,Binders,412.99,6,0,137.98
+MM-2024-00723,4/21/2024,Corporate,West,Washington,Office Supplies,Paper,105.48,3,0,43.85
+MM-2024-00723,4/21/2024,Corporate,West,Washington,Office Supplies,Binders,50.23,1,0.15,12.06
+MM-2024-00724,7/7/2024,Consumer,West,California,Office Supplies,Binders,126.09,2,0.15,8.69
+MM-2024-00725,9/16/2024,Consumer,Central,Texas,Furniture,Chairs,225.96,1,0.3,-31.92
+MM-2024-00726,10/10/2024,Home Office,West,Colorado,Office Supplies,Paper,52.2,2,0,18.29
+MM-2024-00726,10/10/2024,Home Office,West,Colorado,Furniture,Tables,467.1,1,0,-29.07
+MM-2024-00727,7/28/2024,Consumer,West,California,Technology,Accessories,335.9,5,0,102.34
+MM-2024-00727,7/28/2024,Consumer,West,California,Technology,Copiers,6954.57,5,0.1,2085.89
+MM-2024-00728,4/6/2024,Consumer,Central,Texas,Office Supplies,Labels,43.8,3,0,15.11
+MM-2024-00729,7/16/2024,Corporate,East,Ohio,Office Supplies,Binders,52.71,2,0.1,13.08
+MM-2024-00729,7/16/2024,Corporate,East,Ohio,Technology,Phones,393.37,1,0.1,94.19
+MM-2024-00730,2/1/2024,Corporate,South,Kentucky,Technology,Accessories,28.31,1,0.2,10.51
+MM-2024-00731,7/17/2024,Corporate,Central,Michigan,Office Supplies,Paper,18.91,1,0.3,2.11
+MM-2024-00732,9/19/2024,Home Office,Central,Michigan,Office Supplies,Labels,24.95,3,0.2,8.26
+MM-2024-00733,12/19/2024,Consumer,West,Colorado,Office Supplies,Binders,201.09,4,0.2,9.34
+MM-2024-00733,12/19/2024,Consumer,West,Colorado,Office Supplies,Binders,43.94,2,0.4,-4.01
+MM-2024-00733,12/19/2024,Consumer,West,Colorado,Furniture,Chairs,521.35,2,0,87.4
+MM-2024-00734,9/27/2024,Corporate,Central,Illinois,Office Supplies,Storage,230.93,2,0,57.14
+MM-2024-00734,9/27/2024,Corporate,Central,Illinois,Office Supplies,Storage,81.58,1,0.3,-0.55
+MM-2024-00735,7/11/2024,Consumer,Central,Texas,Furniture,Tables,296.65,1,0.3,-51.21
+MM-2024-00736,12/6/2024,Consumer,West,California,Technology,Phones,2010.99,4,0,455.22
+MM-2024-00736,12/6/2024,Consumer,West,California,Office Supplies,Storage,763.72,5,0.1,130.64
+MM-2024-00737,3/26/2024,Home Office,East,Pennsylvania,Office Supplies,Paper,54.45,2,0.2,14.61
+MM-2024-00738,7/17/2024,Corporate,East,Ohio,Office Supplies,Labels,32.58,4,0.4,4.82
+MM-2024-00738,7/17/2024,Corporate,East,Ohio,Office Supplies,Paper,57.49,4,0.2,21.92
+MM-2024-00739,2/28/2024,Home Office,Central,Texas,Furniture,Tables,1573.98,3,0,300.29
+MM-2024-00739,2/28/2024,Home Office,Central,Texas,Office Supplies,Paper,68.35,4,0.4,4.1
+MM-2024-00740,7/22/2024,Consumer,East,Ohio,Office Supplies,Binders,78.26,2,0.1,27.9
+MM-2024-00741,2/20/2024,Consumer,South,Florida,Office Supplies,Binders,29.41,1,0,6.01
+MM-2024-00741,2/20/2024,Consumer,South,Florida,Furniture,Chairs,1471.39,4,0.1,194.97
+MM-2024-00742,9/14/2024,Consumer,West,Washington,Office Supplies,Paper,32.6,1,0,10.61
+MM-2024-00743,8/4/2024,Consumer,West,Colorado,Furniture,Bookcases,748.29,3,0.1,-6.5
+MM-2024-00743,8/4/2024,Consumer,West,Colorado,Furniture,Bookcases,635.23,3,0,39.53
+MM-2024-00744,6/19/2024,Home Office,South,Georgia,Office Supplies,Labels,36.16,3,0,16.32
+MM-2024-00745,8/22/2024,Corporate,East,Ohio,Office Supplies,Labels,57.08,4,0,21.24
+MM-2024-00745,8/22/2024,Corporate,East,Ohio,Office Supplies,Binders,41.5,1,0,6.53
+MM-2024-00746,12/15/2024,Home Office,West,California,Office Supplies,Storage,358.75,3,0,34.1
+MM-2024-00746,12/15/2024,Home Office,West,California,Technology,Phones,1197.65,2,0,298.92
+MM-2024-00746,12/15/2024,Home Office,West,California,Furniture,Chairs,1053.65,2,0,222.78
+MM-2024-00747,11/17/2024,Corporate,Central,Illinois,Office Supplies,Paper,55.4,3,0.3,18.61
+MM-2024-00747,11/17/2024,Corporate,Central,Illinois,Office Supplies,Paper,31.05,1,0.15,9.88
+MM-2024-00747,11/17/2024,Corporate,Central,Illinois,Office Supplies,Storage,577.04,5,0.1,78.86
+MM-2024-00748,2/20/2024,Consumer,South,Kentucky,Office Supplies,Binders,99.02,4,0.3,-7.21
+MM-2024-00748,2/20/2024,Consumer,South,Kentucky,Technology,Accessories,27.9,1,0.2,7.48
+MM-2024-00749,8/22/2024,Corporate,Central,Illinois,Office Supplies,Paper,81.92,2,0.1,25.55
+MM-2024-00750,12/6/2024,Consumer,East,Ohio,Office Supplies,Binders,60.8,2,0.3,-5.91
+MM-2024-00751,1/12/2024,Corporate,Central,Texas,Office Supplies,Paper,126.59,4,0.15,42.72
+MM-2024-00752,4/14/2024,Corporate,West,Washington,Office Supplies,Binders,246.58,5,0,52.38
+MM-2024-00752,4/14/2024,Corporate,West,Washington,Technology,Accessories,59.3,1,0.2,8.38
+MM-2024-00753,9/19/2024,Home Office,East,Pennsylvania,Technology,Phones,1909.42,5,0,533.29
+MM-2024-00754,8/1/2024,Consumer,West,California,Office Supplies,Binders,101.55,2,0.15,17.42
+MM-2024-00755,5/16/2024,Consumer,South,Georgia,Technology,Accessories,166.78,4,0,56.69
+MM-2024-00756,2/11/2024,Consumer,Central,Illinois,Technology,Accessories,129.44,2,0,41.95
+MM-2024-00756,2/11/2024,Consumer,Central,Illinois,Technology,Copiers,527.35,1,0.2,139.79
+MM-2024-00757,9/10/2024,Corporate,South,Florida,Office Supplies,Paper,35.01,1,0,14.6
+MM-2024-00758,1/20/2024,Corporate,East,Pennsylvania,Furniture,Bookcases,180.45,1,0.15,47.45
+MM-2024-00758,1/20/2024,Corporate,East,Pennsylvania,Technology,Phones,1336.08,3,0,374.04
+MM-2024-00759,2/23/2024,Consumer,Central,Texas,Furniture,Chairs,724.81,2,0,173.18
+MM-2024-00760,1/5/2024,Consumer,South,Georgia,Technology,Accessories,190.43,4,0,54.63
+MM-2024-00760,1/5/2024,Consumer,South,Georgia,Office Supplies,Storage,73.79,1,0,15.04
+MM-2024-00761,11/16/2024,Home Office,West,Colorado,Office Supplies,Paper,89.04,4,0,38.83
+MM-2024-00761,11/16/2024,Home Office,West,Colorado,Office Supplies,Paper,18.31,1,0.15,5.44
+MM-2024-00761,11/16/2024,Home Office,West,Colorado,Office Supplies,Paper,74.43,3,0,27.66
+MM-2024-00762,9/6/2024,Corporate,West,Colorado,Office Supplies,Paper,123.32,4,0,61.22
+MM-2024-00762,9/6/2024,Corporate,West,Colorado,Technology,Copiers,3497.41,3,0,1000.06
+MM-2024-00762,9/6/2024,Corporate,West,Colorado,Furniture,Chairs,197.3,1,0.2,1.05
+MM-2024-00763,11/4/2024,Home Office,Central,Illinois,Office Supplies,Paper,38.54,3,0.4,8.4
+MM-2024-00763,11/4/2024,Home Office,Central,Illinois,Technology,Accessories,180.68,3,0.2,39.86
+MM-2024-00764,5/21/2024,Home Office,East,Ohio,Technology,Phones,198.14,1,0,63.11
+MM-2024-00765,12/26/2024,Corporate,East,Pennsylvania,Furniture,Bookcases,634.06,3,0.4,-11.56
+MM-2024-00765,12/26/2024,Corporate,East,Pennsylvania,Office Supplies,Storage,246.33,3,0,18.27
+MM-2024-00765,12/26/2024,Corporate,East,Pennsylvania,Office Supplies,Binders,35.39,1,0,11.08
+MM-2024-00766,3/25/2024,Consumer,East,Ohio,Office Supplies,Binders,94.39,2,0,20.8
+MM-2024-00766,3/25/2024,Consumer,East,Ohio,Office Supplies,Labels,23.98,2,0.1,11.34
+MM-2024-00767,1/17/2024,Consumer,East,Pennsylvania,Office Supplies,Labels,34.16,2,0,14.03
+MM-2024-00768,9/18/2024,Consumer,West,California,Office Supplies,Paper,190.32,4,0,55.6
+MM-2024-00769,3/22/2024,Consumer,West,Colorado,Office Supplies,Labels,61.88,3,0.2,25.76
+MM-2024-00770,4/21/2024,Corporate,West,Colorado,Office Supplies,Paper,21.55,1,0,6.69
+MM-2024-00770,4/21/2024,Corporate,West,Colorado,Office Supplies,Binders,84.1,2,0,27.45
+MM-2024-00770,4/21/2024,Corporate,West,Colorado,Office Supplies,Paper,52.9,2,0.1,11.77
+MM-2024-00771,11/27/2024,Corporate,East,Pennsylvania,Office Supplies,Binders,114.88,3,0.2,33.92
+MM-2024-00771,11/27/2024,Corporate,East,Pennsylvania,Furniture,Tables,1087.02,3,0.3,-211
+MM-2024-00772,4/11/2024,Consumer,West,California,Office Supplies,Binders,87.1,1,0.4,-3.63
+MM-2024-00772,4/11/2024,Consumer,West,California,Technology,Copiers,6542.43,3,0,3169.11
+MM-2024-00772,4/11/2024,Consumer,West,California,Furniture,Chairs,1348.2,3,0.3,-72.91
+MM-2024-00773,1/16/2024,Home Office,Central,Michigan,Office Supplies,Paper,25.69,1,0.1,5.55
+MM-2024-00774,5/27/2024,Consumer,West,Colorado,Office Supplies,Binders,66.47,2,0,16.06
+MM-2024-00775,12/20/2024,Home Office,Central,Michigan,Technology,Phones,914.42,3,0,210.6
+MM-2024-00776,4/13/2024,Consumer,Central,Michigan,Technology,Copiers,2373.8,5,0.4,238.55
+MM-2024-00777,12/17/2024,Home Office,South,Kentucky,Office Supplies,Binders,234.1,6,0,59.84
+MM-2024-00778,7/19/2024,Home Office,South,Florida,Office Supplies,Binders,111.09,2,0,36.3
+MM-2024-00779,4/18/2024,Consumer,South,Florida,Office Supplies,Binders,110.9,2,0,38.58
+MM-2024-00779,4/18/2024,Consumer,South,Florida,Office Supplies,Labels,34.19,2,0,13.8
+MM-2024-00779,4/18/2024,Consumer,South,Florida,Office Supplies,Binders,162.25,4,0.1,39.42
+MM-2024-00780,9/10/2024,Home Office,West,California,Office Supplies,Paper,71.48,2,0,18.37
+MM-2024-00781,12/7/2024,Consumer,East,Pennsylvania,Furniture,Tables,1361.86,2,0,8.09
+MM-2024-00782,4/3/2024,Corporate,Central,Illinois,Technology,Copiers,3557.3,4,0,643.29
+MM-2024-00782,4/3/2024,Corporate,Central,Illinois,Office Supplies,Paper,98.89,3,0,29.63
+MM-2024-00783,1/15/2024,Home Office,East,New York,Office Supplies,Storage,393.42,3,0.15,14.52
+MM-2024-00784,6/24/2024,Corporate,West,California,Technology,Phones,611.28,2,0.3,59.14
+MM-2024-00784,6/24/2024,Corporate,West,California,Technology,Phones,1478.63,3,0,255.73
+MM-2024-00784,6/24/2024,Corporate,West,California,Technology,Accessories,71.95,1,0.15,18.32
+MM-2024-00785,5/9/2024,Corporate,West,California,Technology,Phones,3023.55,4,0,897.02
+MM-2024-00785,5/9/2024,Corporate,West,California,Office Supplies,Binders,130.99,2,0,27.06
+MM-2024-00785,5/9/2024,Corporate,West,California,Technology,Accessories,209.23,3,0,40.99
+MM-2024-00786,12/18/2024,Corporate,West,California,Office Supplies,Paper,89.11,3,0.15,22.1
+MM-2024-00787,10/8/2024,Consumer,South,Florida,Office Supplies,Storage,305.61,3,0,57.87
+MM-2024-00788,4/7/2024,Consumer,East,New York,Office Supplies,Paper,121.84,5,0.1,41.36
+MM-2024-00788,4/7/2024,Consumer,East,New York,Technology,Accessories,78.23,1,0.2,15.31
+MM-2024-00788,4/7/2024,Consumer,East,New York,Office Supplies,Labels,88.8,4,0,34.96
+MM-2024-00789,9/7/2024,Consumer,South,Georgia,Furniture,Bookcases,802.55,5,0,146.88
+MM-2024-00789,9/7/2024,Consumer,South,Georgia,Office Supplies,Binders,26.77,1,0.15,2.72
+MM-2024-00790,5/10/2024,Home Office,West,Washington,Office Supplies,Binders,242.44,5,0,89.56
+MM-2024-00790,5/10/2024,Home Office,West,Washington,Technology,Phones,1212.37,3,0,167.32
+MM-2024-00790,5/10/2024,Home Office,West,Washington,Office Supplies,Paper,66.67,2,0,27.3
+MM-2024-00791,12/18/2024,Home Office,East,Ohio,Office Supplies,Storage,59.7,1,0,9.81
+MM-2024-00792,9/28/2024,Corporate,West,Colorado,Office Supplies,Binders,183.34,5,0.15,23.75
+MM-2024-00792,9/28/2024,Corporate,West,Colorado,Technology,Copiers,2187.28,3,0.2,344.4
+MM-2024-00793,8/7/2024,Home Office,West,California,Office Supplies,Paper,77.47,2,0.15,24.93
+MM-2024-00793,8/7/2024,Home Office,West,California,Technology,Accessories,82.35,1,0.3,16.83
+MM-2024-00794,10/18/2024,Corporate,South,Kentucky,Technology,Copiers,1913.23,4,0.3,249.45
+MM-2024-00795,4/24/2024,Home Office,Central,Texas,Technology,Accessories,124.9,2,0,22.23
+MM-2024-00796,8/23/2024,Corporate,West,California,Office Supplies,Binders,177.4,2,0,43.73
+MM-2024-00796,8/23/2024,Corporate,West,California,Office Supplies,Paper,56.17,1,0,17.94
+MM-2024-00797,1/28/2024,Corporate,South,Kentucky,Office Supplies,Binders,51.77,2,0.15,13.72
+MM-2024-00797,1/28/2024,Corporate,South,Kentucky,Furniture,Tables,292.24,1,0.2,22.9
+MM-2024-00797,1/28/2024,Corporate,South,Kentucky,Technology,Accessories,185.34,4,0,60.27
+MM-2024-00798,4/2/2024,Corporate,East,New York,Technology,Accessories,218.08,3,0.2,28.84
+MM-2024-00798,4/2/2024,Corporate,East,New York,Technology,Phones,484.06,1,0.15,59
+MM-2024-00799,7/8/2024,Consumer,Central,Texas,Furniture,Bookcases,163.01,1,0.3,17.22
+MM-2024-00799,7/8/2024,Consumer,Central,Texas,Office Supplies,Binders,91.63,2,0.15,10.4
+MM-2024-00799,7/8/2024,Consumer,Central,Texas,Office Supplies,Paper,19.78,1,0.3,3.97
+MM-2024-00800,7/7/2024,Corporate,East,Pennsylvania,Office Supplies,Labels,38.57,3,0.2,18.43
+MM-2024-00800,7/7/2024,Corporate,East,Pennsylvania,Furniture,Chairs,291.56,1,0,68.12
+MM-2024-00801,1/23/2024,Consumer,West,Washington,Technology,Accessories,351.44,5,0,68.5
+MM-2024-00802,4/12/2024,Home Office,South,Kentucky,Technology,Phones,532.39,3,0.1,98.41
+MM-2024-00802,4/12/2024,Home Office,South,Kentucky,Office Supplies,Paper,134.47,6,0,56.68
+MM-2024-00802,4/12/2024,Home Office,South,Kentucky,Technology,Phones,230.69,1,0.2,58.33
+MM-2024-00803,11/4/2024,Consumer,West,Colorado,Office Supplies,Binders,233.05,4,0,73.19
+MM-2024-00804,11/5/2024,Consumer,East,Ohio,Technology,Accessories,60.88,1,0.2,7.55
+MM-2024-00804,11/5/2024,Consumer,East,Ohio,Technology,Accessories,87.56,2,0.3,-5.97
+MM-2024-00805,12/18/2024,Corporate,South,Georgia,Office Supplies,Labels,11.16,1,0.15,4.64
+MM-2024-00805,12/18/2024,Corporate,South,Georgia,Furniture,Chairs,1078.55,4,0,191.16
+MM-2024-00806,4/2/2024,Home Office,Central,Illinois,Technology,Accessories,65.03,1,0,17.63
+MM-2024-00807,2/3/2024,Home Office,South,Georgia,Technology,Phones,517.88,3,0.3,62.2
+MM-2024-00808,12/8/2024,Consumer,South,Kentucky,Furniture,Chairs,199.22,1,0.2,-29.24
+MM-2024-00809,3/1/2024,Consumer,South,Georgia,Office Supplies,Paper,24.41,2,0.2,6.69
+MM-2024-00810,3/24/2024,Corporate,West,Washington,Office Supplies,Paper,90.88,3,0,19.96
+MM-2024-00810,3/24/2024,Corporate,West,Washington,Furniture,Bookcases,922.12,3,0.15,179.96
+MM-2024-00811,6/25/2024,Home Office,South,Georgia,Furniture,Bookcases,643.46,3,0,61.93
+MM-2024-00812,8/8/2024,Corporate,Central,Illinois,Furniture,Chairs,1247.93,4,0.2,41.04
+MM-2024-00813,9/6/2024,Consumer,South,Florida,Furniture,Chairs,418.68,1,0,42.45
+MM-2024-00814,8/13/2024,Home Office,West,California,Office Supplies,Binders,254.59,5,0.15,76.47
+MM-2024-00814,8/13/2024,Home Office,West,California,Office Supplies,Binders,79.22,1,0,13.77
+MM-2024-00815,5/10/2024,Consumer,South,Kentucky,Technology,Accessories,57.02,2,0.3,9.59
+MM-2024-00816,9/3/2024,Corporate,South,Florida,Office Supplies,Paper,151.37,5,0.3,36.91
+MM-2024-00817,6/8/2024,Corporate,West,Colorado,Office Supplies,Binders,155.14,3,0,46.55
+MM-2024-00818,4/16/2024,Corporate,Central,Michigan,Technology,Accessories,331.19,6,0,120.21
+MM-2024-00819,11/18/2024,Consumer,East,Ohio,Technology,Accessories,141.55,3,0.3,14.13
+MM-2024-00819,11/18/2024,Consumer,East,Ohio,Office Supplies,Binders,40.64,1,0,12.47
+MM-2024-00820,4/26/2024,Corporate,Central,Michigan,Office Supplies,Binders,32.77,1,0.2,3.89
+MM-2024-00821,2/9/2024,Corporate,East,New York,Furniture,Chairs,803.52,2,0,209.07
+MM-2024-00821,2/9/2024,Corporate,East,New York,Technology,Phones,1716.51,4,0.15,231.55
+MM-2024-00822,9/12/2024,Consumer,Central,Illinois,Office Supplies,Storage,100.79,1,0,18.63
+MM-2024-00822,9/12/2024,Consumer,Central,Illinois,Technology,Accessories,66.31,1,0,20.28
+MM-2024-00822,9/12/2024,Consumer,Central,Illinois,Office Supplies,Labels,18.34,1,0,5.21
+MM-2024-00823,11/15/2024,Home Office,Central,Illinois,Furniture,Tables,1329.65,2,0,-85.83
+MM-2024-00823,11/15/2024,Home Office,Central,Illinois,Furniture,Bookcases,658.97,3,0.2,36.42
+MM-2024-00824,9/24/2024,Consumer,South,Kentucky,Office Supplies,Binders,30.12,1,0.2,6.07
+MM-2024-00825,6/4/2024,Corporate,Central,Michigan,Office Supplies,Labels,17.07,2,0.4,2.32
+MM-2024-00825,6/4/2024,Corporate,Central,Michigan,Office Supplies,Binders,21.98,1,0.4,0.78
+MM-2024-00825,6/4/2024,Corporate,Central,Michigan,Office Supplies,Labels,42.84,4,0.1,13.63
+MM-2024-00826,11/16/2024,Consumer,Central,Illinois,Office Supplies,Binders,35.84,1,0,11.54
+MM-2024-00827,9/10/2024,Consumer,South,Georgia,Furniture,Bookcases,284.99,2,0.15,0.08
+MM-2024-00828,5/22/2024,Home Office,South,Florida,Office Supplies,Storage,615.06,6,0,124.89
+MM-2024-00829,1/2/2024,Corporate,West,Washington,Technology,Copiers,1237.54,1,0.1,429.31
+MM-2024-00830,7/26/2024,Consumer,East,New York,Furniture,Chairs,280.91,1,0.2,-6.3
+MM-2024-00831,7/1/2024,Consumer,West,California,Technology,Accessories,192.48,4,0.4,-4.45
+MM-2024-00831,7/1/2024,Consumer,West,California,Technology,Phones,448.56,1,0,78.39
+MM-2024-00831,7/1/2024,Consumer,West,California,Furniture,Tables,1623.49,3,0.15,-78.12
+MM-2024-00832,9/9/2024,Corporate,South,Kentucky,Furniture,Tables,1173.41,3,0,-8.72
+MM-2024-00833,4/3/2024,Consumer,Central,Illinois,Office Supplies,Paper,97.47,4,0.2,26.46
+MM-2024-00834,7/26/2024,Corporate,West,Colorado,Office Supplies,Paper,31.27,2,0.3,9.13
+MM-2024-00834,7/26/2024,Corporate,West,Colorado,Office Supplies,Labels,31.32,4,0.4,5.99
+MM-2024-00835,9/5/2024,Consumer,East,Pennsylvania,Technology,Accessories,68.39,1,0.15,14.89
+MM-2024-00836,1/7/2024,Corporate,East,Ohio,Technology,Accessories,35.16,1,0.2,5.09
+MM-2024-00837,11/17/2024,Corporate,East,Pennsylvania,Technology,Accessories,137.6,3,0.2,21.4
+MM-2024-00838,9/6/2024,Corporate,West,California,Furniture,Tables,619.01,1,0.15,-92.71
+MM-2024-00839,6/7/2024,Corporate,South,Georgia,Technology,Phones,799.07,4,0.3,61.55
+MM-2024-00839,6/7/2024,Corporate,South,Georgia,Office Supplies,Binders,38.21,2,0.15,6.9
+MM-2024-00839,6/7/2024,Corporate,South,Georgia,Office Supplies,Labels,40.78,4,0,18.83
+MM-2024-00840,9/26/2024,Consumer,West,California,Technology,Accessories,191.46,2,0,28.86
+MM-2024-00840,9/26/2024,Consumer,West,California,Office Supplies,Labels,68.08,2,0,25.62
+MM-2024-00841,12/5/2024,Consumer,West,Colorado,Office Supplies,Binders,120.58,2,0,30.47
+MM-2024-00842,3/21/2024,Home Office,East,Ohio,Office Supplies,Binders,123.38,3,0.15,14.09
+MM-2024-00842,3/21/2024,Home Office,East,Ohio,Technology,Accessories,150.35,3,0.1,23.79
+MM-2024-00842,3/21/2024,Home Office,East,Ohio,Furniture,Tables,388.77,1,0.1,-14.54
+MM-2024-00843,9/23/2024,Home Office,Central,Michigan,Office Supplies,Binders,68.13,2,0,24.18
+MM-2024-00844,5/12/2024,Home Office,Central,Illinois,Technology,Copiers,2680.74,2,0.2,333.99
+MM-2024-00845,11/14/2024,Consumer,Central,Texas,Technology,Copiers,741.65,1,0.3,126.65
+MM-2024-00846,10/6/2024,Consumer,West,Colorado,Technology,Phones,942.89,3,0.15,131.9
+MM-2024-00847,3/17/2024,Home Office,East,New York,Furniture,Tables,1022.47,2,0.15,32.88
+MM-2024-00848,9/5/2024,Corporate,East,Ohio,Office Supplies,Binders,69.9,2,0.15,20
+MM-2024-00849,9/8/2024,Home Office,Central,Michigan,Office Supplies,Paper,50.6,3,0.3,7.47
+MM-2024-00849,9/8/2024,Home Office,Central,Michigan,Office Supplies,Storage,159.34,2,0.2,25.48
+MM-2024-00849,9/8/2024,Home Office,Central,Michigan,Furniture,Bookcases,189.89,1,0,30.62
+MM-2024-00850,8/13/2024,Consumer,East,Pennsylvania,Technology,Phones,709.37,4,0.3,-35.83
+MM-2024-00850,8/13/2024,Consumer,East,Pennsylvania,Office Supplies,Paper,54.28,2,0.2,17.5
+MM-2024-00851,12/16/2024,Consumer,South,Florida,Office Supplies,Labels,11.57,1,0.15,2.53
+MM-2024-00852,10/6/2024,Consumer,South,Kentucky,Technology,Accessories,28.44,1,0.4,1.76
+MM-2024-00852,10/6/2024,Consumer,South,Kentucky,Furniture,Tables,624.66,3,0,51.27
+MM-2024-00853,9/11/2024,Consumer,West,Colorado,Office Supplies,Paper,60.15,3,0.1,13.79
+MM-2024-00854,11/16/2024,Consumer,South,Georgia,Technology,Accessories,124.29,3,0,23.16
+MM-2024-00854,11/16/2024,Consumer,South,Georgia,Technology,Accessories,41.11,1,0.2,8.98
+MM-2024-00855,4/27/2024,Consumer,Central,Texas,Office Supplies,Binders,28.31,1,0.3,2.07
+MM-2024-00856,3/1/2024,Consumer,South,Florida,Office Supplies,Storage,673.65,5,0,152.74
+MM-2024-00857,6/19/2024,Consumer,West,Washington,Office Supplies,Paper,44.34,2,0.3,11.87
+MM-2024-00857,6/19/2024,Consumer,West,Washington,Technology,Phones,352.89,1,0.2,-40.95
+MM-2024-00858,1/8/2024,Consumer,East,Ohio,Office Supplies,Storage,328.54,4,0,82.34
+MM-2024-00859,11/7/2024,Consumer,West,Colorado,Office Supplies,Binders,180.76,3,0.1,26.54
+MM-2024-00859,11/7/2024,Consumer,West,Colorado,Office Supplies,Paper,147.96,6,0,85.42
+MM-2024-00859,11/7/2024,Consumer,West,Colorado,Furniture,Chairs,473.34,1,0.15,48.64
+MM-2024-00860,6/24/2024,Consumer,West,California,Technology,Phones,1180.76,2,0,396.02
+MM-2024-00861,5/23/2024,Consumer,Central,Illinois,Technology,Accessories,151.75,2,0,42.83
+MM-2024-00862,3/9/2024,Home Office,West,Washington,Office Supplies,Paper,25.32,1,0.15,3.83
+MM-2024-00862,3/9/2024,Home Office,West,Washington,Furniture,Chairs,456.02,1,0.15,41.59
+MM-2024-00863,4/15/2024,Home Office,East,Ohio,Furniture,Chairs,1427.85,5,0,322.95
+MM-2024-00864,12/11/2024,Home Office,East,Pennsylvania,Technology,Accessories,78.82,1,0,10.44
+MM-2024-00864,12/11/2024,Home Office,East,Pennsylvania,Furniture,Bookcases,194.36,1,0.15,20.27
+MM-2024-00865,3/23/2024,Home Office,East,Pennsylvania,Office Supplies,Paper,68.08,3,0.15,22.29
+MM-2024-00865,3/23/2024,Home Office,East,Pennsylvania,Office Supplies,Binders,309.51,5,0,74.51
+MM-2024-00865,3/23/2024,Home Office,East,Pennsylvania,Technology,Copiers,1501.41,2,0,560.86
+MM-2024-00866,11/26/2024,Corporate,East,Pennsylvania,Office Supplies,Labels,57.69,3,0,27.37
+MM-2024-00866,11/26/2024,Corporate,East,Pennsylvania,Technology,Phones,1934.59,4,0,415.69
+MM-2024-00867,9/11/2024,Consumer,South,Kentucky,Office Supplies,Binders,41.04,2,0.3,6.27
+MM-2024-00867,9/11/2024,Consumer,South,Kentucky,Furniture,Tables,487.89,2,0.1,-34.62
+MM-2024-00868,7/11/2024,Home Office,East,Ohio,Office Supplies,Labels,62.69,5,0.15,15.06
+MM-2024-00869,8/23/2024,Corporate,South,Kentucky,Technology,Accessories,209.96,5,0.1,36.8
+MM-2024-00869,8/23/2024,Corporate,South,Kentucky,Office Supplies,Paper,45,3,0,15.68
+MM-2024-00870,10/1/2024,Consumer,West,Colorado,Office Supplies,Storage,317.05,4,0.1,17.24
+MM-2024-00871,7/9/2024,Consumer,East,New York,Technology,Phones,871.09,2,0,212.96
+MM-2024-00872,4/15/2024,Consumer,West,Colorado,Office Supplies,Paper,34.1,2,0.4,0.01
+MM-2024-00872,4/15/2024,Consumer,West,Colorado,Furniture,Tables,883.66,2,0,64.04
+MM-2024-00872,4/15/2024,Consumer,West,Colorado,Furniture,Bookcases,953.14,4,0.15,67.57
+MM-2024-00873,1/9/2024,Home Office,South,Florida,Office Supplies,Paper,79.8,3,0.1,33.68
+MM-2024-00873,1/9/2024,Home Office,South,Florida,Office Supplies,Paper,123.77,4,0.2,29.16
+MM-2024-00874,3/9/2024,Corporate,West,Colorado,Office Supplies,Labels,39.93,2,0.2,9.81
+MM-2024-00875,5/13/2024,Corporate,South,Kentucky,Office Supplies,Storage,465.11,5,0.3,-43.15
+MM-2024-00876,7/2/2024,Consumer,West,California,Furniture,Chairs,857.81,2,0.1,35.92
+MM-2024-00877,10/28/2024,Consumer,Central,Texas,Technology,Accessories,199.05,4,0.2,74.71
+MM-2024-00878,10/2/2024,Corporate,East,Pennsylvania,Furniture,Bookcases,720,3,0.1,29.37
+MM-2024-00878,10/2/2024,Corporate,East,Pennsylvania,Office Supplies,Paper,55.93,3,0.3,3.69
+MM-2024-00879,9/18/2024,Consumer,Central,Illinois,Technology,Accessories,182.59,2,0,67.91
+MM-2024-00880,6/18/2024,Consumer,South,Kentucky,Office Supplies,Paper,45.26,3,0,16.65
+MM-2024-00881,4/27/2024,Consumer,East,Ohio,Furniture,Bookcases,366.97,2,0,27.54
+MM-2024-00882,8/9/2024,Consumer,Central,Illinois,Office Supplies,Storage,272.96,2,0,21.09
+MM-2024-00883,12/2/2024,Consumer,Central,Illinois,Office Supplies,Paper,74.79,4,0.3,7.31
+MM-2024-00884,12/25/2024,Corporate,West,California,Office Supplies,Paper,112.59,3,0,36.33
+MM-2024-00885,3/8/2024,Consumer,South,Kentucky,Technology,Phones,335.37,2,0.15,63.34
+MM-2024-00886,3/12/2024,Home Office,South,Florida,Office Supplies,Storage,255.77,3,0.2,26.22
+MM-2024-00886,3/12/2024,Home Office,South,Florida,Office Supplies,Binders,94.34,1,0,24.25
+MM-2024-00886,3/12/2024,Home Office,South,Florida,Office Supplies,Paper,70.85,2,0,11.46
+MM-2024-00887,10/18/2024,Consumer,Central,Michigan,Technology,Phones,579.43,2,0,123.71
+MM-2024-00887,10/18/2024,Consumer,Central,Michigan,Office Supplies,Labels,28.57,2,0,9.79
+MM-2024-00888,8/27/2024,Corporate,Central,Illinois,Office Supplies,Paper,22.93,1,0.1,4.72
+MM-2024-00889,5/8/2024,Consumer,Central,Texas,Office Supplies,Paper,82.97,3,0.2,33.01
+MM-2024-00889,5/8/2024,Consumer,Central,Texas,Office Supplies,Binders,88.09,2,0.4,-3.09
+MM-2024-00890,10/4/2024,Consumer,East,Ohio,Furniture,Chairs,592.98,2,0.2,84.26
+MM-2024-00890,10/4/2024,Consumer,East,Ohio,Office Supplies,Binders,89.57,2,0.2,10.16
+MM-2024-00890,10/4/2024,Consumer,East,Ohio,Office Supplies,Storage,102.93,1,0.15,4.5
+MM-2024-00891,7/16/2024,Consumer,South,Florida,Technology,Accessories,116.1,2,0.1,28.13
+MM-2024-00892,10/24/2024,Corporate,West,Colorado,Technology,Accessories,32.28,1,0.2,7.53
+MM-2024-00892,10/24/2024,Corporate,West,Colorado,Furniture,Tables,1846.18,6,0.3,-417.43
+MM-2024-00893,3/10/2024,Consumer,South,Florida,Office Supplies,Storage,297.32,2,0,55.53
+MM-2024-00893,3/10/2024,Consumer,South,Florida,Technology,Copiers,4048.59,4,0,1129.64
+MM-2024-00894,8/26/2024,Home Office,East,Pennsylvania,Technology,Copiers,6401.65,6,0.15,813.71
+MM-2024-00895,2/13/2024,Consumer,East,Ohio,Technology,Copiers,1902.2,2,0,550
+MM-2024-00896,6/8/2024,Consumer,Central,Michigan,Office Supplies,Paper,135.35,6,0,59.78
+MM-2024-00896,6/8/2024,Consumer,Central,Michigan,Office Supplies,Labels,31.84,3,0.15,9.76
+MM-2024-00896,6/8/2024,Consumer,Central,Michigan,Furniture,Chairs,299.84,1,0.15,8.4
+MM-2024-00897,9/10/2024,Consumer,South,Georgia,Technology,Phones,439.26,2,0.15,7.18
+MM-2024-00898,4/16/2024,Corporate,South,Florida,Technology,Copiers,1122.31,1,0,261.97
+MM-2024-00899,2/1/2024,Corporate,West,Colorado,Office Supplies,Storage,301.87,3,0,39.16
+MM-2024-00899,2/1/2024,Corporate,West,Colorado,Furniture,Bookcases,466.97,2,0,48.64
+MM-2024-00900,4/14/2024,Consumer,Central,Michigan,Office Supplies,Paper,47.65,2,0.15,11.41
+MM-2024-00900,4/14/2024,Consumer,Central,Michigan,Office Supplies,Binders,60.17,2,0.1,10.49
+MM-2024-00900,4/14/2024,Consumer,Central,Michigan,Technology,Phones,243.73,1,0.15,24.98
+MM-2024-00901,5/22/2024,Home Office,South,Kentucky,Furniture,Chairs,352.61,2,0.3,-5.26
+MM-2024-00901,5/22/2024,Home Office,South,Kentucky,Office Supplies,Binders,154.07,5,0,25.27
+MM-2024-00902,3/11/2024,Consumer,East,Ohio,Office Supplies,Binders,100.17,2,0,35.12
+MM-2024-00902,3/11/2024,Consumer,East,Ohio,Furniture,Tables,941.12,3,0.2,-164.81
+MM-2024-00902,3/11/2024,Consumer,East,Ohio,Technology,Accessories,110.02,2,0,32.57
+MM-2024-00903,8/3/2024,Corporate,West,California,Office Supplies,Binders,34.53,1,0.3,6.32
+MM-2024-00903,8/3/2024,Corporate,West,California,Office Supplies,Binders,131.42,2,0,30.05
+MM-2024-00903,8/3/2024,Corporate,West,California,Office Supplies,Paper,65.06,2,0.15,10.11
+MM-2024-00904,10/3/2024,Corporate,West,Washington,Office Supplies,Paper,98.24,2,0,22.65
+MM-2024-00904,10/3/2024,Corporate,West,Washington,Technology,Accessories,161.17,2,0.2,18.12
+MM-2024-00905,12/18/2024,Home Office,South,Florida,Furniture,Chairs,1405.33,4,0.15,34.33
+MM-2024-00906,12/26/2024,Consumer,East,Pennsylvania,Furniture,Bookcases,1001.46,5,0.15,55.39
+MM-2024-00906,12/26/2024,Consumer,East,Pennsylvania,Technology,Accessories,120.8,2,0,22.08
+MM-2024-00907,10/10/2024,Consumer,West,California,Technology,Accessories,57.43,1,0.2,7.29
+MM-2024-00908,8/23/2024,Home Office,West,California,Technology,Phones,2325.91,3,0,620.42
+MM-2024-00908,8/23/2024,Home Office,West,California,Technology,Copiers,1248.13,1,0.15,365.78
+MM-2024-00909,12/3/2024,Consumer,South,Georgia,Technology,Phones,629.55,3,0.15,105.66
+MM-2024-00909,12/3/2024,Consumer,South,Georgia,Furniture,Tables,836.89,3,0.15,-21.25
+MM-2024-00909,12/3/2024,Consumer,South,Georgia,Office Supplies,Binders,240.95,4,0,49.49
+MM-2024-00910,4/22/2024,Consumer,West,Washington,Office Supplies,Labels,19.92,1,0,6
+MM-2024-00910,4/22/2024,Consumer,West,Washington,Furniture,Bookcases,737.97,3,0.3,28.72
+MM-2024-00911,8/23/2024,Consumer,West,California,Technology,Phones,965.07,2,0,235.7
+MM-2025-00912,6/27/2025,Corporate,West,Colorado,Office Supplies,Labels,42.44,2,0,18.29
+MM-2025-00913,9/22/2025,Consumer,East,New York,Office Supplies,Binders,548.75,6,0,69.85
+MM-2025-00914,5/12/2025,Corporate,West,Washington,Technology,Accessories,137.68,2,0,54.42
+MM-2025-00915,4/22/2025,Consumer,West,California,Office Supplies,Storage,1082.93,6,0,238.67
+MM-2025-00916,6/8/2025,Corporate,West,California,Office Supplies,Paper,45.68,1,0,10.87
+MM-2025-00917,11/26/2025,Consumer,West,Colorado,Office Supplies,Paper,108.05,6,0.4,6.95
+MM-2025-00918,11/2/2025,Consumer,South,Florida,Office Supplies,Binders,141.85,2,0,28.35
+MM-2025-00918,11/2/2025,Consumer,South,Florida,Furniture,Chairs,405.54,1,0,22.45
+MM-2025-00919,4/14/2025,Consumer,South,Kentucky,Office Supplies,Labels,40.73,3,0.15,14.37
+MM-2025-00919,4/14/2025,Consumer,South,Kentucky,Office Supplies,Binders,141.69,3,0,30.58
+MM-2025-00920,9/20/2025,Home Office,Central,Illinois,Office Supplies,Labels,16.93,1,0.2,6.21
+MM-2025-00921,12/8/2025,Consumer,West,Washington,Furniture,Tables,2472.56,4,0.15,-138.62
+MM-2025-00921,12/8/2025,Consumer,West,Washington,Office Supplies,Binders,66.47,1,0,17.61
+MM-2025-00922,3/28/2025,Corporate,South,Kentucky,Technology,Phones,236.68,1,0,34.5
+MM-2025-00922,3/28/2025,Corporate,South,Kentucky,Office Supplies,Binders,155.87,5,0,30.41
+MM-2025-00923,2/23/2025,Corporate,Central,Illinois,Furniture,Bookcases,408.37,1,0.2,46.1
+MM-2025-00924,5/17/2025,Home Office,West,Washington,Technology,Accessories,388.55,3,0,118.95
+MM-2025-00924,5/17/2025,Home Office,West,Washington,Technology,Accessories,238.74,2,0,73.34
+MM-2025-00925,8/2/2025,Consumer,East,New York,Office Supplies,Binders,81.61,2,0.3,11.17
+MM-2025-00926,7/7/2025,Home Office,East,New York,Office Supplies,Storage,174,1,0,31.74
+MM-2025-00927,10/2/2025,Consumer,Central,Illinois,Furniture,Bookcases,1172.08,3,0.15,172.11
+MM-2025-00928,11/22/2025,Consumer,Central,Texas,Technology,Accessories,49.6,1,0.1,14
+MM-2025-00928,11/22/2025,Consumer,Central,Texas,Office Supplies,Binders,94.93,2,0,24.32
+MM-2025-00929,1/12/2025,Corporate,East,Ohio,Furniture,Tables,781.1,2,0,-131.55
+MM-2025-00930,4/7/2025,Consumer,East,New York,Office Supplies,Storage,450.64,6,0.2,49.93
+MM-2025-00931,8/4/2025,Consumer,Central,Michigan,Technology,Phones,758.48,3,0.2,77.95
+MM-2025-00932,7/12/2025,Corporate,West,Colorado,Furniture,Chairs,969.32,3,0.15,149.14
+MM-2025-00932,7/12/2025,Corporate,West,Colorado,Office Supplies,Binders,73.75,2,0.2,2.18
+MM-2025-00932,7/12/2025,Corporate,West,Colorado,Office Supplies,Labels,15.23,1,0,5.05
+MM-2025-00933,7/12/2025,Corporate,East,New York,Furniture,Chairs,476.18,1,0.2,18.07
+MM-2025-00934,8/3/2025,Consumer,South,Florida,Technology,Phones,1192.81,2,0,243.96
+MM-2025-00934,8/3/2025,Consumer,South,Florida,Technology,Copiers,4003.11,4,0.2,1240.26
+MM-2025-00934,8/3/2025,Consumer,South,Florida,Office Supplies,Labels,105.19,5,0,46.76
+MM-2025-00935,11/1/2025,Consumer,South,Florida,Technology,Accessories,101.69,1,0,16.89
+MM-2025-00936,5/3/2025,Consumer,Central,Texas,Office Supplies,Storage,320.59,3,0,40.01
+MM-2025-00936,5/3/2025,Consumer,Central,Texas,Technology,Copiers,780.59,1,0,348.94
+MM-2025-00937,6/9/2025,Consumer,South,Kentucky,Furniture,Bookcases,823.12,4,0,149.31
+MM-2025-00937,6/9/2025,Consumer,South,Kentucky,Technology,Phones,553.16,2,0,94.62
+MM-2025-00937,6/9/2025,Consumer,South,Kentucky,Office Supplies,Storage,271.79,4,0.2,32.26
+MM-2025-00938,8/28/2025,Corporate,East,Ohio,Office Supplies,Paper,91.24,3,0.2,30.21
+MM-2025-00938,8/28/2025,Corporate,East,Ohio,Technology,Copiers,2792.23,3,0.15,850.16
+MM-2025-00939,3/24/2025,Home Office,West,California,Office Supplies,Storage,125.88,1,0.2,4.84
+MM-2025-00939,3/24/2025,Home Office,West,California,Technology,Phones,1694.38,3,0,331.22
+MM-2025-00940,11/17/2025,Consumer,West,Washington,Office Supplies,Binders,186.37,3,0,26.44
+MM-2025-00940,11/17/2025,Consumer,West,Washington,Office Supplies,Paper,131.7,5,0.15,45.93
+MM-2025-00941,5/4/2025,Home Office,East,Pennsylvania,Technology,Accessories,277.86,4,0.15,44.82
+MM-2025-00941,5/4/2025,Home Office,East,Pennsylvania,Office Supplies,Storage,63.21,1,0.3,-3.27
+MM-2025-00942,12/5/2025,Consumer,West,Colorado,Technology,Phones,2511.82,5,0,892.73
+MM-2025-00943,1/24/2025,Consumer,South,Kentucky,Furniture,Bookcases,1008.23,6,0.3,-153.59
+MM-2025-00943,1/24/2025,Consumer,South,Kentucky,Furniture,Chairs,251.98,1,0,24.84
+MM-2025-00943,1/24/2025,Consumer,South,Kentucky,Office Supplies,Binders,68.45,2,0,9.05
+MM-2025-00944,11/14/2025,Corporate,West,Washington,Technology,Copiers,5320.45,3,0.15,1351.79
+MM-2025-00945,1/12/2025,Consumer,West,California,Office Supplies,Labels,16.01,1,0.2,7.01
+MM-2025-00945,1/12/2025,Consumer,West,California,Furniture,Tables,1273.16,2,0.3,-132.53
+MM-2025-00946,4/1/2025,Corporate,East,Pennsylvania,Office Supplies,Paper,77.78,3,0,33.55
+MM-2025-00947,12/4/2025,Corporate,South,Georgia,Furniture,Tables,2909.28,6,0.1,-157.05
+MM-2025-00948,8/20/2025,Home Office,South,Florida,Technology,Phones,1464.08,4,0.3,188.27
+MM-2025-00949,11/25/2025,Corporate,South,Kentucky,Furniture,Tables,475.84,2,0.4,-99.52
+MM-2025-00950,6/7/2025,Home Office,South,Florida,Office Supplies,Storage,659.88,6,0.1,91.42
+MM-2025-00951,9/9/2025,Corporate,Central,Illinois,Office Supplies,Storage,346.77,4,0.15,45.57
+MM-2025-00952,9/14/2025,Consumer,West,Washington,Office Supplies,Paper,54.16,1,0,25.52
+MM-2025-00952,9/14/2025,Consumer,West,Washington,Office Supplies,Binders,108.12,2,0.1,25.87
+MM-2025-00953,11/24/2025,Consumer,East,Ohio,Office Supplies,Labels,31.12,3,0.4,7.91
+MM-2025-00953,11/24/2025,Consumer,East,Ohio,Office Supplies,Storage,160.45,2,0,30.81
+MM-2025-00953,11/24/2025,Consumer,East,Ohio,Office Supplies,Labels,37.27,3,0.1,13.57
+MM-2025-00954,8/18/2025,Consumer,East,New York,Furniture,Tables,613.95,1,0.15,-65.69
+MM-2025-00955,12/22/2025,Corporate,East,Pennsylvania,Office Supplies,Storage,309.78,2,0.1,13.82
+MM-2025-00956,12/28/2025,Corporate,East,New York,Office Supplies,Binders,121.45,2,0,35.06
+MM-2025-00957,10/6/2025,Consumer,South,Florida,Office Supplies,Binders,102.62,2,0,25.74
+MM-2025-00958,11/11/2025,Consumer,East,Pennsylvania,Furniture,Chairs,1054.68,2,0,88.42
+MM-2025-00959,3/5/2025,Corporate,Central,Texas,Furniture,Tables,1111.56,3,0.3,-92.29
+MM-2025-00960,6/1/2025,Corporate,South,Kentucky,Office Supplies,Binders,43.17,1,0,10.33
+MM-2025-00961,12/6/2025,Corporate,East,Ohio,Office Supplies,Paper,23.64,1,0.1,5.4
+MM-2025-00962,6/28/2025,Consumer,South,Kentucky,Office Supplies,Binders,59.93,2,0,7.68
+MM-2025-00963,11/11/2025,Consumer,South,Florida,Technology,Accessories,306.83,3,0.15,60.6
+MM-2025-00964,9/28/2025,Consumer,South,Florida,Technology,Accessories,75.28,1,0,20.33
+MM-2025-00964,9/28/2025,Consumer,South,Florida,Office Supplies,Labels,20.79,2,0.3,3.73
+MM-2025-00965,8/19/2025,Consumer,South,Georgia,Technology,Phones,246.66,1,0.1,62.01
+MM-2025-00965,8/19/2025,Consumer,South,Georgia,Office Supplies,Paper,119.07,4,0.15,34.63
+MM-2025-00966,12/27/2025,Corporate,East,Ohio,Office Supplies,Binders,139.56,2,0,49.32
+MM-2025-00967,11/10/2025,Corporate,Central,Michigan,Technology,Copiers,1487.37,2,0,503.99
+MM-2025-00967,11/10/2025,Corporate,Central,Michigan,Office Supplies,Binders,170.1,5,0,42.2
+MM-2025-00968,9/26/2025,Corporate,South,Kentucky,Office Supplies,Paper,89.95,5,0,51.23
+MM-2025-00969,10/5/2025,Consumer,East,Ohio,Furniture,Chairs,560.14,2,0,99.59
+MM-2025-00970,10/13/2025,Consumer,West,California,Technology,Phones,752.93,1,0,239.45
+MM-2025-00971,7/7/2025,Consumer,West,California,Technology,Copiers,2927.34,2,0,784.08
+MM-2025-00972,6/15/2025,Consumer,West,California,Technology,Accessories,95.42,1,0.2,10.94
+MM-2025-00973,9/15/2025,Consumer,East,Ohio,Technology,Accessories,47.45,1,0,13.68
+MM-2025-00974,11/22/2025,Consumer,Central,Michigan,Office Supplies,Binders,24.51,1,0.4,0.51
+MM-2025-00975,11/25/2025,Consumer,West,Colorado,Technology,Phones,1775.38,3,0,588.61
+MM-2025-00975,11/25/2025,Consumer,West,Colorado,Office Supplies,Binders,226.01,3,0,81.84
+MM-2025-00976,4/19/2025,Consumer,Central,Michigan,Technology,Copiers,1088.22,2,0.1,453.87
+MM-2025-00976,4/19/2025,Consumer,Central,Michigan,Office Supplies,Paper,53.28,2,0.2,16.13
+MM-2025-00977,3/22/2025,Corporate,Central,Illinois,Office Supplies,Labels,41.99,3,0.3,9.29
+MM-2025-00977,3/22/2025,Corporate,Central,Illinois,Office Supplies,Paper,71.94,2,0.15,23.35
+MM-2025-00978,5/16/2025,Consumer,West,California,Office Supplies,Binders,138.58,3,0,27.12
+MM-2025-00978,5/16/2025,Consumer,West,California,Technology,Phones,1447.13,3,0.15,139.22
+MM-2025-00978,5/16/2025,Consumer,West,California,Furniture,Tables,3586.3,3,0,-267.06
+MM-2025-00979,5/24/2025,Consumer,Central,Illinois,Office Supplies,Binders,62.61,1,0,8.64
+MM-2025-00979,5/24/2025,Consumer,Central,Illinois,Furniture,Chairs,1305.28,4,0.2,-334.81
+MM-2025-00980,11/3/2025,Consumer,West,Colorado,Technology,Phones,337.33,1,0,77.83
+MM-2025-00981,11/5/2025,Consumer,South,Florida,Office Supplies,Paper,110.8,3,0,50.22
+MM-2025-00982,8/11/2025,Home Office,Central,Michigan,Office Supplies,Paper,43.73,2,0.15,7.61
+MM-2025-00983,11/7/2025,Corporate,South,Florida,Furniture,Chairs,2332.54,6,0.2,130.14
+MM-2025-00983,11/7/2025,Corporate,South,Florida,Technology,Phones,2590.04,5,0,588.91
+MM-2025-00984,5/4/2025,Home Office,South,Georgia,Office Supplies,Labels,53.1,5,0,15.82
+MM-2025-00985,10/14/2025,Consumer,West,Washington,Technology,Phones,1867.46,3,0,386.59
+MM-2025-00986,12/20/2025,Home Office,West,Washington,Office Supplies,Binders,215,3,0,68.41
+MM-2025-00986,12/20/2025,Home Office,West,Washington,Office Supplies,Storage,503.38,4,0,57.59
+MM-2025-00987,2/2/2025,Home Office,Central,Illinois,Office Supplies,Binders,108.49,3,0.3,11.75
+MM-2025-00988,12/27/2025,Corporate,West,Colorado,Office Supplies,Binders,92.38,1,0,35.53
+MM-2025-00988,12/27/2025,Corporate,West,Colorado,Office Supplies,Binders,319.34,5,0,88.01
+MM-2025-00989,12/20/2025,Home Office,West,Washington,Technology,Accessories,68.31,1,0.15,9.37
+MM-2025-00989,12/20/2025,Home Office,West,Washington,Technology,Phones,491.08,1,0,167.77
+MM-2025-00990,4/11/2025,Home Office,Central,Michigan,Office Supplies,Paper,23.55,1,0.2,3.91
+MM-2025-00990,4/11/2025,Home Office,Central,Michigan,Furniture,Chairs,796.66,4,0.3,-146.2
+MM-2025-00991,8/22/2025,Consumer,South,Georgia,Office Supplies,Paper,126.01,6,0.3,11.58
+MM-2025-00991,8/22/2025,Consumer,South,Georgia,Office Supplies,Storage,244.62,3,0,-3.57
+MM-2025-00992,1/16/2025,Corporate,South,Florida,Furniture,Chairs,729.64,2,0,87.73
+MM-2025-00993,11/24/2025,Corporate,Central,Texas,Office Supplies,Binders,122.2,4,0.2,40.08
+MM-2025-00994,12/17/2025,Consumer,Central,Texas,Office Supplies,Paper,25.96,1,0.2,11.13
+MM-2025-00994,12/17/2025,Consumer,Central,Texas,Furniture,Bookcases,1094.83,4,0,267.8
+MM-2025-00994,12/17/2025,Consumer,Central,Texas,Furniture,Bookcases,650.59,2,0.2,-38.5
+MM-2025-00995,12/25/2025,Corporate,West,Colorado,Furniture,Bookcases,468.3,2,0,73.09
+MM-2025-00996,1/23/2025,Consumer,Central,Michigan,Office Supplies,Binders,75.27,6,0.4,-9.39
+MM-2025-00997,7/2/2025,Consumer,West,California,Office Supplies,Labels,201.79,6,0.15,64.69
+MM-2025-00997,7/2/2025,Consumer,West,California,Office Supplies,Paper,168.56,4,0.2,56.03
+MM-2025-00997,7/2/2025,Consumer,West,California,Office Supplies,Binders,61.11,1,0,15.11
+MM-2025-00998,4/1/2025,Consumer,South,Kentucky,Technology,Accessories,347.25,6,0.15,65.53
+MM-2025-00999,9/3/2025,Consumer,Central,Michigan,Office Supplies,Paper,49.69,2,0,25.09
+MM-2025-00999,9/3/2025,Consumer,Central,Michigan,Office Supplies,Labels,77.35,5,0.1,27.97
+MM-2025-01000,2/21/2025,Consumer,Central,Illinois,Office Supplies,Paper,37,1,0.15,16.61
+MM-2025-01001,2/1/2025,Corporate,Central,Illinois,Office Supplies,Paper,126.89,4,0,48.3
+MM-2025-01001,2/1/2025,Corporate,Central,Illinois,Furniture,Chairs,339.85,1,0.1,-12.31
+MM-2025-01001,2/1/2025,Corporate,Central,Illinois,Technology,Accessories,124.54,2,0.2,28.34
+MM-2025-01002,4/16/2025,Corporate,Central,Michigan,Office Supplies,Paper,110.41,6,0.3,13.51
+MM-2025-01002,4/16/2025,Corporate,Central,Michigan,Office Supplies,Paper,30.82,2,0.15,11.79
+MM-2025-01003,10/20/2025,Corporate,West,California,Office Supplies,Storage,306.82,2,0,29.55
+MM-2025-01004,10/15/2025,Corporate,East,Ohio,Technology,Accessories,83.22,1,0,19.37
+MM-2025-01005,11/24/2025,Home Office,Central,Texas,Office Supplies,Binders,88.6,2,0,23.25
+MM-2025-01006,10/10/2025,Consumer,Central,Texas,Office Supplies,Paper,79.5,3,0.15,16.57
+MM-2025-01006,10/10/2025,Consumer,Central,Texas,Office Supplies,Paper,118.37,3,0,45.11
+MM-2025-01007,11/16/2025,Consumer,Central,Texas,Furniture,Chairs,1829.37,6,0.3,-222.35
+MM-2025-01008,11/1/2025,Consumer,East,Pennsylvania,Office Supplies,Binders,113.45,2,0,29.47
+MM-2025-01009,8/4/2025,Consumer,Central,Illinois,Furniture,Chairs,582.41,3,0.4,5.09
+MM-2025-01009,8/4/2025,Consumer,Central,Illinois,Technology,Phones,321.58,1,0.15,31
+MM-2025-01010,5/11/2025,Corporate,Central,Texas,Office Supplies,Binders,138.47,5,0.2,21.86
+MM-2025-01010,5/11/2025,Corporate,Central,Texas,Technology,Accessories,220.6,3,0.2,8.07
+MM-2025-01010,5/11/2025,Corporate,Central,Texas,Technology,Copiers,4332.86,4,0.2,642.76
+MM-2025-01011,10/15/2025,Corporate,West,Colorado,Office Supplies,Binders,33.26,1,0.3,1.53
+MM-2025-01011,10/15/2025,Corporate,West,Colorado,Technology,Phones,1684.84,4,0,272.47
+MM-2025-01012,11/10/2025,Consumer,South,Georgia,Office Supplies,Labels,27.73,3,0.3,7.89
+MM-2025-01013,5/21/2025,Consumer,West,Colorado,Office Supplies,Paper,64.96,2,0,14.19
+MM-2025-01014,3/16/2025,Consumer,South,Florida,Technology,Accessories,209.94,4,0.1,29.61
+MM-2025-01014,3/16/2025,Consumer,South,Florida,Technology,Phones,443.89,1,0,14.06
+MM-2025-01015,9/21/2025,Consumer,Central,Texas,Office Supplies,Binders,283.67,6,0.3,-32.57
+MM-2025-01016,12/22/2025,Corporate,Central,Illinois,Office Supplies,Storage,250.48,2,0.2,-27.08
+MM-2025-01016,12/22/2025,Corporate,Central,Illinois,Furniture,Chairs,398.03,1,0.1,46.86
+MM-2025-01016,12/22/2025,Corporate,Central,Illinois,Office Supplies,Binders,55.49,1,0.2,2.66
+MM-2025-01017,6/9/2025,Consumer,Central,Texas,Furniture,Bookcases,335.86,1,0.1,-16.29
+MM-2025-01018,12/10/2025,Consumer,East,Pennsylvania,Technology,Phones,992.73,2,0,85.13
+MM-2025-01019,10/4/2025,Home Office,Central,Illinois,Office Supplies,Paper,95.59,2,0,39.69
+MM-2025-01019,10/4/2025,Home Office,Central,Illinois,Office Supplies,Labels,30.8,2,0.4,3.23
+MM-2025-01020,1/15/2025,Consumer,West,California,Furniture,Tables,1474.93,2,0,122.13
+MM-2025-01021,3/27/2025,Consumer,South,Georgia,Office Supplies,Storage,656.13,6,0,77.33
+MM-2025-01021,3/27/2025,Consumer,South,Georgia,Office Supplies,Paper,14.81,1,0.15,5.18
+MM-2025-01022,5/12/2025,Consumer,South,Kentucky,Office Supplies,Storage,121.4,2,0,16.97
+MM-2025-01022,5/12/2025,Consumer,South,Kentucky,Office Supplies,Binders,78.04,3,0.2,3.38
+MM-2025-01022,5/12/2025,Consumer,South,Kentucky,Office Supplies,Binders,91.07,4,0.15,4.75
+MM-2025-01023,12/24/2025,Corporate,Central,Texas,Office Supplies,Binders,87.22,2,0.2,8.01
+MM-2025-01024,11/8/2025,Consumer,West,Washington,Office Supplies,Labels,118.27,5,0,64.21
+MM-2025-01024,11/8/2025,Consumer,West,Washington,Technology,Copiers,10155.57,6,0,2465.64
+MM-2025-01025,11/25/2025,Consumer,South,Kentucky,Office Supplies,Paper,134.35,4,0,58.93
+MM-2025-01026,7/5/2025,Consumer,South,Kentucky,Office Supplies,Paper,134.44,6,0.15,33.13
+MM-2025-01027,9/14/2025,Corporate,Central,Michigan,Technology,Accessories,127.16,3,0.2,10.7
+MM-2025-01027,9/14/2025,Corporate,Central,Michigan,Office Supplies,Storage,172.43,1,0,17.06
+MM-2025-01027,9/14/2025,Corporate,Central,Michigan,Office Supplies,Binders,147.44,3,0,27.73
+MM-2025-01028,12/3/2025,Corporate,East,Pennsylvania,Furniture,Bookcases,1771.17,5,0,301.3
+MM-2025-01028,12/3/2025,Corporate,East,Pennsylvania,Technology,Phones,552.69,1,0,115.31
+MM-2025-01029,9/8/2025,Consumer,Central,Texas,Office Supplies,Storage,315.01,2,0,5.31
+MM-2025-01030,8/14/2025,Consumer,South,Florida,Office Supplies,Binders,160.69,5,0.3,13.42
+MM-2025-01030,8/14/2025,Consumer,South,Florida,Furniture,Chairs,1140.95,4,0.2,39.56
+MM-2025-01031,3/2/2025,Consumer,West,Colorado,Furniture,Bookcases,2044.95,6,0.15,264.61
+MM-2025-01032,4/20/2025,Consumer,Central,Texas,Technology,Accessories,211.86,5,0.2,41.21
+MM-2025-01032,4/20/2025,Consumer,Central,Texas,Furniture,Chairs,695.44,3,0.3,-34.15
+MM-2025-01033,6/2/2025,Consumer,East,Ohio,Furniture,Tables,1142.4,3,0.3,-117.52
+MM-2025-01033,6/2/2025,Consumer,East,Ohio,Office Supplies,Binders,70.43,2,0,13.45
+MM-2025-01033,6/2/2025,Consumer,East,Ohio,Office Supplies,Paper,68.6,2,0.1,20.6
+MM-2025-01034,1/11/2025,Home Office,Central,Illinois,Office Supplies,Paper,142.49,3,0.1,54.86
+MM-2025-01034,1/11/2025,Home Office,Central,Illinois,Technology,Accessories,122.18,2,0.15,25.77
+MM-2025-01034,1/11/2025,Home Office,Central,Illinois,Office Supplies,Storage,196.53,2,0.4,2.76
+MM-2025-01035,2/15/2025,Consumer,Central,Illinois,Office Supplies,Paper,115.05,5,0.3,44.11
+MM-2025-01035,2/15/2025,Consumer,Central,Illinois,Technology,Accessories,435.86,5,0.2,48.51
+MM-2025-01036,10/10/2025,Consumer,West,Colorado,Office Supplies,Binders,42.96,1,0.3,5.82
+MM-2025-01036,10/10/2025,Consumer,West,Colorado,Office Supplies,Binders,228.38,5,0,52.18
+MM-2025-01036,10/10/2025,Consumer,West,Colorado,Office Supplies,Paper,53.18,3,0.2,16.31
+MM-2025-01037,8/9/2025,Corporate,Central,Texas,Technology,Accessories,134.27,2,0.3,27.92
+MM-2025-01037,8/9/2025,Corporate,Central,Texas,Office Supplies,Storage,449.37,5,0,73.48
+MM-2025-01037,8/9/2025,Corporate,Central,Texas,Office Supplies,Labels,58.14,5,0.1,24.54
+MM-2025-01038,10/14/2025,Consumer,East,Ohio,Office Supplies,Labels,17.71,1,0,4.18
+MM-2025-01038,10/14/2025,Consumer,East,Ohio,Furniture,Tables,490.47,1,0,-43.93
+MM-2025-01038,10/14/2025,Consumer,East,Ohio,Furniture,Bookcases,266.47,1,0.1,24.89
+MM-2025-01039,10/27/2025,Corporate,South,Florida,Office Supplies,Paper,180,4,0.15,50.84
+MM-2025-01040,3/28/2025,Consumer,South,Kentucky,Office Supplies,Labels,110.3,6,0,45.63
+MM-2025-01040,3/28/2025,Consumer,South,Kentucky,Technology,Accessories,69.41,2,0,19.91
+MM-2025-01040,3/28/2025,Consumer,South,Kentucky,Office Supplies,Labels,31.07,4,0,15.38
+MM-2025-01041,12/13/2025,Consumer,Central,Texas,Technology,Copiers,5448.17,5,0.2,770.94
+MM-2025-01042,9/14/2025,Consumer,Central,Illinois,Office Supplies,Storage,256.52,2,0,36.21
+MM-2025-01042,9/14/2025,Consumer,Central,Illinois,Technology,Accessories,221.31,2,0.2,56.07
+MM-2025-01043,4/13/2025,Consumer,East,New York,Office Supplies,Binders,47.43,1,0.1,10.59
+MM-2025-01043,4/13/2025,Consumer,East,New York,Office Supplies,Binders,139.66,3,0,67.37
+MM-2025-01044,11/14/2025,Corporate,Central,Michigan,Office Supplies,Paper,16.31,1,0.2,3.57
+MM-2025-01045,9/2/2025,Home Office,East,Ohio,Office Supplies,Paper,108.26,4,0,33.04
+MM-2025-01046,6/16/2025,Consumer,East,Pennsylvania,Technology,Copiers,4343.02,3,0,1742.67
+MM-2025-01047,3/13/2025,Consumer,South,Georgia,Furniture,Chairs,957.33,3,0.1,126.21
+MM-2025-01048,4/26/2025,Consumer,West,Washington,Technology,Accessories,187.52,3,0.2,38.72
+MM-2025-01048,4/26/2025,Consumer,West,Washington,Technology,Accessories,154.36,2,0,64.41
+MM-2025-01049,7/11/2025,Consumer,West,Colorado,Office Supplies,Storage,145.7,2,0.15,9.95
+MM-2025-01050,7/16/2025,Corporate,South,Kentucky,Furniture,Bookcases,825.89,3,0,27.1
+MM-2025-01051,12/16/2025,Corporate,West,California,Technology,Accessories,117.08,2,0.15,17.08
+MM-2025-01051,12/16/2025,Corporate,West,California,Technology,Phones,1236.62,3,0.4,-15.06
+MM-2025-01052,10/13/2025,Home Office,South,Kentucky,Office Supplies,Binders,90.06,2,0,3.19
+MM-2025-01052,10/13/2025,Home Office,South,Kentucky,Furniture,Bookcases,579.23,3,0.2,19.64
+MM-2025-01053,4/12/2025,Consumer,South,Georgia,Furniture,Tables,976.9,2,0,114.01
+MM-2025-01053,4/12/2025,Consumer,South,Georgia,Technology,Accessories,128.36,4,0.2,13.69
+MM-2025-01054,3/25/2025,Home Office,West,California,Office Supplies,Storage,272.86,2,0,37.98
+MM-2025-01054,3/25/2025,Home Office,West,California,Furniture,Chairs,1366.83,2,0.1,-66.51
+MM-2025-01054,3/25/2025,Home Office,West,California,Technology,Copiers,3517.01,3,0.2,662.66
+MM-2025-01055,10/7/2025,Consumer,South,Kentucky,Technology,Accessories,260.45,6,0.1,78.02
+MM-2025-01056,2/11/2025,Consumer,East,New York,Technology,Accessories,178.89,2,0.15,30.82
+MM-2025-01056,2/11/2025,Consumer,East,New York,Office Supplies,Paper,89.01,2,0,29.62
+MM-2025-01057,10/17/2025,Consumer,South,Georgia,Office Supplies,Binders,39.46,1,0.2,3.67
+MM-2025-01057,10/17/2025,Consumer,South,Georgia,Office Supplies,Paper,19.39,1,0,3.55
+MM-2025-01058,2/3/2025,Corporate,East,New York,Technology,Accessories,467.04,4,0,117.57
+MM-2025-01058,2/3/2025,Corporate,East,New York,Office Supplies,Paper,92.25,2,0,31.08
+MM-2025-01059,1/16/2025,Corporate,South,Florida,Furniture,Chairs,845.62,2,0,115.4
+MM-2025-01059,1/16/2025,Corporate,South,Florida,Technology,Accessories,108.61,1,0.2,20.92
+MM-2025-01060,3/16/2025,Corporate,Central,Texas,Technology,Accessories,168.63,3,0.3,34.87
+MM-2025-01060,3/16/2025,Corporate,Central,Texas,Office Supplies,Paper,118.3,3,0,54.74
+MM-2025-01060,3/16/2025,Corporate,Central,Texas,Furniture,Chairs,823.89,2,0.1,45.33
+MM-2025-01061,3/26/2025,Home Office,West,Washington,Office Supplies,Paper,92.62,2,0,35.79
+MM-2025-01062,9/22/2025,Consumer,West,Washington,Office Supplies,Paper,126.59,2,0,41.7
+MM-2025-01062,9/22/2025,Consumer,West,Washington,Furniture,Bookcases,1832.72,5,0.1,197.46
+MM-2025-01063,3/14/2025,Corporate,South,Kentucky,Office Supplies,Storage,268.56,4,0.2,39.19
+MM-2025-01064,7/15/2025,Consumer,West,Colorado,Office Supplies,Paper,144.51,6,0,33.37
+MM-2025-01064,7/15/2025,Consumer,West,Colorado,Technology,Accessories,48.1,1,0.15,7.78
+MM-2025-01065,6/1/2025,Consumer,East,Ohio,Technology,Accessories,63.76,1,0.1,14.18
+MM-2025-01066,2/1/2025,Consumer,West,Washington,Furniture,Chairs,2084.96,6,0.4,-212.5
+MM-2025-01067,9/21/2025,Consumer,South,Georgia,Technology,Phones,1570.99,4,0.15,252.43
+MM-2025-01068,6/7/2025,Corporate,Central,Michigan,Office Supplies,Binders,53.28,2,0.2,1.67
+MM-2025-01068,6/7/2025,Corporate,Central,Michigan,Technology,Accessories,128.52,2,0,39.43
+MM-2025-01069,9/9/2025,Consumer,South,Florida,Office Supplies,Storage,291.41,2,0.15,33.22
+MM-2025-01070,9/15/2025,Consumer,South,Georgia,Technology,Copiers,648.86,1,0,168.15
+MM-2025-01070,9/15/2025,Consumer,South,Georgia,Office Supplies,Labels,27.79,2,0.15,7.44
+MM-2025-01071,9/12/2025,Home Office,West,Washington,Office Supplies,Storage,516.96,4,0,89.84
+MM-2025-01071,9/12/2025,Home Office,West,Washington,Office Supplies,Binders,153.02,3,0.2,21.73
+MM-2025-01071,9/12/2025,Home Office,West,Washington,Office Supplies,Binders,112.45,2,0.2,17.96
+MM-2025-01072,7/16/2025,Corporate,West,Washington,Technology,Accessories,413.45,4,0,105.56
+MM-2025-01072,7/16/2025,Corporate,West,Washington,Technology,Accessories,216.1,4,0.15,51.36
+MM-2025-01073,12/23/2025,Corporate,East,Ohio,Technology,Copiers,3553.75,4,0,1636.58
+MM-2025-01073,12/23/2025,Corporate,East,Ohio,Office Supplies,Binders,42.17,1,0,7.88
+MM-2025-01074,9/25/2025,Consumer,West,Washington,Office Supplies,Binders,104.69,2,0.15,14.37
+MM-2025-01075,12/20/2025,Home Office,South,Georgia,Technology,Phones,523.89,2,0,144.33
+MM-2025-01076,11/23/2025,Consumer,South,Georgia,Office Supplies,Paper,15.72,1,0,3.88
+MM-2025-01077,2/19/2025,Home Office,West,Washington,Office Supplies,Binders,65.32,1,0.1,17.57
+MM-2025-01078,10/2/2025,Corporate,South,Georgia,Furniture,Bookcases,1446.36,5,0,2.3
+MM-2025-01079,1/23/2025,Consumer,Central,Michigan,Furniture,Bookcases,229.03,1,0,26.53
+MM-2025-01080,6/27/2025,Corporate,South,Florida,Office Supplies,Binders,196.62,3,0,59.35
+MM-2025-01081,11/12/2025,Corporate,East,Pennsylvania,Office Supplies,Paper,92.5,3,0,35.45
+MM-2025-01082,6/24/2025,Home Office,Central,Texas,Technology,Phones,359.36,1,0,135.11
+MM-2025-01083,11/7/2025,Home Office,West,California,Furniture,Chairs,1561.67,3,0,88.31
+MM-2025-01084,7/19/2025,Home Office,East,Ohio,Technology,Copiers,3167.9,3,0.2,566.46
+MM-2025-01085,9/17/2025,Corporate,East,Pennsylvania,Office Supplies,Storage,180.71,2,0,26.86
+MM-2025-01085,9/17/2025,Corporate,East,Pennsylvania,Technology,Accessories,74.8,1,0.2,22.76
+MM-2025-01085,9/17/2025,Corporate,East,Pennsylvania,Technology,Accessories,148.5,2,0,37.26
+MM-2025-01086,7/21/2025,Consumer,West,Colorado,Technology,Accessories,83.39,1,0,34.12
+MM-2025-01087,5/23/2025,Consumer,East,Pennsylvania,Technology,Accessories,507.5,6,0,123.91
+MM-2025-01088,6/26/2025,Home Office,South,Georgia,Furniture,Bookcases,111.73,1,0.3,8.2
+MM-2025-01089,10/13/2025,Consumer,Central,Illinois,Office Supplies,Labels,36.08,2,0,15.94
+MM-2025-01090,10/8/2025,Corporate,Central,Michigan,Furniture,Tables,376.78,1,0.3,-22.24
+MM-2025-01091,11/27/2025,Corporate,East,New York,Office Supplies,Paper,53.84,1,0,20.16
+MM-2025-01092,11/10/2025,Corporate,East,Pennsylvania,Technology,Accessories,279.14,4,0,71.88
+MM-2025-01093,8/16/2025,Home Office,Central,Michigan,Office Supplies,Paper,21.21,1,0.2,6.94
+MM-2025-01093,8/16/2025,Home Office,Central,Michigan,Office Supplies,Paper,38.23,2,0.2,7.95
+MM-2025-01094,1/2/2025,Corporate,South,Florida,Office Supplies,Paper,85.63,2,0,28.69
+MM-2025-01095,9/25/2025,Corporate,East,New York,Office Supplies,Binders,104.3,2,0.2,16.12
+MM-2025-01095,9/25/2025,Corporate,East,New York,Office Supplies,Binders,142.21,4,0.4,-10.33
+MM-2025-01095,9/25/2025,Corporate,East,New York,Technology,Phones,1026.96,2,0,50.27
+MM-2025-01096,8/12/2025,Consumer,South,Florida,Technology,Accessories,71.8,1,0,20.62
+MM-2025-01096,8/12/2025,Consumer,South,Florida,Technology,Copiers,2749.24,3,0,848.02
+MM-2025-01096,8/12/2025,Consumer,South,Florida,Furniture,Bookcases,1120.7,4,0,222.97
+MM-2025-01097,3/8/2025,Consumer,Central,Illinois,Technology,Accessories,73.94,1,0.2,27.11
+MM-2025-01098,12/2/2025,Consumer,Central,Michigan,Technology,Phones,1049.23,4,0.2,341.82
+MM-2025-01098,12/2/2025,Consumer,Central,Michigan,Office Supplies,Binders,38.84,1,0.15,3.3
+MM-2025-01099,12/5/2025,Corporate,East,Pennsylvania,Office Supplies,Labels,83.12,5,0,24.3
+MM-2025-01100,12/23/2025,Consumer,Central,Texas,Technology,Copiers,1837.6,3,0.2,372.23
+MM-2025-01101,8/22/2025,Corporate,Central,Texas,Technology,Phones,1616.65,5,0.2,66.96
+MM-2025-01101,8/22/2025,Corporate,Central,Texas,Office Supplies,Paper,77.62,3,0,27.42
+MM-2025-01101,8/22/2025,Corporate,Central,Texas,Office Supplies,Binders,70.59,1,0,16.89
+MM-2025-01102,3/10/2025,Corporate,West,Washington,Technology,Phones,690.87,2,0.15,84.51
+MM-2025-01103,10/23/2025,Consumer,West,California,Office Supplies,Storage,162.62,1,0,12.4
+MM-2025-01103,10/23/2025,Consumer,West,California,Office Supplies,Binders,305.28,4,0,54.21
+MM-2025-01104,12/26/2025,Consumer,West,California,Furniture,Bookcases,1236.21,5,0.4,-159.85
+MM-2025-01104,12/26/2025,Consumer,West,California,Technology,Accessories,136.78,2,0,40.32
+MM-2025-01105,12/4/2025,Consumer,South,Kentucky,Furniture,Tables,515.64,1,0,46.56
+MM-2025-01106,1/7/2025,Consumer,West,Washington,Office Supplies,Binders,53.83,1,0.15,15.67
+MM-2025-01106,1/7/2025,Consumer,West,Washington,Furniture,Bookcases,570.07,2,0.3,1.14
+MM-2025-01107,7/26/2025,Corporate,Central,Michigan,Technology,Copiers,1262.53,2,0.15,204.84
+MM-2025-01108,4/22/2025,Corporate,West,California,Office Supplies,Storage,268.36,2,0.3,12.56
+MM-2025-01108,4/22/2025,Corporate,West,California,Technology,Accessories,346.11,3,0.1,76.35
+MM-2025-01108,4/22/2025,Corporate,West,California,Furniture,Tables,2167.36,2,0,-20.26
+MM-2025-01109,9/13/2025,Consumer,Central,Illinois,Furniture,Chairs,1871.25,4,0,397.58
+MM-2025-01109,9/13/2025,Consumer,Central,Illinois,Office Supplies,Paper,69.11,3,0.2,21.19
+MM-2025-01110,9/25/2025,Corporate,Central,Michigan,Technology,Phones,293.51,1,0.3,9.43
+MM-2025-01111,10/14/2025,Consumer,South,Georgia,Office Supplies,Binders,62.91,2,0,16.36
+MM-2025-01111,10/14/2025,Consumer,South,Georgia,Office Supplies,Binders,69.43,2,0.3,3.43
+MM-2025-01112,4/1/2025,Corporate,East,Pennsylvania,Office Supplies,Binders,75.55,1,0,23.39
+MM-2025-01112,4/1/2025,Corporate,East,Pennsylvania,Technology,Accessories,235.09,4,0.2,88.18
+MM-2025-01113,11/6/2025,Consumer,West,California,Office Supplies,Storage,514.98,3,0,83.46
+MM-2025-01114,8/23/2025,Corporate,West,Washington,Furniture,Chairs,1250.68,3,0.15,36.12
+MM-2025-01114,8/23/2025,Corporate,West,Washington,Technology,Copiers,1700.37,2,0.3,400.31
+MM-2025-01114,8/23/2025,Corporate,West,Washington,Furniture,Tables,1888.92,4,0.15,43.32
+MM-2025-01115,3/25/2025,Corporate,East,New York,Technology,Phones,466.9,1,0.2,68.73
+MM-2025-01115,3/25/2025,Corporate,East,New York,Office Supplies,Paper,80.23,2,0.15,33.07
+MM-2025-01116,4/5/2025,Corporate,East,Ohio,Technology,Accessories,109.38,2,0,29.9
+MM-2025-01117,1/3/2025,Consumer,West,Washington,Furniture,Chairs,2486.05,5,0,292.61
+MM-2025-01118,3/17/2025,Consumer,West,Washington,Office Supplies,Paper,61.89,3,0.3,15.04
+MM-2025-01118,3/17/2025,Consumer,West,Washington,Office Supplies,Storage,253.14,2,0.1,43.43
+MM-2025-01119,10/4/2025,Corporate,East,Ohio,Technology,Accessories,99.88,2,0,33.74
+MM-2025-01119,10/4/2025,Corporate,East,Ohio,Furniture,Bookcases,890.96,4,0.2,22.78
+MM-2025-01120,5/9/2025,Consumer,East,New York,Technology,Accessories,338.38,4,0,72.71
+MM-2025-01120,5/9/2025,Consumer,East,New York,Furniture,Tables,1126.03,3,0.2,-4.06
+MM-2025-01121,5/15/2025,Home Office,West,Washington,Office Supplies,Storage,135.7,1,0.1,5.17
+MM-2025-01121,5/15/2025,Home Office,West,Washington,Furniture,Tables,1371.07,3,0.3,-233.73
+MM-2025-01122,11/17/2025,Home Office,West,California,Office Supplies,Labels,123.99,4,0,53.9
+MM-2025-01122,11/17/2025,Home Office,West,California,Furniture,Tables,1078.15,2,0,154.79
+MM-2025-01123,2/21/2025,Corporate,South,Georgia,Office Supplies,Paper,24.54,1,0,7.92
+MM-2025-01124,1/1/2025,Corporate,East,New York,Technology,Accessories,73.7,1,0.1,15.87
+MM-2025-01125,9/4/2025,Consumer,East,Pennsylvania,Office Supplies,Storage,451.83,4,0,51.2
+MM-2025-01125,9/4/2025,Consumer,East,Pennsylvania,Office Supplies,Storage,314.48,3,0.2,10.02
+MM-2025-01126,11/16/2025,Consumer,South,Georgia,Technology,Phones,302.31,1,0,59.28
+MM-2025-01127,2/2/2025,Consumer,South,Kentucky,Office Supplies,Binders,80.16,3,0,26.7
+MM-2025-01128,5/17/2025,Home Office,East,Ohio,Office Supplies,Storage,531.55,5,0,114.52
+MM-2025-01129,3/26/2025,Consumer,East,Ohio,Office Supplies,Labels,10.09,1,0.2,2.21
+MM-2025-01130,5/3/2025,Consumer,South,Florida,Technology,Accessories,76.3,1,0.15,12.51
+MM-2025-01130,5/3/2025,Consumer,South,Florida,Furniture,Bookcases,925.35,3,0.3,-87.83
+MM-2025-01130,5/3/2025,Consumer,South,Florida,Office Supplies,Labels,39.79,3,0.15,13.11
+MM-2025-01131,9/12/2025,Corporate,South,Kentucky,Technology,Copiers,3394.09,4,0.15,610.77
+MM-2025-01132,10/19/2025,Home Office,South,Florida,Furniture,Chairs,749.19,3,0.15,76.23
+MM-2025-01132,10/19/2025,Home Office,South,Florida,Office Supplies,Paper,105.73,3,0,46.64
+MM-2025-01132,10/19/2025,Home Office,South,Florida,Technology,Copiers,3896.1,2,0,1021.35
+MM-2025-01133,9/2/2025,Consumer,South,Kentucky,Furniture,Tables,1035.47,2,0,4
+MM-2025-01133,9/2/2025,Consumer,South,Kentucky,Office Supplies,Labels,20.12,3,0,9.69
+MM-2025-01133,9/2/2025,Consumer,South,Kentucky,Furniture,Chairs,731.67,3,0,119.1
+MM-2025-01134,9/4/2025,Corporate,West,California,Office Supplies,Binders,331.13,6,0.2,28.65
+MM-2025-01134,9/4/2025,Corporate,West,California,Office Supplies,Storage,384.64,2,0.1,40.76
+MM-2025-01135,12/18/2025,Consumer,Central,Michigan,Technology,Phones,901.97,2,0,110.98
+MM-2025-01136,9/12/2025,Home Office,East,Ohio,Office Supplies,Paper,123.88,4,0,46.55
+MM-2025-01137,7/19/2025,Consumer,East,Pennsylvania,Office Supplies,Paper,122.4,3,0,36.85
+MM-2025-01138,3/2/2025,Consumer,Central,Illinois,Office Supplies,Binders,204.11,4,0,44.31
+MM-2025-01139,9/21/2025,Consumer,South,Kentucky,Office Supplies,Binders,80.57,2,0,31.01
+MM-2025-01139,9/21/2025,Consumer,South,Kentucky,Technology,Accessories,126.74,2,0,39.28
+MM-2025-01140,3/13/2025,Corporate,East,Ohio,Furniture,Chairs,941.45,3,0.15,22.29
+MM-2025-01140,3/13/2025,Corporate,East,Ohio,Office Supplies,Binders,91.47,3,0.2,16.23
+MM-2025-01140,3/13/2025,Corporate,East,Ohio,Technology,Accessories,77.76,1,0,15.73
+MM-2025-01141,10/26/2025,Corporate,West,California,Office Supplies,Labels,22.72,1,0,9.99
+MM-2025-01142,12/17/2025,Consumer,Central,Michigan,Furniture,Bookcases,808.14,4,0.3,43.2
+MM-2025-01143,1/1/2025,Corporate,East,Ohio,Furniture,Chairs,934.59,4,0.3,-38.08
+MM-2025-01144,9/5/2025,Corporate,Central,Michigan,Office Supplies,Binders,40.17,1,0.2,3.31
+MM-2025-01145,11/18/2025,Corporate,West,California,Office Supplies,Labels,69.83,4,0.4,7.3
+MM-2025-01145,11/18/2025,Corporate,West,California,Office Supplies,Paper,161.34,4,0.15,32.58
+MM-2025-01145,11/18/2025,Corporate,West,California,Technology,Accessories,110.83,1,0,41.64
+MM-2025-01146,4/5/2025,Home Office,East,New York,Office Supplies,Binders,177,3,0,48.78
+MM-2025-01146,4/5/2025,Home Office,East,New York,Office Supplies,Binders,84.28,3,0.4,4.91
+MM-2025-01147,11/20/2025,Corporate,South,Kentucky,Furniture,Bookcases,158.55,1,0.15,13.2
+MM-2025-01148,11/26/2025,Home Office,East,Pennsylvania,Technology,Phones,415.33,1,0.1,51.14
+MM-2025-01149,10/9/2025,Corporate,South,Kentucky,Office Supplies,Storage,297.51,4,0.1,39.37
+MM-2025-01150,5/20/2025,Corporate,East,Ohio,Office Supplies,Paper,173.22,6,0.15,11.7
+MM-2025-01150,5/20/2025,Corporate,East,Ohio,Furniture,Chairs,1018.47,3,0.1,41.37
+MM-2025-01151,7/21/2025,Home Office,South,Florida,Technology,Phones,1124.15,2,0,253.92
+MM-2025-01152,3/14/2025,Consumer,Central,Illinois,Office Supplies,Binders,53.74,1,0.2,9
+MM-2025-01153,11/23/2025,Consumer,South,Georgia,Furniture,Bookcases,187.5,1,0.15,54.68
+MM-2025-01154,1/24/2025,Home Office,East,Ohio,Furniture,Chairs,1276.94,4,0.15,22.59
+MM-2025-01154,1/24/2025,Home Office,East,Ohio,Technology,Accessories,50.59,1,0.2,5.51
+MM-2025-01154,1/24/2025,Home Office,East,Ohio,Office Supplies,Storage,116.04,1,0,35.06
+MM-2025-01155,5/11/2025,Corporate,West,Washington,Office Supplies,Binders,264.14,4,0,69.93
+MM-2025-01156,10/11/2025,Corporate,East,Ohio,Office Supplies,Paper,19.05,1,0.4,2.22
+MM-2025-01156,10/11/2025,Corporate,East,Ohio,Technology,Phones,177.66,1,0.3,-9.89
+MM-2025-01156,10/11/2025,Corporate,East,Ohio,Office Supplies,Storage,248.82,3,0.15,20.64
+MM-2025-01157,1/25/2025,Corporate,East,New York,Office Supplies,Labels,14.68,1,0.3,4.37
+MM-2025-01158,9/7/2025,Corporate,West,Colorado,Office Supplies,Labels,99.28,6,0.15,37.15
+MM-2025-01158,9/7/2025,Corporate,West,Colorado,Office Supplies,Binders,60.76,2,0.15,15.05
+MM-2025-01158,9/7/2025,Corporate,West,Colorado,Office Supplies,Paper,96.73,3,0,30.56
+MM-2025-01159,12/16/2025,Consumer,Central,Texas,Office Supplies,Paper,98.73,4,0,43.47
+MM-2025-01159,12/16/2025,Consumer,Central,Texas,Furniture,Bookcases,278.32,2,0.4,-12.68
+MM-2025-01159,12/16/2025,Consumer,Central,Texas,Office Supplies,Paper,95.76,3,0.2,30.16
+MM-2025-01160,3/12/2025,Corporate,East,New York,Office Supplies,Paper,40,1,0,16.93
+MM-2025-01161,10/18/2025,Home Office,West,Colorado,Office Supplies,Paper,158.7,5,0.1,25.9
+MM-2025-01161,10/18/2025,Home Office,West,Colorado,Office Supplies,Labels,13.3,1,0,6.33
+MM-2025-01162,4/25/2025,Consumer,West,Colorado,Office Supplies,Binders,114.73,2,0.15,23.31
+MM-2025-01163,9/19/2025,Consumer,South,Kentucky,Office Supplies,Paper,69.25,3,0,33.69
+MM-2025-01164,9/19/2025,Consumer,South,Florida,Technology,Phones,260.39,1,0.4,-4.97
+MM-2025-01164,9/19/2025,Consumer,South,Florida,Technology,Accessories,229.5,4,0.2,38.84
+MM-2025-01165,1/5/2025,Consumer,East,Ohio,Furniture,Tables,1542.16,4,0,149.47
+MM-2025-01165,1/5/2025,Consumer,East,Ohio,Furniture,Chairs,947.92,3,0,141.21
+MM-2025-01166,10/8/2025,Home Office,South,Kentucky,Furniture,Chairs,579.15,3,0.15,88.25
+MM-2025-01167,11/26/2025,Corporate,South,Georgia,Furniture,Tables,1139.02,3,0.15,-72.43
+MM-2025-01168,5/9/2025,Consumer,Central,Michigan,Office Supplies,Storage,162.57,2,0.2,-4.04
+MM-2025-01169,12/22/2025,Corporate,West,California,Furniture,Bookcases,1269.09,3,0.3,28.28
+MM-2025-01169,12/22/2025,Corporate,West,California,Furniture,Tables,4394.76,4,0,350.24
+MM-2025-01169,12/22/2025,Corporate,West,California,Office Supplies,Labels,29.09,1,0,12.69
+MM-2025-01170,5/13/2025,Consumer,East,Ohio,Office Supplies,Paper,181.76,5,0,66.47
+MM-2025-01171,4/21/2025,Consumer,West,California,Technology,Copiers,7679.3,6,0.2,1705.28
+MM-2025-01171,4/21/2025,Consumer,West,California,Furniture,Chairs,2821.97,5,0.15,40.8
+MM-2025-01172,9/11/2025,Consumer,Central,Texas,Office Supplies,Binders,56.75,2,0.3,11.54
+MM-2025-01173,4/1/2025,Consumer,West,Colorado,Office Supplies,Paper,220.14,5,0,66.65
+MM-2025-01173,4/1/2025,Consumer,West,Colorado,Furniture,Bookcases,1083,5,0,303.74
+MM-2025-01173,4/1/2025,Consumer,West,Colorado,Technology,Copiers,2195.76,2,0,614.05
+MM-2025-01174,1/10/2025,Consumer,East,Pennsylvania,Technology,Copiers,1352.35,1,0.15,424.96
+MM-2025-01175,12/18/2025,Corporate,South,Kentucky,Office Supplies,Binders,30.12,1,0,8.51
+MM-2025-01176,2/12/2025,Consumer,South,Georgia,Technology,Accessories,105.26,3,0.15,29.43
+MM-2025-01177,11/8/2025,Home Office,Central,Texas,Technology,Accessories,309.35,6,0.2,47.39
+MM-2025-01178,2/2/2025,Home Office,West,California,Furniture,Bookcases,1083.06,3,0.1,82.07
+MM-2025-01179,4/24/2025,Consumer,East,New York,Technology,Copiers,1973.1,2,0.2,131.75
+MM-2025-01180,3/24/2025,Home Office,East,New York,Technology,Phones,1181.77,3,0.3,63.14
+MM-2025-01180,3/24/2025,Home Office,East,New York,Furniture,Chairs,1428.79,3,0,-25.94
+MM-2025-01181,12/19/2025,Consumer,East,Ohio,Office Supplies,Binders,152.87,3,0,38.36
+MM-2025-01181,12/19/2025,Consumer,East,Ohio,Office Supplies,Binders,141.25,3,0,27.48
+MM-2025-01182,4/22/2025,Home Office,West,California,Office Supplies,Paper,159.87,5,0,79.36
+MM-2025-01183,12/17/2025,Home Office,Central,Texas,Office Supplies,Paper,125.19,4,0.3,32.93
+MM-2025-01184,6/27/2025,Home Office,Central,Texas,Furniture,Chairs,252.74,1,0.4,-11.07
+MM-2025-01185,9/23/2025,Corporate,Central,Illinois,Office Supplies,Binders,90.19,2,0.3,-4.99
+MM-2025-01186,2/3/2025,Consumer,South,Georgia,Technology,Accessories,72.66,2,0.2,14.97
+MM-2025-01187,12/11/2025,Consumer,Central,Texas,Technology,Copiers,833.55,1,0.2,244.8
+MM-2025-01187,12/11/2025,Consumer,Central,Texas,Office Supplies,Binders,190.68,4,0,66.16
+MM-2025-01188,11/19/2025,Consumer,Central,Texas,Furniture,Chairs,335.77,1,0,40.58
+MM-2025-01189,12/5/2025,Corporate,South,Florida,Technology,Accessories,99.79,1,0,20.14
+MM-2025-01189,12/5/2025,Corporate,South,Florida,Office Supplies,Paper,26.97,1,0.1,9.05
+MM-2025-01189,12/5/2025,Corporate,South,Florida,Office Supplies,Storage,593.25,4,0,215.21
+MM-2025-01190,2/17/2025,Consumer,Central,Illinois,Furniture,Chairs,820.08,3,0.3,-26.07
+MM-2025-01191,9/17/2025,Consumer,East,Pennsylvania,Office Supplies,Paper,120.96,4,0,31.46
+MM-2025-01191,9/17/2025,Consumer,East,Pennsylvania,Technology,Phones,985.29,3,0.1,154.96
+MM-2025-01191,9/17/2025,Consumer,East,Pennsylvania,Office Supplies,Binders,200.18,4,0,63.24
+MM-2025-01192,12/7/2025,Home Office,West,California,Furniture,Bookcases,2932.87,5,0.15,638.17
+MM-2025-01193,6/16/2025,Consumer,Central,Illinois,Furniture,Tables,3004.21,3,0,171.05
+MM-2025-01193,6/16/2025,Consumer,Central,Illinois,Office Supplies,Paper,84.88,4,0.4,7.44
+MM-2025-01194,9/14/2025,Consumer,Central,Texas,Office Supplies,Labels,63.28,4,0.4,3.87
+MM-2025-01195,10/13/2025,Consumer,West,Washington,Office Supplies,Binders,178.36,6,0.1,26.47
+MM-2025-01196,7/6/2025,Corporate,Central,Illinois,Technology,Copiers,5281.15,5,0.4,976.38
+MM-2025-01196,7/6/2025,Corporate,Central,Illinois,Office Supplies,Paper,30.06,1,0.15,7.22
+MM-2025-01197,8/15/2025,Consumer,East,Pennsylvania,Furniture,Chairs,681.22,2,0,144.36
+MM-2025-01198,6/3/2025,Consumer,West,California,Office Supplies,Binders,153.18,3,0,43.46
+MM-2025-01199,10/11/2025,Corporate,Central,Michigan,Furniture,Chairs,1731.47,5,0,359.96
+MM-2025-01200,6/8/2025,Consumer,Central,Michigan,Office Supplies,Labels,53.54,4,0.2,10.44
+MM-2025-01201,6/14/2025,Consumer,South,Kentucky,Furniture,Chairs,788.21,4,0.1,57.56
+MM-2025-01202,9/26/2025,Corporate,South,Georgia,Technology,Phones,584,3,0.3,15.15
+MM-2025-01203,8/28/2025,Consumer,East,New York,Technology,Phones,1441.19,3,0.2,244.85
+MM-2025-01203,8/28/2025,Consumer,East,New York,Office Supplies,Paper,80.24,2,0,25.28
+MM-2025-01204,9/23/2025,Consumer,West,Washington,Technology,Phones,509.31,1,0,158.93
+MM-2025-01205,4/6/2025,Consumer,Central,Texas,Office Supplies,Storage,256.83,2,0.1,32.76
+MM-2025-01206,11/2/2025,Consumer,Central,Michigan,Technology,Copiers,1162.21,1,0,276.39
+MM-2025-01206,11/2/2025,Consumer,Central,Michigan,Office Supplies,Binders,27.39,1,0.4,2.52
+MM-2025-01207,12/16/2025,Consumer,Central,Texas,Office Supplies,Binders,36.91,1,0.2,4.34
+MM-2025-01208,12/28/2025,Home Office,Central,Illinois,Office Supplies,Labels,22.72,2,0.4,7.68
+MM-2025-01208,12/28/2025,Home Office,Central,Illinois,Furniture,Bookcases,1112.72,3,0.2,71.91
+MM-2025-01209,7/17/2025,Corporate,South,Kentucky,Technology,Accessories,110.75,2,0,37.6
+MM-2025-01210,8/14/2025,Consumer,South,Florida,Technology,Phones,956.65,2,0,269.46
+MM-2025-01210,8/14/2025,Consumer,South,Florida,Office Supplies,Labels,54.03,3,0,22.32
+MM-2025-01211,5/3/2025,Home Office,South,Georgia,Office Supplies,Binders,29.5,1,0.1,5.54
+MM-2025-01212,3/16/2025,Consumer,East,Pennsylvania,Office Supplies,Storage,116.26,1,0,18.01
+MM-2025-01213,12/12/2025,Corporate,Central,Illinois,Furniture,Tables,1900.84,5,0.4,-535.99
+MM-2025-01213,12/12/2025,Corporate,Central,Illinois,Office Supplies,Binders,64.82,2,0.1,11.59
+MM-2025-01214,4/25/2025,Consumer,East,Pennsylvania,Office Supplies,Binders,90.46,2,0.3,-7.95
+MM-2025-01214,4/25/2025,Consumer,East,Pennsylvania,Furniture,Chairs,1086.98,3,0.15,39.69
+MM-2025-01215,11/4/2025,Home Office,Central,Illinois,Office Supplies,Paper,37.53,1,0.3,5.14
+MM-2025-01216,5/6/2025,Consumer,West,Colorado,Office Supplies,Labels,37.56,2,0,17.28
+MM-2025-01217,11/9/2025,Corporate,East,New York,Office Supplies,Binders,398.15,6,0.15,36.48
+MM-2025-01218,12/24/2025,Corporate,West,Colorado,Office Supplies,Paper,18.84,1,0.4,3.69
+MM-2025-01218,12/24/2025,Corporate,West,Colorado,Technology,Accessories,119.92,3,0.4,15.03
+MM-2025-01218,12/24/2025,Corporate,West,Colorado,Office Supplies,Labels,42.11,2,0.1,13.89
+MM-2025-01219,12/17/2025,Consumer,West,California,Office Supplies,Labels,33.54,1,0,13.61
+MM-2025-01219,12/17/2025,Consumer,West,California,Office Supplies,Paper,70.79,3,0,20.25
+MM-2025-01220,11/26/2025,Consumer,Central,Texas,Technology,Copiers,1364.19,1,0.2,267.18
+MM-2025-01221,11/11/2025,Consumer,Central,Illinois,Office Supplies,Storage,601.12,3,0,113.64
+MM-2025-01222,10/4/2025,Consumer,East,New York,Technology,Copiers,873.11,1,0.3,196.13
+MM-2025-01223,4/1/2025,Consumer,West,Colorado,Office Supplies,Binders,35.8,1,0.3,4.14
+MM-2025-01223,4/1/2025,Consumer,West,Colorado,Office Supplies,Storage,418.47,4,0.2,60.35
+MM-2025-01224,11/19/2025,Corporate,Central,Texas,Technology,Phones,2332.66,4,0,549.04
+MM-2025-01224,11/19/2025,Corporate,Central,Texas,Office Supplies,Storage,662.78,4,0.15,43.9
+MM-2025-01225,11/24/2025,Home Office,Central,Illinois,Office Supplies,Labels,82.54,3,0,32.15
+MM-2025-01226,10/4/2025,Consumer,Central,Illinois,Technology,Copiers,1624.42,1,0,496.99
+MM-2025-01226,10/4/2025,Consumer,Central,Illinois,Office Supplies,Storage,551.46,5,0.2,4.69
+MM-2025-01227,2/2/2025,Home Office,East,New York,Office Supplies,Binders,179.93,2,0.15,45.86
+MM-2025-01228,10/1/2025,Corporate,South,Kentucky,Office Supplies,Binders,54.62,1,0,21.76
+MM-2025-01229,9/23/2025,Home Office,South,Georgia,Technology,Accessories,144.9,3,0,41.53
+MM-2025-01230,9/4/2025,Corporate,South,Kentucky,Office Supplies,Paper,84.56,3,0,31.16
+MM-2025-01231,10/8/2025,Consumer,South,Florida,Office Supplies,Binders,105.95,2,0,27
+MM-2025-01232,10/20/2025,Consumer,South,Kentucky,Furniture,Tables,1129.98,3,0.15,178.86
+MM-2025-01232,10/20/2025,Consumer,South,Kentucky,Technology,Phones,339.09,1,0,88.38
+MM-2025-01232,10/20/2025,Consumer,South,Kentucky,Office Supplies,Binders,65.2,2,0,17.81
+MM-2025-01233,9/4/2025,Consumer,West,Colorado,Furniture,Tables,464.04,1,0.2,55.61
+MM-2025-01233,9/4/2025,Consumer,West,Colorado,Office Supplies,Binders,99.8,2,0,20.43
+MM-2025-01233,9/4/2025,Consumer,West,Colorado,Technology,Accessories,43.6,1,0.4,7.2
+MM-2025-01234,9/11/2025,Consumer,South,Georgia,Office Supplies,Binders,39.57,3,0.4,5.71
+MM-2025-01235,5/22/2025,Consumer,West,Washington,Office Supplies,Binders,111.46,2,0.2,20.42
+MM-2025-01235,5/22/2025,Consumer,West,Washington,Furniture,Bookcases,992.92,3,0,128.53
+MM-2025-01236,12/26/2025,Consumer,Central,Michigan,Furniture,Tables,1300.56,3,0.15,-160.2
+MM-2025-01237,5/2/2025,Corporate,West,California,Furniture,Bookcases,1597.85,2,0,-148.17
+MM-2025-01237,5/2/2025,Corporate,West,California,Furniture,Bookcases,402.03,1,0,48.03
+MM-2025-01237,5/2/2025,Corporate,West,California,Office Supplies,Paper,234.91,6,0,102.39
+MM-2025-01238,7/27/2025,Home Office,Central,Illinois,Office Supplies,Paper,55.46,3,0.4,10.74
+MM-2025-01239,6/23/2025,Corporate,Central,Texas,Technology,Accessories,263.97,5,0.1,63.28
+MM-2025-01240,4/13/2025,Corporate,West,California,Office Supplies,Labels,43.87,1,0.1,13.15
+MM-2025-01240,4/13/2025,Corporate,West,California,Technology,Phones,462.83,1,0,54.12
+MM-2025-01241,6/22/2025,Home Office,West,Colorado,Office Supplies,Binders,44.76,1,0,6.29
+MM-2025-01241,6/22/2025,Home Office,West,Colorado,Office Supplies,Paper,129.78,5,0,37.81
+MM-2025-01241,6/22/2025,Home Office,West,Colorado,Furniture,Tables,1610.59,2,0,85.24
+MM-2025-01242,8/21/2025,Corporate,East,Pennsylvania,Office Supplies,Paper,45.6,2,0.2,16.58
+MM-2025-01242,8/21/2025,Corporate,East,Pennsylvania,Technology,Copiers,1469.17,1,0.1,364.96
+MM-2025-01243,9/3/2025,Corporate,East,Ohio,Technology,Accessories,92.53,2,0,29.05
+MM-2025-01244,10/27/2025,Consumer,West,Washington,Office Supplies,Storage,342.9,3,0.15,35.66
+MM-2025-01244,10/27/2025,Consumer,West,Washington,Office Supplies,Labels,42.33,2,0,15.86
+MM-2025-01244,10/27/2025,Consumer,West,Washington,Office Supplies,Storage,803.53,6,0.15,146.04
+MM-2025-01245,11/18/2025,Consumer,West,California,Technology,Phones,567.18,1,0,107.67
+MM-2025-01246,4/10/2025,Corporate,Central,Michigan,Office Supplies,Storage,84.09,1,0.15,0.33
+MM-2025-01247,3/20/2025,Corporate,South,Georgia,Office Supplies,Binders,34.15,1,0,12.89
+MM-2025-01248,11/25/2025,Home Office,Central,Texas,Office Supplies,Binders,81.37,2,0.3,8.81
+MM-2025-01249,5/8/2025,Consumer,East,Ohio,Office Supplies,Labels,14.22,1,0,6.68
+MM-2025-01249,5/8/2025,Consumer,East,Ohio,Technology,Accessories,334.63,5,0.15,52.28
+MM-2025-01250,8/15/2025,Consumer,South,Georgia,Technology,Accessories,44.19,1,0.1,4.71
+MM-2025-01251,9/6/2025,Corporate,West,Colorado,Office Supplies,Labels,83.7,5,0,42.19
+MM-2025-01251,9/6/2025,Corporate,West,Colorado,Technology,Phones,2801.77,6,0,232.78
+MM-2025-01252,6/14/2025,Home Office,South,Florida,Technology,Copiers,3600.85,3,0,1576.85
+MM-2025-01253,10/27/2025,Corporate,West,Washington,Office Supplies,Binders,117.7,3,0.15,26.97
+MM-2025-01254,5/26/2025,Corporate,Central,Illinois,Office Supplies,Binders,84.66,2,0.4,4.38
+MM-2025-01254,5/26/2025,Corporate,Central,Illinois,Technology,Phones,562.06,1,0,8.6
+MM-2025-01255,10/17/2025,Corporate,East,New York,Furniture,Chairs,1677.73,3,0.15,-196.71
+MM-2025-01256,11/20/2025,Consumer,West,Washington,Office Supplies,Storage,560.54,5,0,-6.75
+MM-2025-01256,11/20/2025,Consumer,West,Washington,Furniture,Bookcases,587.15,2,0,87.49
+MM-2025-01256,11/20/2025,Consumer,West,Washington,Furniture,Tables,446.35,1,0.4,-89.77
+MM-2025-01257,5/25/2025,Home Office,East,Ohio,Office Supplies,Binders,195.48,5,0,49.27
+MM-2025-01258,11/11/2025,Consumer,East,Pennsylvania,Office Supplies,Paper,57.81,3,0,20.88
+MM-2025-01259,8/8/2025,Corporate,East,New York,Technology,Phones,936.58,2,0.2,86.99
+MM-2025-01260,8/12/2025,Consumer,Central,Michigan,Technology,Accessories,197.57,5,0.3,6.67
+MM-2025-01260,8/12/2025,Consumer,Central,Michigan,Office Supplies,Paper,29.93,2,0.1,12.28
+MM-2025-01260,8/12/2025,Consumer,Central,Michigan,Office Supplies,Binders,136.3,3,0.2,28.47
+MM-2025-01261,10/3/2025,Corporate,Central,Michigan,Furniture,Bookcases,531.32,2,0,123.32
+MM-2025-01262,6/25/2025,Consumer,South,Kentucky,Technology,Phones,930.52,3,0.3,-7.14
+MM-2025-01263,8/7/2025,Consumer,Central,Michigan,Office Supplies,Binders,157.08,5,0,41.58
+MM-2025-01263,8/7/2025,Consumer,Central,Michigan,Office Supplies,Binders,44.11,2,0.3,1.31
+MM-2025-01264,11/26/2025,Home Office,Central,Michigan,Technology,Accessories,37.68,1,0.1,5.21
+MM-2025-01265,12/21/2025,Consumer,West,California,Technology,Accessories,170.25,3,0.3,3.97
+MM-2025-01265,12/21/2025,Consumer,West,California,Technology,Accessories,418.28,4,0,93.32
+MM-2025-01266,8/20/2025,Consumer,Central,Michigan,Office Supplies,Paper,107.72,4,0,38.66
+MM-2025-01266,8/20/2025,Consumer,Central,Michigan,Technology,Accessories,148.62,2,0.2,4.3
+MM-2025-01267,9/21/2025,Consumer,Central,Michigan,Furniture,Chairs,174.26,1,0.2,13.48
+MM-2025-01268,3/2/2025,Corporate,West,Colorado,Technology,Accessories,51.22,1,0.1,15.46
+MM-2025-01269,5/17/2025,Corporate,West,Washington,Furniture,Chairs,1641.81,3,0,290.71
+MM-2025-01269,5/17/2025,Corporate,West,Washington,Technology,Accessories,145.88,2,0.15,37.71
+MM-2025-01270,9/18/2025,Consumer,West,Colorado,Office Supplies,Labels,9.05,1,0.4,1.54
+MM-2025-01271,2/11/2025,Corporate,West,Washington,Office Supplies,Binders,158.47,3,0.15,31.28
+MM-2025-01272,9/21/2025,Home Office,East,Pennsylvania,Technology,Phones,392.08,1,0,55.25
+MM-2025-01272,9/21/2025,Home Office,East,Pennsylvania,Technology,Accessories,46.55,1,0.3,4.99
+MM-2025-01273,3/3/2025,Consumer,East,New York,Furniture,Bookcases,1315.31,2,0,223.04
+MM-2025-01274,6/5/2025,Consumer,South,Georgia,Office Supplies,Storage,219.85,2,0,13.83
+MM-2025-01274,6/5/2025,Consumer,South,Georgia,Furniture,Bookcases,540.33,3,0,23.64
+MM-2025-01274,6/5/2025,Consumer,South,Georgia,Office Supplies,Paper,13.45,1,0.2,1.85
+MM-2025-01275,12/17/2025,Consumer,Central,Illinois,Office Supplies,Storage,58.78,1,0.4,-11.98
+MM-2025-01275,12/17/2025,Consumer,Central,Illinois,Office Supplies,Storage,122.72,1,0.3,-2.53
+MM-2025-01276,4/16/2025,Consumer,West,California,Office Supplies,Binders,131.75,2,0.15,5.22
+MM-2025-01277,6/28/2025,Consumer,West,Washington,Furniture,Bookcases,828.25,2,0,70.66
+MM-2025-01277,6/28/2025,Consumer,West,Washington,Office Supplies,Binders,159.57,3,0.1,24.66
+MM-2025-01278,12/28/2025,Consumer,South,Georgia,Technology,Phones,1288.67,4,0,259.35
+MM-2025-01278,12/28/2025,Consumer,South,Georgia,Office Supplies,Paper,176.2,5,0.2,45.7
+MM-2025-01279,2/25/2025,Consumer,East,New York,Office Supplies,Paper,96,2,0,35
+MM-2025-01280,5/13/2025,Corporate,West,Washington,Office Supplies,Labels,111.07,4,0.1,23.5
+MM-2025-01281,5/1/2025,Corporate,South,Kentucky,Technology,Accessories,111.56,2,0.15,13.46
+MM-2025-01281,5/1/2025,Corporate,South,Kentucky,Technology,Accessories,147.99,3,0,54.45
+MM-2025-01282,10/14/2025,Home Office,Central,Illinois,Technology,Accessories,194.44,4,0.4,2.36
+MM-2025-01283,12/13/2025,Consumer,West,Colorado,Office Supplies,Storage,79.18,1,0.15,9.96
+MM-2025-01283,12/13/2025,Consumer,West,Colorado,Furniture,Bookcases,198.47,1,0.15,22.55
+MM-2025-01283,12/13/2025,Consumer,West,Colorado,Office Supplies,Binders,37.6,1,0.1,4.3
+MM-2025-01284,6/17/2025,Consumer,South,Kentucky,Office Supplies,Storage,129.45,2,0,23.95
+MM-2025-01284,6/17/2025,Consumer,South,Kentucky,Technology,Phones,874.74,3,0.2,61.72
+MM-2025-01285,7/5/2025,Consumer,East,New York,Technology,Accessories,138.12,2,0.15,27.83
+MM-2025-01286,9/4/2025,Corporate,East,Pennsylvania,Office Supplies,Binders,197.89,5,0.2,0.12
+MM-2025-01287,5/3/2025,Home Office,East,Pennsylvania,Furniture,Bookcases,566.97,2,0.15,11.42
+MM-2025-01287,5/3/2025,Home Office,East,Pennsylvania,Office Supplies,Paper,101.15,3,0,18.97
+MM-2025-01288,1/1/2025,Consumer,East,Pennsylvania,Office Supplies,Binders,129.82,2,0.3,19.16
+MM-2025-01288,1/1/2025,Consumer,East,Pennsylvania,Furniture,Bookcases,297.52,1,0,25.33
+MM-2025-01288,1/1/2025,Consumer,East,Pennsylvania,Office Supplies,Paper,40.01,1,0,5.97
+MM-2025-01289,7/10/2025,Corporate,East,Pennsylvania,Office Supplies,Binders,45.76,1,0.1,6.52
+MM-2025-01290,3/24/2025,Corporate,East,Pennsylvania,Office Supplies,Binders,142.51,2,0.15,29.45
+MM-2025-01291,8/17/2025,Corporate,Central,Michigan,Furniture,Chairs,550.74,2,0.2,14.68
+MM-2025-01292,12/27/2025,Consumer,West,Washington,Technology,Phones,1959.2,4,0,485.86
+MM-2025-01292,12/27/2025,Consumer,West,Washington,Technology,Phones,683.3,2,0.3,-1.44
+MM-2025-01293,10/20/2025,Consumer,West,Washington,Office Supplies,Labels,67.04,3,0.3,18.12
+MM-2025-01294,2/11/2025,Consumer,East,Ohio,Office Supplies,Binders,51,1,0,6.22
+MM-2025-01295,5/16/2025,Corporate,Central,Texas,Office Supplies,Paper,94.08,3,0.1,20.83
+MM-2025-01296,6/10/2025,Consumer,Central,Texas,Technology,Copiers,3303.21,4,0.2,588.15
+MM-2025-01296,6/10/2025,Consumer,Central,Texas,Technology,Phones,2193.79,6,0,198.4
+MM-2025-01296,6/10/2025,Consumer,Central,Texas,Office Supplies,Paper,46.56,1,0,18.4

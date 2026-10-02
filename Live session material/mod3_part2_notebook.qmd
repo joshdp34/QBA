@@ -1,0 +1,236 @@
+---
+title: "Module 3, Part 2: Paired Comparisons, ANOVA, and Tukey's HSD"
+subtitle: "Guided notebook: review the reading, then fill in the blanks together"
+author: "Your name here"
+format:
+  html:
+    theme: cosmo
+    toc: true
+    embed-resources: true
+execute:
+  echo: true
+  warning: false
+  message: false
+  error: true
+---
+
+::: {.callout-important title="Reminder: how this notebook works"}
+- Replace each `___` in code with the missing R code, then run the chunk. Type your answer where you see `_____` in a sentence.
+- Run chunks **in order from the top**. Later chunks use objects created by earlier ones.
+- Render any time. Unfilled blanks show red error text but do not stop the render.
+- **Exception:** an error in R code written *inside a sentence* (inline code) does stop the render. Fix or remove it, then render again.
+:::
+
+## Setup
+
+Run this chunk. It is the same setup as Part 1.
+
+```{r}
+library(tidyverse)
+
+base_url <- "https://raw.githubusercontent.com/joshdp34/QBA/master/data/"
+
+minimart <- read_csv(paste0(base_url, "minimart_lines.csv")) |>
+  rename_with(~ str_replace_all(.x, "[ -]", "_")) |>
+  mutate(Order_Date = mdy(Order_Date),
+         Year = year(Order_Date))
+```
+
+In Part 1 we used a one-sample test (one group against a benchmark) and a two-sample test (two separate groups). Today we add the two remaining tools: **paired** comparisons and **ANOVA with Tukey's HSD**.
+
+## 1. Paired Comparisons (review)
+
+**Key ideas from the reading** (Week 6 reading):
+
+- Data are **paired** when each observation in one group has a specific counterpart in the other: the same people measured twice, the same stores in two years.
+- Analyze the **within-pair differences** $d_i = x_{\text{after},i} - x_{\text{before},i}$. A paired test is just a one-sample test on those differences, $H_0: \mu_d = 0$.
+- Treating paired data as two independent groups ignores the pairing and can bury a real, consistent effect.
+
+Here is the reading's example: eight sales reps' performance scores before and after a negotiation training program. **Every single rep improved.**
+
+```{r}
+before <- c(72, 68, 76, 68, 84, 68, 61, 76)
+after  <- c(77, 74, 82, 73, 87, 69, 66, 80)
+
+after - before     # each rep's own improvement
+```
+
+First, the **wrong** way: treat the 8 "before" scores and 8 "after" scores as two independent groups. Run it:
+
+```{r}
+t.test(after, before, alternative = "greater")     # independent groups (Welch)
+```
+
+Now the **right** way: a paired test. Fill in the blank:
+
+```{r}
+t.test(after, before, ___, alternative = "greater")
+```
+
+**Interpretation.** Fill in the blanks:
+
+The independent-groups test gives a p-value of about _____, so it _____ $H_0$ at $\alpha = 0.05$, even though all 8 reps improved. The paired test gives a p-value of about _____ and rejects decisively. Pairing works because each rep serves as their own _____, so the differences between strong and weak reps cancel out.
+
+## 2. A Paired Test on the Minimart Data
+
+Minimart's leadership asks: **did total sales per state grow from 2024 to 2025?**
+
+Each state appears in both years, so each state is one **pair**. That is a paired design: the same units (states) measured twice (two years).
+
+First, which years do we have? Fill in the blank.
+
+```{r}
+minimart |> count(___)
+```
+
+The two most recent full calendar years in the data are 2024 and 2025. Now build **one pair of numbers per state**: total sales in each year. Fill in the blanks.
+
+```{r}
+state_totals <- minimart |>
+  filter(Year %in% c(2024, 2025)) |>
+  group_by(State, Year) |>
+  summarise(Total_Sales = ___(Sales), .groups = "drop")
+
+state_totals
+```
+
+That table has one row per state per year. For a paired test we need each state's two values **side by side**. `pivot_wider()` does that (run it as is):
+
+```{r}
+state_wide <- state_totals |>
+  pivot_wider(names_from = Year, values_from = Total_Sales, names_prefix = "Y")
+
+state_wide
+```
+
+Now compute each state's difference (2025 minus 2024) and run the paired test. Fill in the blanks.
+
+```{r}
+state_wide$diff <- state_wide$Y2025 - state_wide$___
+
+paired_test <- t.test(state_wide$Y2025, state_wide$Y2024, ___)
+paired_test
+```
+
+::: {.callout-tip collapse="true" title="Hint"}
+`state_wide$Y2024` is the column of 2024 totals. A paired test needs `paired = TRUE`. Putting 2025 first makes the difference "2025 minus 2024," so a positive difference means growth.
+:::
+
+You can also see the pairing. Run this plot (no changes needed). Each line is one state, going from its 2024 total to its 2025 total:
+
+```{r}
+state_totals |>
+  mutate(Year = factor(Year)) |>
+  ggplot(aes(x = Year, y = Total_Sales, group = State)) +
+  geom_line(color = "grey60") +
+  geom_point() +
+  labs(title = "Total sales by state, 2024 vs. 2025", y = "Total sales ($)")
+```
+
+**Interpretation, using inline code.**
+
+> The average state's total sales rose by \$`r "____"` from 2024 to 2025. The 95% confidence interval for the mean difference runs from \$`r "____"` to \$`r "____"`, and the p-value is `r "____"`.
+
+Fill in the blanks:
+
+The p-value is _____ than 0.05, so we _____ $H_0$. The interval is entirely _____ 0, so the data support growth in total sales across states, by somewhere between about \$1,100 and \$14,400 per state.
+
+**Why pairing mattered.** Run the *wrong* test on the same numbers, treating the 12 states' 2024 totals and the 12 states' 2025 totals as independent groups:
+
+```{r}
+t.test(state_wide$Y2025, state_wide$Y2024)$p.value
+```
+
+That p-value is about _____, which would _____. States differ hugely in size (California sells far more than Kentucky), and that differs-by-state noise has nothing to do with growth. The paired test removes it because each state is compared with _____.
+
+## 3. ANOVA (review)
+
+**Key ideas from the reading** (Week 7 reading):
+
+- Comparing **three or more** groups with many separate t-tests inflates the chance of a false alarm.
+- **One-way ANOVA** tests all the means at once: $H_0: \mu_1 = \mu_2 = \cdots = \mu_g$ versus $H_a$: at least one mean differs.
+- The **F-statistic** compares variability *between* the group means to variability *within* the groups. A large F is evidence against $H_0$.
+
+How bad is the false-alarm problem? With 4 groups there are `choose(4, 2)` pairwise tests. Fill in the blank to find the chance that at least one of them falsely flags a difference when nothing is really different:
+
+```{r}
+n_pairs <- choose(4, 2)
+n_pairs
+1 - (0.95)^___
+```
+
+The chance of at least one false alarm is about _____, much bigger than the 5% we intended.
+
+Minimart's question: **does average profit per line item differ across the three product categories?**
+
+$$
+H_0: \mu_{\text{Furniture}} = \mu_{\text{Office Supplies}} = \mu_{\text{Technology}} \qquad H_a: \text{at least one category's mean differs}
+$$
+
+```{r}
+minimart |>
+  group_by(Category) |>
+  summarise(n = n(),
+            mean_profit = ___(Profit),
+            sd_profit   = sd(Profit))
+```
+
+```{r}
+ggplot(minimart, aes(x = Category, y = Profit)) +
+  geom_boxplot(fill = "#FFB81c") +
+  labs(title = "Profit per line item by category", y = "Profit ($)")
+```
+
+Now run the ANOVA. The formula `Profit ~ Category` reads "Profit **by** Category". Fill in the blanks.
+
+```{r}
+model <- aov(Profit ~ ___, data = ___)
+summary(model)
+```
+
+**Interpretation.** Fill in the blanks (the numbers come from the ANOVA table):
+
+The F-statistic is about _____ with _____ and _____ degrees of freedom, and the p-value is far below 0.05. We _____ $H_0$: average profit is _____ across all three categories.
+
+::: {.callout-note title="A condition worth checking: roughly equal spreads"}
+ANOVA assumes the groups have roughly equal variability. Look at the `sd_profit` column above. The standard deviation for Technology is more than ten times that of Office Supplies, so this condition is **not** met. When the differences between group means are as large as they are here, the conclusion is not in doubt. But in a report you should say so honestly: "the groups' spreads differ a lot, so treat the exact p-value with caution." Noticing and reporting this is exactly what a careful analyst does.
+:::
+
+## 4. Which Categories Differ? Tukey's HSD
+
+ANOVA says *some* category differs, but not *which*. **Tukey's HSD** builds a confidence interval for every pairwise difference at once, adjusted so the overall false-alarm rate stays at 5%. A pair is significantly different if its interval does **not** contain 0 (equivalently, its adjusted p-value is below 0.05).
+
+```{r}
+tukey <- TukeyHSD(___)
+tukey
+```
+
+Run this plot (no changes needed). Each line is one pairwise difference. Intervals that cross the dashed line at 0 are **not** significantly different:
+
+```{r}
+plot(tukey, las = 1)
+```
+
+**Interpretation.** Fill in the blanks:
+
+- Office Supplies versus Furniture: the adjusted p-value is about _____, so we _____ conclude these two categories differ in average profit.
+- Technology versus Furniture, and Technology versus Office Supplies: both intervals _____ 0, so Technology's average profit is significantly _____ than both of the others.
+
+The real story is therefore "Technology > {Furniture, Office Supplies}," not "all three categories are different."
+
+::: {.callout-tip title="Statistical vs. practical significance"}
+Tukey's interval for Technology minus Office Supplies is roughly \$153 to \$199 more profit per line item. That is a large difference in dollars, not just a small one detected because the sample is big. Always look at the **size** of a difference in real units, not only at whether the p-value is small.
+:::
+
+## Recap
+
+| Task | Tool in R |
+|---|---|
+| Paired test on two columns | `t.test(after, before, paired = TRUE)` |
+| One row per unit, side by side | `pivot_wider(names_from = Year, values_from = Total_Sales)` |
+| Total (or mean) by group and year | `group_by(State, Year)`, then `summarise(Total_Sales = sum(Sales))` |
+| One-way ANOVA | `aov(y ~ group, data = d)` then `summary()` |
+| Which pairs differ | `TukeyHSD(model)` |
+| Why not many t-tests? | Each test adds false-alarm risk: `1 - 0.95^k` |
+
+In Part 3 we step back from the calculations and ask the question the whole module has been building toward: **even when a comparison is statistically significant, does it show that one thing *causes* another?**
