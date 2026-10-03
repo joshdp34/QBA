@@ -15,12 +15,22 @@ Everyone will work from the **same dataset**, so your results should be directly
 
 ## The Dataset
 
-You'll use the **Sample Superstore** dataset, a widely used, freely available retail sales dataset (originally distributed by Tableau as sample data, now hosted in many places on Kaggle). It contains 9,994 rows and 21 columns of U.S. retail order data.
+You'll use the **Sample Superstore** dataset, a widely used, freely available retail sales dataset (originally distributed by Tableau as sample data). It contains 9,994 rows and 21 columns of U.S. retail order data.
 
 ::: {.callout-note collapse="false" title="Where to get it"}
-Search Kaggle for **"Superstore Dataset"** (for example, the dataset published by user `vivek468`, titled "Superstore Dataset Final", is a stable, popular version) and download the CSV. You will need a free Kaggle account. Place the file in your project's `data` folder, exactly as you did with `readiness_store_sales.csv` in Module 1.
+There is nothing to download. The course hosts a copy of the dataset on GitHub, and the setup chunk in `mod3_midterm_template.qmd` reads it directly from there:
 
-If your downloaded version's exact row count or column names differ slightly from what's described below (different uploads occasionally vary a little), use whatever columns are present that match the descriptions; the core columns (`Region`, `Segment`, `Category`, `Sub-Category`, `Sales`, `Profit`, `Discount`, `Order Date`) are present in essentially every version of this dataset.
+```r
+base_url <- "https://raw.githubusercontent.com/joshdp34/QBA/master/data/"
+
+superstore <- read_csv(paste0(base_url, "superstore.csv")) |>
+  rename_with(~ str_replace_all(.x, "[ -]", "_")) |>
+  mutate(Order_Date = mdy(Order_Date), Year = year(Order_Date))
+```
+
+You need an internet connection when you run or render the file. Everyone uses the same copy, so your results should match a correctly worked answer key.
+
+The original column names contain spaces and hyphens (`Sub-Category`, `Order Date`). The setup code above replaces them with underscores (`Sub_Category`, `Order_Date`) so they are easier to type in R. This exam text uses the original names.
 :::
 
 Relevant columns for this exam:

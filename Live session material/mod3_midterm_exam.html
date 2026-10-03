@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,16 +12,54 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -33,13 +71,13 @@ ul.task-list li input[type="checkbox"] {
 <script src="mod3_midterm_exam_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="mod3_midterm_exam_files/libs/quarto-html/anchor.min.js"></script>
 <link href="mod3_midterm_exam_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="mod3_midterm_exam_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="mod3_midterm_exam_files/libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="mod3_midterm_exam_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="mod3_midterm_exam_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="mod3_midterm_exam_files/libs/bootstrap/bootstrap-efbb37e9afcc02144ebbc7afd12a776f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="mod3_midterm_exam_files/libs/bootstrap/bootstrap-215b371544c282197b31c8aa00ce3677.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -106,7 +144,7 @@ window.Quarto = {
 </section>
 <section id="the-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="the-dataset">The Dataset</h2>
-<p>You’ll use the <strong>Sample Superstore</strong> dataset, a widely used, freely available retail sales dataset (originally distributed by Tableau as sample data, now hosted in many places on Kaggle). It contains 9,994 rows and 21 columns of U.S. retail order data.</p>
+<p>You’ll use the <strong>Sample Superstore</strong> dataset, a widely used, freely available retail sales dataset (originally distributed by Tableau as sample data). It contains 9,994 rows and 21 columns of U.S. retail order data.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Where to get it">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -119,8 +157,14 @@ window.Quarto = {
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
-<p>Search Kaggle for <strong>“Superstore Dataset”</strong> (for example, the dataset published by user <code>vivek468</code>, titled “Superstore Dataset Final”, is a stable, popular version) and download the CSV. You will need a free Kaggle account. Place the file in your project’s <code>data</code> folder, exactly as you did with <code>readiness_store_sales.csv</code> in Module 1.</p>
-<p>If your downloaded version’s exact row count or column names differ slightly from what’s described below (different uploads occasionally vary a little), use whatever columns are present that match the descriptions; the core columns (<code>Region</code>, <code>Segment</code>, <code>Category</code>, <code>Sub-Category</code>, <code>Sales</code>, <code>Profit</code>, <code>Discount</code>, <code>Order Date</code>) are present in essentially every version of this dataset.</p>
+<p>There is nothing to download. The course hosts a copy of the dataset on GitHub, and the setup chunk in <code>mod3_midterm_template.qmd</code> reads it directly from there:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>base_url <span class="ot">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/joshdp34/QBA/master/data/"</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>superstore <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">paste0</span>(base_url, <span class="st">"superstore.csv"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename_with</span>(<span class="sc">~</span> <span class="fu">str_replace_all</span>(.x, <span class="st">"[ -]"</span>, <span class="st">"_"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Order_Date =</span> <span class="fu">mdy</span>(Order_Date), <span class="at">Year =</span> <span class="fu">year</span>(Order_Date))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>You need an internet connection when you run or render the file. Everyone uses the same copy, so your results should match a correctly worked answer key.</p>
+<p>The original column names contain spaces and hyphens (<code>Sub-Category</code>, <code>Order Date</code>). The setup code above replaces them with underscores (<code>Sub_Category</code>, <code>Order_Date</code>) so they are easier to type in R. This exam text uses the original names.</p>
 </div>
 </div>
 </div>
