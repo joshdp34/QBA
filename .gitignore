@@ -26,3 +26,12 @@ desktop.ini
 .idea/
 
 **/*.quarto_ipynb
+
+# ---- Instructor-only material: keep out of this public repo ----
+*_solutions.qmd
+*_solutions.html
+*_solutions_files/
+/Live session material/mod6_final_exam.*
+/Live session material/mod6_final_exam_files/
+*_teaching_note.pdf
+*_educator_copy.pdf
