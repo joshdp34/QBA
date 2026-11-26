@@ -1,0 +1,28 @@
+# ---- Quarto build output (GitHub Actions renders the site) ----
+/.quarto/
+/_book/
+/_site/
+
+# Keep _freeze/ (computed R results) committed so unchanged chapters
+# are not re-run on GitHub.
+
+# ---- R / RStudio ----
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+.Renviron
+Rplots.pdf
+
+# ---- OS, Office and Box clutter ----
+.DS_Store
+Thumbs.db
+desktop.ini
+~$*
+
+# ---- Editor / tool settings ----
+.claude/
+.vscode/
+.idea/
+
+**/*.quarto_ipynb

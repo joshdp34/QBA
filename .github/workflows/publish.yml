@@ -26,10 +26,20 @@ jobs:
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           packages: |
+            any::rmarkdown
+            any::knitr
             any::tidyverse
-            any::dplyr
+            any::olsrr
+            any::fpp3
+            any::fable
+            any::feasts
+            any::slider
+            any::pROC
+            any::lpSolve
 
       - uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: 1.9.38
 
       - name: Install Quarto extensions
         run: quarto add --no-prompt coatless-quarto/custom-callout
